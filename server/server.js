@@ -2,11 +2,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
-const {
-  clerkMiddleware,
-  requireAuth,
-  getAuth,
-} = require("@clerk/express");
+const { clerkMiddleware, requireAuth, getAuth } = require("@clerk/express");
+
+const saveUserInfo = require("./routes/saveuserInfoToDb");
 
 const app = express();
 app.use(express.json());
@@ -14,8 +12,12 @@ app.use(express.json());
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 //Clerk authentication
-app.use(clerkMiddleware({ secretKey: process.env.CLERK_SECRET_KEY }));
-
+app.use(
+  clerkMiddleware({
+    secretKey: process.env.CLERK_SECRET_KEY,
+    publishableKey: process.env.CLERK_PUBLISHABLE_KEY, // Add this if you have it
+  })
+);
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -30,6 +32,8 @@ app.get("/api/me", requireAuth(), (req, res) => {
   const { userId } = getAuth(req);
   res.json({ userId });
 });
+
+app.use("/api/saveUser", saveUserInfo);
 
 app.use((err, _req, res, _next) => {
   if (err && err.statusCode) {
