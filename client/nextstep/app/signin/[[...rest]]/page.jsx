@@ -5,6 +5,11 @@ import React from "react";
 
 const page = () => {
   const { userId, isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return <p className="">Loading...</p>;
+  }
+
   return (
     <>
       <div className="bg-custom-gray-100 min-h-screen w-screen overflow-x-hidden">
@@ -18,12 +23,8 @@ const page = () => {
               connections that accelerate your career journey.
             </p>
           </div>
-          <div className="flex items-center justify-center mt-8">
-            {!isLoaded ? (
-              <p className="text-white">Loading...</p>
-            ) : (
-              <SignIn signUpUrl="/signup" />
-            )}
+          <div className="flex items-center justify-center mt-8 lg:mr-4">
+            <SignIn signUpUrl="/signup" afterSignInUrl="/" />
           </div>
         </div>
       </div>
