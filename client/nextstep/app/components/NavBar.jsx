@@ -17,7 +17,7 @@ const NavBar = () => {
   return (
     <>
       <div>
-        <div className="bg-custom-gray-100 p-5">
+        <div className="bg-custom-gray-100 p-5 min-w-screen">
           <div className=" flex flex-row items-center justify-between">
             <div className="flex  items-center gap-2">
               {pathname !== "/signin" && pathname !== "/signup" && (
@@ -30,7 +30,7 @@ const NavBar = () => {
               </Link>
             </div>
 
-            {userId && (
+            {pathname !== "/onboarding" && userId && (
               <div className="hidden text-gray-300 font-bold sm:flex sm:flex-row gap-5 text-md">
                 <Link href="/" className="hover:text-gray-100">
                   Home

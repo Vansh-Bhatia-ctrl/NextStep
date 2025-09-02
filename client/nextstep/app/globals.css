@@ -4,9 +4,11 @@
 }
 
 @theme inline {
-  --color-custom-gray-100: #0f172a;
-  --color-custom-gray-200: #1e293b;
+  --color-custom-gray-100: #020617;
+  --color-custom-gray-200: #0b1120;
   --color-custom-gray-300: #111827;
+  --color-custom-gray-400: #4b5563;
+  --color-custom-gray-500: #6b7280;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,10 +1,8 @@
 "use client";
 
-import { SignUp, useUser } from "@clerk/nextjs";
+import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
-  const { user } = useUser();
-  console.log("User information: ", user);
   return (
     <>
       <div className="min-h-screen w-screen overflow-x-hidden bg-custom-gray-100">
