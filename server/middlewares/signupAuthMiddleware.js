@@ -2,7 +2,7 @@ const User = require("../models/users");
 
 const signupAuth = async (req, res, next) => {
   try {
-    const clerkUserId = req.auth.userId;
+    const clerkUserId = req.auth()?.userId;
 
     if (!clerkUserId) {
       return res

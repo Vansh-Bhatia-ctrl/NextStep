@@ -6,6 +6,7 @@ const { clerkMiddleware, requireAuth, getAuth } = require("@clerk/express");
 
 const saveUserInfo = require("./routes/saveuserInfoToDb");
 const saveQuestionsToDb = require("./routes/saveQues");
+const getQuestionsFromDb = require("./routes/fetchQuestionsFromDB");
 
 const app = express();
 app.use(express.json());
@@ -36,6 +37,7 @@ app.get("/api/me", requireAuth(), (req, res) => {
 
 app.use("/api/saveUser", saveUserInfo);
 app.use("/api/saveQuestions", saveQuestionsToDb);
+app.use("/api/getQuestions", getQuestionsFromDb);
 
 app.use((err, _req, res, _next) => {
   if (err && err.statusCode) {
