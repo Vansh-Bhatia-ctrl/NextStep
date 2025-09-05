@@ -11,8 +11,8 @@ const Page = () => {
 
   const [fetchedQuestions, setFetchedQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [userAnswers, setUserAnswers] = useState([]);
 
   const [isLoadingQuestions, setIsLoadingQuestions] = useState(true);
   const [userSaved, setUserSaved] = useState(false);
@@ -46,7 +46,6 @@ const Page = () => {
         setUserSaved(true);
       }
       const data = await response.json();
-      console.log(data);
 
       dispatch(
         setUser({
@@ -85,6 +84,36 @@ const Page = () => {
     }
   };
 
+  const submitAnswers = async () => {
+    try {
+      const token = await getToken();
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_DEV_URL}/api/saveAnswers/answers`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            answers: userAnswers,
+          }),
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Assessment submitted successfully", data);
+      } else {
+        const errorData = await response.json();
+        console.log("Error submitting assessment: ", errorData.message);
+      }
+    } catch (error) {
+      console.error("Error submitting assessment:", error);
+    }
+  };
+
   useEffect(() => {
     if (isLoaded && user && !userSaved) {
       saveUserToDb();
@@ -97,7 +126,21 @@ const Page = () => {
     }
   }, [isLoaded, user, userSaved]);
 
-  const handleNext = () => {
+  useEffect(() => {
+    if (isFinished && userAnswers.length === totalQuestions) {
+      submitAnswers();
+    }
+  }, [isFinished, userAnswers, totalQuestions]);
+
+  const handleSelectedOption = (selectedOption) => {
+    const currentQuestion = fetchedQuestions[currentIndex];
+
+    const newAnswer = {
+      question: currentQuestion.question,
+      selectedOption: selectedOption,
+    };
+
+    setUserAnswers((prev) => [...prev, newAnswer]);
     if (currentIndex >= totalQuestions - 1) {
       setIsFinished(true);
     } else {
@@ -124,7 +167,6 @@ const Page = () => {
     );
   }
 
-  console.log("fetched questions from DB: ", fetchedQuestions);
   const currentQuestion = fetchedQuestions[currentIndex] ?? {
     question: "",
     options: [],
@@ -152,8 +194,7 @@ const Page = () => {
                     {currentQuestion.options?.map((option, index) => (
                       <button
                         onClick={() => {
-                          handleNext();
-                          setIsAnswered(true);
+                          handleSelectedOption(option);
                         }}
                         key={index}
                         className="mt-5 bg-custom-gray-400 p-2 rounded-xl hover:bg-custom-gray-500 transition-all duration-300 ease-in-out cursor-pointer"
