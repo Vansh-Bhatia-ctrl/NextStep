@@ -17,7 +17,7 @@ const NavBar = () => {
   return (
     <>
       <div>
-        <div className="bg-custom-gray-100 p-5 min-w-screen">
+        <div className="fixed top-0 left-0 right-0 h-auto z-50 bg-custom-gray-100 p-5 min-w-screen">
           <div className=" flex flex-row items-center justify-between">
             <div className="flex  items-center gap-2">
               {pathname !== "/signin" && pathname !== "/signup" && (
