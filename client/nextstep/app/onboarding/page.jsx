@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userSlice";
+import Link from "next/link";
 
 const Page = () => {
   const { user, isLoaded } = useUser();
@@ -134,10 +135,11 @@ const Page = () => {
 
   const handleSelectedOption = (selectedOption) => {
     const currentQuestion = fetchedQuestions[currentIndex];
-
     const newAnswer = {
       question: currentQuestion.question,
-      selectedOption: selectedOption,
+      weight: currentQuestion.weight,
+      selectedOption: selectedOption.label,
+      score: selectedOption.score,
     };
 
     setUserAnswers((prev) => [...prev, newAnswer]);
@@ -200,7 +202,7 @@ const Page = () => {
                         className="mt-5 bg-custom-gray-400 p-2 rounded-xl hover:bg-custom-gray-500 transition-all duration-300 ease-in-out cursor-pointer"
                       >
                         <p className="text-white font-semibol text-sm text-start">
-                          {option}
+                          {option.label}
                         </p>
                       </button>
                     ))}
@@ -215,7 +217,7 @@ const Page = () => {
             )}
 
             {isFinished && (
-              <div className="mt-13 text-center">
+              <div className="mt-13 text-center space-y-7">
                 <p className="text-green-400 font-bold text-xl whitespace-nowrap">
                   🎉 Assessment Complete!
                 </p>
@@ -223,9 +225,9 @@ const Page = () => {
                   Thank you for completing the assessment. Your responses have
                   been submitted.
                 </p>
-                <button className="bg-blue-700 text-white font-semibold p-2 rounded-xl mt-9 hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer">
+                <Link href="/dashboard" className="bg-blue-700 text-white font-semibold p-2 rounded-xl hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer">
                   Continue
-                </button>
+                </Link>
               </div>
             )}
           </div>
