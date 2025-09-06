@@ -1,75 +1,92 @@
 [
   {
     "id": 1,
+    "weight": 0.05,
     "question": "How long have you been coding/programming?",
     "options": [
-      "I’ve never coded before",
-      "Less than 1 year",
-      "1–3 years",
-      "3+ years"
+      { "label": "I’ve never coded before", "score": 0.0 },
+      { "label": "Less than 1 year", "score": 0.33 },
+      { "label": "1–3 years", "score": 0.66 },
+      { "label": "3+ years", "score": 1.0 }
     ]
   },
   {
     "id": 2,
+    "weight": 0.15,
     "question": "Which best describes the projects you’ve worked on?",
     "options": [
-      "None, just tutorials",
-      "Small personal projects",
-      "Production-level apps / large projects"
+      { "label": "None, just tutorials", "score": 0.0 },
+      { "label": "Small personal projects", "score": 0.5 },
+      { "label": "Production-level apps / large projects", "score": 1.0 }
     ]
   },
   {
     "id": 3,
+    "weight": 0.2,
     "question": "When solving problems, how do you usually approach them?",
     "options": [
-      "I mostly look at solutions first",
-      "I try myself, then check resources",
-      "I can usually solve problems independently"
+      { "label": "I mostly look at solutions first", "score": 0.0 },
+      { "label": "I try myself, then check resources", "score": 0.5 },
+      { "label": "I can usually solve problems independently", "score": 1.0 }
     ]
   },
   {
     "id": 4,
+    "weight": 0.15,
     "question": "How comfortable are you with libraries and frameworks (React, Express, etc.)?",
     "options": [
-      "I don’t know much about them",
-      "I can use them with tutorials/docs",
-      "I can build apps from scratch using them"
+      { "label": "I don’t know much about them", "score": 0.0 },
+      { "label": "I can use them with tutorials/docs", "score": 0.5 },
+      { "label": "I can build apps from scratch using them", "score": 1.0 }
     ]
   },
   {
     "id": 5,
+    "weight": 0.1,
     "question": "In your own words, what is an API?",
     "options": [
-      "Not sure",
-      "A way to send/get data between apps",
-      "A defined interface with endpoints and structured communication"
+      { "label": "Not sure", "score": 0.0 },
+      { "label": "A way to send/get data between apps", "score": 0.6 },
+      {
+        "label": "A defined interface with endpoints and structured communication",
+        "score": 1.0
+      }
     ]
   },
   {
     "id": 6,
+    "weight": 0.15,
     "question": "How do you usually debug your code?",
     "options": [
-      "I try random changes until it works",
-      "I use console logs and search online",
-      "I use debuggers, testing tools, and structured strategies"
+      { "label": "I try random changes until it works", "score": 0.0 },
+      { "label": "I use console logs and search online", "score": 0.5 },
+      {
+        "label": "I use debuggers, testing tools, and structured strategies",
+        "score": 1.0
+      }
     ]
   },
   {
     "id": 7,
+    "weight": 0.1,
     "question": "Have you ever used Git/GitHub? If yes, how?",
     "options": [
-      "Never used it",
-      "I use it to push/pull code",
-      "I work with branches, PRs, and team workflows"
+      { "label": "Never used it", "score": 0.0 },
+      { "label": "I use it to push/pull code", "score": 0.5 },
+      { "label": "I work with branches, PRs, and team workflows", "score": 1.0 }
     ]
   },
   {
     "id": 8,
+    "weight": 0.1,
     "question": "How comfortable are you with databases?",
     "options": [
-      "Never used one",
-      "I’ve set up simple databases",
-      "I’ve worked with complex queries and optimized schemas"
+      { "label": "Never used one", "score": 0.0 },
+      { "label": "I’ve set up simple databases", "score": 0.5 },
+      {
+        "label": "I’ve worked with complex queries and optimized schemas",
+        "score": 1.0
+      }
     ]
   }
 ]

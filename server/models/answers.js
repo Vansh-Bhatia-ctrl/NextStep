@@ -5,8 +5,16 @@ const answerSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  weight: {
+    type: Number,
+    required: true,
+  },
   selectedOption: {
     type: String,
+    required: true,
+  },
+  score: {
+    type: Number,
     required: true,
   },
 });

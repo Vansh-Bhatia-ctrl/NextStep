@@ -17,10 +17,16 @@ const saveAnswersToDb = async (req, res) => {
     }
 
     for (const answer of answers) {
-      if (!answer.question || !answer.selectedOption) {
+      if (
+        !answer.question ||
+        !answer.selectedOption ||
+        answer.score === undefined ||
+        answer.score === null ||
+        !answer.weight
+      ) {
         return res.status(400).json({
           message:
-            "Each answer must have 'question' and 'selectedOption' fields.",
+            "Each answer must have 'question', 'selectedOption' and 'score' fields.",
         });
       }
     }
