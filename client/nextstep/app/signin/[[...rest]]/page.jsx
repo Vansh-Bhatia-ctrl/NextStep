@@ -12,7 +12,7 @@ const page = () => {
 
   return (
     <>
-      <div className="bg-custom-gray-100 min-h-screen w-screen overflow-x-hidden">
+      <div className="bg-custom-gray-100 min-h-screen w-screen overflow-x-hidden pt-18">
         <div className="flex  items-center justify-center gap-8 xl:gap-40">
           <div className="hidden lg:flex lg:flex-col lg:items-center lg:justify-center lg:gap-2 xl:w-[30%]">
             <p className="text-white font-extrabold text-5xl text-center tracking-wide leading-tight">

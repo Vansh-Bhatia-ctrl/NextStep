@@ -5,7 +5,7 @@ import { SignUp } from "@clerk/nextjs";
 export default function SignUpPage() {
   return (
     <>
-      <div className="min-h-screen w-screen overflow-x-hidden bg-custom-gray-100">
+      <div className="min-h-screen w-screen overflow-x-hidden bg-custom-gray-100 pt-18">
         <div className="flex items-center gap-20 justify-center">
           <div className="hidden text-center xl:w-[45%] lg:flex lg:flex-col lg:items-center lg:justify-center">
             <p className="text-white font-extrabold text-5xl leading-tight tracking-wide text-center">
