@@ -24,7 +24,7 @@ const page = () => {
             </p>
           </div>
           <div className="flex items-center justify-center mt-8 lg:mr-4">
-            <SignIn signUpUrl="/signup" afterSignInUrl="/dashboard" />
+            <SignIn signUpUrl="/signup" afterSignInUrl="/dashboard/overview" />
           </div>
         </div>
       </div>

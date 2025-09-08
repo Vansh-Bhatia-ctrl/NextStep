@@ -611,3 +611,594 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//MODULE PAGE DESIGN
+
+// "use client";
+// import React, { useState } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+// import {
+//   ChevronRight,
+//   BookOpen,
+//   Video,
+//   FileText,
+//   ExternalLink,
+//   Play,
+//   Clock,
+//   CheckCircle2,
+//   Circle,
+//   Star,
+//   Download,
+//   Bookmark,
+//   Share2,
+// } from "lucide-react";
+
+// const LearningModule = () => {
+//   const [activeSection, setActiveSection] = useState(0);
+//   const [completedLessons, setCompletedLessons] = useState(new Set([0, 1]));
+
+//   const courseData = {
+//     title: "React Fundamentals",
+//     level: "Beginner",
+//     progress: 7,
+//     total: 8,
+//     duration: "6 hours",
+//     sections: [
+//       {
+//         id: 1,
+//         title: "Getting Started with React",
+//         lessons: [
+//           {
+//             id: 1,
+//             title: "What is React?",
+//             type: "video",
+//             duration: "15 min",
+//             completed: true,
+//           },
+//           {
+//             id: 2,
+//             title: "Setting up Development Environment",
+//             type: "video",
+//             duration: "20 min",
+//             completed: true,
+//           },
+//           {
+//             id: 3,
+//             title: "Your First React Component",
+//             type: "video",
+//             duration: "25 min",
+//             completed: false,
+//           },
+//           {
+//             id: 4,
+//             title: "JSX Fundamentals",
+//             type: "reading",
+//             duration: "10 min",
+//             completed: false,
+//           },
+//         ],
+//       },
+//       {
+//         id: 2,
+//         title: "Components and Props",
+//         lessons: [
+//           {
+//             id: 5,
+//             title: "Understanding Components",
+//             type: "video",
+//             duration: "30 min",
+//             completed: false,
+//           },
+//           {
+//             id: 6,
+//             title: "Props and Data Flow",
+//             type: "video",
+//             duration: "25 min",
+//             completed: false,
+//           },
+//           {
+//             id: 7,
+//             title: "Component Composition",
+//             type: "practice",
+//             duration: "45 min",
+//             completed: false,
+//           },
+//         ],
+//       },
+//       {
+//         id: 3,
+//         title: "State and Event Handling",
+//         lessons: [
+//           {
+//             id: 8,
+//             title: "useState Hook",
+//             type: "video",
+//             duration: "35 min",
+//             completed: false,
+//           },
+//           {
+//             id: 9,
+//             title: "Event Handling",
+//             type: "video",
+//             duration: "20 min",
+//             completed: false,
+//           },
+//           {
+//             id: 10,
+//             title: "State Management Best Practices",
+//             type: "reading",
+//             duration: "15 min",
+//             completed: false,
+//           },
+//         ],
+//       },
+//     ],
+//     resources: [
+//       {
+//         id: 1,
+//         title: "React Official Documentation",
+//         type: "documentation",
+//         url: "#",
+//       },
+//       { id: 2, title: "React Cheat Sheet", type: "download", url: "#" },
+//       { id: 3, title: "Component Patterns Guide", type: "guide", url: "#" },
+//       { id: 4, title: "Practice Exercises", type: "practice", url: "#" },
+//     ],
+//     customSources: [
+//       {
+//         id: 1,
+//         title: "Interactive React Playground",
+//         description: "Practice React concepts in real-time",
+//         type: "interactive",
+//       },
+//       {
+//         id: 2,
+//         title: "AI-Generated Code Examples",
+//         description: "Personalized examples based on your progress",
+//         type: "ai-generated",
+//       },
+//       {
+//         id: 3,
+//         title: "Smart Quiz Generator",
+//         description: "Adaptive quizzes tailored to your learning",
+//         type: "quiz",
+//       },
+//     ],
+//   };
+
+//   const toggleLessonCompletion = (lessonId) => {
+//     const newCompleted = new Set(completedLessons);
+//     if (newCompleted.has(lessonId)) {
+//       newCompleted.delete(lessonId);
+//     } else {
+//       newCompleted.add(lessonId);
+//     }
+//     setCompletedLessons(newCompleted);
+//   };
+
+//   const getTypeIcon = (type) => {
+//     switch (type) {
+//       case "video":
+//         return <Video className="w-4 h-4" />;
+//       case "reading":
+//         return <FileText className="w-4 h-4" />;
+//       case "practice":
+//         return <BookOpen className="w-4 h-4" />;
+//       default:
+//         return <Circle className="w-4 h-4" />;
+//     }
+//   };
+
+//   const getTypeColor = (type) => {
+//     switch (type) {
+//       case "video":
+//         return "text-blue-400";
+//       case "reading":
+//         return "text-green-400";
+//       case "practice":
+//         return "text-purple-400";
+//       default:
+//         return "text-gray-400";
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-slate-900 text-white pt-18">
+//       {/* Header */}
+//       <motion.div
+//         initial={{ opacity: 0, y: -20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         className="bg-slate-800 border-b border-slate-700"
+//       >
+//         <div className="max-w-7xl mx-auto px-6 py-6">
+//           <div className="flex items-center justify-between">
+//             <div>
+//               <div className="flex items-center gap-3 mb-2">
+//                 <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-lg">
+//                   <BookOpen className="w-6 h-6 text-white" />
+//                 </div>
+//                 <div>
+//                   <h1 className="text-2xl font-bold">{courseData.title}</h1>
+//                   <p className="text-slate-400">
+//                     {courseData.level} • {courseData.duration}
+//                   </p>
+//                 </div>
+//               </div>
+//               <div className="flex items-center gap-4">
+//                 <div className="flex items-center gap-2">
+//                   <div className="w-48 h-2 bg-slate-700 rounded-full overflow-hidden">
+//                     <motion.div
+//                       className="h-full bg-gradient-to-r from-green-400 to-emerald-500"
+//                       initial={{ width: 0 }}
+//                       animate={{
+//                         width: `${
+//                           (courseData.progress / courseData.total) * 100
+//                         }%`,
+//                       }}
+//                       transition={{ duration: 1, delay: 0.5 }}
+//                     />
+//                   </div>
+//                   <span className="text-sm text-slate-400">
+//                     {courseData.progress}/{courseData.total} complete
+//                   </span>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="flex items-center gap-3">
+//               <motion.button
+//                 whileHover={{ scale: 1.05 }}
+//                 whileTap={{ scale: 0.95 }}
+//                 className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
+//               >
+//                 <Bookmark className="w-5 h-5" />
+//               </motion.button>
+//               <motion.button
+//                 whileHover={{ scale: 1.05 }}
+//                 whileTap={{ scale: 0.95 }}
+//                 className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
+//               >
+//                 <Share2 className="w-5 h-5" />
+//               </motion.button>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.div>
+
+//       <div className="max-w-7xl mx-auto px-6 py-8">
+//         <div className="grid lg:grid-cols-3 gap-8">
+//           {/* Main Content */}
+//           <div className="lg:col-span-2 space-y-6">
+//             {/* Course Sections */}
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               transition={{ delay: 0.2 }}
+//             >
+//               <h2 className="text-xl font-semibold mb-4">Course Content</h2>
+//               <div className="space-y-4">
+//                 {courseData.sections.map((section, sectionIndex) => (
+//                   <motion.div
+//                     key={section.id}
+//                     initial={{ opacity: 0, x: -20 }}
+//                     animate={{ opacity: 1, x: 0 }}
+//                     transition={{ delay: 0.3 + sectionIndex * 0.1 }}
+//                     className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden"
+//                   >
+//                     <motion.button
+//                       onClick={() =>
+//                         setActiveSection(
+//                           activeSection === sectionIndex ? -1 : sectionIndex
+//                         )
+//                       }
+//                       className="w-full p-4 flex items-center justify-between hover:bg-slate-750 transition-colors"
+//                       whileHover={{ backgroundColor: "rgb(51, 65, 85)" }}
+//                     >
+//                       <div className="flex items-center gap-3">
+//                         <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg">
+//                           <BookOpen className="w-5 h-5 text-white" />
+//                         </div>
+//                         <div className="text-left">
+//                           <h3 className="font-medium">{section.title}</h3>
+//                           <p className="text-sm text-slate-400">
+//                             {section.lessons.length} lessons
+//                           </p>
+//                         </div>
+//                       </div>
+//                       <motion.div
+//                         animate={{
+//                           rotate: activeSection === sectionIndex ? 90 : 0,
+//                         }}
+//                         transition={{ duration: 0.2 }}
+//                       >
+//                         <ChevronRight className="w-5 h-5 text-slate-400" />
+//                       </motion.div>
+//                     </motion.button>
+
+//                     <AnimatePresence>
+//                       {activeSection === sectionIndex && (
+//                         <motion.div
+//                           initial={{ height: 0, opacity: 0 }}
+//                           animate={{ height: "auto", opacity: 1 }}
+//                           exit={{ height: 0, opacity: 0 }}
+//                           transition={{ duration: 0.3 }}
+//                           className="border-t border-slate-700"
+//                         >
+//                           <div className="p-4 space-y-2">
+//                             {section.lessons.map((lesson, lessonIndex) => (
+//                               <motion.div
+//                                 key={lesson.id}
+//                                 initial={{ opacity: 0, x: -10 }}
+//                                 animate={{ opacity: 1, x: 0 }}
+//                                 transition={{ delay: lessonIndex * 0.05 }}
+//                                 className="flex items-center justify-between p-3 hover:bg-slate-700 rounded-lg transition-colors cursor-pointer group"
+//                               >
+//                                 <div className="flex items-center gap-3">
+//                                   <motion.button
+//                                     onClick={() =>
+//                                       toggleLessonCompletion(lesson.id)
+//                                     }
+//                                     whileHover={{ scale: 1.1 }}
+//                                     whileTap={{ scale: 0.9 }}
+//                                   >
+//                                     {completedLessons.has(lesson.id) ? (
+//                                       <CheckCircle2 className="w-5 h-5 text-green-400" />
+//                                     ) : (
+//                                       <Circle className="w-5 h-5 text-slate-400" />
+//                                     )}
+//                                   </motion.button>
+//                                   <div
+//                                     className={`${getTypeColor(lesson.type)}`}
+//                                   >
+//                                     {getTypeIcon(lesson.type)}
+//                                   </div>
+//                                   <div>
+//                                     <p className="font-medium text-sm">
+//                                       {lesson.title}
+//                                     </p>
+//                                     <div className="flex items-center gap-2 text-xs text-slate-400">
+//                                       <Clock className="w-3 h-3" />
+//                                       <span>{lesson.duration}</span>
+//                                     </div>
+//                                   </div>
+//                                 </div>
+//                                 <motion.button
+//                                   whileHover={{ scale: 1.1 }}
+//                                   whileTap={{ scale: 0.9 }}
+//                                   className="opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 p-2 rounded-lg"
+//                                 >
+//                                   <Play className="w-4 h-4" />
+//                                 </motion.button>
+//                               </motion.div>
+//                             ))}
+//                           </div>
+//                         </motion.div>
+//                       )}
+//                     </AnimatePresence>
+//                   </motion.div>
+//                 ))}
+//               </div>
+//             </motion.div>
+//           </div>
+
+//           {/* Sidebar */}
+//           <div className="space-y-6">
+//             {/* Resources */}
+//             <motion.div
+//               initial={{ opacity: 0, x: 20 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ delay: 0.4 }}
+//               className="bg-slate-800 rounded-xl p-6 border border-slate-700"
+//             >
+//               <h3 className="font-semibold mb-4 flex items-center gap-2">
+//                 <FileText className="w-5 h-5 text-blue-400" />
+//                 Resources
+//               </h3>
+//               <div className="space-y-3">
+//                 {courseData.resources.map((resource, index) => (
+//                   <motion.a
+//                     key={resource.id}
+//                     href={resource.url}
+//                     initial={{ opacity: 0, y: 10 }}
+//                     animate={{ opacity: 1, y: 0 }}
+//                     transition={{ delay: 0.5 + index * 0.05 }}
+//                     className="flex items-center justify-between p-3 hover:bg-slate-700 rounded-lg transition-colors group"
+//                   >
+//                     <span className="text-sm font-medium">
+//                       {resource.title}
+//                     </span>
+//                     <div className="flex items-center gap-2">
+//                       {resource.type === "download" && (
+//                         <Download className="w-4 h-4 text-green-400" />
+//                       )}
+//                       <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
+//                     </div>
+//                   </motion.a>
+//                 ))}
+//               </div>
+//             </motion.div>
+
+//             {/* AI-Generated Content */}
+//             <motion.div
+//               initial={{ opacity: 0, x: 20 }}
+//               animate={{ opacity: 1, x: 0 }}
+//               transition={{ delay: 0.6 }}
+//               className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl p-6 border border-purple-500/30"
+//             >
+//               <h3 className="font-semibold mb-4 flex items-center gap-2">
+//                 <Star className="w-5 h-5 text-purple-400" />
+//                 Smart Learning Tools
+//               </h3>
+//               <div className="space-y-4">
+//                 {courseData.customSources.map((source, index) => (
+//                   <motion.div
+//                     key={source.id}
+//                     initial={{ opacity: 0, y: 10 }}
+//                     animate={{ opacity: 1, y: 0 }}
+//                     transition={{ delay: 0.7 + index * 0.05 }}
+//                     className="p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+//                   >
+//                     <h4 className="font-medium text-sm mb-1">{source.title}</h4>
+//                     <p className="text-xs text-slate-400">
+//                       {source.description}
+//                     </p>
+//                   </motion.div>
+//                 ))}
+//               </div>
+//               <motion.button
+//                 whileHover={{ scale: 1.02 }}
+//                 whileTap={{ scale: 0.98 }}
+//                 className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 px-4 rounded-lg font-medium text-sm transition-all"
+//               >
+//                 Explore AI Tools
+//               </motion.button>
+//             </motion.div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LearningModule;
