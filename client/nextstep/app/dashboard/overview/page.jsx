@@ -1,5 +1,4 @@
 import RecentActivity from "@/app/components/RecentActivity";
-import SideBar from "@/app/components/SideBar";
 import UserStats from "@/app/components/UserStats";
 import WelcomeSections from "@/app/components/WelcomeSections";
 import React from "react";

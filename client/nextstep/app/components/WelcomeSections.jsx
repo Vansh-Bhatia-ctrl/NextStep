@@ -31,7 +31,12 @@ const WelcomeSections = () => {
           </div>
 
           <div className="bg-white/20 rounded-full h-2 mt-3">
-            <div className="bg-white w-[67%] h-full rounded-full"></div>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "67%" }}
+              transition={{ duration: 1.5, delay: 0.3 }}
+              className="bg-white w-[67%] h-full rounded-full"
+            ></motion.div>
           </div>
         </motion.div>
       </div>
