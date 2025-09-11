@@ -1,0 +1,807 @@
+[
+  {
+    "learningModuleId": "507f1f77bcf86cd799439020",
+    "title": "Basics of the Web",
+    "slug": "basics-of-the-web",
+    "domains": [
+      {
+        "domainId": "507f1f77bcf86cd799439021",
+        "name": "Web Fundamentals",
+        "slug": "web-fundamentals",
+        "description": "Explore the core concepts of how the web works, including protocols, servers, and browsers.",
+        "courses": [
+          {
+            "courseId": "507f1f77bcf86cd799439022",
+            "title": "Understanding the Web",
+            "slug": "understanding-the-web",
+            "shortDescription": "A beginner-friendly course to learn the fundamentals of how the web operates.",
+            "longDescription": "This course covers the essential concepts of the web, including HTTP/HTTPS, servers, clients, and browsers, designed for those new to web technology.",
+            "tags": ["Web", "HTTP", "HTTPS", "Servers", "Browsers", "Beginner"],
+            "thumbnail": "https://example.com/thumbnails/web-basics.jpg",
+            "levels": [
+              {
+                "level": "Beginner",
+                "overview": "This level introduces the foundational concepts of how the internet and web function, including communication protocols and server-client interactions.",
+                "goals": [
+                  "Understand the basics of HTTP and HTTPS",
+                  "Learn what servers and clients are",
+                  "Explore how browsers interact with the web",
+                  "Grasp the role of URLs and DNS"
+                ],
+                "modules": [
+                  {
+                    "moduleId": "507f1f77bcf86cd799439023",
+                    "title": "Introduction to the Web",
+                    "slug": "introduction-to-the-web",
+                    "description": "Learn the basic components and structure of the web.",
+                    "order": 1,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439024",
+                        "title": "What is the Web?",
+                        "slug": "what-is-the-web",
+                        "description": "Understand the internet, the web, and their basic components.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "The World Wide Web is a system of interlinked resources accessed via the internet. It uses browsers, servers, and protocols to deliver content like webpages.",
+                          "examples": [
+                            "When you visit 'example.com', your browser sends a request to a server, which responds with the webpage data."
+                          ],
+                          "realWorldApplication": "The web enables online shopping, social media, and information sharing globally.",
+                          "expertInsights": "The web relies on a client-server model, where browsers (clients) request data from servers.",
+                          "commonMistakes": [
+                            "Confusing the internet with the web (the web is a service on the internet)",
+                            "Assuming all websites are secure by default"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Describe a Web Interaction",
+                              "prompt": "Write a short description of how a browser retrieves a webpage when you enter a URL.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Mention the browser, server, and request",
+                                "Include the role of a URL"
+                              ],
+                              "solution": "When you enter a URL like 'example.com' in a browser, the browser sends a request to a server. The server processes the request and sends back the webpage data, which the browser displays."
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "What is the World Wide Web?",
+                              "options": [
+                                "A programming language",
+                                "A system of interlinked resources on the internet",
+                                "A type of server",
+                                "A browser"
+                              ],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 15,
+                          "resources": [
+                            {
+                              "title": "MDN How the Web Works",
+                              "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works",
+                              "type": "article"
+                            },
+                            {
+                              "title": "Web Basics Video",
+                              "url": "https://www.youtube.com/watch?v=example-web-basics",
+                              "type": "video"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "moduleId": "507f1f77bcf86cd799439025",
+                    "title": "HTTP and HTTPS",
+                    "slug": "http-and-https",
+                    "description": "Learn about HTTP, HTTPS, and how they enable web communication.",
+                    "order": 2,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439026",
+                        "title": "Understanding HTTP and HTTPS",
+                        "slug": "understanding-http-https",
+                        "description": "Explore the protocols that power web communication.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "HTTP (HyperText Transfer Protocol) is the protocol for transferring data over the web. HTTPS is its secure version, using encryption to protect data.",
+                          "examples": [
+                            "A URL starting with 'http://' uses HTTP, while 'https://' uses HTTPS for secure communication."
+                          ],
+                          "realWorldApplication": "HTTPS is critical for secure transactions, like online banking or shopping.",
+                          "expertInsights": "Always use HTTPS for websites handling sensitive data to ensure security.",
+                          "commonMistakes": [
+                            "Assuming HTTP is secure",
+                            "Ignoring browser warnings about insecure (HTTP) sites"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Identify Secure URLs",
+                              "prompt": "Given a list of URLs, identify which ones use HTTPS.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Look for 'https://' at the start of the URL",
+                                "HTTP URLs are not secure"
+                              ],
+                              "solution": "URLs like 'https://example.com' use HTTPS, while 'http://example.com' uses HTTP."
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "What does HTTPS add to HTTP?",
+                              "options": [
+                                "Faster speed",
+                                "Encryption for security",
+                                "More colors",
+                                "Additional file types"
+                              ],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 20,
+                          "resources": [
+                            {
+                              "title": "MDN HTTP Overview",
+                              "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "moduleId": "507f1f77bcf86cd799439027",
+                    "title": "Servers, Clients, and DNS",
+                    "slug": "servers-clients-dns",
+                    "description": "Understand the roles of servers, clients, and DNS in web interactions.",
+                    "order": 3,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439028",
+                        "title": "Servers, Clients, and DNS Basics",
+                        "slug": "servers-clients-dns-basics",
+                        "description": "Learn how servers, clients, and DNS work together to deliver webpages.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "Servers store and send webpage data, clients (like browsers) request it, and DNS (Domain Name System) translates domain names (e.g., example.com) into IP addresses.",
+                          "examples": [
+                            "When you type 'example.com', DNS finds the server's IP address, and your browser (client) requests data from that server."
+                          ],
+                          "realWorldApplication": "Servers host websites, clients access them, and DNS ensures you reach the right server.",
+                          "expertInsights": "DNS is like the internet's phonebook, mapping names to addresses.",
+                          "commonMistakes": [
+                            "Confusing servers with physical computers (servers can be software)",
+                            "Assuming DNS is instantaneous (it can take time)"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Explain DNS Role",
+                              "prompt": "Write a short explanation of how DNS helps you access a website.",
+                              "difficulty": "medium",
+                              "hints": [
+                                "Mention domain names and IP addresses",
+                                "Describe DNS as a translator"
+                              ],
+                              "solution": "DNS translates a domain name like 'example.com' into an IP address, allowing your browser to find and connect to the correct server."
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "What does DNS do?",
+                              "options": [
+                                "Stores webpages",
+                                "Translates domain names to IP addresses",
+                                "Styles webpages",
+                                "Encrypts data"
+                              ],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 25,
+                          "resources": [
+                            {
+                              "title": "MDN How DNS Works",
+                              "url": "https://developer.mozilla.org/en-US/docs/Glossary/DNS",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-12T00:29:00Z",
+      "version": "1.0"
+    }
+  },
+  {
+    "learningModuleId": "507f1f77bcf86cd799439030",
+    "title": "HTML Essentials",
+    "slug": "html-essentials",
+    "domains": [
+      {
+        "domainId": "507f1f77bcf86cd799439031",
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Master the core skills for structuring content on the web with HTML.",
+        "courses": [
+          {
+            "courseId": "507f1f77bcf86cd799439032",
+            "title": "HTML Fundamentals",
+            "slug": "html-fundamentals",
+            "shortDescription": "A beginner-friendly course to learn the basics of HTML for building webpages.",
+            "longDescription": "This course introduces HTML, the foundation of web development, teaching you how to create structured, accessible, and semantic webpages from scratch.",
+            "tags": ["HTML", "Web Development", "Beginner", "Frontend"],
+            "thumbnail": "https://example.com/thumbnails/html-fundamentals.jpg",
+            "levels": [
+              {
+                "level": "Beginner",
+                "overview": "This level covers the essentials of HTML, including tags, attributes, and semantic markup, to create well-structured webpages.",
+                "goals": [
+                  "Understand the purpose and structure of HTML",
+                  "Learn to use common HTML tags and attributes",
+                  "Create a simple, semantic webpage",
+                  "Apply best practices for accessibility"
+                ],
+                "modules": [
+                  {
+                    "moduleId": "507f1f77bcf86cd799439033",
+                    "title": "Getting Started with HTML",
+                    "slug": "getting-started-with-html",
+                    "description": "Learn the basics of HTML to structure content on the web.",
+                    "order": 1,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439034",
+                        "title": "Introduction to HTML",
+                        "slug": "introduction-to-html",
+                        "description": "Understand what HTML is and how to create a basic webpage.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "HTML (HyperText Markup Language) is the standard language for creating webpages. It uses tags to structure content, such as headings, paragraphs, and links.",
+                          "examples": [
+                            "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>"
+                          ],
+                          "realWorldApplication": "HTML is used to build the structure of websites like news sites, blogs, and online stores.",
+                          "expertInsights": "Always include the <!DOCTYPE html> declaration to ensure browsers render your page correctly.",
+                          "commonMistakes": [
+                            "Forgetting to close tags, e.g., <p> without </p>",
+                            "Nesting tags incorrectly, e.g., <p><h1>Text</p></h1>"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Create a Basic HTML Page",
+                              "prompt": "Write HTML code to create a webpage with a heading, paragraph, and a link.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Start with <!DOCTYPE html>",
+                                "Use <h1> for the heading",
+                                "Use <a href='url'> for the link"
+                              ],
+                              "solution": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n  <a href='https://example.com'>Visit Example</a>\n</body>\n</html>"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "What does HTML stand for?",
+                              "options": [
+                                "HyperText Markup Language",
+                                "HighText Machine Language",
+                                "HyperTool Multi Language",
+                                "HomeText Markup Language"
+                              ],
+                              "correctOption": [0]
+                            }
+                          ],
+                          "estimatedTime": 15,
+                          "resources": [
+                            {
+                              "title": "MDN HTML Basics",
+                              "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
+                              "type": "article"
+                            },
+                            {
+                              "title": "HTML Introduction Video",
+                              "url": "https://www.youtube.com/watch?v=example-html-video",
+                              "type": "video"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "moduleId": "507f1f77bcf86cd799439035",
+                    "title": "HTML Tags and Attributes",
+                    "slug": "html-tags-and-attributes",
+                    "description": "Learn how to use HTML tags and attributes to add structure and functionality.",
+                    "order": 2,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439036",
+                        "title": "Working with Tags and Attributes",
+                        "slug": "working-with-tags-and-attributes",
+                        "description": "Explore common HTML tags and how attributes enhance them.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "HTML tags define elements like headings (<h1>), images (<img>), and lists (<ul>). Attributes provide additional information, such as 'src' for images or 'href' for links.",
+                          "examples": [
+                            "<img src='image.jpg' alt='Description'>\n<a href='https://example.com' title='Visit Example'>Link</a>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>"
+                          ],
+                          "realWorldApplication": "Tags and attributes are used to create navigation menus, image galleries, and forms on websites.",
+                          "expertInsights": "Use the 'alt' attribute for images to improve accessibility for screen readers.",
+                          "commonMistakes": [
+                            "Omitting required attributes, e.g., 'alt' for <img>",
+                            "Using incorrect attribute values, e.g., invalid URLs in 'href'"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Add an Image with Attributes",
+                              "prompt": "Write HTML code to display an image with a source URL and an alt description.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Use the <img> tag",
+                                "Include 'src' and 'alt' attributes"
+                              ],
+                              "solution": "<img src='https://example.com/image.jpg' alt='Sample Image'>"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "Which attribute specifies the URL for a link?",
+                              "options": ["src", "href", "alt", "title"],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 20,
+                          "resources": [
+                            {
+                              "title": "MDN HTML Elements Reference",
+                              "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "moduleId": "507f1f77bcf86cd799439037",
+                    "title": "Semantic HTML",
+                    "slug": "semantic-html",
+                    "description": "Learn how to use semantic HTML for better structure and accessibility.",
+                    "order": 3,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439038",
+                        "title": "Using Semantic HTML",
+                        "slug": "using-semantic-html",
+                        "description": "Understand semantic tags and their importance for accessibility and SEO.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "Semantic HTML uses tags like <header>, <nav>, <article>, and <footer> to give meaning to content, improving accessibility and search engine optimization.",
+                          "examples": [
+                            "<header>\n  <h1>My Website</h1>\n</header>\n<nav>\n  <a href='/home'>Home</a>\n</nav>\n<article>\n  <h2>Article Title</h2>\n  <p>Content here.</p>\n</article>\n<footer>\n  <p>© 2025</p>\n</footer>"
+                          ],
+                          "realWorldApplication": "Semantic HTML is used in professional websites to ensure accessibility and improve search engine rankings.",
+                          "expertInsights": "Semantic tags help screen readers understand the structure, making your site more inclusive.",
+                          "commonMistakes": [
+                            "Using <div> instead of semantic tags like <section> or <article>",
+                            "Overusing generic tags, reducing accessibility"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Create a Semantic Webpage",
+                              "prompt": "Write HTML code for a webpage with a header, navigation menu, article, and footer using semantic tags.",
+                              "difficulty": "medium",
+                              "hints": [
+                                "Use <header>, <nav>, <article>, and <footer>",
+                                "Include at least one link in the navigation"
+                              ],
+                              "solution": "<!DOCTYPE html>\n<html>\n<head>\n  <title>Semantic Page</title>\n</head>\n<body>\n  <header>\n    <h1>My Site</h1>\n  </header>\n  <nav>\n    <a href='/home'>Home</a>\n    <a href='/about'>About</a>\n  </nav>\n  <article>\n    <h2>Article</h2>\n    <p>This is an article.</p>\n  </article>\n  <footer>\n    <p>© 2025</p>\n  </footer>\n</body>\n</html>"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "Which tag is used for the main navigation of a webpage?",
+                              "options": [
+                                "<header>",
+                                "<nav>",
+                                "<article>",
+                                "<div>"
+                              ],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 25,
+                          "resources": [
+                            {
+                              "title": "MDN Semantic HTML",
+                              "url": "https://developer.mozilla.org/en-US/docs/Glossary/Semantics#semantic_html",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-12T00:34:00Z",
+      "version": "1.0"
+    }
+  },
+  {
+    "learningModuleId": "507f1f77bcf86cd799439040",
+    "title": "CSS Fundamentals",
+    "slug": "css-fundamentals",
+    "domains": [
+      {
+        "domainId": "507f1f77bcf86cd799439041",
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Master the core skills for styling webpages with CSS.",
+        "courses": [
+          {
+            "courseId": "507f1f77bcf86cd799439042",
+            "title": "CSS Essentials",
+            "slug": "css-essentials",
+            "shortDescription": "A beginner-friendly course to learn the basics of CSS for styling webpages.",
+            "longDescription": "This course introduces CSS, teaching you how to style webpages using selectors, the box model, typography, and colors, perfect for beginners in web development.",
+            "tags": ["CSS", "Web Development", "Beginner", "Frontend"],
+            "thumbnail": "https://example.com/thumbnails/css-essentials.jpg",
+            "levels": [
+              {
+                "level": "Beginner",
+                "overview": "This level covers the essentials of CSS, including selectors, the box model, typography, and colors, to create visually appealing webpages.",
+                "goals": [
+                  "Understand how to apply CSS to HTML",
+                  "Learn to use selectors and understand specificity",
+                  "Master the box model and layout properties",
+                  "Apply typography and color styles effectively"
+                ],
+                "modules": [
+                  {
+                    "moduleId": "507f1f77bcf86cd799439043",
+                    "title": "CSS Fundamentals",
+                    "slug": "css-fundamentals",
+                    "description": "Learn the core concepts of CSS to style webpages effectively.",
+                    "order": 1,
+                    "lessons": [
+                      {
+                        "lessonId": "507f1f77bcf86cd799439044",
+                        "title": "CSS Basics & Inclusion Methods",
+                        "slug": "css-basics-inclusion",
+                        "description": "Understand what CSS is and how to include it in your HTML.",
+                        "order": 1,
+                        "content": {
+                          "explanation": "CSS (Cascading Style Sheets) is used to style HTML elements, controlling their appearance. It can be included inline (within HTML tags), internally (in a <style> tag), or externally (via a separate .css file).",
+                          "examples": [
+                            "Inline: <p style='color: blue;'>Text</p>\nInternal: <style>\np { color: blue; }\n</style>\nExternal: <link rel='stylesheet' href='styles.css'>"
+                          ],
+                          "realWorldApplication": "CSS is used to style websites, such as creating consistent designs for buttons or layouts across pages.",
+                          "expertInsights": "Use external CSS files for better organization and scalability in larger projects.",
+                          "commonMistakes": [
+                            "Using inline CSS excessively, making maintenance difficult",
+                            "Incorrectly linking external CSS files (wrong file path)"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Apply CSS to HTML",
+                              "prompt": "Write HTML with an external CSS file link to style a heading with red text.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Use the <link> tag in the <head>",
+                                "Create a simple CSS rule for the heading"
+                              ],
+                              "solution": "HTML: <!DOCTYPE html>\n<html>\n<head>\n  <link rel='stylesheet' href='styles.css'>\n</head>\n<body>\n  <h1>My Heading</h1>\n</body>\n</html>\nCSS (styles.css): h1 { color: red; }"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "Which method uses a separate .css file?",
+                              "options": [
+                                "Inline CSS",
+                                "Internal CSS",
+                                "External CSS",
+                                "Embedded CSS"
+                              ],
+                              "correctOption": [2]
+                            },
+                            {
+                              "question": "Where is internal CSS placed in HTML?",
+                              "options": [
+                                "In a <script> tag",
+                                "In a <style> tag",
+                                "In a <link> tag",
+                                "In a <div>"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "What tag links an external CSS file?",
+                              "options": [
+                                "<style>",
+                                "<script>",
+                                "<link>",
+                                "<css>"
+                              ],
+                              "correctOption": [2]
+                            }
+                          ],
+                          "estimatedTime": 15,
+                          "resources": [
+                            {
+                              "title": "MDN CSS Basics",
+                              "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
+                              "type": "article"
+                            },
+                            {
+                              "title": "CSS Introduction Video",
+                              "url": "https://www.youtube.com/watch?v=example-css-video",
+                              "type": "video"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "lessonId": "507f1f77bcf86cd799439045",
+                        "title": "Selectors & Specificity",
+                        "slug": "selectors-specificity",
+                        "description": "Learn how to target HTML elements with selectors and understand specificity.",
+                        "order": 2,
+                        "content": {
+                          "explanation": "CSS selectors target HTML elements (e.g., type, class, ID). Specificity determines which rule applies when multiple rules conflict, with ID selectors being more specific than class or type selectors.",
+                          "examples": [
+                            "Type: p { color: blue; }\nClass: .highlight { background: yellow; }\nID: #header { font-size: 24px; }\nCombinator: div p { margin: 10px; }"
+                          ],
+                          "realWorldApplication": "Selectors are used to style specific parts of a webpage, like highlighting active menu items or styling form inputs.",
+                          "expertInsights": "Use class selectors for reusable styles and avoid overusing ID selectors due to high specificity.",
+                          "commonMistakes": [
+                            "Using overly specific selectors, making styles hard to override",
+                            "Misspelling class or ID names in CSS"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Style a Profile Card",
+                              "prompt": "Write CSS to style a div with class='profile-card' to have a blue border and centered text.",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Use the class selector '.profile-card'",
+                                "Apply 'border' and 'text-align' properties"
+                              ],
+                              "solution": ".profile-card { border: 1px solid blue; text-align: center; }"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "Which selector has the highest specificity?",
+                              "options": [
+                                "Type selector",
+                                "Class selector",
+                                "ID selector",
+                                "Universal selector"
+                              ],
+                              "correctOption": [2]
+                            },
+                            {
+                              "question": "How do you select an element with class='box'?",
+                              "options": [".box", "#box", "box", "*box"],
+                              "correctOption": [0]
+                            },
+                            {
+                              "question": "What does the '>' combinator select?",
+                              "options": [
+                                "All descendants",
+                                "Direct children",
+                                "Siblings",
+                                "Parent elements"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "Which rule applies if two selectors target the same element?",
+                              "options": [
+                                "The first rule",
+                                "The last rule",
+                                "The most specific rule",
+                                "None apply"
+                              ],
+                              "correctOption": [2]
+                            }
+                          ],
+                          "estimatedTime": 20,
+                          "resources": [
+                            {
+                              "title": "MDN CSS Selectors",
+                              "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "lessonId": "507f1f77bcf86cd799439046",
+                        "title": "Box Model & Display",
+                        "slug": "box-model-display",
+                        "description": "Understand the CSS box model and display properties for layout.",
+                        "order": 3,
+                        "content": {
+                          "explanation": "The CSS box model defines an element's content, padding, border, and margin. The 'display' property controls layout, with 'block' (full-width) and 'inline' (in-line) being common values. 'box-sizing: border-box' includes padding and border in the element's width.",
+                          "examples": [
+                            ".box { width: 200px; padding: 10px; border: 1px solid black; margin: 20px; box-sizing: border-box; }\ndiv { display: block; }\nspan { display: inline; }"
+                          ],
+                          "realWorldApplication": "The box model is used to create layouts, like spacing buttons or aligning content in a grid.",
+                          "expertInsights": "Use 'box-sizing: border-box' to make sizing calculations easier and more predictable.",
+                          "commonMistakes": [
+                            "Forgetting margins collapse vertically",
+                            "Not accounting for padding/border in width calculations"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Fix Spacing with Box Model",
+                              "prompt": "Write CSS for a div with class='card' to have a 200px width, 10px padding, 2px border, and 15px margin, using border-box sizing.",
+                              "difficulty": "medium",
+                              "hints": [
+                                "Set 'box-sizing: border-box'",
+                                "Include padding, border, and margin properties"
+                              ],
+                              "solution": ".card { width: 200px; padding: 10px; border: 2px solid black; margin: 15px; box-sizing: border-box; }"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "What does 'box-sizing: border-box' do?",
+                              "options": [
+                                "Excludes padding from width",
+                                "Includes padding and border in width",
+                                "Removes margins",
+                                "Changes display type"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "Which property makes an element take the full width of its container?",
+                              "options": [
+                                "display: inline",
+                                "display: block",
+                                "width: 100%",
+                                "Both b and c"
+                              ],
+                              "correctOption": [3]
+                            },
+                            {
+                              "question": "What is part of the CSS box model?",
+                              "options": [
+                                "Content",
+                                "Padding",
+                                "Border",
+                                "All of the above"
+                              ],
+                              "correctOption": [3]
+                            }
+                          ],
+                          "estimatedTime": 20,
+                          "resources": [
+                            {
+                              "title": "MDN CSS Box Model",
+                              "url": "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "lessonId": "507f1f77bcf86cd799439047",
+                        "title": "Typography & Colors",
+                        "slug": "typography-colors",
+                        "description": "Learn how to style text and colors in CSS.",
+                        "order": 4,
+                        "content": {
+                          "explanation": "CSS typography controls fonts, sizes, and styles using properties like 'font-family', 'font-size', and 'font-weight'. Colors can be set using hex, RGB, or RGBA for transparency.",
+                          "examples": [
+                            "p { font-family: Arial, sans-serif; font-size: 16px; color: #333333; }\n.button { background-color: rgb(0, 128, 255); color: rgba(255, 255, 255, 0.8); }"
+                          ],
+                          "realWorldApplication": "Typography and colors are used to create readable text and visually appealing designs, like branding for websites.",
+                          "expertInsights": "Use web-safe fonts or fallback fonts to ensure consistent rendering across devices.",
+                          "commonMistakes": [
+                            "Using non-web-safe fonts without fallbacks",
+                            "Specifying invalid color values, e.g., incorrect hex codes"
+                          ],
+                          "exercises": [
+                            {
+                              "title": "Style a Profile Card Text",
+                              "prompt": "Write CSS to style a paragraph with class='profile-text' using Arial font, 14px size, and a dark gray color (#444444).",
+                              "difficulty": "easy",
+                              "hints": [
+                                "Use 'font-family', 'font-size', and 'color'",
+                                "Include a fallback font like 'sans-serif'"
+                              ],
+                              "solution": ".profile-text { font-family: Arial, sans-serif; font-size: 14px; color: #444444; }"
+                            }
+                          ],
+                          "quiz": [
+                            {
+                              "question": "Which property sets the font type?",
+                              "options": [
+                                "font-size",
+                                "font-family",
+                                "color",
+                                "font-weight"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "What does RGBA include that RGB does not?",
+                              "options": [
+                                "Brightness",
+                                "Transparency",
+                                "Saturation",
+                                "Hue"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "Which is a web-safe font?",
+                              "options": [
+                                "Comic Sans",
+                                "Arial",
+                                "CustomFont",
+                                "None"
+                              ],
+                              "correctOption": [1]
+                            },
+                            {
+                              "question": "How is a hex color written?",
+                              "options": [
+                                "rgb(255, 0, 0)",
+                                "#FF0000",
+                                "red",
+                                "Both b and c"
+                              ],
+                              "correctOption": [1]
+                            }
+                          ],
+                          "estimatedTime": 25,
+                          "resources": [
+                            {
+                              "title": "MDN CSS Typography",
+                              "url": "https://developer.mozilla.org/en-US/docs/Learn/CSS/Styling_text/Fundamentals",
+                              "type": "article"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-12T00:53:00Z",
+      "version": "1.0"
+    }
+  }
+]

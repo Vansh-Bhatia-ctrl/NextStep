@@ -9,6 +9,7 @@ const saveQuestionsToDb = require("./routes/saveQues");
 const getQuestionsFromDb = require("./routes/fetchQuestionsFromDB");
 const saveAnswersToDb = require("./routes/saveAnswers");
 const evaluateAnswers = require("./routes/evaluateAnswers");
+const saveModule = require("./routes/SaveCourse");
 
 const app = express();
 app.use(express.json());
@@ -42,6 +43,7 @@ app.use("/api/saveQuestions", saveQuestionsToDb);
 app.use("/api/getQuestions", getQuestionsFromDb);
 app.use("/api/saveAnswers", saveAnswersToDb);
 app.use("/api/evaluate", evaluateAnswers);
+app.use("/api/saveModule", saveModule);
 
 app.use((err, _req, res, _next) => {
   if (err && err.statusCode) {
