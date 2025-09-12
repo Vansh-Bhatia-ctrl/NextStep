@@ -183,7 +183,6 @@ const LearningModuleSchema = new Schema(
     slug: {
       type: String,
       required: true,
-      index: true,
       unique: true,
     },
     domains: { type: [DomainSchema], default: [] },

@@ -1,4 +1,5 @@
 const AssessmentAttempt = require("../models/answers");
+const User = require("../models/users");
 
 const evaluateAnswers = async (req, res) => {
   try {
@@ -43,6 +44,12 @@ const evaluateAnswers = async (req, res) => {
     await AssessmentAttempt.findOneAndUpdate(
       { clerkUserId: clerkUserId },
       { $set: { score: finalScore, level: level } },
+      { new: true }
+    );
+
+    await User.findOneAndUpdate(
+      { clerkUserId: clerkUserId },
+      { $set: { onBoardingStatus: true } },
       { new: true }
     );
 
