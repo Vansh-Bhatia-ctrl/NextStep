@@ -683,474 +683,696 @@
 
 
 //COURSE SELECTION PAGE
-"use client";
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Code2,
-  Brain,
-  Server,
-  Gamepad2,
-  Smartphone,
-  Shield,
-  Database,
-  Cloud,
-  Palette,
-  TrendingUp,
-  ChevronRight,
-  Star,
-  Users,
-  Clock,
-} from "lucide-react";
+"use client"
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  CheckCircle, 
+  Circle, 
+  Play, 
+  Book, 
+  Clock, 
+  Target, 
+  Lightbulb, 
+  AlertCircle, 
+  ExternalLink,
+  Menu,
+  X,
+  ArrowLeft,
+  Award
+} from 'lucide-react';
 
-const CareerPathsPage = () => {
-  const [selectedPath, setSelectedPath] = useState(null);
-  const [hoveredCard, setHoveredCard] = useState(null);
+const courseData = {
+  "learningModuleId": "507f1f77bcf86cd799439030",
+  "title": "HTML Essentials",
+  "slug": "html-essentials",
+  "domains": [
+    {
+      "domainId": "507f1f77bcf86cd799439031",
+      "name": "Web Development",
+      "slug": "web-development",
+      "description": "Master the core skills for structuring content on the web with HTML.",
+      "courses": [
+        {
+          "courseId": "507f1f77bcf86cd799439032",
+          "title": "HTML Fundamentals",
+          "slug": "html-fundamentals",
+          "shortDescription": "A beginner-friendly course to learn the basics of HTML for building webpages.",
+          "longDescription": "This course introduces HTML, the foundation of web development, teaching you how to create structured, accessible, and semantic webpages from scratch.",
+          "tags": ["HTML", "Web Development", "Beginner", "Frontend"],
+          "thumbnail": "https://example.com/thumbnails/html-fundamentals.jpg",
+          "levels": [
+            {
+              "level": "Beginner",
+              "overview": "This level covers the essentials of HTML, including tags, attributes, and semantic markup, to create well-structured webpages.",
+              "goals": [
+                "Understand the purpose and structure of HTML",
+                "Learn to use common HTML tags and attributes",
+                "Create a simple, semantic webpage",
+                "Apply best practices for accessibility"
+              ],
+              "modules": [
+                {
+                  "moduleId": "507f1f77bcf86cd799439033",
+                  "title": "Getting Started with HTML",
+                  "slug": "getting-started-with-html",
+                  "description": "Learn the basics of HTML to structure content on the web.",
+                  "order": 1,
+                  "lessons": [
+                    {
+                      "lessonId": "507f1f77bcf86cd799439034",
+                      "title": "Introduction to HTML",
+                      "slug": "introduction-to-html",
+                      "description": "Understand what HTML is and how to create a basic webpage.",
+                      "order": 1,
+                      "content": {
+                        "explanation": "HTML (HyperText Markup Language) is the standard language for creating webpages. It uses tags to structure content, such as headings, paragraphs, and links.",
+                        "examples": [
+                          "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>"
+                        ],
+                        "realWorldApplication": "HTML is used to build the structure of websites like news sites, blogs, and online stores.",
+                        "expertInsights": "Always include the <!DOCTYPE html> declaration to ensure browsers render your page correctly.",
+                        "commonMistakes": [
+                          "Forgetting to close tags, e.g., <p> without </p>",
+                          "Nesting tags incorrectly, e.g., <p><h1>Text</p></h1>"
+                        ],
+                        "exercises": [
+                          {
+                            "title": "Create a Basic HTML Page",
+                            "prompt": "Write HTML code to create a webpage with a heading, paragraph, and a link.",
+                            "difficulty": "easy",
+                            "hints": [
+                              "Start with <!DOCTYPE html>",
+                              "Use <h1> for the heading",
+                              "Use <a href='url'> for the link"
+                            ],
+                            "solution": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n  <a href='https://example.com'>Visit Example</a>\n</body>\n</html>"
+                          }
+                        ],
+                        "quiz": [
+                          {
+                            "question": "What does HTML stand for?",
+                            "options": [
+                              "HyperText Markup Language",
+                              "HighText Machine Language",
+                              "HyperTool Multi Language",
+                              "HomeText Markup Language"
+                            ],
+                            "correctOption": [0]
+                          }
+                        ],
+                        "estimatedTime": 15,
+                        "resources": [
+                          {
+                            "title": "MDN HTML Basics",
+                            "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
+                            "type": "article"
+                          },
+                          {
+                            "title": "HTML Introduction Video",
+                            "url": "https://www.youtube.com/watch?v=example-html-video",
+                            "type": "video"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "moduleId": "507f1f77bcf86cd799439035",
+                  "title": "HTML Tags and Attributes",
+                  "slug": "html-tags-and-attributes",
+                  "description": "Learn how to use HTML tags and attributes to add structure and functionality.",
+                  "order": 2,
+                  "lessons": [
+                    {
+                      "lessonId": "507f1f77bcf86cd799439036",
+                      "title": "Working with Tags and Attributes",
+                      "slug": "working-with-tags-and-attributes",
+                      "description": "Explore common HTML tags and how attributes enhance them.",
+                      "order": 1,
+                      "content": {
+                        "explanation": "HTML tags define elements like headings (<h1>), images (<img>), and lists (<ul>). Attributes provide additional information, such as 'src' for images or 'href' for links.",
+                        "examples": [
+                          "<img src='image.jpg' alt='Description'>\n<a href='https://example.com' title='Visit Example'>Link</a>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>"
+                        ],
+                        "realWorldApplication": "Tags and attributes are used to create navigation menus, image galleries, and forms on websites.",
+                        "expertInsights": "Use the 'alt' attribute for images to improve accessibility for screen readers.",
+                        "commonMistakes": [
+                          "Omitting required attributes, e.g., 'alt' for <img>",
+                          "Using incorrect attribute values, e.g., invalid URLs in 'href'"
+                        ],
+                        "exercises": [
+                          {
+                            "title": "Add an Image with Attributes",
+                            "prompt": "Write HTML code to display an image with a source URL and an alt description.",
+                            "difficulty": "easy",
+                            "hints": [
+                              "Use the <img> tag",
+                              "Include 'src' and 'alt' attributes"
+                            ],
+                            "solution": "<img src='https://example.com/image.jpg' alt='Sample Image'>"
+                          }
+                        ],
+                        "quiz": [
+                          {
+                            "question": "Which attribute specifies the URL for a link?",
+                            "options": ["src", "href", "alt", "title"],
+                            "correctOption": [1]
+                          }
+                        ],
+                        "estimatedTime": 20,
+                        "resources": [
+                          {
+                            "title": "MDN HTML Elements Reference",
+                            "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
+                            "type": "article"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+};
 
-  const careerPaths = [
-    {
-      id: "web-dev",
-      title: "Web Development",
-      subtitle: "Build the future of the web",
-      description:
-        "Create responsive websites and web applications using modern frameworks",
-      icon: Code2,
-      gradient: "from-blue-500 via-blue-600 to-indigo-700",
-      popularity: "95%",
-      avgSalary: "$75,000",
-      jobOpenings: "50,000+",
-      skills: ["React", "JavaScript", "Node.js", "CSS", "HTML"],
-      duration: "6-12 months",
-    },
-    {
-      id: "ai-ml",
-      title: "AI/Machine Learning",
-      subtitle: "Shape the intelligence of tomorrow",
-      description:
-        "Develop intelligent systems and algorithms that can learn and adapt",
-      icon: Brain,
-      gradient: "from-purple-500 via-purple-600 to-pink-700",
-      popularity: "88%",
-      avgSalary: "$120,000",
-      jobOpenings: "25,000+",
-      skills: [
-        "Python",
-        "TensorFlow",
-        "PyTorch",
-        "Statistics",
-        "Deep Learning",
-      ],
-      duration: "12-18 months",
-    },
-    {
-      id: "devops",
-      title: "DevOps Engineering",
-      subtitle: "Bridge development and operations",
-      description:
-        "Streamline software delivery through automation and infrastructure management",
-      icon: Server,
-      gradient: "from-teal-500 via-cyan-600 to-blue-700",
-      popularity: "82%",
-      avgSalary: "$105,000",
-      jobOpenings: "30,000+",
-      skills: ["Docker", "Kubernetes", "AWS", "Jenkins", "Terraform"],
-      duration: "8-14 months",
-    },
-    {
-      id: "game-dev",
-      title: "Game Development",
-      subtitle: "Create immersive gaming experiences",
-      description: "Design and develop engaging games across various platforms",
-      icon: Gamepad2,
-      gradient: "from-orange-500 via-red-600 to-pink-700",
-      popularity: "76%",
-      avgSalary: "$85,000",
-      jobOpenings: "15,000+",
-      skills: ["Unity", "C#", "Unreal Engine", "3D Modeling", "Game Design"],
-      duration: "10-16 months",
-    },
-    {
-      id: "mobile-dev",
-      title: "Mobile Development",
-      subtitle: "Build apps for billions of users",
-      description: "Create native and cross-platform mobile applications",
-      icon: Smartphone,
-      gradient: "from-green-500 via-emerald-600 to-teal-700",
-      popularity: "85%",
-      avgSalary: "$90,000",
-      jobOpenings: "35,000+",
-      skills: ["React Native", "Flutter", "Swift", "Kotlin", "iOS/Android"],
-      duration: "8-12 months",
-    },
-    {
-      id: "cybersecurity",
-      title: "Cybersecurity",
-      subtitle: "Protect digital assets and privacy",
-      description:
-        "Safeguard systems and networks from cyber threats and attacks",
-      icon: Shield,
-      gradient: "from-red-500 via-red-600 to-orange-700",
-      popularity: "91%",
-      avgSalary: "$110,000",
-      jobOpenings: "40,000+",
-      skills: [
-        "Ethical Hacking",
-        "Network Security",
-        "Cryptography",
-        "Risk Assessment",
-      ],
-      duration: "10-15 months",
-    },
-    {
-      id: "data-science",
-      title: "Data Science",
-      subtitle: "Extract insights from data",
-      description:
-        "Analyze complex data to drive business decisions and predictions",
-      icon: Database,
-      gradient: "from-violet-500 via-purple-600 to-indigo-700",
-      popularity: "87%",
-      avgSalary: "$115,000",
-      jobOpenings: "28,000+",
-      skills: ["Python", "R", "SQL", "Machine Learning", "Statistics"],
-      duration: "12-16 months",
-    },
-    {
-      id: "cloud-computing",
-      title: "Cloud Computing",
-      subtitle: "Build scalable cloud solutions",
-      description: "Design and manage cloud infrastructure and services",
-      icon: Cloud,
-      gradient: "from-sky-500 via-blue-600 to-indigo-700",
-      popularity: "89%",
-      avgSalary: "$100,000",
-      jobOpenings: "45,000+",
-      skills: ["AWS", "Azure", "GCP", "Microservices", "Serverless"],
-      duration: "6-10 months",
-    },
-    {
-      id: "ux-ui",
-      title: "UX/UI Design",
-      subtitle: "Craft beautiful user experiences",
-      description: "Design intuitive and visually appealing user interfaces",
-      icon: Palette,
-      gradient: "from-pink-500 via-rose-600 to-purple-700",
-      popularity: "83%",
-      avgSalary: "$80,000",
-      jobOpenings: "32,000+",
-      skills: [
-        "Figma",
-        "Adobe XD",
-        "User Research",
-        "Prototyping",
-        "Design Systems",
-      ],
-      duration: "4-8 months",
-    },
-  ];
+const NextStepCoursePage = () => {
+  const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
+  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState('content');
+  const [completedLessons, setCompletedLessons] = useState(new Set());
+  const [selectedQuizOption, setSelectedQuizOption] = useState({});
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
+  const course = courseData.domains[0].courses[0];
+  const currentLevel = course.levels[0];
+  const currentModule = currentLevel.modules[currentModuleIndex];
+  const currentLesson = currentModule.lessons[currentLessonIndex];
+
+  const totalLessons = currentLevel.modules.reduce((total, module) => total + module.lessons.length, 0);
+  const completedCount = completedLessons.size;
+  const progressPercentage = (completedCount / totalLessons) * 100;
+
+  const toggleLessonComplete = (moduleIndex, lessonIndex) => {
+    const lessonKey = `${moduleIndex}-${lessonIndex}`;
+    const newCompleted = new Set(completedLessons);
+    
+    if (newCompleted.has(lessonKey)) {
+      newCompleted.delete(lessonKey);
+    } else {
+      newCompleted.add(lessonKey);
+    }
+    
+    setCompletedLessons(newCompleted);
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
+  const navigateToLesson = (moduleIndex, lessonIndex) => {
+    setCurrentModuleIndex(moduleIndex);
+    setCurrentLessonIndex(lessonIndex);
+    setIsSidebarOpen(false);
+    setActiveTab('content');
   };
 
-  const handleCardClick = (path) => {
-    setSelectedPath(path);
+  const nextLesson = () => {
+    if (currentLessonIndex < currentModule.lessons.length - 1) {
+      setCurrentLessonIndex(currentLessonIndex + 1);
+    } else if (currentModuleIndex < currentLevel.modules.length - 1) {
+      setCurrentModuleIndex(currentModuleIndex + 1);
+      setCurrentLessonIndex(0);
+    }
   };
 
-  return (
-    <div className="min-h-screen bg-slate-900 text-white pt-18">
-      {/* Header */}
-      <div className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-teal-600/20"></div>
-        <div className="relative px-6 py-16">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-7xl mx-auto text-center"
+  const previousLesson = () => {
+    if (currentLessonIndex > 0) {
+      setCurrentLessonIndex(currentLessonIndex - 1);
+    } else if (currentModuleIndex > 0) {
+      setCurrentModuleIndex(currentModuleIndex - 1);
+      setCurrentLessonIndex(currentLevel.modules[currentModuleIndex - 1].lessons.length - 1);
+    }
+  };
+
+  const handleQuizOption = (questionIndex, optionIndex) => {
+    setSelectedQuizOption({
+      ...selectedQuizOption,
+      [questionIndex]: optionIndex
+    });
+  };
+
+  const Sidebar = () => (
+    <div className="h-full bg-slate-900 border-r border-slate-700 flex flex-col pt-18">
+      <div className="p-6 border-b border-slate-700">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-white">{course.title}</h2>
+          <button 
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden text-slate-400 hover:text-white"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-400 to-teal-400 bg-clip-text text-transparent">
-              Choose Your IT Career Path
-            </h1>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Discover the perfect technology career that matches your interests
-              and goals. Each path is designed to take you from beginner to
-              professional.
-            </p>
-          </motion.div>
+            <X size={20} />
+          </button>
+        </div>
+        
+        <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
+          <Award size={16} />
+          <span>{currentLevel.level}</span>
+        </div>
+
+        <div className="space-y-2">
+          <div className="flex justify-between text-sm">
+            <span className="text-slate-400">Progress</span>
+            <span className="text-blue-400 font-medium">{Math.round(progressPercentage)}%</span>
+          </div>
+          <div className="w-full bg-slate-800 rounded-full h-2">
+            <motion.div 
+              className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+              initial={{ width: 0 }}
+              animate={{ width: `${progressPercentage}%` }}
+              transition={{ duration: 0.5 }}
+            />
+          </div>
+          <div className="text-xs text-slate-500">
+            {completedCount} of {totalLessons} lessons completed
+          </div>
         </div>
       </div>
 
-      {/* Career Paths Grid */}
-      <div className="px-6 pb-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {careerPaths.map((path) => {
-            const IconComponent = path.icon;
-            return (
-              <motion.div
-                key={path.id}
-                variants={cardVariants}
-                whileHover={{ scale: 1.02, y: -5 }}
-                whileTap={{ scale: 0.98 }}
-                onHoverStart={() => setHoveredCard(path.id)}
-                onHoverEnd={() => setHoveredCard(null)}
-                onClick={() => handleCardClick(path)}
-                className="relative group cursor-pointer"
-              >
-                <div
-                  className={`relative p-8 rounded-2xl bg-gradient-to-br ${path.gradient} shadow-2xl border border-white/10 hover:border-white/20 transition-all duration-300`}
-                >
-                  {/* Subtle glow effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    {/* Icon and Title */}
-                    <div className="flex items-start justify-between mb-6">
-                      <div className="flex items-center space-x-4">
-                        <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl group-hover:bg-white/20 transition-colors duration-300">
-                          <IconComponent className="w-8 h-8 text-white" />
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="space-y-4">
+          {currentLevel.modules.map((module, moduleIndex) => (
+            <div key={module.moduleId} className="space-y-2">
+              <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
+                <Book size={16} />
+                <span>Module {module.order}: {module.title}</span>
+              </div>
+              
+              <div className="ml-6 space-y-2">
+                {module.lessons.map((lesson, lessonIndex) => {
+                  const lessonKey = `${moduleIndex}-${lessonIndex}`;
+                  const isCompleted = completedLessons.has(lessonKey);
+                  const isCurrent = moduleIndex === currentModuleIndex && lessonIndex === currentLessonIndex;
+                  
+                  return (
+                    <motion.button
+                      key={lesson.lessonId}
+                      onClick={() => navigateToLesson(moduleIndex, lessonIndex)}
+                      className={`w-full text-left p-3 rounded-lg border transition-all ${
+                        isCurrent 
+                          ? 'bg-blue-600 border-blue-500 text-white' 
+                          : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750 hover:border-slate-600'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleLessonComplete(moduleIndex, lessonIndex);
+                          }}
+                          className="flex-shrink-0"
+                        >
+                          {isCompleted ? (
+                            <CheckCircle size={18} className="text-green-500" />
+                          ) : (
+                            <Circle size={18} className="text-slate-500" />
+                          )}
+                        </button>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-sm truncate">{lesson.title}</div>
+                          <div className="text-xs opacity-75 flex items-center gap-1">
+                            <Clock size={12} />
+                            <span>{lesson.content.estimatedTime} min</span>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="text-xl font-bold text-white mb-1">
-                            {path.title}
-                          </h3>
-                          <p className="text-white/80 text-sm">
-                            {path.subtitle}
-                          </p>
-                        </div>
                       </div>
-                      <motion.div
-                        animate={{ rotate: hoveredCard === path.id ? 45 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ChevronRight className="w-5 h-5 text-white/60" />
-                      </motion.div>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-white/90 mb-6 leading-relaxed">
-                      {path.description}
-                    </p>
-
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <TrendingUp className="w-4 h-4 text-white/80" />
-                          <span className="text-white/80 text-xs">
-                            Popularity
-                          </span>
-                        </div>
-                        <span className="text-white font-semibold">
-                          {path.popularity}
-                        </span>
-                      </div>
-                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <Users className="w-4 h-4 text-white/80" />
-                          <span className="text-white/80 text-xs">Jobs</span>
-                        </div>
-                        <span className="text-white font-semibold">
-                          {path.jobOpenings}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Skills Preview */}
-                    <div className="mb-4">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Star className="w-4 h-4 text-white/80" />
-                        <span className="text-white/80 text-xs">
-                          Key Skills
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {path.skills.slice(0, 3).map((skill, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 bg-white/20 backdrop-blur-sm rounded-md text-xs text-white"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                        {path.skills.length > 3 && (
-                          <span className="px-2 py-1 bg-white/10 backdrop-blur-sm rounded-md text-xs text-white/80">
-                            +{path.skills.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Duration and Salary */}
-                    <div className="flex items-center justify-between text-sm">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-white/80" />
-                        <span className="text-white/80">{path.duration}</span>
-                      </div>
-                      <span className="text-white font-semibold">
-                        {path.avgSalary}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Hover overlay */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredCard === path.id ? 1 : 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute inset-0 bg-white/5 rounded-2xl pointer-events-none"
-                  />
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
+    </div>
+  );
 
-      {/* CTA Section */}
-      <motion.div
+  const ContentSection = () => (
+    <div className="space-y-8">
+      <motion.div 
+        className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-xl text-white"
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-        className="px-6 py-16 text-center bg-gradient-to-br from-slate-800 to-slate-900 border-t border-white/10"
+        animate={{ opacity: 1, y: 0 }}
       >
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">
-            Ready to Start Your Journey?
-          </h2>
-          <p className="text-slate-300 mb-8 text-lg">
-            Join thousands of learners who have successfully transitioned into
-            their dream tech careers
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-semibold text-white shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Get Personalized Recommendations
-          </motion.button>
+        <h1 className="text-2xl font-bold mb-2">{currentLesson.title}</h1>
+        <p className="text-blue-100 mb-4">{currentLesson.description}</p>
+        <div className="flex items-center gap-4 text-sm text-blue-100">
+          <div className="flex items-center gap-1">
+            <Clock size={16} />
+            <span>{currentLesson.content.estimatedTime} min</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <Target size={16} />
+            <span>Module {currentModule.order}</span>
+          </div>
         </div>
       </motion.div>
 
-      {/* Selection Modal */}
-      <AnimatePresence>
-        {selectedPath && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-6 z-50"
-            onClick={() => setSelectedPath(null)}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              onClick={(e) => e.stopPropagation()}
-              className={`max-w-2xl w-full bg-gradient-to-br ${selectedPath.gradient} p-8 rounded-3xl border border-white/20 shadow-2xl`}
+      <motion.div 
+        className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+          <Book size={20} />
+          Explanation
+        </h2>
+        <p className="text-slate-300 leading-relaxed">{currentLesson.content.explanation}</p>
+      </motion.div>
+
+      {currentLesson.content.examples && (
+        <motion.div 
+          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+        >
+          <h2 className="text-xl font-bold text-white mb-4">Example</h2>
+          <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto text-green-400 text-sm">
+            <code>{currentLesson.content.examples[0]}</code>
+          </pre>
+        </motion.div>
+      )}
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <motion.div 
+          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+            <Lightbulb size={18} />
+            Expert Insights
+          </h3>
+          <p className="text-slate-300 text-sm">{currentLesson.content.expertInsights}</p>
+        </motion.div>
+
+        <motion.div 
+          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+            <AlertCircle size={18} />
+            Common Mistakes
+          </h3>
+          <ul className="space-y-2 text-slate-300 text-sm">
+            {currentLesson.content.commonMistakes.map((mistake, index) => (
+              <li key={index} className="flex items-start gap-2">
+                <span className="text-red-400 mt-1">•</span>
+                <span>{mistake}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+
+      <motion.div 
+        className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6 }}
+      >
+        <h3 className="text-lg font-bold text-white mb-4">Resources</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {currentLesson.content.resources.map((resource, index) => (
+            <a 
+              key={index}
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors group"
             >
-              <div className="text-center">
-                <div className="inline-flex p-4 bg-white/20 backdrop-blur-sm rounded-2xl mb-6">
-                  <selectedPath.icon className="w-12 h-12 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-white mb-2">
-                  {selectedPath.title}
-                </h3>
-                <p className="text-white/90 mb-8 text-lg">
-                  {selectedPath.description}
-                </p>
-
-                <div className="grid grid-cols-2 gap-6 mb-8">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">
-                      {selectedPath.avgSalary}
-                    </div>
-                    <div className="text-white/80">Average Salary</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-white">
-                      {selectedPath.duration}
-                    </div>
-                    <div className="text-white/80">Learning Duration</div>
-                  </div>
-                </div>
-
-                <div className="flex space-x-4">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 px-6 py-3 bg-white text-gray-900 rounded-xl font-semibold hover:bg-white/90 transition-colors duration-300"
-                  >
-                    Start Learning Path
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => setSelectedPath(null)}
-                    className="px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/30 transition-colors duration-300"
-                  >
-                    Close
-                  </motion.button>
-                </div>
+              <div className="flex-shrink-0">
+                {resource.type === 'video' ? (
+                  <Play size={18} className="text-red-400" />
+                ) : (
+                  <ExternalLink size={18} className="text-blue-400" />
+                )}
               </div>
-            </motion.div>
+              <div className="flex-1">
+                <div className="font-medium text-white group-hover:text-blue-400 transition-colors">
+                  {resource.title}
+                </div>
+                <div className="text-xs text-slate-400 capitalize">{resource.type}</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
+
+  const ExerciseSection = () => (
+    <div className="space-y-6">
+      {currentLesson.content.exercises.map((exercise, index) => (
+        <motion.div 
+          key={index}
+          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.1 }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xl font-bold text-white">{exercise.title}</h3>
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+              exercise.difficulty === 'easy' 
+                ? 'bg-green-900 text-green-300' 
+                : exercise.difficulty === 'medium'
+                ? 'bg-yellow-900 text-yellow-300'
+                : 'bg-red-900 text-red-300'
+            }`}>
+              {exercise.difficulty}
+            </span>
+          </div>
+          
+          <p className="text-slate-300 mb-6">{exercise.prompt}</p>
+          
+          <div className="mb-4">
+            <h4 className="text-sm font-medium text-slate-400 mb-2">Hints:</h4>
+            <ul className="space-y-1">
+              {exercise.hints.map((hint, hintIndex) => (
+                <li key={hintIndex} className="text-sm text-slate-500 flex items-start gap-2">
+                  <span className="text-blue-400 mt-1">💡</span>
+                  <span>{hint}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-slate-900 p-4 rounded-lg">
+            <div className="text-sm font-medium text-slate-400 mb-2">Your Solution:</div>
+            <textarea 
+              className="w-full bg-slate-800 text-slate-300 p-3 rounded border border-slate-600 focus:border-blue-500 focus:outline-none resize-vertical min-h-[120px] font-mono text-sm"
+              placeholder="Write your code here..."
+            />
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+
+  const QuizSection = () => (
+    <div className="space-y-6">
+      {currentLesson.content.quiz.map((question, questionIndex) => (
+        <motion.div 
+          key={questionIndex}
+          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: questionIndex * 0.1 }}
+        >
+          <h3 className="text-lg font-medium text-white mb-4">
+            Question {questionIndex + 1}: {question.question}
+          </h3>
+          
+          <div className="space-y-3">
+            {question.options.map((option, optionIndex) => {
+              const isSelected = selectedQuizOption[questionIndex] === optionIndex;
+              const isCorrect = question.correctOption.includes(optionIndex);
+              const showResult = selectedQuizOption[questionIndex] !== undefined;
+              
+              return (
+                <button
+                  key={optionIndex}
+                  onClick={() => handleQuizOption(questionIndex, optionIndex)}
+                  className={`w-full text-left p-4 rounded-lg border transition-all ${
+                    showResult
+                      ? isCorrect
+                        ? 'bg-green-900 border-green-600 text-green-100'
+                        : isSelected
+                        ? 'bg-red-900 border-red-600 text-red-100'
+                        : 'bg-slate-700 border-slate-600 text-slate-300'
+                      : isSelected
+                      ? 'bg-blue-900 border-blue-600 text-blue-100'
+                      : 'bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600'
+                  }`}
+                  disabled={showResult}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
+                      showResult && isCorrect
+                        ? 'bg-green-500 border-green-500'
+                        : isSelected
+                        ? 'bg-blue-500 border-blue-500'
+                        : 'border-slate-400'
+                    }`}>
+                      {(showResult && isCorrect) || isSelected ? (
+                        <div className="w-full h-full rounded-full bg-white scale-50" />
+                      ) : null}
+                    </div>
+                    <span>{option}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-900 flex">
+      {/* Sidebar */}
+      <AnimatePresence>
+        {(isSidebarOpen || window.innerWidth >= 1024) && (
+          <motion.div
+            initial={{ x: -300 }}
+            animate={{ x: 0 }}
+            exit={{ x: -300 }}
+            className="fixed lg:relative z-30 w-80 h-screen lg:block"
+          >
+            <Sidebar />
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-slate-800 border-b border-slate-700 p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="lg:hidden text-slate-400 hover:text-white"
+              >
+                <Menu size={20} />
+              </button>
+              
+              <div className="hidden lg:flex items-center gap-2 text-slate-400 text-sm">
+                <ArrowLeft size={16} />
+                <span>Back to Course Overview</span>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              <div className="hidden sm:flex items-center gap-2 text-sm text-slate-400">
+             
+                <span>{Math.round(progressPercentage)}% Complete</span>
+              </div>
+              
+              <div className="flex gap-2">
+                <button 
+                  onClick={previousLesson}
+                  disabled={currentModuleIndex === 0 && currentLessonIndex === 0}
+                  className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <ChevronLeft size={16} />
+                  <span className="hidden sm:inline">Previous</span>
+                </button>
+                
+                <button 
+                  onClick={nextLesson}
+                  disabled={currentModuleIndex === currentLevel.modules.length - 1 && 
+                           currentLessonIndex === currentModule.lessons.length - 1}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                >
+                  <span className="hidden sm:inline">Next</span>
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Content Area */}
+        <div className="flex-1 overflow-auto">
+          {/* Tab Navigation */}
+          <div className="bg-slate-800 border-b border-slate-700 px-6">
+            <div className="flex space-x-8">
+              {[
+                { id: 'content', label: 'Content', icon: Book },
+                { id: 'exercise', label: 'Exercise', icon: Target },
+                { id: 'quiz', label: 'Quiz', icon: CheckCircle }
+              ].map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => setActiveTab(id)}
+                  className={`flex items-center gap-2 py-4 px-2 border-b-2 transition-colors ${
+                    activeTab === id
+                      ? 'border-blue-500 text-blue-400'
+                      : 'border-transparent text-slate-400 hover:text-white'
+                  }`}
+                >
+                  <Icon size={16} />
+                  <span className="font-medium">{label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          <div className="p-6">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {activeTab === 'content' && <ContentSection />}
+                {activeTab === 'exercise' && <ExerciseSection />}
+                {activeTab === 'quiz' && <QuizSection />}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default CareerPathsPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default NextStepCoursePage;
 
 
 

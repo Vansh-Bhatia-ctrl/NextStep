@@ -178,7 +178,7 @@ const Page = () => {
     <>
       <div className="min-h-screen w-screen bg-custom-gray-100 flex items-center justify-center overflow-x-hidden">
         <div className="w-[90vh] flex items-center justify-center">
-          <div className="bg-custom-gray-200 h-full w-[90%] md:w-[100%] p-9 rounded-xl border-2 border-blue-700 -mt-25">
+          <div className="bg-custom-gray-200 h-full w-[90%] md:w-[100%] p-9 rounded-xl border-2 border-blue-700">
             <div className="text-center">
               <p className="text-blue-400 font-semibold text-4xl">
                 NextStep Assessment
@@ -225,7 +225,7 @@ const Page = () => {
                   Thank you for completing the assessment. Your responses have
                   been submitted.
                 </p>
-                <Link href="/dashboard" className="bg-blue-700 text-white font-semibold p-2 rounded-xl hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer">
+                <Link href="/choosecareerpath" className="bg-blue-700 text-white font-semibold p-2 rounded-xl hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer">
                   Continue
                 </Link>
               </div>

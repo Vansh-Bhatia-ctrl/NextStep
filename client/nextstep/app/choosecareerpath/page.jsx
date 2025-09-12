@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Code2,
   Brain,
@@ -14,6 +14,8 @@ import {
   Star,
   Timer,
 } from "lucide-react";
+import { useAuth, useUser } from "@clerk/nextjs";
+import Link from "next/link";
 
 const PATHS = [
   {
@@ -134,6 +136,41 @@ const PATHS = [
 ];
 
 const page = () => {
+  const { user, isLoaded } = useUser();
+  const { getToken } = useAuth();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [pathInfo, setPathInfo] = useState();
+
+  const saveCareerPath = async (careerPath) => {
+    try {
+      const token = await getToken();
+
+      if (!isLoaded || !user) return;
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_DEV_URL}/api/savecareer/careerpath`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            careerPath: careerPath,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        return console.log("Error submiting the request.");
+      }
+
+      const data = await response.json();
+    } catch (error) {
+      console.log("Something went wrong, please try again", error.message);
+    }
+  };
+
   return (
     <>
       <div className="pt-18 min-h-screen w-screen bg-custom-gray-100 overflow-x-hidden">
@@ -163,6 +200,10 @@ const page = () => {
             const Icon = path.icon;
             return (
               <div
+                onClick={() => {
+                  setModalIsOpen(true);
+                  setPathInfo(path);
+                }}
                 key={path.id}
                 className={`bg-gradient-to-br ${path.gradient} p-4 rounded-xl hover:scale-103 transition-all duration-300 ease-in cursor-pointer`}
               >
@@ -220,6 +261,85 @@ const page = () => {
             );
           })}
         </motion.div>
+
+        <AnimatePresence>
+          {modalIsOpen && (
+            <div
+              onClick={() => setModalIsOpen(false)}
+              className="fixed inset-0 backdrop-blur-md pt-18 flex items-center justify-center"
+            >
+              <div className="p-4">
+                <motion.div
+                  initial={{ opacity: 0, y: -20, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  exit={{
+                    opacity: 0,
+                    y: 20,
+                    scale: 0.98,
+                    transition: { duration: 0.18 },
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                  className={`bg-gradient-to-br ${pathInfo.gradient} p-6 rounded-xl`}
+                >
+                  <div>
+                    <div className="text-center">
+                      <div className="bg-white/30 inline-block p-2 rounded-xl">
+                        <Code2 color="#fff" size={30} />
+                      </div>
+                    </div>
+                    <div className="text-center space-y-2">
+                      <p className="text-2xl font-bold text-white">
+                        {pathInfo.title}
+                      </p>
+                      <p className="text-white/80">{pathInfo.description}</p>
+                    </div>
+                    <div className="mt-8 flex items-center justify-between">
+                      <div>
+                        <p className="text-white text-lg font-semibold text-center">
+                          {pathInfo.avgSalary}
+                        </p>
+                        <p className="text-white/80 font-semibold">
+                          Average Salary
+                        </p>
+                      </div>
+
+                      <div>
+                        <p className="text-white text-lg font-semibold text-center">
+                          {pathInfo.duration}
+                        </p>
+                        <p className="text-white/80 font-semibold">
+                          Learning Duration
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 flex items-center justify-center gap-4">
+                      <div className="sm:w-[100%]">
+                        <Link href="/dashboard/overview">
+                          <button
+                            onClick={() => saveCareerPath(pathInfo.title)}
+                            className="bg-white p-3 rounded-xl font-semibold hover:scale-105 duration-300 transition-all ease-in-out cursor-pointer sm:w-full"
+                          >
+                            Choose
+                          </button>
+                        </Link>
+                      </div>
+                      <div>
+                        <button
+                          onClick={() => setModalIsOpen(false)}
+                          className="bg-white/40 p-3 rounded-xl font-semibold text-white hover:scale-105 duration-300 transition-all ease-in-out cursor-pointer"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );
