@@ -612,263 +612,212 @@
 
 // export default Dashboard;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //COURSE SELECTION PAGE
-"use client"
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  CheckCircle, 
-  Circle, 
-  Play, 
-  Book, 
-  Clock, 
-  Target, 
-  Lightbulb, 
-  AlertCircle, 
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle,
+  Circle,
+  Play,
+  Book,
+  Clock,
+  Target,
+  Lightbulb,
+  AlertCircle,
   ExternalLink,
   Menu,
   X,
   ArrowLeft,
-  Award
-} from 'lucide-react';
+  Award,
+} from "lucide-react";
 
 const courseData = {
-  "learningModuleId": "507f1f77bcf86cd799439030",
-  "title": "HTML Essentials",
-  "slug": "html-essentials",
-  "domains": [
+  learningModuleId: "507f1f77bcf86cd799439030",
+  title: "HTML Essentials",
+  slug: "html-essentials",
+  domains: [
     {
-      "domainId": "507f1f77bcf86cd799439031",
-      "name": "Web Development",
-      "slug": "web-development",
-      "description": "Master the core skills for structuring content on the web with HTML.",
-      "courses": [
+      domainId: "507f1f77bcf86cd799439031",
+      name: "Web Development",
+      slug: "web-development",
+      description:
+        "Master the core skills for structuring content on the web with HTML.",
+      courses: [
         {
-          "courseId": "507f1f77bcf86cd799439032",
-          "title": "HTML Fundamentals",
-          "slug": "html-fundamentals",
-          "shortDescription": "A beginner-friendly course to learn the basics of HTML for building webpages.",
-          "longDescription": "This course introduces HTML, the foundation of web development, teaching you how to create structured, accessible, and semantic webpages from scratch.",
-          "tags": ["HTML", "Web Development", "Beginner", "Frontend"],
-          "thumbnail": "https://example.com/thumbnails/html-fundamentals.jpg",
-          "levels": [
+          courseId: "507f1f77bcf86cd799439032",
+          title: "HTML Fundamentals",
+          slug: "html-fundamentals",
+          shortDescription:
+            "A beginner-friendly course to learn the basics of HTML for building webpages.",
+          longDescription:
+            "This course introduces HTML, the foundation of web development, teaching you how to create structured, accessible, and semantic webpages from scratch.",
+          tags: ["HTML", "Web Development", "Beginner", "Frontend"],
+          thumbnail: "https://example.com/thumbnails/html-fundamentals.jpg",
+          levels: [
             {
-              "level": "Beginner",
-              "overview": "This level covers the essentials of HTML, including tags, attributes, and semantic markup, to create well-structured webpages.",
-              "goals": [
+              level: "Beginner",
+              overview:
+                "This level covers the essentials of HTML, including tags, attributes, and semantic markup, to create well-structured webpages.",
+              goals: [
                 "Understand the purpose and structure of HTML",
                 "Learn to use common HTML tags and attributes",
                 "Create a simple, semantic webpage",
-                "Apply best practices for accessibility"
+                "Apply best practices for accessibility",
               ],
-              "modules": [
+              modules: [
                 {
-                  "moduleId": "507f1f77bcf86cd799439033",
-                  "title": "Getting Started with HTML",
-                  "slug": "getting-started-with-html",
-                  "description": "Learn the basics of HTML to structure content on the web.",
-                  "order": 1,
-                  "lessons": [
+                  moduleId: "507f1f77bcf86cd799439033",
+                  title: "Getting Started with HTML",
+                  slug: "getting-started-with-html",
+                  description:
+                    "Learn the basics of HTML to structure content on the web.",
+                  order: 1,
+                  lessons: [
                     {
-                      "lessonId": "507f1f77bcf86cd799439034",
-                      "title": "Introduction to HTML",
-                      "slug": "introduction-to-html",
-                      "description": "Understand what HTML is and how to create a basic webpage.",
-                      "order": 1,
-                      "content": {
-                        "explanation": "HTML (HyperText Markup Language) is the standard language for creating webpages. It uses tags to structure content, such as headings, paragraphs, and links.",
-                        "examples": [
-                          "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>"
+                      lessonId: "507f1f77bcf86cd799439034",
+                      title: "Introduction to HTML",
+                      slug: "introduction-to-html",
+                      description:
+                        "Understand what HTML is and how to create a basic webpage.",
+                      order: 1,
+                      content: {
+                        explanation:
+                          "HTML (HyperText Markup Language) is the standard language for creating webpages. It uses tags to structure content, such as headings, paragraphs, and links.",
+                        examples: [
+                          "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>",
                         ],
-                        "realWorldApplication": "HTML is used to build the structure of websites like news sites, blogs, and online stores.",
-                        "expertInsights": "Always include the <!DOCTYPE html> declaration to ensure browsers render your page correctly.",
-                        "commonMistakes": [
+                        realWorldApplication:
+                          "HTML is used to build the structure of websites like news sites, blogs, and online stores.",
+                        expertInsights:
+                          "Always include the <!DOCTYPE html> declaration to ensure browsers render your page correctly.",
+                        commonMistakes: [
                           "Forgetting to close tags, e.g., <p> without </p>",
-                          "Nesting tags incorrectly, e.g., <p><h1>Text</p></h1>"
+                          "Nesting tags incorrectly, e.g., <p><h1>Text</p></h1>",
                         ],
-                        "exercises": [
+                        exercises: [
                           {
-                            "title": "Create a Basic HTML Page",
-                            "prompt": "Write HTML code to create a webpage with a heading, paragraph, and a link.",
-                            "difficulty": "easy",
-                            "hints": [
+                            title: "Create a Basic HTML Page",
+                            prompt:
+                              "Write HTML code to create a webpage with a heading, paragraph, and a link.",
+                            difficulty: "easy",
+                            hints: [
                               "Start with <!DOCTYPE html>",
                               "Use <h1> for the heading",
-                              "Use <a href='url'> for the link"
+                              "Use <a href='url'> for the link",
                             ],
-                            "solution": "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n  <a href='https://example.com'>Visit Example</a>\n</body>\n</html>"
-                          }
+                            solution:
+                              "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n  <a href='https://example.com'>Visit Example</a>\n</body>\n</html>",
+                          },
                         ],
-                        "quiz": [
+                        quiz: [
                           {
-                            "question": "What does HTML stand for?",
-                            "options": [
+                            question: "What does HTML stand for?",
+                            options: [
                               "HyperText Markup Language",
                               "HighText Machine Language",
                               "HyperTool Multi Language",
-                              "HomeText Markup Language"
+                              "HomeText Markup Language",
                             ],
-                            "correctOption": [0]
-                          }
+                            correctOption: [0],
+                          },
                         ],
-                        "estimatedTime": 15,
-                        "resources": [
+                        estimatedTime: 15,
+                        resources: [
                           {
-                            "title": "MDN HTML Basics",
-                            "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
-                            "type": "article"
+                            title: "MDN HTML Basics",
+                            url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
+                            type: "article",
                           },
                           {
-                            "title": "HTML Introduction Video",
-                            "url": "https://www.youtube.com/watch?v=example-html-video",
-                            "type": "video"
-                          }
-                        ]
-                      }
-                    }
-                  ]
+                            title: "HTML Introduction Video",
+                            url: "https://www.youtube.com/watch?v=example-html-video",
+                            type: "video",
+                          },
+                        ],
+                      },
+                    },
+                  ],
                 },
                 {
-                  "moduleId": "507f1f77bcf86cd799439035",
-                  "title": "HTML Tags and Attributes",
-                  "slug": "html-tags-and-attributes",
-                  "description": "Learn how to use HTML tags and attributes to add structure and functionality.",
-                  "order": 2,
-                  "lessons": [
+                  moduleId: "507f1f77bcf86cd799439035",
+                  title: "HTML Tags and Attributes",
+                  slug: "html-tags-and-attributes",
+                  description:
+                    "Learn how to use HTML tags and attributes to add structure and functionality.",
+                  order: 2,
+                  lessons: [
                     {
-                      "lessonId": "507f1f77bcf86cd799439036",
-                      "title": "Working with Tags and Attributes",
-                      "slug": "working-with-tags-and-attributes",
-                      "description": "Explore common HTML tags and how attributes enhance them.",
-                      "order": 1,
-                      "content": {
-                        "explanation": "HTML tags define elements like headings (<h1>), images (<img>), and lists (<ul>). Attributes provide additional information, such as 'src' for images or 'href' for links.",
-                        "examples": [
-                          "<img src='image.jpg' alt='Description'>\n<a href='https://example.com' title='Visit Example'>Link</a>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>"
+                      lessonId: "507f1f77bcf86cd799439036",
+                      title: "Working with Tags and Attributes",
+                      slug: "working-with-tags-and-attributes",
+                      description:
+                        "Explore common HTML tags and how attributes enhance them.",
+                      order: 1,
+                      content: {
+                        explanation:
+                          "HTML tags define elements like headings (<h1>), images (<img>), and lists (<ul>). Attributes provide additional information, such as 'src' for images or 'href' for links.",
+                        examples: [
+                          "<img src='image.jpg' alt='Description'>\n<a href='https://example.com' title='Visit Example'>Link</a>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>",
                         ],
-                        "realWorldApplication": "Tags and attributes are used to create navigation menus, image galleries, and forms on websites.",
-                        "expertInsights": "Use the 'alt' attribute for images to improve accessibility for screen readers.",
-                        "commonMistakes": [
+                        realWorldApplication:
+                          "Tags and attributes are used to create navigation menus, image galleries, and forms on websites.",
+                        expertInsights:
+                          "Use the 'alt' attribute for images to improve accessibility for screen readers.",
+                        commonMistakes: [
                           "Omitting required attributes, e.g., 'alt' for <img>",
-                          "Using incorrect attribute values, e.g., invalid URLs in 'href'"
+                          "Using incorrect attribute values, e.g., invalid URLs in 'href'",
                         ],
-                        "exercises": [
+                        exercises: [
                           {
-                            "title": "Add an Image with Attributes",
-                            "prompt": "Write HTML code to display an image with a source URL and an alt description.",
-                            "difficulty": "easy",
-                            "hints": [
+                            title: "Add an Image with Attributes",
+                            prompt:
+                              "Write HTML code to display an image with a source URL and an alt description.",
+                            difficulty: "easy",
+                            hints: [
                               "Use the <img> tag",
-                              "Include 'src' and 'alt' attributes"
+                              "Include 'src' and 'alt' attributes",
                             ],
-                            "solution": "<img src='https://example.com/image.jpg' alt='Sample Image'>"
-                          }
+                            solution:
+                              "<img src='https://example.com/image.jpg' alt='Sample Image'>",
+                          },
                         ],
-                        "quiz": [
+                        quiz: [
                           {
-                            "question": "Which attribute specifies the URL for a link?",
-                            "options": ["src", "href", "alt", "title"],
-                            "correctOption": [1]
-                          }
+                            question:
+                              "Which attribute specifies the URL for a link?",
+                            options: ["src", "href", "alt", "title"],
+                            correctOption: [1],
+                          },
                         ],
-                        "estimatedTime": 20,
-                        "resources": [
+                        estimatedTime: 20,
+                        resources: [
                           {
-                            "title": "MDN HTML Elements Reference",
-                            "url": "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
-                            "type": "article"
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                            title: "MDN HTML Elements Reference",
+                            url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
+                            type: "article",
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 const NextStepCoursePage = () => {
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('content');
+  const [activeTab, setActiveTab] = useState("content");
   const [completedLessons, setCompletedLessons] = useState(new Set());
   const [selectedQuizOption, setSelectedQuizOption] = useState({});
 
@@ -877,20 +826,23 @@ const NextStepCoursePage = () => {
   const currentModule = currentLevel.modules[currentModuleIndex];
   const currentLesson = currentModule.lessons[currentLessonIndex];
 
-  const totalLessons = currentLevel.modules.reduce((total, module) => total + module.lessons.length, 0);
+  const totalLessons = currentLevel.modules.reduce(
+    (total, module) => total + module.lessons.length,
+    0
+  );
   const completedCount = completedLessons.size;
   const progressPercentage = (completedCount / totalLessons) * 100;
 
   const toggleLessonComplete = (moduleIndex, lessonIndex) => {
     const lessonKey = `${moduleIndex}-${lessonIndex}`;
     const newCompleted = new Set(completedLessons);
-    
+
     if (newCompleted.has(lessonKey)) {
       newCompleted.delete(lessonKey);
     } else {
       newCompleted.add(lessonKey);
     }
-    
+
     setCompletedLessons(newCompleted);
   };
 
@@ -898,7 +850,7 @@ const NextStepCoursePage = () => {
     setCurrentModuleIndex(moduleIndex);
     setCurrentLessonIndex(lessonIndex);
     setIsSidebarOpen(false);
-    setActiveTab('content');
+    setActiveTab("content");
   };
 
   const nextLesson = () => {
@@ -915,14 +867,16 @@ const NextStepCoursePage = () => {
       setCurrentLessonIndex(currentLessonIndex - 1);
     } else if (currentModuleIndex > 0) {
       setCurrentModuleIndex(currentModuleIndex - 1);
-      setCurrentLessonIndex(currentLevel.modules[currentModuleIndex - 1].lessons.length - 1);
+      setCurrentLessonIndex(
+        currentLevel.modules[currentModuleIndex - 1].lessons.length - 1
+      );
     }
   };
 
   const handleQuizOption = (questionIndex, optionIndex) => {
     setSelectedQuizOption({
       ...selectedQuizOption,
-      [questionIndex]: optionIndex
+      [questionIndex]: optionIndex,
     });
   };
 
@@ -931,14 +885,14 @@ const NextStepCoursePage = () => {
       <div className="p-6 border-b border-slate-700">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-white">{course.title}</h2>
-          <button 
+          <button
             onClick={() => setIsSidebarOpen(false)}
             className="lg:hidden text-slate-400 hover:text-white"
           >
             <X size={20} />
           </button>
         </div>
-        
+
         <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
           <Award size={16} />
           <span>{currentLevel.level}</span>
@@ -947,10 +901,12 @@ const NextStepCoursePage = () => {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-slate-400">Progress</span>
-            <span className="text-blue-400 font-medium">{Math.round(progressPercentage)}%</span>
+            <span className="text-blue-400 font-medium">
+              {Math.round(progressPercentage)}%
+            </span>
           </div>
           <div className="w-full bg-slate-800 rounded-full h-2">
-            <motion.div 
+            <motion.div
               className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progressPercentage}%` }}
@@ -969,23 +925,27 @@ const NextStepCoursePage = () => {
             <div key={module.moduleId} className="space-y-2">
               <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
                 <Book size={16} />
-                <span>Module {module.order}: {module.title}</span>
+                <span>
+                  Module {module.order}: {module.title}
+                </span>
               </div>
-              
+
               <div className="ml-6 space-y-2">
                 {module.lessons.map((lesson, lessonIndex) => {
                   const lessonKey = `${moduleIndex}-${lessonIndex}`;
                   const isCompleted = completedLessons.has(lessonKey);
-                  const isCurrent = moduleIndex === currentModuleIndex && lessonIndex === currentLessonIndex;
-                  
+                  const isCurrent =
+                    moduleIndex === currentModuleIndex &&
+                    lessonIndex === currentLessonIndex;
+
                   return (
                     <motion.button
                       key={lesson.lessonId}
                       onClick={() => navigateToLesson(moduleIndex, lessonIndex)}
                       className={`w-full text-left p-3 rounded-lg border transition-all ${
-                        isCurrent 
-                          ? 'bg-blue-600 border-blue-500 text-white' 
-                          : 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750 hover:border-slate-600'
+                        isCurrent
+                          ? "bg-blue-600 border-blue-500 text-white"
+                          : "bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750 hover:border-slate-600"
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -1005,7 +965,9 @@ const NextStepCoursePage = () => {
                           )}
                         </button>
                         <div className="flex-1 min-w-0">
-                          <div className="font-medium text-sm truncate">{lesson.title}</div>
+                          <div className="font-medium text-sm truncate">
+                            {lesson.title}
+                          </div>
                           <div className="text-xs opacity-75 flex items-center gap-1">
                             <Clock size={12} />
                             <span>{lesson.content.estimatedTime} min</span>
@@ -1025,7 +987,7 @@ const NextStepCoursePage = () => {
 
   const ContentSection = () => (
     <div className="space-y-8">
-      <motion.div 
+      <motion.div
         className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-xl text-white"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -1044,7 +1006,7 @@ const NextStepCoursePage = () => {
         </div>
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className="bg-slate-800 p-6 rounded-xl border border-slate-700"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -1054,11 +1016,13 @@ const NextStepCoursePage = () => {
           <Book size={20} />
           Explanation
         </h2>
-        <p className="text-slate-300 leading-relaxed">{currentLesson.content.explanation}</p>
+        <p className="text-slate-300 leading-relaxed">
+          {currentLesson.content.explanation}
+        </p>
       </motion.div>
 
       {currentLesson.content.examples && (
-        <motion.div 
+        <motion.div
           className="bg-slate-800 p-6 rounded-xl border border-slate-700"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1072,7 +1036,7 @@ const NextStepCoursePage = () => {
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div 
+        <motion.div
           className="bg-slate-800 p-6 rounded-xl border border-slate-700"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1082,10 +1046,12 @@ const NextStepCoursePage = () => {
             <Lightbulb size={18} />
             Expert Insights
           </h3>
-          <p className="text-slate-300 text-sm">{currentLesson.content.expertInsights}</p>
+          <p className="text-slate-300 text-sm">
+            {currentLesson.content.expertInsights}
+          </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="bg-slate-800 p-6 rounded-xl border border-slate-700"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -1106,7 +1072,7 @@ const NextStepCoursePage = () => {
         </motion.div>
       </div>
 
-      <motion.div 
+      <motion.div
         className="bg-slate-800 p-6 rounded-xl border border-slate-700"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -1115,7 +1081,7 @@ const NextStepCoursePage = () => {
         <h3 className="text-lg font-bold text-white mb-4">Resources</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {currentLesson.content.resources.map((resource, index) => (
-            <a 
+            <a
               key={index}
               href={resource.url}
               target="_blank"
@@ -1123,7 +1089,7 @@ const NextStepCoursePage = () => {
               className="flex items-center gap-3 p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors group"
             >
               <div className="flex-shrink-0">
-                {resource.type === 'video' ? (
+                {resource.type === "video" ? (
                   <Play size={18} className="text-red-400" />
                 ) : (
                   <ExternalLink size={18} className="text-blue-400" />
@@ -1133,7 +1099,9 @@ const NextStepCoursePage = () => {
                 <div className="font-medium text-white group-hover:text-blue-400 transition-colors">
                   {resource.title}
                 </div>
-                <div className="text-xs text-slate-400 capitalize">{resource.type}</div>
+                <div className="text-xs text-slate-400 capitalize">
+                  {resource.type}
+                </div>
               </div>
             </a>
           ))}
@@ -1145,7 +1113,7 @@ const NextStepCoursePage = () => {
   const ExerciseSection = () => (
     <div className="space-y-6">
       {currentLesson.content.exercises.map((exercise, index) => (
-        <motion.div 
+        <motion.div
           key={index}
           className="bg-slate-800 p-6 rounded-xl border border-slate-700"
           initial={{ opacity: 0, y: 20 }}
@@ -1154,24 +1122,29 @@ const NextStepCoursePage = () => {
         >
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-white">{exercise.title}</h3>
-            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-              exercise.difficulty === 'easy' 
-                ? 'bg-green-900 text-green-300' 
-                : exercise.difficulty === 'medium'
-                ? 'bg-yellow-900 text-yellow-300'
-                : 'bg-red-900 text-red-300'
-            }`}>
+            <span
+              className={`px-3 py-1 rounded-full text-xs font-medium ${
+                exercise.difficulty === "easy"
+                  ? "bg-green-900 text-green-300"
+                  : exercise.difficulty === "medium"
+                  ? "bg-yellow-900 text-yellow-300"
+                  : "bg-red-900 text-red-300"
+              }`}
+            >
               {exercise.difficulty}
             </span>
           </div>
-          
+
           <p className="text-slate-300 mb-6">{exercise.prompt}</p>
-          
+
           <div className="mb-4">
             <h4 className="text-sm font-medium text-slate-400 mb-2">Hints:</h4>
             <ul className="space-y-1">
               {exercise.hints.map((hint, hintIndex) => (
-                <li key={hintIndex} className="text-sm text-slate-500 flex items-start gap-2">
+                <li
+                  key={hintIndex}
+                  className="text-sm text-slate-500 flex items-start gap-2"
+                >
                   <span className="text-blue-400 mt-1">💡</span>
                   <span>{hint}</span>
                 </li>
@@ -1180,8 +1153,10 @@ const NextStepCoursePage = () => {
           </div>
 
           <div className="bg-slate-900 p-4 rounded-lg">
-            <div className="text-sm font-medium text-slate-400 mb-2">Your Solution:</div>
-            <textarea 
+            <div className="text-sm font-medium text-slate-400 mb-2">
+              Your Solution:
+            </div>
+            <textarea
               className="w-full bg-slate-800 text-slate-300 p-3 rounded border border-slate-600 focus:border-blue-500 focus:outline-none resize-vertical min-h-[120px] font-mono text-sm"
               placeholder="Write your code here..."
             />
@@ -1194,7 +1169,7 @@ const NextStepCoursePage = () => {
   const QuizSection = () => (
     <div className="space-y-6">
       {currentLesson.content.quiz.map((question, questionIndex) => (
-        <motion.div 
+        <motion.div
           key={questionIndex}
           className="bg-slate-800 p-6 rounded-xl border border-slate-700"
           initial={{ opacity: 0, y: 20 }}
@@ -1204,13 +1179,15 @@ const NextStepCoursePage = () => {
           <h3 className="text-lg font-medium text-white mb-4">
             Question {questionIndex + 1}: {question.question}
           </h3>
-          
+
           <div className="space-y-3">
             {question.options.map((option, optionIndex) => {
-              const isSelected = selectedQuizOption[questionIndex] === optionIndex;
+              const isSelected =
+                selectedQuizOption[questionIndex] === optionIndex;
               const isCorrect = question.correctOption.includes(optionIndex);
-              const showResult = selectedQuizOption[questionIndex] !== undefined;
-              
+              const showResult =
+                selectedQuizOption[questionIndex] !== undefined;
+
               return (
                 <button
                   key={optionIndex}
@@ -1218,24 +1195,26 @@ const NextStepCoursePage = () => {
                   className={`w-full text-left p-4 rounded-lg border transition-all ${
                     showResult
                       ? isCorrect
-                        ? 'bg-green-900 border-green-600 text-green-100'
+                        ? "bg-green-900 border-green-600 text-green-100"
                         : isSelected
-                        ? 'bg-red-900 border-red-600 text-red-100'
-                        : 'bg-slate-700 border-slate-600 text-slate-300'
+                        ? "bg-red-900 border-red-600 text-red-100"
+                        : "bg-slate-700 border-slate-600 text-slate-300"
                       : isSelected
-                      ? 'bg-blue-900 border-blue-600 text-blue-100'
-                      : 'bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600'
+                      ? "bg-blue-900 border-blue-600 text-blue-100"
+                      : "bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600"
                   }`}
                   disabled={showResult}
                 >
                   <div className="flex items-center gap-3">
-                    <div className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
-                      showResult && isCorrect
-                        ? 'bg-green-500 border-green-500'
-                        : isSelected
-                        ? 'bg-blue-500 border-blue-500'
-                        : 'border-slate-400'
-                    }`}>
+                    <div
+                      className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
+                        showResult && isCorrect
+                          ? "bg-green-500 border-green-500"
+                          : isSelected
+                          ? "bg-blue-500 border-blue-500"
+                          : "border-slate-400"
+                      }`}
+                    >
                       {(showResult && isCorrect) || isSelected ? (
                         <div className="w-full h-full rounded-full bg-white scale-50" />
                       ) : null}
@@ -1269,25 +1248,25 @@ const NextStepCoursePage = () => {
 
       {/* Overlay */}
       {isSidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col pt-18">
         {/* Header */}
         <header className="bg-slate-800 border-b border-slate-700 p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                 className="lg:hidden text-slate-400 hover:text-white"
               >
                 <Menu size={20} />
               </button>
-              
+
               <div className="hidden lg:flex items-center gap-2 text-slate-400 text-sm">
                 <ArrowLeft size={16} />
                 <span>Back to Course Overview</span>
@@ -1296,24 +1275,27 @@ const NextStepCoursePage = () => {
 
             <div className="flex items-center gap-4">
               <div className="hidden sm:flex items-center gap-2 text-sm text-slate-400">
-             
                 <span>{Math.round(progressPercentage)}% Complete</span>
               </div>
-              
+
               <div className="flex gap-2">
-                <button 
+                <button
                   onClick={previousLesson}
-                  disabled={currentModuleIndex === 0 && currentLessonIndex === 0}
+                  disabled={
+                    currentModuleIndex === 0 && currentLessonIndex === 0
+                  }
                   className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   <ChevronLeft size={16} />
                   <span className="hidden sm:inline">Previous</span>
                 </button>
-                
-                <button 
+
+                <button
                   onClick={nextLesson}
-                  disabled={currentModuleIndex === currentLevel.modules.length - 1 && 
-                           currentLessonIndex === currentModule.lessons.length - 1}
+                  disabled={
+                    currentModuleIndex === currentLevel.modules.length - 1 &&
+                    currentLessonIndex === currentModule.lessons.length - 1
+                  }
                   className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                 >
                   <span className="hidden sm:inline">Next</span>
@@ -1330,17 +1312,17 @@ const NextStepCoursePage = () => {
           <div className="bg-slate-800 border-b border-slate-700 px-6">
             <div className="flex space-x-8">
               {[
-                { id: 'content', label: 'Content', icon: Book },
-                { id: 'exercise', label: 'Exercise', icon: Target },
-                { id: 'quiz', label: 'Quiz', icon: CheckCircle }
+                { id: "content", label: "Content", icon: Book },
+                { id: "exercise", label: "Exercise", icon: Target },
+                { id: "quiz", label: "Quiz", icon: CheckCircle },
               ].map(({ id, label, icon: Icon }) => (
                 <button
                   key={id}
                   onClick={() => setActiveTab(id)}
                   className={`flex items-center gap-2 py-4 px-2 border-b-2 transition-colors ${
                     activeTab === id
-                      ? 'border-blue-500 text-blue-400'
-                      : 'border-transparent text-slate-400 hover:text-white'
+                      ? "border-blue-500 text-blue-400"
+                      : "border-transparent text-slate-400 hover:text-white"
                   }`}
                 >
                   <Icon size={16} />
@@ -1360,9 +1342,9 @@ const NextStepCoursePage = () => {
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                {activeTab === 'content' && <ContentSection />}
-                {activeTab === 'exercise' && <ExerciseSection />}
-                {activeTab === 'quiz' && <QuizSection />}
+                {activeTab === "content" && <ContentSection />}
+                {activeTab === "exercise" && <ExerciseSection />}
+                {activeTab === "quiz" && <QuizSection />}
               </motion.div>
             </AnimatePresence>
           </div>
@@ -1373,44 +1355,6 @@ const NextStepCoursePage = () => {
 };
 
 export default NextStepCoursePage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //MODULE PAGE DESIGN
 

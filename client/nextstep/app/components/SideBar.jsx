@@ -39,6 +39,10 @@ const OPTIONS = [
 const SideBar = () => {
   const pathname = usePathname();
 
+  if (pathname.startsWith("/dashboard/roadmaps/")) {
+    return null;
+  }
+
   return (
     <>
       <div className="fixed inset-y-0 left-0 bg-transparent w-[270px] mt-15 hidden md:flex md:flex-col p-3 md:gap-2 pt-8">

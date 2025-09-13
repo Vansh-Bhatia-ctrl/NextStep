@@ -6,7 +6,7 @@ const layout = async ({ children }) => {
     <div className="min-h-screen w-screen bg-custom-gray-100 overflow-x-hidden pt-18 flex">
       <SideBar />
 
-      <div className="flex-1 px-2 md:px-4 overflow-x-hidden md:-ml-[30px]">
+      <div className="flex-1 overflow-x-hidden">
         {children}
       </div>
     </div>
