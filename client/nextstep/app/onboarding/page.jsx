@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useAuth, useUser } from "@clerk/nextjs";
-import { useDispatch } from "react-redux";
-import { setUser } from "../redux/userSlice";
 import Link from "next/link";
+import useUserStore from "../store/useUserStore";
 
 const Page = () => {
   const { user, isLoaded } = useUser();
   const { getToken } = useAuth();
-  const dispatch = useDispatch();
+  const setUserInStore = useUserStore((s) => s.setUser);
 
   const [fetchedQuestions, setFetchedQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,14 +47,12 @@ const Page = () => {
       }
       const data = await response.json();
 
-      dispatch(
-        setUser({
-          clerkUserId: user.id,
-          name: user.fullName,
-          email: user.primaryEmailAddress.emailAddress,
-          onBoardingStatus: false,
-        })
-      );
+      setUserInStore({
+        clerkUserId: user.id,
+        name: user.fullName,
+        email: user.primaryEmailAddress.emailAddress,
+        onBoardingStatus: false,
+      });
     } catch (error) {
       console.log("Something went wrong please try again.", error);
     }
@@ -225,7 +222,10 @@ const Page = () => {
                   Thank you for completing the assessment. Your responses have
                   been submitted.
                 </p>
-                <Link href="/choosecareerpath" className="bg-blue-700 text-white font-semibold p-2 rounded-xl hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer">
+                <Link
+                  href="/choosecareerpath"
+                  className="bg-blue-700 text-white font-semibold p-2 rounded-xl hover:bg-blue-600 duration-300 transform-all ease-in-out cursor-pointer"
+                >
                   Continue
                 </Link>
               </div>

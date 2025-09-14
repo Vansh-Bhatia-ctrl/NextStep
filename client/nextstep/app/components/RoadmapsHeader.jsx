@@ -1,34 +1,17 @@
 "use client";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ArrowRight,
-  Book,
-  Target,
-  CheckCircle,
-} from "lucide-react";
-import React, { useState } from "react";
-
-const OPTIONS = [
-  {
-    id: 1,
-    icon: Book,
-    label: "Content",
-  },
-  {
-    id: 2,
-    icon: Target,
-    label: "Excersice",
-  },
-  {
-    id: 3,
-    icon: CheckCircle,
-    label: "Quiz",
-  },
-];
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import React from "react";
+import useUiStore from "../store/useUiStore";
+import CourseContentHeader from "./CourseContentHeader";
+import ExampleSection from "./ExampleSection";
+import Explanation from "./Explanation";
+import CommonMistakesandExpertInsight from "./CommonMistakesandExpertInsight";
+import ResourcesSection from "./ResourcesSection";
+import ExcersiseSection from "./ExcersiseSection";
+import QuizSection from "./QuizSection";
 
 const RoadmapsHeader = () => {
-  const [selectedId, setSelectedId] = useState();
+  const { options, selectedOption, setOptions } = useUiStore();
   return (
     <>
       <div className="bg-custom-gray-200">
@@ -50,15 +33,17 @@ const RoadmapsHeader = () => {
         </div>
 
         <div className="p-4 flex items-center justify-between border-b border-slate-700 md:flex md:items-center md:justify-center md:gap-16">
-          {OPTIONS.map((option) => {
+          {options.map((option) => {
             const Icon = option.icon;
             return (
               <div
-                onClick={() => setSelectedId(option.id)}
+                onClick={() => setOptions(option.id)}
                 key={option.id}
                 className={`flex items-center gap-2 ${
-                  selectedId === option.id ? "text-blue-500" : "text-white"
-                } transition-colors duration-300 ease-in cursor-pointer hover:text-blue-500`}
+                  selectedOption === option.id
+                    ? "text-blue-500"
+                    : "text-white/70"
+                } transition-colors duration-300 ease-in cursor-pointer hover:text-white`}
               >
                 <Icon />
                 <p className="">{option.label}</p>
@@ -67,6 +52,39 @@ const RoadmapsHeader = () => {
           })}
         </div>
       </div>
+
+      {/*Content Section*/}
+      {selectedOption === 1 && (
+        <div className="mt-4 p-2 lg:max-w-5xl lg:mx-auto xl:max-w-[1470px] xl:mx-auto">
+          <CourseContentHeader />
+          <div className="mt-6">
+            <Explanation />
+          </div>
+          <div className="mt-6">
+            <ExampleSection />
+          </div>
+          <div className="mt-6">
+            <CommonMistakesandExpertInsight />
+          </div>
+
+          <div className="mt-6">
+            <ResourcesSection />
+          </div>
+        </div>
+      )}
+
+      {/*Excersice Section*/}
+      {selectedOption === 2 && (
+        <div className="mt-4 p-2 lg:max-w-5xl lg:mx-auto xl:max-w-[1470px] xl:mx-auto">
+          <ExcersiseSection />
+        </div>
+      )}
+
+      {selectedOption === 3 && (
+        <div className="mt-4 p-2 lg:max-w-5xl lg:mx-auto xl:max-w-[1470px] xl:mx-auto">
+          <QuizSection />
+        </div>
+      )}
     </>
   );
 };

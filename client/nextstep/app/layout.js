@@ -1,9 +1,7 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
-import { Provider } from "react-redux";
-import { store } from "./store";
+
 import { Providers } from "./provider";
 
 const geistSans = Geist({
