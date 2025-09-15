@@ -1,0 +1,423 @@
+[
+  {
+    "domains": [
+      {
+        "_id": "650f1f77bcf86cd799439a01",
+        "domainId": "650f1f77bcf86cd799439a01",
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Fundamentals of building for the web: browsers, HTTP, HTML, CSS, and modern developer workflows.",
+        "courseCount": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "courses": [
+      {
+        "_id": "650f1f77bcf86cd799439a02",
+        "courseId": "650f1f77bcf86cd799439a02",
+        "title": "Web Development: From Zero to First Page",
+        "slug": "web-dev-zero-to-first-page",
+        "shortDescription": "A beginner-friendly course that takes you from zero knowledge to building and deploying a simple web page.",
+        "longDescription": "This course introduces the fundamentals of the web: how browsers and servers communicate (HTTP/HTTPS), how to structure content with HTML, style with CSS, basic developer tooling, and a simple first deployment workflow. Each lesson combines explanation, examples, exercises, and short quizzes to reinforce learning.",
+        "tags": ["web", "html", "css", "http", "beginner", "frontend"],
+        "thumbnail": "https://example.com/thumbnails/web-dev-beginner.jpg",
+        "domainId": "650f1f77bcf86cd799439a01",
+        "levelSummary": [
+          {
+            "level": "Beginner",
+            "overview": "Learn core web foundations and ship your first static web page.",
+            "moduleCount": 1
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "modules": [
+      {
+        "_id": "650f1f77bcf86cd799439a03",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "title": "Module 1 — Basics of the Web",
+        "slug": "basics-of-the-web",
+        "description": "Core fundamentals: what the web is, how browsers & servers communicate, and the building blocks (HTML & CSS).",
+        "courseId": "650f1f77bcf86cd799439a02",
+        "order": 1,
+        "lessonIds": [
+          "650f1f77bcf86cd799439a11",
+          "650f1f77bcf86cd799439a12",
+          "650f1f77bcf86cd799439a13",
+          "650f1f77bcf86cd799439a14",
+          "650f1f77bcf86cd799439a15",
+          "650f1f77bcf86cd799439a16"
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "lessons": [
+      {
+        "_id": "650f1f77bcf86cd799439a11",
+        "lessonId": "650f1f77bcf86cd799439a11",
+        "title": "What is the Web?",
+        "slug": "what-is-the-web",
+        "description": "High-level overview: websites, web apps, clients and servers.",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 1,
+        "contentId": "650f1f77bcf86cd799439b11",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439a12",
+        "lessonId": "650f1f77bcf86cd799439a12",
+        "title": "HTTP & HTTPS — How the Web Talks",
+        "slug": "http-https",
+        "description": "Requests, responses, status codes, headers, and secure transport (TLS).",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 2,
+        "contentId": "650f1f77bcf86cd799439b12",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439a13",
+        "lessonId": "650f1f77bcf86cd799439a13",
+        "title": "Browsers & DevTools",
+        "slug": "browsers-devtools",
+        "description": "How browsers render pages, the DOM, and an intro to DevTools for debugging.",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 3,
+        "contentId": "650f1f77bcf86cd799439b13",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439a14",
+        "lessonId": "650f1f77bcf86cd799439a14",
+        "title": "HTML Basics",
+        "slug": "html-basics",
+        "description": "Structure content with HTML: elements, attributes, semantic tags, and basic forms.",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 4,
+        "contentId": "650f1f77bcf86cd799439b14",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439a15",
+        "lessonId": "650f1f77bcf86cd799439a15",
+        "title": "CSS Basics",
+        "slug": "css-basics",
+        "description": "Style content: selectors, box model, layout basics (display, position), and responsive tips.",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 5,
+        "contentId": "650f1f77bcf86cd799439b15",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439a16",
+        "lessonId": "650f1f77bcf86cd799439a16",
+        "title": "Developer Workflow & First Deployment",
+        "slug": "developer-workflow-deploy",
+        "description": "Intro to editors, Git basics, and deploying a static page (GitHub Pages / Vercel).",
+        "moduleId": "650f1f77bcf86cd799439a03",
+        "order": 6,
+        "contentId": "650f1f77bcf86cd799439b16",
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "learningContents": [
+      {
+        "_id": "650f1f77bcf86cd799439b11",
+        "lessonId": "650f1f77bcf86cd799439a11",
+        "explanation": "The web is a network of servers and clients. Servers host resources (HTML, CSS, JS, images) and clients (browsers) request them over protocols such as HTTP/HTTPS. Websites are collections of linked pages; web applications are interactive programs running in the browser, often communicating with servers via APIs.",
+        "examples": [
+          "A static blog where each page is HTML files served from a server.",
+          "A web app like Google Docs that talks to a backend to save documents."
+        ],
+        "realWorldApplication": "Understanding this distinction helps you design whether a feature is client-only (UI) or requires backend services (data, auth).",
+        "expertInsights": "Start by thinking in terms of resources and requests. The browser asks for a URL; the server returns content. This mental model simplifies debugging and architecture decisions.",
+        "commonMistakes": [
+          "Confusing websites with web servers (they are related but different).",
+          "Assuming every UI change requires a server change."
+        ],
+        "exercises": [
+          {
+            "title": "Map the flow",
+            "prompt": "Describe what happens when you open https://example.com in your browser. Include browser, DNS, server, and network steps.",
+            "difficulty": "easy",
+            "hints": [
+              "Think: DNS lookup, TCP/TLS handshake, HTTP request/response"
+            ],
+            "solution": "Browser resolves DNS to IP -> TCP/TLS handshake (if HTTPS) -> browser sends HTTP GET -> server responds with HTML -> browser renders page, then requests CSS/JS/images referenced by HTML."
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which component renders HTML and runs JavaScript?",
+            "options": ["Server", "Browser", "DNS", "CDN"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Which protocol is used to request web pages?",
+            "options": ["FTP", "SMTP", "HTTP/HTTPS", "SSH"],
+            "correctOption": [2]
+          }
+        ],
+        "estimatedTime": 30,
+        "resources": [
+          {
+            "title": "MDN — How the Web Works",
+            "url": "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439b12",
+        "lessonId": "650f1f77bcf86cd799439a12",
+        "explanation": "HTTP is the application-level protocol used for clients and servers to exchange resources. Requests have a method (GET, POST), a URL, headers and sometimes a body. Responses have status codes (200 OK, 404 Not Found, 500 Server Error). HTTPS adds encryption (TLS) ensuring confidentiality and integrity.",
+        "examples": [
+          "GET /index.html -> 200 OK with HTML body",
+          "POST /api/login -> 200 OK with JSON body or 401 Unauthorized"
+        ],
+        "realWorldApplication": "When building features like forms or API calls, you need to know which HTTP method and status codes to use and how to secure data with HTTPS.",
+        "expertInsights": "Use the right method (GET for safe reads, POST/PUT/PATCH for changes). Always use HTTPS in production — browsers and users expect secure transport.",
+        "commonMistakes": [
+          "Sending sensitive data over HTTP instead of HTTPS.",
+          "Using GET for state-changing operations."
+        ],
+        "exercises": [
+          {
+            "title": "Inspect a request",
+            "prompt": "Open your browser DevTools > Network, visit any website, and pick one request. Note method, status code, and headers.",
+            "difficulty": "easy",
+            "hints": [
+              "Use DevTools Network tab",
+              "Filter by document or XHR for API calls"
+            ],
+            "solution": "Example: GET / -> 200 OK, header: content-type: text/html; charset=UTF-8"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which status code usually means the request succeeded?",
+            "options": ["200", "404", "500", "301"],
+            "correctOption": [0]
+          },
+          {
+            "question": "Which HTTP method should you use to fetch data without changing server state?",
+            "options": ["GET", "POST", "DELETE", "PATCH"],
+            "correctOption": [0]
+          }
+        ],
+        "estimatedTime": 40,
+        "resources": [
+          {
+            "title": "HTTP Overview — MDN",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439b13",
+        "lessonId": "650f1f77bcf86cd799439a13",
+        "explanation": "Browsers parse HTML into the DOM (Document Object Model), apply CSS to compute layout, and execute JavaScript. DevTools is a built-in suite for inspecting DOM, debugging JS, monitoring network requests, and profiling performance.",
+        "examples": [
+          "Using Elements panel to inspect and change HTML/CSS live.",
+          "Using Network panel to see which resources are slow or failing."
+        ],
+        "realWorldApplication": "DevTools speeds up debugging, helps you find broken layout, slow resources, and JS errors quickly.",
+        "expertInsights": "Learn to reproduce bugs in DevTools: change styles live, set breakpoints, and replay network requests. This is the fastest way to debug UI issues.",
+        "commonMistakes": [
+          "Not checking console errors when something breaks.",
+          "Making permanent changes in DevTools instead of source files."
+        ],
+        "exercises": [
+          {
+            "title": "Use DevTools to fix a layout bug",
+            "prompt": "Open DevTools on a simple page, change a CSS property in the Elements panel to fix a layout issue, and then copy the change to your source file.",
+            "difficulty": "medium",
+            "hints": [
+              "Try changing display or margin properties",
+              "Copy the final rule to your CSS file"
+            ],
+            "solution": "Example: changed .card { display: block; } to .card { display: flex; align-items: center; } and saved to styles.css"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which DevTools panel lets you inspect network requests?",
+            "options": ["Console", "Elements", "Sources", "Network"],
+            "correctOption": [3]
+          },
+          {
+            "question": "The DOM stands for:",
+            "options": [
+              "Document Object Model",
+              "Data Object Method",
+              "Document Order Model",
+              "Dynamic Object Mapping"
+            ],
+            "correctOption": [0]
+          }
+        ],
+        "estimatedTime": 30,
+        "resources": [
+          {
+            "title": "Chrome DevTools Overview",
+            "url": "https://developer.chrome.com/docs/devtools/overview/",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439b14",
+        "lessonId": "650f1f77bcf86cd799439a14",
+        "explanation": "HTML (HyperText Markup Language) is used to structure content. Elements (tags) like `<header>`, `<main>`, `<section>`, `<p>`, `<a>`, `<img>` give meaning and accessibility to content. Use semantic tags rather than generic `<div>`s when appropriate.",
+        "examples": [
+          "<!doctype html>\n<html>\n  <head><title>My Page</title></head>\n  <body>\n    <header><h1>Welcome</h1></header>\n    <main><p>Hello world</p></main>\n  </body>\n</html>"
+        ],
+        "realWorldApplication": "Semantic HTML improves accessibility and SEO. Screen readers rely on proper tags to navigate content.",
+        "expertInsights": "Start with semantic structure (header, nav, main, footer). Only add styling later. Good HTML reduces CSS complexity.",
+        "commonMistakes": [
+          "Overusing `<div>` instead of semantic tags.",
+          "Forgetting alt text on images."
+        ],
+        "exercises": [
+          {
+            "title": "Create a simple page",
+            "prompt": "Build a static HTML page with a header, navigation (3 links), a main article with a heading and paragraph, and a footer with contact info.",
+            "difficulty": "easy",
+            "hints": ["Use <nav> for links", "Include <main> and <footer>"],
+            "solution": "<header><nav><a href=\"#\">Home</a> ...</nav></header>\n<main><article><h2>Title</h2><p>Content</p></article></main>\n<footer>Contact</footer>"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which tag is used for the main content of a page?",
+            "options": ["<div>", "<main>", "<section>", "<span>"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Why is alt text important for images?",
+            "options": ["Performance", "Accessibility", "Styling", "SEO only"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 60,
+        "resources": [
+          {
+            "title": "HTML basics — MDN",
+            "url": "https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439b15",
+        "lessonId": "650f1f77bcf86cd799439a15",
+        "explanation": "CSS (Cascading Style Sheets) controls presentation: colors, spacing, layout. Important fundamentals: the box model (content, padding, border, margin), selectors, and layout modes like block, inline, flexbox, and basic grid.",
+        "examples": [
+          ".card { padding: 16px; border: 1px solid #ddd; }",
+          ".row { display: flex; gap: 12px; }"
+        ],
+        "realWorldApplication": "Understanding the box model and flexbox is essential for building responsive UIs quickly.",
+        "expertInsights": "Use small, reusable utility classes at first (e.g., .mt-4). Learn flexbox before complex grid layouts — it solves most layout problems for beginners.",
+        "commonMistakes": [
+          "Forgetting to set box-sizing: border-box; leading to confusing widths.",
+          "Using too many nested selectors, causing specificity issues."
+        ],
+        "exercises": [
+          {
+            "title": "Style your page",
+            "prompt": "Take the HTML page from the previous exercise. Add styles to make the header sticky, center the main article, and style nav links.",
+            "difficulty": "medium",
+            "hints": [
+              "Use display:flex for nav",
+              "Use max-width and margin: 0 auto for centering"
+            ],
+            "solution": "header { position: sticky; top:0; } main { max-width: 800px; margin: 24px auto; } nav a { margin-right: 12px; }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which CSS property controls the space between an element's border and its content?",
+            "options": ["margin", "padding", "border", "gap"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Which layout model is best for 1D layouts (row or column)?",
+            "options": ["Grid", "Flexbox", "Table", "Float"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 75,
+        "resources": [
+          {
+            "title": "A Complete Guide to Flexbox",
+            "url": "https://css-tricks.com/snippets/css/a-guide-to-flexbox/",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "_id": "650f1f77bcf86cd799439b16",
+        "lessonId": "650f1f77bcf86cd799439a16",
+        "explanation": "A smooth developer workflow includes a code editor (VS Code), basic Git for version control, and a simple deployment path for static sites. GitHub Pages and Vercel allow you to deploy static pages from a Git repository in minutes.",
+        "examples": [
+          "Create a Git repo, commit your HTML/CSS, and push to GitHub. Enable GitHub Pages to publish.",
+          "Connect a repo to Vercel to get continuous deploys on every push."
+        ],
+        "realWorldApplication": "You’ll publish your first portfolio or project to share with others and to include in your resume.",
+        "expertInsights": "Learn Git basics: clone, add, commit, push, and a simple branching model. Use meaningful commit messages and small commits.",
+        "commonMistakes": [
+          "Not committing frequently enough (losing progress).",
+          "Pushing secrets (API keys) to public repos."
+        ],
+        "exercises": [
+          {
+            "title": "Deploy your page",
+            "prompt": "Initialize a Git repo with your HTML/CSS, push to GitHub, and deploy the site using GitHub Pages or Vercel. Share the live URL.",
+            "difficulty": "medium",
+            "hints": [
+              "Create a README with deployment steps",
+              "Use gh-pages branch for GitHub Pages or connect to Vercel"
+            ],
+            "solution": "Create repo, git add ., git commit -m 'initial', git push origin main, enable GitHub Pages or connect repo in Vercel and deploy."
+          }
+        ],
+        "quiz": [
+          {
+            "question": "Which command stages files for a commit?",
+            "options": ["git push", "git add", "git commit", "git clone"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Which platform can continuously deploy a static site from a Git repo?",
+            "options": ["Vercel", "MySQL", "Redis", "Docker"],
+            "correctOption": [0]
+          }
+        ],
+        "estimatedTime": 90,
+        "resources": [
+          {
+            "title": "Getting started with Git — GitHub Learning Lab",
+            "url": "https://lab.github.com/",
+            "type": "article"
+          },
+          {
+            "title": "Vercel Docs — Deploying Static Sites",
+            "url": "https://vercel.com/docs/platform/deployments",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-16T00:00:00.000Z",
+      "version": "1.0"
+    }
+  }
+]
