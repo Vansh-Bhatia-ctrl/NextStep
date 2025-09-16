@@ -22,7 +22,10 @@ const LearningContentSchema = new Schema(
 );
 
 LearningContentSchema.index({ lessonId: 1 });
-
 LearningContentSchema.index({ explanation: "text", examples: "text" });
 
-module.exports = mongoose.model("LearningContent", LearningContentSchema);
+const LearningContent = mongoose.model(
+  "LearningContent",
+  LearningContentSchema
+);
+module.exports = LearningContent;

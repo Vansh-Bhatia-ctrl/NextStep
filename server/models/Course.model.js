@@ -29,4 +29,5 @@ const CourseSchema = new Schema(
 CourseSchema.index({ slug: 1 });
 CourseSchema.index({ domainId: 1 });
 
-module.exports = mongoose.model("Course", CourseSchema);
+const Course = mongoose.model("Course", CourseSchema);
+module.exports = Course;

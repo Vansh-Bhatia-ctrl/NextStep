@@ -1,7 +1,7 @@
 const express = require("express");
-const { saveCourseData } = require("../controllers/saveModules");
+const { insertData } = require("../controllers/saveModules");
 const router = express.Router();
 
-router.post("/module", saveCourseData);
+router.post("/module", insertData);
 
 module.exports = router;

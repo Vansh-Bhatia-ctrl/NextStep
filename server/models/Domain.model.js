@@ -8,7 +8,7 @@ const DomainSchema = new Schema(
       default: () => new mongoose.Types.ObjectId(),
     },
     name: { type: String, required: true, index: true },
-    slug: { type: String, required: true, unique: true, index: true },
+    slug: { type: String, required: true, index: true },
     description: { type: String },
     courseCount: { type: Number, default: 0 },
   },
@@ -17,4 +17,5 @@ const DomainSchema = new Schema(
 
 DomainSchema.index({ slug: 1 });
 
-module.exports = mongoose.model("Domain", DomainSchema);
+const Domain = mongoose.model("Domain", DomainSchema);
+module.exports = Domain;

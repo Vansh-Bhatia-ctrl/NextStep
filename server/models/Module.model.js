@@ -24,4 +24,5 @@ const ModuleSchema = new Schema(
 
 ModuleSchema.index({ courseId: 1, order: 1 });
 
-module.exports = mongoose.model("Module", ModuleSchema);
+const Module = mongoose.model("Module", ModuleSchema);
+module.exports = Module;

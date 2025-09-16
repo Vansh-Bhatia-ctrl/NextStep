@@ -1,0 +1,1220 @@
+[
+  {
+    "domains": [
+      {
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Explore advanced frontend performance and architecture techniques, including SSR, SSG, ISR, edge rendering, design systems, and mono-repos for scalable web applications.",
+        "courseCount": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "courses": [
+      {
+        "title": "Advanced Frontend Performance & Architecture",
+        "slug": "advanced-frontend-performance-architecture",
+        "shortDescription": "An intermediate course on optimizing frontend performance and architecture with Next.js, covering SSR/SSG/ISR, edge rendering, and design systems.",
+        "longDescription": "This course dives into advanced frontend performance and architecture, focusing on Next.js for server-side rendering (SSR), static site generation (SSG), and incremental static regeneration (ISR). You’ll explore edge rendering, streaming, partial hydration, design systems, and mono-repos for scalable applications. Through hands-on exercises, real-world examples, and quizzes, you’ll build a design system with Storybook and integrate it into a Next.js app. The course also covers debugging, optimization, and deployment, preparing you for building high-performance web applications.",
+        "tags": [
+          "javascript",
+          "nextjs",
+          "performance",
+          "architecture",
+          "design-systems",
+          "mono-repos",
+          "frontend"
+        ],
+        "thumbnail": "https://example.com/thumbnails/advanced-frontend.jpg",
+
+        "levelSummary": [
+          {
+            "level": "Intermediate",
+            "overview": "Master advanced frontend techniques with Next.js, design systems, and modern architecture for performant, scalable apps.",
+            "moduleCount": 1
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "modules": [
+      {
+        "title": "Module 1 — Advanced Frontend Performance & Architecture",
+        "slug": "advanced-frontend-performance-architecture",
+        "description": "Learn SSR, SSG, ISR, edge rendering, design systems, and mono-repos to build scalable, performant frontend applications.",
+
+        "order": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "lessons": [
+      {
+        "title": "Introduction to Frontend Performance & Architecture",
+        "slug": "intro-frontend-performance",
+        "description": "Understand the principles of advanced frontend performance and scalable architecture in modern web development.",
+
+        "order": 1,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "SSR, SSG, and ISR with Next.js",
+        "slug": "ssr-ssg-isr",
+        "description": "Explore server-side rendering, static site generation, and incremental static regeneration in Next.js.",
+
+        "order": 2,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Edge Rendering and Streaming",
+        "slug": "edge-rendering-streaming",
+        "description": "Learn edge rendering, streaming, and partial hydration for optimized frontend performance.",
+
+        "order": 3,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Building a Design System with Storybook",
+        "slug": "design-system-storybook",
+        "description": "Create a reusable design system using Storybook for component-driven development.",
+
+        "order": 4,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Mono-repos and Package Sharing",
+        "slug": "mono-repos-packages",
+        "description": "Understand mono-repos and package sharing for scalable frontend architecture.",
+
+        "order": 5,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Integrating and Deploying a Next.js App",
+        "slug": "nextjs-integration-deploy",
+        "description": "Integrate a design system into a Next.js app and deploy it with optimized performance.",
+
+        "order": 6,
+
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "learningContents": [
+      {
+        "explanation": "Advanced frontend performance and architecture focus on optimizing web apps for speed, scalability, and maintainability. Techniques like SSR, SSG, ISR, edge rendering, and design systems streamline development. This lesson introduces these concepts, their trade-offs, and their role in modern frameworks like Next.js. You’ll learn to plan performance-driven projects and set up a development environment for scalability.",
+        "examples": [
+          "Next.js SSR: export async function getServerSideProps() { return { props: { data } } }",
+          "Run: npm create next-app // Initialize a Next.js project"
+        ],
+        "realWorldApplication": "These techniques power fast, scalable apps like e-commerce platforms, dashboards, and content-heavy sites.",
+        "expertInsights": "Balance performance and complexity by choosing the right rendering strategy. Use tools like Lighthouse for optimization.",
+        "commonMistakes": [
+          "Overusing SSR, slowing down responses.",
+          "Ignoring performance metrics, leading to poor UX."
+        ],
+        "exercises": [
+          {
+            "title": "Plan a Performance-Driven App",
+            "prompt": "Outline a Next.js app structure with SSR and a design system.",
+            "difficulty": "easy",
+            "hints": [
+              "Include pages and components",
+              "Plan for API data fetching"
+            ],
+            "solution": "pages/index.js: export async function getServerSideProps() { return { props: { data: 'Hello' } } }\ncomponents/Button.js: export const Button = () => <button>Click</button>;"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What improves frontend performance?",
+            "options": ["SSR", "SSG", "ISR", "All of the above"],
+            "correctOption": [3]
+          },
+          {
+            "question": "Why use a design system?",
+            "options": [
+              "Faster deployment",
+              "Consistent UI",
+              "Smaller bundles",
+              "Better SEO"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 30,
+        "resources": [
+          {
+            "title": "Next.js Documentation",
+            "url": "https://nextjs.org/docs",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Server-side rendering (SSR), static site generation (SSG), and incremental static regeneration (ISR) are Next.js rendering strategies with distinct trade-offs. SSR renders pages on each request, SSG pre-renders at build time, and ISR updates static pages incrementally. This lesson covers implementing these in Next.js, analyzing their use cases, and testing performance. You’ll learn to create pages with each method and verify them in a browser.",
+        "examples": [
+          "SSG: export async function getStaticProps() { return { props: { data } } }",
+          "ISR: export async function getStaticProps() { return { props: { data }, revalidate: 10 } }"
+        ],
+        "realWorldApplication": "SSR is used for dynamic dashboards, SSG for blogs, and ISR for e-commerce product pages.",
+        "expertInsights": "Use SSG for static content, ISR for frequent updates, and SSR for real-time data. Monitor revalidation times for ISR.",
+        "commonMistakes": [
+          "Using SSR for static content, increasing server load.",
+          "Setting short ISR revalidation, causing frequent rebuilds."
+        ],
+        "exercises": [
+          {
+            "title": "Implement SSG in Next.js",
+            "prompt": "Create a Next.js page using SSG to display static data.",
+            "difficulty": "medium",
+            "hints": ["Use getStaticProps", "Return props object"],
+            "solution": "pages/index.js: export async function getStaticProps() { return { props: { message: 'Hello SSG' } } } export default function Home({ message }) { return <p>{message}</p> }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does ISR do?",
+            "options": [
+              "Renders on request",
+              "Pre-renders at build",
+              "Updates static pages",
+              "Streams data"
+            ],
+            "correctOption": [2]
+          },
+          {
+            "question": "When is SSR most suitable?",
+            "options": [
+              "Static blogs",
+              "Dynamic data",
+              "Infrequent updates",
+              "Small apps"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 45,
+        "resources": [
+          {
+            "title": "Next.js — Data Fetching",
+            "url": "https://nextjs.org/docs/basic-features/data-fetching",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Edge rendering, streaming, and partial hydration optimize performance by reducing server load and improving load times. Edge rendering processes pages at CDN edges, streaming delivers content incrementally, and partial hydration minimizes client-side JavaScript. This lesson covers implementing these in Next.js, focusing on performance gains. You’ll learn to set up a streaming page and test it with DevTools’ Network tab.",
+        "examples": [
+          "Streaming: export const dynamic = 'force-dynamic'; export default function Page() { return <Suspense fallback={<p>Loading...</p>}><Component /></Suspense> }",
+          "Partial hydration: import dynamic from 'next/dynamic'; const Component = dynamic(() => import('./Component'), { ssr: false });"
+        ],
+        "realWorldApplication": "These techniques are used in high-traffic apps like news sites or social platforms for fast, scalable rendering.",
+        "expertInsights": "Use streaming for large pages and partial hydration for heavy components. Monitor edge latency for optimal performance.",
+        "commonMistakes": [
+          "Overusing dynamic imports, slowing initial loads.",
+          "Not providing fallbacks for Suspense, breaking UX."
+        ],
+        "exercises": [
+          {
+            "title": "Implement Streaming in Next.js",
+            "prompt": "Create a Next.js page with streaming and a loading fallback.",
+            "difficulty": "medium",
+            "hints": ["Use Suspense component", "Add dynamic rendering"],
+            "solution": "pages/index.js: import { Suspense } from 'react'; export const dynamic = 'force-dynamic'; export default function Page() { return <Suspense fallback={<p>Loading...</p>}><p>Data loaded</p></Suspense> }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does edge rendering use?",
+            "options": [
+              "Local server",
+              "CDN edges",
+              "Client browser",
+              "Database"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What does partial hydration reduce?",
+            "options": [
+              "Server load",
+              "Client-side JS",
+              "API calls",
+              "CSS size"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "Next.js — Streaming",
+            "url": "https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Design systems provide reusable, consistent UI components to streamline development. Storybook is a tool for building, testing, and documenting components in isolation. This lesson covers creating a design system with Storybook, defining components like buttons or inputs, and documenting their states. You’ll learn to set up Storybook and test components interactively in a browser.",
+        "examples": [
+          "// Button.stories.js: export default { title: 'Button' }; export const Primary = () => <button>Click</button>;",
+          "Run: npx storybook init // Initialize Storybook"
+        ],
+        "realWorldApplication": "Design systems are used in large-scale apps like Airbnb or Shopify for consistent, reusable UI components.",
+        "expertInsights": "Define clear component states in Storybook. Use CSS-in-JS or Tailwind for styling consistency.",
+        "commonMistakes": [
+          "Not documenting component states, reducing reusability.",
+          "Overcomplicating Storybook setup, slowing development."
+        ],
+        "exercises": [
+          {
+            "title": "Create a Storybook Design System",
+            "prompt": "Set up Storybook and create a button component with primary and secondary states.",
+            "difficulty": "medium",
+            "hints": [
+              "Use npx storybook init",
+              "Define stories with different props"
+            ],
+            "solution": "Run: npx storybook init\ncomponents/Button.js: export const Button = ({ type }) => <button className={type}>{type}</button>;\nButton.stories.js: export default { title: 'Button' }; export const Primary = () => <Button type='primary' />; export const Secondary = () => <Button type='secondary' />;"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What is Storybook used for?",
+            "options": [
+              "Bundling",
+              "Component testing",
+              "API fetching",
+              "Deployment"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "Why use a design system?",
+            "options": [
+              "Faster builds",
+              "Consistent UI",
+              "Smaller code",
+              "Better SEO"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "Storybook Documentation",
+            "url": "https://storybook.js.org/docs/react/get-started/introduction",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Mono-repos manage multiple packages in a single repository, enabling package sharing and streamlined workflows. Tools like Yarn Workspaces or Turborepo support mono-repo setups. This lesson covers setting up a mono-repo, sharing a design system package, and integrating it into a project. You’ll learn to configure a mono-repo and test package imports for modularity.",
+        "examples": [
+          "// package.json: { 'workspaces': ['packages/*'] }",
+          "// packages/design-system/package.json: { 'name': '@myapp/design-system' }"
+        ],
+        "realWorldApplication": "Mono-repos are used by companies like Google and Meta for managing large-scale frontend and backend packages.",
+        "expertInsights": "Use Yarn Workspaces for simplicity or Turborepo for performance. Version shared packages carefully to avoid conflicts.",
+        "commonMistakes": [
+          "Misconfiguring workspaces, breaking package imports.",
+          "Not versioning packages, causing dependency issues."
+        ],
+        "exercises": [
+          {
+            "title": "Set Up a Mono-repo",
+            "prompt": "Create a mono-repo with a shared button component package.",
+            "difficulty": "medium",
+            "hints": ["Use Yarn Workspaces", "Export component in a package"],
+            "solution": "package.json: { 'workspaces': ['packages/*'] }\npackages/button/package.json: { 'name': '@myapp/button' }\npackages/button/index.js: export const Button = () => <button>Click</button>;"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What is a mono-repo?",
+            "options": [
+              "Single file",
+              "Multiple packages in one repo",
+              "Single package",
+              "Multiple repos"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What tool supports mono-repos?",
+            "options": ["ESLint", "Yarn Workspaces", "Vite", "DevTools"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "Yarn Workspaces Documentation",
+            "url": "https://classic.yarnpkg.com/en/docs/workspaces/",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Integrating a design system into a Next.js app and deploying it combines all learned skills for a production-ready project. This lesson guides you through importing a Storybook design system into a Next.js app, optimizing performance with ISR or SSG, and deploying with Vercel or GitHub Pages. You’ll learn to debug with DevTools, test across browsers, and ensure scalability.",
+        "examples": [
+          "Next.js: import { Button } from '@myapp/design-system'; export default function Page() { return <Button /> }",
+          "Deploy: vercel deploy // Deploy to Vercel"
+        ],
+        "realWorldApplication": "Integrated design systems power consistent, scalable apps like e-commerce sites or SaaS platforms.",
+        "expertInsights": "Test design system integration early. Optimize Next.js builds with ISR for dynamic content and Vercel for fast deploys.",
+        "commonMistakes": [
+          "Deploying without testing integration, causing UI breaks.",
+          "Not optimizing builds, leading to slow load times."
+        ],
+        "exercises": [
+          {
+            "title": "Deploy a Next.js App with Design System",
+            "prompt": "Integrate a Storybook button into a Next.js app and deploy to Vercel.",
+            "difficulty": "hard",
+            "hints": [
+              "Import design system package",
+              "Use Vercel CLI for deployment"
+            ],
+            "solution": "packages/button/index.js: export const Button = () => <button>Click</button>;\npages/index.js: import { Button } from '@myapp/button'; export async function getStaticProps() { return { props: {} } } export default function Home() { return <Button /> }\nRun: vercel deploy"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What optimizes Next.js performance?",
+            "options": [
+              "Inline scripts",
+              "ISR",
+              "Global variables",
+              "No modules"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "Which platform supports Next.js deployment?",
+            "options": ["MySQL", "Vercel", "MongoDB", "Redis"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 60,
+        "resources": [
+          {
+            "title": "Next.js — Deployment",
+            "url": "https://nextjs.org/docs/deployment",
+            "type": "doc"
+          },
+          {
+            "title": "Vercel Documentation",
+            "url": "https://vercel.com/docs",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-16T00:00:00.000Z",
+      "version": "1.0"
+    }
+  },
+  {
+    "domains": [
+      {
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Master advanced TypeScript patterns, including generics, conditional types, mapped types, type-safe API contracts, and domain-driven types for robust full-stack applications.",
+        "courseCount": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "courses": [
+      {
+        "title": "Advanced TypeScript Patterns",
+        "slug": "advanced-typescript-patterns",
+        "shortDescription": "An intermediate course on leveraging advanced TypeScript patterns, including generics, type-safe APIs with TRPC/gRPC, and domain-driven types for full-stack apps.",
+        "longDescription": "This course explores advanced TypeScript patterns to build robust, type-safe full-stack applications. You’ll dive into advanced generics, conditional and mapped types, type-safe API contracts with TRPC and gRPC, and domain-driven type design. Through hands-on exercises, real-world examples, and quizzes, you’ll create a fully type-safe CRUD app with shared types between frontend and backend. The course also covers utility libraries and best practices for scalable TypeScript development, preparing you for professional full-stack projects.",
+        "tags": [
+          "typescript",
+          "generics",
+          "api-contracts",
+          "trpc",
+          "grpc",
+          "domain-driven",
+          "full-stack"
+        ],
+        "thumbnail": "https://example.com/thumbnails/advanced-typescript.jpg",
+        "levelSummary": [
+          {
+            "level": "Intermediate",
+            "overview": "Master advanced TypeScript techniques for building type-safe, scalable full-stack applications with shared types and modern APIs.",
+            "moduleCount": 1
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "modules": [
+      {
+        "title": "Module 1 — Advanced TypeScript Patterns",
+        "slug": "advanced-typescript-patterns",
+        "description": "Learn advanced generics, conditional and mapped types, type-safe APIs, and domain-driven types to build robust TypeScript applications.",
+        "order": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "lessons": [
+      {
+        "title": "Introduction to Advanced TypeScript Patterns",
+        "slug": "intro-advanced-typescript",
+        "description": "Understand advanced TypeScript concepts like generics, conditional types, and their role in building type-safe applications.",
+        "order": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Advanced Generics in TypeScript",
+        "slug": "advanced-generics",
+        "description": "Explore advanced generics for flexible, reusable, and type-safe code structures.",
+        "order": 2,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Conditional and Mapped Types",
+        "slug": "conditional-mapped-types",
+        "description": "Learn conditional and mapped types to create dynamic, type-safe utilities.",
+        "order": 3,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Type-Safe API Contracts with TRPC",
+        "slug": "trpc-api-contracts",
+        "description": "Implement type-safe API contracts using TRPC for seamless frontend-backend integration.",
+        "order": 4,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Type-Safe APIs with gRPC and TypeScript",
+        "slug": "grpc-typescript",
+        "description": "Use gRPC with TypeScript to build type-safe, high-performance APIs.",
+        "order": 5,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Domain-Driven Types and Building a CRUD App",
+        "slug": "domain-driven-crud",
+        "description": "Create a fully type-safe full-stack CRUD app using domain-driven types and shared type definitions.",
+        "order": 6,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "learningContents": [
+      {
+        "explanation": "Advanced TypeScript patterns enable developers to create robust, type-safe applications with reusable and maintainable code. Generics, conditional types, and mapped types provide flexibility, while type-safe APIs and domain-driven types ensure consistency across full-stack apps. This lesson introduces these concepts, their benefits, and how to set up a TypeScript project for advanced development.",
+        "examples": [
+          "Generic: function identity<T>(value: T): T { return value; }",
+          "Run: npx tsc --init // Initialize TypeScript project"
+        ],
+        "realWorldApplication": "These patterns are used in large-scale apps like financial platforms or SaaS products for type safety and scalability.",
+        "expertInsights": "Leverage generics for reusable components and conditional types for dynamic utilities. Always define strict types for APIs.",
+        "commonMistakes": [
+          "Overcomplicating generics, reducing readability.",
+          "Ignoring type inference, leading to verbose code."
+        ],
+        "exercises": [
+          {
+            "title": "Plan a TypeScript Project",
+            "prompt": "Outline a TypeScript app structure with a generic utility function.",
+            "difficulty": "easy",
+            "hints": ["Use a generic type", "Define a simple function"],
+            "solution": "utils.ts: function mapData<T>(data: T): T { return data; }\nmain.ts: import { mapData } from './utils'; console.log(mapData<string>('Hello'));"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What do advanced TypeScript patterns improve?",
+            "options": ["Performance", "Type safety", "Bundling", "Deployment"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Why use generics?",
+            "options": [
+              "Faster runtime",
+              "Reusable types",
+              "Smaller code",
+              "Better SEO"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 30,
+        "resources": [
+          {
+            "title": "TypeScript Documentation",
+            "url": "https://www.typescriptlang.org/docs/",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Advanced generics allow flexible, reusable, and type-safe code by parameterizing types. They enable functions, interfaces, and classes to work with any data type while maintaining type safety. This lesson covers creating and using advanced generics, constraining them, and applying them in real-world scenarios. You’ll learn to write a generic utility and test it in a TypeScript project.",
+        "examples": [
+          "interface Box<T> { content: T; } const stringBox: Box<string> = { content: 'Hello' };",
+          "function merge<T, U>(a: T, b: U): T & U { return { ...a, ...b }; }"
+        ],
+        "realWorldApplication": "Generics are used in libraries like React or Redux for type-safe components and state management.",
+        "expertInsights": "Use type constraints to limit generics. Combine with utility types for powerful abstractions.",
+        "commonMistakes": [
+          "Using any instead of generics, losing type safety.",
+          "Overconstraining generics, reducing flexibility."
+        ],
+        "exercises": [
+          {
+            "title": "Create a Generic Function",
+            "prompt": "Write a generic function to wrap a value in an object with a type-safe key.",
+            "difficulty": "medium",
+            "hints": [
+              "Use a generic type parameter",
+              "Return an object with the value"
+            ],
+            "solution": "function wrap<T>(value: T): { data: T } { return { data: value }; }\nconsole.log(wrap<string>('Test')); // { data: 'Test' }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What do generics provide?",
+            "options": [
+              "Type safety",
+              "Runtime speed",
+              "Smaller bundles",
+              "Dynamic routes"
+            ],
+            "correctOption": [0]
+          },
+          {
+            "question": "How do you constrain a generic?",
+            "options": ["extends", "implements", "typeof", "instanceof"],
+            "correctOption": [0]
+          }
+        ],
+        "estimatedTime": 45,
+        "resources": [
+          {
+            "title": "TypeScript — Generics",
+            "url": "https://www.typescriptlang.org/docs/handbook/2/generics.html",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Conditional and mapped types allow dynamic type creation based on conditions or existing types, enabling powerful type utilities. Conditional types select types based on conditions, while mapped types transform object types. This lesson covers creating and using these types to build flexible utilities, testing them in a TypeScript project for type safety.",
+        "examples": [
+          "type IsString<T> = T extends string ? true : false;",
+          "type Mapped<T> = { [K in keyof T]: T[K] };"
+        ],
+        "realWorldApplication": "These types are used in libraries like TypeScript’s built-in utilities or API clients for dynamic type safety.",
+        "expertInsights": "Combine conditional and mapped types for complex utilities. Use keyof and in for robust mappings.",
+        "commonMistakes": [
+          "Misusing conditions, causing type errors.",
+          "Overcomplicating mapped types, reducing clarity."
+        ],
+        "exercises": [
+          {
+            "title": "Create a Conditional Type",
+            "prompt": "Write a conditional type to check if a type is a string and return a boolean.",
+            "difficulty": "medium",
+            "hints": ["Use extends with a condition", "Return true or false"],
+            "solution": "type IsString<T> = T extends string ? true : false;\ntype Test = IsString<string>; // true"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What do conditional types do?",
+            "options": [
+              "Map objects",
+              "Select types",
+              "Bundle code",
+              "Deploy apps"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What operator is used in mapped types?",
+            "options": ["extends", "in", "typeof", "as"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "TypeScript — Conditional Types",
+            "url": "https://www.typescriptlang.org/docs/handbook/2/conditional-types.html",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "TRPC provides type-safe API contracts by generating types from backend procedures, ensuring seamless frontend-backend integration. It eliminates manual type definitions for APIs. This lesson covers setting up TRPC in a TypeScript project, defining procedures, and consuming them in a frontend app. You’ll learn to create a type-safe endpoint and test it in a browser.",
+        "examples": [
+          "TRPC router: export const router = t.router({ hello: t.procedure.input(z.string()).query(({ input }) => `Hello ${input}`) });",
+          "Client: const result = await trpc.hello.query('World');"
+        ],
+        "realWorldApplication": "TRPC is used in full-stack apps for type-safe APIs, like dashboards or e-commerce platforms.",
+        "expertInsights": "Keep TRPC routers simple and use Zod for input validation. Test endpoints thoroughly for type accuracy.",
+        "commonMistakes": [
+          "Not validating inputs, causing runtime errors.",
+          "Ignoring client-side type inference, reducing safety."
+        ],
+        "exercises": [
+          {
+            "title": "Set Up a TRPC Endpoint",
+            "prompt": "Create a TRPC router with a type-safe query endpoint.",
+            "difficulty": "medium",
+            "hints": ["Use t.procedure with input", "Test with a client query"],
+            "solution": "server.ts: import { initTRPC } from '@trpc/server'; import { z } from 'zod'; const t = initTRPC.create(); export const router = t.router({ hello: t.procedure.input(z.string()).query(({ input }) => `Hello ${input}`) });\nclient.ts: import { createTRPCProxyClient } from '@trpc/client'; const trpc = createTRPCProxyClient({ links: [] }); const result = await trpc.hello.query('World');"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does TRPC ensure?",
+            "options": ["Type safety", "Performance", "Bundling", "SEO"],
+            "correctOption": [0]
+          },
+          {
+            "question": "What validates TRPC inputs?",
+            "options": ["ESLint", "Zod", "Vite", "Jest"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "TRPC Documentation",
+            "url": "https://trpc.io/docs",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "gRPC with TypeScript enables high-performance, type-safe APIs using protocol buffers. It ensures strict contracts between services, ideal for microservices or full-stack apps. This lesson covers defining gRPC services, generating TypeScript types, and integrating them into a project. You’ll learn to create a gRPC service and test it with a client.",
+        "examples": [
+          "proto: service Greeter { rpc SayHello (HelloRequest) returns (HelloReply); }",
+          "Client: const client = new GreeterClient(); client.sayHello({ name: 'World' }, (err, res) => console.log(res));"
+        ],
+        "realWorldApplication": "gRPC is used in microservices for apps like streaming platforms or financial systems.",
+        "expertInsights": "Use proto files for clear contracts. Generate types with protoc to ensure type safety.",
+        "commonMistakes": [
+          "Misdefining proto files, causing type mismatches.",
+          "Not handling gRPC errors, breaking clients."
+        ],
+        "exercises": [
+          {
+            "title": "Create a gRPC Service",
+            "prompt": "Define a gRPC service in a proto file and generate TypeScript types.",
+            "difficulty": "medium",
+            "hints": [
+              "Use protoc to generate types",
+              "Define a simple service"
+            ],
+            "solution": "greeter.proto: syntax = 'proto3'; service Greeter { rpc SayHello (HelloRequest) returns (HelloReply); } message HelloRequest { string name = 1; } message HelloReply { string message = 1; }\nRun: protoc --ts_out=. greeter.proto"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What defines gRPC contracts?",
+            "options": ["JSON", "Proto files", "TypeScript", "YAML"],
+            "correctOption": [1]
+          },
+          {
+            "question": "What tool generates gRPC types?",
+            "options": ["ESLint", "protoc", "Vite", "Zod"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "gRPC TypeScript Documentation",
+            "url": "https://grpc.io/docs/languages/node/",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Domain-driven types align TypeScript types with business logic, ensuring consistency across full-stack apps. Shared types enable type-safe CRUD operations between frontend and backend. This lesson guides you through designing domain-driven types, building a full-stack CRUD app, and deploying it. You’ll learn to share types, implement CRUD, and test the app for type safety.",
+        "examples": [
+          "type User = { id: string; name: string; }; type Result<T> = { data: T; };",
+          "CRUD: async function createUser(user: User): Promise<Result<User>> { return { data: user }; }"
+        ],
+        "realWorldApplication": "Domain-driven types power consistent APIs in apps like CRMs or e-commerce platforms.",
+        "expertInsights": "Define types in a shared package for reuse. Use utility types to simplify CRUD operations.",
+        "commonMistakes": [
+          "Duplicating types, causing inconsistencies.",
+          "Not testing CRUD operations, leading to runtime errors."
+        ],
+        "exercises": [
+          {
+            "title": "Build a Type-Safe CRUD App",
+            "prompt": "Create a full-stack CRUD app with shared User types for create and read operations.",
+            "difficulty": "hard",
+            "hints": [
+              "Define types in a shared file",
+              "Implement create/read endpoints"
+            ],
+            "solution": "types.ts: export type User = { id: string; name: string; };\nserver.ts: import { User } from './types'; async function createUser(user: User) { return { data: user }; }\nclient.ts: import { User } from './types'; async function addUser() { const user: User = { id: '1', name: 'Alice' }; const result = await fetch('/api/user', { method: 'POST', body: JSON.stringify(user) }); console.log(await result.json()); }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What do domain-driven types align with?",
+            "options": ["UI components", "Business logic", "Bundling", "SEO"],
+            "correctOption": [1]
+          },
+          {
+            "question": "Why share types in a CRUD app?",
+            "options": [
+              "Faster builds",
+              "Type consistency",
+              "Smaller code",
+              "Better UX"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 60,
+        "resources": [
+          {
+            "title": "TypeScript — Utility Types",
+            "url": "https://www.typescriptlang.org/docs/handbook/utility-types.html",
+            "type": "doc"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-16T00:00:00.000Z",
+      "version": "1.0"
+    }
+  },
+  {
+    "domains": [
+      {
+        "name": "Web Development",
+        "slug": "web-development",
+        "description": "Master advanced backend architecture techniques, including hexagonal and clean architecture, domain-driven design, and event sourcing for scalable systems.",
+        "courseCount": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "courses": [
+      {
+        "title": "Advanced Backend Architecture",
+        "slug": "advanced-backend-architecture",
+        "shortDescription": "An intermediate course on designing scalable backend systems using hexagonal architecture, DDD, and event sourcing versus traditional CRUD.",
+        "longDescription": "This course dives into advanced backend architecture, focusing on hexagonal (ports and adapters) and clean architecture principles, domain-driven design (DDD) concepts, and event sourcing compared to traditional CRUD approaches. Through hands-on exercises, real-world examples, and quizzes, you’ll refactor a monolithic application into a layered hexagonal architecture. The course covers designing maintainable, testable systems and implementing domain-driven patterns, preparing you for building robust backend applications.",
+        "tags": [
+          "backend",
+          "hexagonal-architecture",
+          "clean-architecture",
+          "ddd",
+          "event-sourcing",
+          "crud",
+          "software-design"
+        ],
+        "thumbnail": "https://example.com/thumbnails/advanced-backend.jpg",
+        "levelSummary": [
+          {
+            "level": "Intermediate",
+            "overview": "Master advanced backend techniques like hexagonal architecture, DDD, and event sourcing for scalable, maintainable systems.",
+            "moduleCount": 1
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "modules": [
+      {
+        "title": "Module 1 — Advanced Backend Architecture",
+        "slug": "advanced-backend-architecture",
+        "description": "Learn hexagonal and clean architecture, DDD concepts, and event sourcing to design scalable, maintainable backend systems.",
+        "order": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "lessons": [
+      {
+        "title": "Introduction to Advanced Backend Architecture",
+        "slug": "intro-backend-architecture",
+        "description": "Understand the principles of advanced backend architecture, including hexagonal and clean architecture for scalable systems.",
+        "order": 1,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Hexagonal Architecture (Ports and Adapters)",
+        "slug": "hexagonal-architecture",
+        "description": "Explore hexagonal architecture to create loosely coupled, testable backend systems.",
+        "order": 2,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Clean Architecture Principles",
+        "slug": "clean-architecture",
+        "description": "Apply clean architecture principles to design maintainable and independent backend layers.",
+        "order": 3,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Domain-Driven Design (DDD) Concepts",
+        "slug": "ddd-concepts",
+        "description": "Learn domain-driven design to align backend systems with business logic and requirements.",
+        "order": 4,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Event Sourcing vs Traditional CRUD",
+        "slug": "event-sourcing-vs-crud",
+        "description": "Compare event sourcing and traditional CRUD approaches for data persistence and system design.",
+        "order": 5,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "title": "Refactoring to Hexagonal Architecture",
+        "slug": "refactor-hexagonal",
+        "description": "Refactor a monolithic backend into a layered hexagonal architecture for scalability and maintainability.",
+        "order": 6,
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "learningContents": [
+      {
+        "explanation": "Advanced backend architecture focuses on designing scalable, maintainable systems using principles like hexagonal and clean architecture, domain-driven design, and event sourcing. These approaches decouple business logic from infrastructure, improving testability and flexibility. This lesson introduces these concepts, their benefits, and how to set up a backend project for advanced architecture.",
+        "examples": [
+          "Hexagonal port: interface UserPort { save(user: User): Promise<void>; }",
+          "Run: npm init -y // Initialize a Node.js project"
+        ],
+        "realWorldApplication": "These architectures are used in enterprise systems like e-commerce, banking, or logistics platforms for scalability and maintainability.",
+        "expertInsights": "Start with clear domain boundaries in DDD. Use dependency inversion in hexagonal architecture for flexibility.",
+        "commonMistakes": [
+          "Tightly coupling business logic to infrastructure, reducing testability.",
+          "Ignoring domain modeling, leading to misaligned systems."
+        ],
+        "exercises": [
+          {
+            "title": "Plan a Backend Architecture",
+            "prompt": "Outline a backend project structure with hexagonal architecture principles.",
+            "difficulty": "easy",
+            "hints": ["Define ports and adapters", "Separate domain logic"],
+            "solution": "src/domain/user.ts: export interface User { id: string; name: string; }\nsrc/ports/user-port.ts: export interface UserPort { save(user: User): Promise<void>; }\nsrc/adapters/user-adapter.ts: export class UserAdapter implements UserPort { async save(user: User) { console.log('Saved:', user); } }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What improves backend scalability?",
+            "options": [
+              "Monoliths",
+              "Hexagonal architecture",
+              "Inline logic",
+              "Global state"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "Why use DDD?",
+            "options": [
+              "Faster builds",
+              "Align with business logic",
+              "Smaller code",
+              "Better UI"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 30,
+        "resources": [
+          {
+            "title": "Domain-Driven Design Fundamentals",
+            "url": "https://martinfowler.com/bliki/DomainDrivenDesign.html",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Hexagonal architecture, also known as ports and adapters, decouples business logic from external systems, enabling testability and flexibility. Ports define interfaces, while adapters implement them for specific technologies. This lesson covers designing a hexagonal architecture, creating ports and adapters, and testing them in a backend project.",
+        "examples": [
+          "Port: interface RepositoryPort { find(id: string): Promise<Entity>; }",
+          "Adapter: class DatabaseAdapter implements RepositoryPort { async find(id: string) { return { id, name: 'Test' }; } }"
+        ],
+        "realWorldApplication": "Hexagonal architecture is used in microservices for systems like payment gateways or inventory management.",
+        "expertInsights": "Define clear interfaces for ports. Use dependency injection to swap adapters easily.",
+        "commonMistakes": [
+          "Mixing business logic with adapters, reducing decoupling.",
+          "Not mocking ports in tests, complicating validation."
+        ],
+        "exercises": [
+          {
+            "title": "Create a Hexagonal Port and Adapter",
+            "prompt": "Define a port and adapter for a user repository in a TypeScript backend.",
+            "difficulty": "medium",
+            "hints": [
+              "Create an interface for the port",
+              "Implement an adapter with mock data"
+            ],
+            "solution": "src/ports/user-port.ts: export interface UserPort { find(id: string): Promise<User>; }\nsrc/domain/user.ts: export interface User { id: string; name: string; }\nsrc/adapters/user-adapter.ts: import { UserPort, User } from '../ports/user-port'; export class UserAdapter implements UserPort { async find(id: string): Promise<User> { return { id, name: 'Alice' }; } }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does a port define in hexagonal architecture?",
+            "options": [
+              "Business logic",
+              "Interface",
+              "Database",
+              "API routes"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What implements a port?",
+            "options": ["Adapter", "Service", "Entity", "Controller"],
+            "correctOption": [0]
+          }
+        ],
+        "estimatedTime": 45,
+        "resources": [
+          {
+            "title": "Hexagonal Architecture Explained",
+            "url": "https://alistair.cockburn.us/hexagonal-architecture/",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Clean architecture emphasizes separation of concerns, with independent layers for entities, use cases, and interfaces. It ensures business logic remains independent of frameworks or databases. This lesson covers structuring a backend with clean architecture, defining use cases, and testing them for independence.",
+        "examples": [
+          "Entity: class User { constructor(public id: string, public name: string) {} }",
+          "Use case: class CreateUser { async execute(data: User) { return repository.save(data); } }"
+        ],
+        "realWorldApplication": "Clean architecture is used in enterprise apps like CRMs or ERP systems for maintainable, testable codebases.",
+        "expertInsights": "Keep entities framework-agnostic. Use dependency inversion to isolate use cases from external systems.",
+        "commonMistakes": [
+          "Coupling use cases to databases, reducing flexibility.",
+          "Skipping unit tests for use cases, missing logic errors."
+        ],
+        "exercises": [
+          {
+            "title": "Implement a Clean Architecture Use Case",
+            "prompt": "Create a use case for creating a user in a clean architecture structure.",
+            "difficulty": "medium",
+            "hints": [
+              "Define an entity and use case",
+              "Inject a repository dependency"
+            ],
+            "solution": "src/domain/user.ts: export class User { constructor(public id: string, public name: string) {} }\nsrc/use-cases/create-user.ts: import { User } from '../domain/user'; export class CreateUser { constructor(private repository: { save: (user: User) => Promise<void> }) {} async execute(data: User) { await this.repository.save(data); } }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does clean architecture prioritize?",
+            "options": [
+              "Database design",
+              "Separation of concerns",
+              "API endpoints",
+              "UI logic"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What remains framework-agnostic?",
+            "options": ["Adapters", "Entities", "Controllers", "Routes"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 45,
+        "resources": [
+          {
+            "title": "Clean Architecture by Robert C. Martin",
+            "url": "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Domain-driven design (DDD) aligns software with business domains by modeling entities, aggregates, and services around business logic. It ensures systems reflect real-world requirements. This lesson covers applying DDD concepts, defining domain models, and integrating them into a backend system for consistency and clarity.",
+        "examples": [
+          "Aggregate: class Order { constructor(public id: string, public items: Item[]) {} }",
+          "Service: class OrderService { createOrder(data: Order) { return repository.save(data); } }"
+        ],
+        "realWorldApplication": "DDD is used in complex domains like e-commerce or logistics for clear, maintainable business logic.",
+        "expertInsights": "Focus on bounded contexts to limit complexity. Use aggregates to enforce consistency.",
+        "commonMistakes": [
+          "Overcomplicating domain models, reducing clarity.",
+          "Ignoring bounded contexts, causing domain overlap."
+        ],
+        "exercises": [
+          {
+            "title": "Define a DDD Aggregate",
+            "prompt": "Create an Order aggregate with items in a DDD-based backend.",
+            "difficulty": "medium",
+            "hints": [
+              "Define an entity and aggregate",
+              "Include business logic"
+            ],
+            "solution": "src/domain/item.ts: export class Item { constructor(public id: string, public name: string) {} }\nsrc/domain/order.ts: export class Order { constructor(public id: string, public items: Item[]) {} addItem(item: Item) { this.items.push(item); } }"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does DDD align software with?",
+            "options": [
+              "UI design",
+              "Business logic",
+              "Database schema",
+              "API routes"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What is a bounded context?",
+            "options": ["Database", "Domain scope", "API layer", "Frontend"],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "Domain-Driven Design by Eric Evans",
+            "url": "https://www.domainlanguage.com/ddd/",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Event sourcing stores state as a sequence of events, unlike traditional CRUD, which uses direct state updates. It enables auditing, replayability, and complex workflows. This lesson compares event sourcing with CRUD, covering implementation and trade-offs. You’ll learn to design an event-sourced system and test it for consistency.",
+        "examples": [
+          "Event: { type: 'UserCreated', data: { id: '1', name: 'Alice' } }",
+          "Event store: class EventStore { save(event: Event) { console.log('Stored:', event); } }"
+        ],
+        "realWorldApplication": "Event sourcing is used in banking, e-commerce, or audit-heavy systems for tracking changes and rebuilding state.",
+        "expertInsights": "Use event sourcing for audit trails or complex workflows. Combine with CQRS for scalability.",
+        "commonMistakes": [
+          "Overusing event sourcing for simple apps, adding complexity.",
+          "Not versioning events, causing replay issues."
+        ],
+        "exercises": [
+          {
+            "title": "Implement an Event-Sourced System",
+            "prompt": "Create a simple event-sourced system for user creation events.",
+            "difficulty": "medium",
+            "hints": ["Define an event type", "Store events in an array"],
+            "solution": "src/domain/event.ts: export interface Event { type: string; data: any; }\nsrc/event-store.ts: export class EventStore { private events: Event[] = []; save(event: Event) { this.events.push(event); } getEvents() { return this.events; } }\nsrc/main.ts: const store = new EventStore(); store.save({ type: 'UserCreated', data: { id: '1', name: 'Alice' } });"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What does event sourcing store?",
+            "options": [
+              "Database rows",
+              "Event sequence",
+              "API routes",
+              "UI state"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "When is event sourcing useful?",
+            "options": [
+              "Simple CRUD",
+              "Audit trails",
+              "Static sites",
+              "UI rendering"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 50,
+        "resources": [
+          {
+            "title": "Event Sourcing by Martin Fowler",
+            "url": "https://martinfowler.com/eaaDev/EventSourcing.html",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      },
+      {
+        "explanation": "Refactoring a monolith into a hexagonal architecture involves separating business logic into ports and adapters, improving scalability and testability. This lesson guides you through refactoring a monolithic backend into a layered hexagonal structure, testing each layer, and ensuring maintainability. You’ll learn to modularize code and deploy a refactored system.",
+        "examples": [
+          "Monolith: app.post('/user', (req, res) => db.save(req.body));",
+          "Hexagonal: class UserService { constructor(private port: UserPort) {} async create(user: User) { await this.port.save(user); } }"
+        ],
+        "realWorldApplication": "Refactored hexagonal architectures are used in legacy systems or microservices for improved maintainability and scalability.",
+        "expertInsights": "Refactor incrementally, testing each layer. Use dependency injection to isolate dependencies.",
+        "commonMistakes": [
+          "Refactoring without tests, introducing bugs.",
+          "Not isolating business logic, reducing decoupling."
+        ],
+        "exercises": [
+          {
+            "title": "Refactor to Hexagonal Architecture",
+            "prompt": "Refactor a monolithic user creation endpoint into a hexagonal architecture.",
+            "difficulty": "hard",
+            "hints": ["Define a port and adapter", "Move logic to a service"],
+            "solution": "src/domain/user.ts: export interface User { id: string; name: string; }\nsrc/ports/user-port.ts: export interface UserPort { save(user: User): Promise<void>; }\nsrc/services/user-service.ts: import { UserPort, User } from '../ports/user-port'; export class UserService { constructor(private port: UserPort) {} async create(user: User) { await this.port.save(user); } }\nsrc/adapters/user-adapter.ts: import { UserPort, User } from '../ports/user-port'; export class UserAdapter implements UserPort { async save(user: User) { console.log('Saved:', user); } }\nsrc/main.ts: import { UserService } from './services/user-service'; import { UserAdapter } from './adapters/user-adapter'; const service = new UserService(new UserAdapter()); service.create({ id: '1', name: 'Alice' });"
+          }
+        ],
+        "quiz": [
+          {
+            "question": "What improves after refactoring to hexagonal?",
+            "options": [
+              "UI speed",
+              "Testability",
+              "Database size",
+              "API routes"
+            ],
+            "correctOption": [1]
+          },
+          {
+            "question": "What isolates dependencies in hexagonal architecture?",
+            "options": [
+              "Controllers",
+              "Dependency injection",
+              "Routes",
+              "Entities"
+            ],
+            "correctOption": [1]
+          }
+        ],
+        "estimatedTime": 60,
+        "resources": [
+          {
+            "title": "Refactoring to Hexagonal Architecture",
+            "url": "https://herbertograca.com/2017/11/16/explicit-architecture-ports-and-adapters-hexagonal-architecture/",
+            "type": "article"
+          }
+        ],
+        "createdAt": "2025-09-16T00:00:00.000Z"
+      }
+    ],
+    "meta": {
+      "generatedAt": "2025-09-16T00:00:00.000Z",
+      "version": "1.0"
+    }
+  }
+]
