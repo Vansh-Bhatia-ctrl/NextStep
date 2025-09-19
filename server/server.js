@@ -11,6 +11,8 @@ const saveAnswersToDb = require("./routes/saveAnswers");
 const evaluateAnswers = require("./routes/evaluateAnswers");
 const saveModule = require("./routes/SaveCourse");
 const saveCareerPath = require("./routes/careerpath");
+const sendLearningModules = require("./routes/sendLearningContent");
+const getUserDomain = require("./routes/fetchUserDomain");
 
 const app = express();
 app.use(express.json());
@@ -46,6 +48,8 @@ app.use("/api/saveAnswers", saveAnswersToDb);
 app.use("/api/evaluate", evaluateAnswers);
 app.use("/api/saveModule", saveModule);
 app.use("/api/savecareer", saveCareerPath);
+app.use("/api/sendlearningcontent", sendLearningModules);
+app.use("/api/getlevel", getUserDomain);
 
 app.use((err, _req, res, _next) => {
   if (err && err.statusCode) {
