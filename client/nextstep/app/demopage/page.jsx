@@ -612,1195 +612,1339 @@
 
 // export default Dashboard;
 
-//COURSE SELECTION PAGE
-"use client";
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle,
-  Circle,
-  Play,
-  Book,
-  Clock,
-  Target,
-  Lightbulb,
-  AlertCircle,
-  ExternalLink,
-  Menu,
-  X,
-  ArrowLeft,
-  Award,
-} from "lucide-react";
 
-const courseData = {
-  learningModuleId: "507f1f77bcf86cd799439030",
-  title: "HTML Essentials",
-  slug: "html-essentials",
-  domains: [
-    {
-      domainId: "507f1f77bcf86cd799439031",
-      name: "Web Development",
-      slug: "web-development",
-      description:
-        "Master the core skills for structuring content on the web with HTML.",
-      courses: [
-        {
-          courseId: "507f1f77bcf86cd799439032",
-          title: "HTML Fundamentals",
-          slug: "html-fundamentals",
-          shortDescription:
-            "A beginner-friendly course to learn the basics of HTML for building webpages.",
-          longDescription:
-            "This course introduces HTML, the foundation of web development, teaching you how to create structured, accessible, and semantic webpages from scratch.",
-          tags: ["HTML", "Web Development", "Beginner", "Frontend"],
-          thumbnail: "https://example.com/thumbnails/html-fundamentals.jpg",
-          levels: [
-            {
-              level: "Beginner",
-              overview:
-                "This level covers the essentials of HTML, including tags, attributes, and semantic markup, to create well-structured webpages.",
-              goals: [
-                "Understand the purpose and structure of HTML",
-                "Learn to use common HTML tags and attributes",
-                "Create a simple, semantic webpage",
-                "Apply best practices for accessibility",
-              ],
-              modules: [
-                {
-                  moduleId: "507f1f77bcf86cd799439033",
-                  title: "Getting Started with HTML",
-                  slug: "getting-started-with-html",
-                  description:
-                    "Learn the basics of HTML to structure content on the web.",
-                  order: 1,
-                  lessons: [
-                    {
-                      lessonId: "507f1f77bcf86cd799439034",
-                      title: "Introduction to HTML",
-                      slug: "introduction-to-html",
-                      description:
-                        "Understand what HTML is and how to create a basic webpage.",
-                      order: 1,
-                      content: {
-                        explanation:
-                          "HTML (HyperText Markup Language) is the standard language for creating webpages. It uses tags to structure content, such as headings, paragraphs, and links.",
-                        examples: [
-                          "<!DOCTYPE html>\n<html>\n<head>\n  <title>My First Webpage</title>\n</head>\n<body>\n  <h1>Hello, World!</h1>\n  <p>This is my first webpage.</p>\n</body>\n</html>",
-                        ],
-                        realWorldApplication:
-                          "HTML is used to build the structure of websites like news sites, blogs, and online stores.",
-                        expertInsights:
-                          "Always include the <!DOCTYPE html> declaration to ensure browsers render your page correctly.",
-                        commonMistakes: [
-                          "Forgetting to close tags, e.g., <p> without </p>",
-                          "Nesting tags incorrectly, e.g., <p><h1>Text</p></h1>",
-                        ],
-                        exercises: [
-                          {
-                            title: "Create a Basic HTML Page",
-                            prompt:
-                              "Write HTML code to create a webpage with a heading, paragraph, and a link.",
-                            difficulty: "easy",
-                            hints: [
-                              "Start with <!DOCTYPE html>",
-                              "Use <h1> for the heading",
-                              "Use <a href='url'> for the link",
-                            ],
-                            solution:
-                              "<!DOCTYPE html>\n<html>\n<head>\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome</h1>\n  <p>This is a paragraph.</p>\n  <a href='https://example.com'>Visit Example</a>\n</body>\n</html>",
-                          },
-                        ],
-                        quiz: [
-                          {
-                            question: "What does HTML stand for?",
-                            options: [
-                              "HyperText Markup Language",
-                              "HighText Machine Language",
-                              "HyperTool Multi Language",
-                              "HomeText Markup Language",
-                            ],
-                            correctOption: [0],
-                          },
-                        ],
-                        estimatedTime: 15,
-                        resources: [
-                          {
-                            title: "MDN HTML Basics",
-                            url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics",
-                            type: "article",
-                          },
-                          {
-                            title: "HTML Introduction Video",
-                            url: "https://www.youtube.com/watch?v=example-html-video",
-                            type: "video",
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-                {
-                  moduleId: "507f1f77bcf86cd799439035",
-                  title: "HTML Tags and Attributes",
-                  slug: "html-tags-and-attributes",
-                  description:
-                    "Learn how to use HTML tags and attributes to add structure and functionality.",
-                  order: 2,
-                  lessons: [
-                    {
-                      lessonId: "507f1f77bcf86cd799439036",
-                      title: "Working with Tags and Attributes",
-                      slug: "working-with-tags-and-attributes",
-                      description:
-                        "Explore common HTML tags and how attributes enhance them.",
-                      order: 1,
-                      content: {
-                        explanation:
-                          "HTML tags define elements like headings (<h1>), images (<img>), and lists (<ul>). Attributes provide additional information, such as 'src' for images or 'href' for links.",
-                        examples: [
-                          "<img src='image.jpg' alt='Description'>\n<a href='https://example.com' title='Visit Example'>Link</a>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n</ul>",
-                        ],
-                        realWorldApplication:
-                          "Tags and attributes are used to create navigation menus, image galleries, and forms on websites.",
-                        expertInsights:
-                          "Use the 'alt' attribute for images to improve accessibility for screen readers.",
-                        commonMistakes: [
-                          "Omitting required attributes, e.g., 'alt' for <img>",
-                          "Using incorrect attribute values, e.g., invalid URLs in 'href'",
-                        ],
-                        exercises: [
-                          {
-                            title: "Add an Image with Attributes",
-                            prompt:
-                              "Write HTML code to display an image with a source URL and an alt description.",
-                            difficulty: "easy",
-                            hints: [
-                              "Use the <img> tag",
-                              "Include 'src' and 'alt' attributes",
-                            ],
-                            solution:
-                              "<img src='https://example.com/image.jpg' alt='Sample Image'>",
-                          },
-                        ],
-                        quiz: [
-                          {
-                            question:
-                              "Which attribute specifies the URL for a link?",
-                            options: ["src", "href", "alt", "title"],
-                            correctOption: [1],
-                          },
-                        ],
-                        estimatedTime: 20,
-                        resources: [
-                          {
-                            title: "MDN HTML Elements Reference",
-                            url: "https://developer.mozilla.org/en-US/docs/Web/HTML/Element",
-                            type: "article",
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"use client"
+import React from "react";
+import { motion } from "framer-motion";
+
+const UniversalLoading = ({ 
+  width = "w-full", 
+  height = "h-16", 
+  rounded = "rounded-lg",
+  className = "",
+  showText = false,
+  text = "Loading...",
+  intensity = "medium" // "low", "medium", "high"
+}) => {
+  // Different glow intensities based on your app's theme
+  const glowIntensities = {
+    low: "shadow-lg shadow-blue-500/10",
+    medium: "shadow-xl shadow-blue-500/20",
+    high: "shadow-2xl shadow-blue-500/30"
+  };
+
+  const pulseVariants = {
+    initial: { 
+      opacity: 0.4,
+      scale: 0.95,
+      boxShadow: "0 0 0 rgba(59, 130, 246, 0)"
     },
-  ],
-};
-
-const NextStepCoursePage = () => {
-  const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
-  const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("content");
-  const [completedLessons, setCompletedLessons] = useState(new Set());
-  const [selectedQuizOption, setSelectedQuizOption] = useState({});
-
-  const course = courseData.domains[0].courses[0];
-  const currentLevel = course.levels[0];
-  const currentModule = currentLevel.modules[currentModuleIndex];
-  const currentLesson = currentModule.lessons[currentLessonIndex];
-
-  const totalLessons = currentLevel.modules.reduce(
-    (total, module) => total + module.lessons.length,
-    0
-  );
-  const completedCount = completedLessons.size;
-  const progressPercentage = (completedCount / totalLessons) * 100;
-
-  const toggleLessonComplete = (moduleIndex, lessonIndex) => {
-    const lessonKey = `${moduleIndex}-${lessonIndex}`;
-    const newCompleted = new Set(completedLessons);
-
-    if (newCompleted.has(lessonKey)) {
-      newCompleted.delete(lessonKey);
-    } else {
-      newCompleted.add(lessonKey);
-    }
-
-    setCompletedLessons(newCompleted);
-  };
-
-  const navigateToLesson = (moduleIndex, lessonIndex) => {
-    setCurrentModuleIndex(moduleIndex);
-    setCurrentLessonIndex(lessonIndex);
-    setIsSidebarOpen(false);
-    setActiveTab("content");
-  };
-
-  const nextLesson = () => {
-    if (currentLessonIndex < currentModule.lessons.length - 1) {
-      setCurrentLessonIndex(currentLessonIndex + 1);
-    } else if (currentModuleIndex < currentLevel.modules.length - 1) {
-      setCurrentModuleIndex(currentModuleIndex + 1);
-      setCurrentLessonIndex(0);
+    animate: { 
+      opacity: [0.4, 0.8, 0.4],
+      scale: [0.95, 1.02, 0.95],
+      boxShadow: [
+        "0 0 0 rgba(59, 130, 246, 0)",
+        "0 0 30px rgba(59, 130, 246, 0.3)",
+        "0 0 0 rgba(59, 130, 246, 0)"
+      ]
     }
   };
 
-  const previousLesson = () => {
-    if (currentLessonIndex > 0) {
-      setCurrentLessonIndex(currentLessonIndex - 1);
-    } else if (currentModuleIndex > 0) {
-      setCurrentModuleIndex(currentModuleIndex - 1);
-      setCurrentLessonIndex(
-        currentLevel.modules[currentModuleIndex - 1].lessons.length - 1
-      );
-    }
+  const shimmerVariants = {
+    initial: { x: "-100%" },
+    animate: { x: "100%" }
   };
-
-  const handleQuizOption = (questionIndex, optionIndex) => {
-    setSelectedQuizOption({
-      ...selectedQuizOption,
-      [questionIndex]: optionIndex,
-    });
-  };
-
-  const Sidebar = () => (
-    <div className="h-full bg-slate-900 border-r border-slate-700 flex flex-col pt-18">
-      <div className="p-6 border-b border-slate-700">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-white">{course.title}</h2>
-          <button
-            onClick={() => setIsSidebarOpen(false)}
-            className="lg:hidden text-slate-400 hover:text-white"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        <div className="flex items-center gap-2 text-sm text-slate-400 mb-4">
-          <Award size={16} />
-          <span>{currentLevel.level}</span>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span className="text-slate-400">Progress</span>
-            <span className="text-blue-400 font-medium">
-              {Math.round(progressPercentage)}%
-            </span>
-          </div>
-          <div className="w-full bg-slate-800 rounded-full h-2">
-            <motion.div
-              className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
-              initial={{ width: 0 }}
-              animate={{ width: `${progressPercentage}%` }}
-              transition={{ duration: 0.5 }}
-            />
-          </div>
-          <div className="text-xs text-slate-500">
-            {completedCount} of {totalLessons} lessons completed
-          </div>
-        </div>
-      </div>
-
-      <div className="flex-1 overflow-y-auto p-4">
-        <div className="space-y-4">
-          {currentLevel.modules.map((module, moduleIndex) => (
-            <div key={module.moduleId} className="space-y-2">
-              <div className="flex items-center gap-2 text-sm font-medium text-slate-300">
-                <Book size={16} />
-                <span>
-                  Module {module.order}: {module.title}
-                </span>
-              </div>
-
-              <div className="ml-6 space-y-2">
-                {module.lessons.map((lesson, lessonIndex) => {
-                  const lessonKey = `${moduleIndex}-${lessonIndex}`;
-                  const isCompleted = completedLessons.has(lessonKey);
-                  const isCurrent =
-                    moduleIndex === currentModuleIndex &&
-                    lessonIndex === currentLessonIndex;
-
-                  return (
-                    <motion.button
-                      key={lesson.lessonId}
-                      onClick={() => navigateToLesson(moduleIndex, lessonIndex)}
-                      className={`w-full text-left p-3 rounded-lg border transition-all ${
-                        isCurrent
-                          ? "bg-blue-600 border-blue-500 text-white"
-                          : "bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-750 hover:border-slate-600"
-                      }`}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            toggleLessonComplete(moduleIndex, lessonIndex);
-                          }}
-                          className="flex-shrink-0"
-                        >
-                          {isCompleted ? (
-                            <CheckCircle size={18} className="text-green-500" />
-                          ) : (
-                            <Circle size={18} className="text-slate-500" />
-                          )}
-                        </button>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-medium text-sm truncate">
-                            {lesson.title}
-                          </div>
-                          <div className="text-xs opacity-75 flex items-center gap-1">
-                            <Clock size={12} />
-                            <span>{lesson.content.estimatedTime} min</span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.button>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  const ContentSection = () => (
-    <div className="space-y-8">
-      <motion.div
-        className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-xl text-white"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
-        <h1 className="text-2xl font-bold mb-2">{currentLesson.title}</h1>
-        <p className="text-blue-100 mb-4">{currentLesson.description}</p>
-        <div className="flex items-center gap-4 text-sm text-blue-100">
-          <div className="flex items-center gap-1">
-            <Clock size={16} />
-            <span>{currentLesson.content.estimatedTime} min</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Target size={16} />
-            <span>Module {currentModule.order}</span>
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <Book size={20} />
-          Explanation
-        </h2>
-        <p className="text-slate-300 leading-relaxed">
-          {currentLesson.content.explanation}
-        </p>
-      </motion.div>
-
-      {currentLesson.content.examples && (
-        <motion.div
-          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-        >
-          <h2 className="text-xl font-bold text-white mb-4">Example</h2>
-          <pre className="bg-slate-900 p-4 rounded-lg overflow-x-auto text-green-400 text-sm">
-            <code>{currentLesson.content.examples[0]}</code>
-          </pre>
-        </motion.div>
-      )}
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <motion.div
-          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-            <Lightbulb size={18} />
-            Expert Insights
-          </h3>
-          <p className="text-slate-300 text-sm">
-            {currentLesson.content.expertInsights}
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-            <AlertCircle size={18} />
-            Common Mistakes
-          </h3>
-          <ul className="space-y-2 text-slate-300 text-sm">
-            {currentLesson.content.commonMistakes.map((mistake, index) => (
-              <li key={index} className="flex items-start gap-2">
-                <span className="text-red-400 mt-1">•</span>
-                <span>{mistake}</span>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
-      </div>
-
-      <motion.div
-        className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
-      >
-        <h3 className="text-lg font-bold text-white mb-4">Resources</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {currentLesson.content.resources.map((resource, index) => (
-            <a
-              key={index}
-              href={resource.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition-colors group"
-            >
-              <div className="flex-shrink-0">
-                {resource.type === "video" ? (
-                  <Play size={18} className="text-red-400" />
-                ) : (
-                  <ExternalLink size={18} className="text-blue-400" />
-                )}
-              </div>
-              <div className="flex-1">
-                <div className="font-medium text-white group-hover:text-blue-400 transition-colors">
-                  {resource.title}
-                </div>
-                <div className="text-xs text-slate-400 capitalize">
-                  {resource.type}
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  );
-
-  const ExerciseSection = () => (
-    <div className="space-y-6">
-      {currentLesson.content.exercises.map((exercise, index) => (
-        <motion.div
-          key={index}
-          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1 }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-xl font-bold text-white">{exercise.title}</h3>
-            <span
-              className={`px-3 py-1 rounded-full text-xs font-medium ${
-                exercise.difficulty === "easy"
-                  ? "bg-green-900 text-green-300"
-                  : exercise.difficulty === "medium"
-                  ? "bg-yellow-900 text-yellow-300"
-                  : "bg-red-900 text-red-300"
-              }`}
-            >
-              {exercise.difficulty}
-            </span>
-          </div>
-
-          <p className="text-slate-300 mb-6">{exercise.prompt}</p>
-
-          <div className="mb-4">
-            <h4 className="text-sm font-medium text-slate-400 mb-2">Hints:</h4>
-            <ul className="space-y-1">
-              {exercise.hints.map((hint, hintIndex) => (
-                <li
-                  key={hintIndex}
-                  className="text-sm text-slate-500 flex items-start gap-2"
-                >
-                  <span className="text-blue-400 mt-1">💡</span>
-                  <span>{hint}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="bg-slate-900 p-4 rounded-lg">
-            <div className="text-sm font-medium text-slate-400 mb-2">
-              Your Solution:
-            </div>
-            <textarea
-              className="w-full bg-slate-800 text-slate-300 p-3 rounded border border-slate-600 focus:border-blue-500 focus:outline-none resize-vertical min-h-[120px] font-mono text-sm"
-              placeholder="Write your code here..."
-            />
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
-
-  const QuizSection = () => (
-    <div className="space-y-6">
-      {currentLesson.content.quiz.map((question, questionIndex) => (
-        <motion.div
-          key={questionIndex}
-          className="bg-slate-800 p-6 rounded-xl border border-slate-700"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: questionIndex * 0.1 }}
-        >
-          <h3 className="text-lg font-medium text-white mb-4">
-            Question {questionIndex + 1}: {question.question}
-          </h3>
-
-          <div className="space-y-3">
-            {question.options.map((option, optionIndex) => {
-              const isSelected =
-                selectedQuizOption[questionIndex] === optionIndex;
-              const isCorrect = question.correctOption.includes(optionIndex);
-              const showResult =
-                selectedQuizOption[questionIndex] !== undefined;
-
-              return (
-                <button
-                  key={optionIndex}
-                  onClick={() => handleQuizOption(questionIndex, optionIndex)}
-                  className={`w-full text-left p-4 rounded-lg border transition-all ${
-                    showResult
-                      ? isCorrect
-                        ? "bg-green-900 border-green-600 text-green-100"
-                        : isSelected
-                        ? "bg-red-900 border-red-600 text-red-100"
-                        : "bg-slate-700 border-slate-600 text-slate-300"
-                      : isSelected
-                      ? "bg-blue-900 border-blue-600 text-blue-100"
-                      : "bg-slate-700 border-slate-600 text-slate-300 hover:bg-slate-600"
-                  }`}
-                  disabled={showResult}
-                >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-4 h-4 rounded-full border-2 flex-shrink-0 ${
-                        showResult && isCorrect
-                          ? "bg-green-500 border-green-500"
-                          : isSelected
-                          ? "bg-blue-500 border-blue-500"
-                          : "border-slate-400"
-                      }`}
-                    >
-                      {(showResult && isCorrect) || isSelected ? (
-                        <div className="w-full h-full rounded-full bg-white scale-50" />
-                      ) : null}
-                    </div>
-                    <span>{option}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  );
 
   return (
-    <div className="min-h-screen bg-slate-900 flex">
-      {/* Sidebar */}
-      <AnimatePresence>
-        {(isSidebarOpen || window.innerWidth >= 1024) && (
-          <motion.div
-            initial={{ x: -300 }}
-            animate={{ x: 0 }}
-            exit={{ x: -300 }}
-            className="fixed lg:relative z-30 w-80 h-screen lg:block"
-          >
-            <Sidebar />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
+    <div className={`${width} ${className}`}>
+      <motion.div
+        className={`
+          ${height} 
+          ${rounded} 
+          bg-gradient-to-r from-slate-800/50 via-slate-700/50 to-slate-800/50
+          border border-slate-600/30
+          relative 
+          overflow-hidden
+          ${glowIntensities[intensity]}
+        `}
+        variants={pulseVariants}
+        initial="initial"
+        animate="animate"
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      >
+        {/* Main shimmer effect */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+          variants={shimmerVariants}
+          initial="initial"
+          animate="animate"
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.2
+          }}
         />
-      )}
+        
+        {/* Secondary subtle shimmer */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/10 to-transparent"
+          variants={shimmerVariants}
+          initial="initial"
+          animate="animate"
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.8
+          }}
+        />
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col pt-18">
-        {/* Header */}
-        <header className="bg-slate-800 border-b border-slate-700 p-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <button
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                className="lg:hidden text-slate-400 hover:text-white"
-              >
-                <Menu size={20} />
-              </button>
-
-              <div className="hidden lg:flex items-center gap-2 text-slate-400 text-sm">
-                <ArrowLeft size={16} />
-                <span>Back to Course Overview</span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="hidden sm:flex items-center gap-2 text-sm text-slate-400">
-                <span>{Math.round(progressPercentage)}% Complete</span>
-              </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={previousLesson}
-                  disabled={
-                    currentModuleIndex === 0 && currentLessonIndex === 0
-                  }
-                  className="px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  <ChevronLeft size={16} />
-                  <span className="hidden sm:inline">Previous</span>
-                </button>
-
-                <button
-                  onClick={nextLesson}
-                  disabled={
-                    currentModuleIndex === currentLevel.modules.length - 1 &&
-                    currentLessonIndex === currentModule.lessons.length - 1
-                  }
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                >
-                  <span className="hidden sm:inline">Next</span>
-                  <ChevronRight size={16} />
-                </button>
-              </div>
-            </div>
+        {/* Content area with subtle pattern */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-transparent to-slate-900/20" />
+        
+        {/* Optional loading text */}
+        {showText && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <motion.span
+              className="text-slate-400 text-sm font-medium"
+              animate={{ opacity: [0.5, 1, 0.5] }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              {text}
+            </motion.span>
           </div>
-        </header>
-
-        {/* Content Area */}
-        <div className="flex-1 overflow-auto">
-          {/* Tab Navigation */}
-          <div className="bg-slate-800 border-b border-slate-700 px-6">
-            <div className="flex space-x-8">
-              {[
-                { id: "content", label: "Content", icon: Book },
-                { id: "exercise", label: "Exercise", icon: Target },
-                { id: "quiz", label: "Quiz", icon: CheckCircle },
-              ].map(({ id, label, icon: Icon }) => (
-                <button
-                  key={id}
-                  onClick={() => setActiveTab(id)}
-                  className={`flex items-center gap-2 py-4 px-2 border-b-2 transition-colors ${
-                    activeTab === id
-                      ? "border-blue-500 text-blue-400"
-                      : "border-transparent text-slate-400 hover:text-white"
-                  }`}
-                >
-                  <Icon size={16} />
-                  <span className="font-medium">{label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Tab Content */}
-          <div className="p-6">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {activeTab === "content" && <ContentSection />}
-                {activeTab === "exercise" && <ExerciseSection />}
-                {activeTab === "quiz" && <QuizSection />}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
+        )}
+      </motion.div>
     </div>
   );
 };
 
-export default NextStepCoursePage;
+// Preset configurations for common use cases
+export const LoadingCard = ({ className = "" }) => (
+  <UniversalLoading 
+    width="w-full" 
+    height="h-32" 
+    rounded="rounded-xl"
+    intensity="medium"
+    className={className}
+  />
+);
 
-//MODULE PAGE DESIGN
+export const LoadingButton = ({ className = "" }) => (
+  <UniversalLoading 
+    width="w-full" 
+    height="h-12" 
+    rounded="rounded-lg"
+    intensity="low"
+    className={className}
+  />
+);
 
-// "use client";
-// import React, { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
+export const LoadingBanner = ({ className = "" }) => (
+  <UniversalLoading 
+    width="w-full" 
+    height="h-24" 
+    rounded="rounded-2xl"
+    intensity="high"
+    showText={true}
+    text="Loading content..."
+    className={className}
+  />
+);
+
+export const LoadingAvatar = ({ className = "" }) => (
+  <UniversalLoading 
+    width="w-12" 
+    height="h-12" 
+    rounded="rounded-full"
+    intensity="low"
+    className={className}
+  />
+);
+
+export const LoadingText = ({ width = "w-32", className = "" }) => (
+  <UniversalLoading 
+    width={width} 
+    height="h-4" 
+    rounded="rounded"
+    intensity="low"
+    className={className}
+  />
+);
+
+// Demo component showing various usage examples
+const LoadingDemo = () => (
+  <div className="min-h-screen bg-slate-900 p-8 space-y-8">
+    <div className="max-w-4xl mx-auto space-y-8">
+      
+      {/* Header */}
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold text-white">Universal Loading States</h1>
+        <p className="text-slate-400">Consistent loading experience across your learning platform</p>
+      </div>
+
+      {/* Card Loading Examples */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Course Cards</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <LoadingCard />
+          <LoadingCard />
+          <LoadingCard />
+        </div>
+      </div>
+
+      {/* List Item Loading */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Lesson List</h2>
+        <div className="space-y-3">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="flex items-center gap-4">
+              <LoadingAvatar />
+              <div className="flex-1 space-y-2">
+                <LoadingText width="w-48" />
+                <LoadingText width="w-32" />
+              </div>
+              <LoadingButton className="w-24" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Banner Loading */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Module Header</h2>
+        <LoadingBanner />
+      </div>
+
+      {/* Custom Sizes */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Custom Sizes</h2>
+        <div className="space-y-4">
+          <UniversalLoading width="w-full" height="h-8" rounded="rounded" intensity="low" />
+          <UniversalLoading width="w-2/3" height="h-16" rounded="rounded-lg" intensity="medium" />
+          <UniversalLoading width="w-1/2" height="h-24" rounded="rounded-xl" intensity="high" />
+        </div>
+      </div>
+
+      {/* Progress Indicators */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Progress & Stats</h2>
+        <div className="grid grid-cols-3 gap-4">
+          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+        </div>
+      </div>
+
+      {/* Full Page Loading */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-white">Page Loading</h2>
+        <UniversalLoading 
+          width="w-full" 
+          height="h-96" 
+          rounded="rounded-2xl"
+          intensity="high"
+          showText={true}
+          text="Loading your learning dashboard..."
+        />
+      </div>
+
+    </div>
+  </div>
+);
+
+export default LoadingDemo;
+export { UniversalLoading };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//ACTUAL COURSE CONTENT  PAGE
+// "use client"
+// import React, { useState } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
 // import {
-//   ChevronRight,
 //   BookOpen,
-//   Video,
-//   FileText,
-//   ExternalLink,
-//   Play,
+//   Target,
+//   HelpCircle,
 //   Clock,
-//   CheckCircle2,
-//   Circle,
-//   Star,
-//   Download,
-//   Bookmark,
-//   Share2,
-// } from "lucide-react";
+//   ChevronLeft,
+//   ChevronRight,
+//   Play,
+//   Code,
+//   Lightbulb,
+//   AlertTriangle,
+//   ExternalLink,
+//   CheckCircle,
+//   XCircle,
+//   Eye,
+//   EyeOff,
+//   Copy,
+//   Check
+// } from 'lucide-react';
 
-// const LearningModule = () => {
-//   const [activeSection, setActiveSection] = useState(0);
-//   const [completedLessons, setCompletedLessons] = useState(new Set([0, 1]));
+// const LessonContentPage = () => {
+//   const [activeTab, setActiveTab] = useState('content');
+//   const [selectedAnswers, setSelectedAnswers] = useState({});
+//   const [showResults, setShowResults] = useState(false);
+//   const [exerciseCompleted, setExerciseCompleted] = useState(false);
+//   const [showSolution, setShowSolution] = useState(false);
+//   const [copied, setCopied] = useState(false);
 
-//   const courseData = {
-//     title: "React Fundamentals",
-//     level: "Beginner",
-//     progress: 7,
-//     total: 8,
-//     duration: "6 hours",
-//     sections: [
-//       {
-//         id: 1,
-//         title: "Getting Started with React",
-//         lessons: [
-//           {
-//             id: 1,
-//             title: "What is React?",
-//             type: "video",
-//             duration: "15 min",
-//             completed: true,
-//           },
-//           {
-//             id: 2,
-//             title: "Setting up Development Environment",
-//             type: "video",
-//             duration: "20 min",
-//             completed: true,
-//           },
-//           {
-//             id: 3,
-//             title: "Your First React Component",
-//             type: "video",
-//             duration: "25 min",
-//             completed: false,
-//           },
-//           {
-//             id: 4,
-//             title: "JSX Fundamentals",
-//             type: "reading",
-//             duration: "10 min",
-//             completed: false,
-//           },
-//         ],
-//       },
-//       {
-//         id: 2,
-//         title: "Components and Props",
-//         lessons: [
-//           {
-//             id: 5,
-//             title: "Understanding Components",
-//             type: "video",
-//             duration: "30 min",
-//             completed: false,
-//           },
-//           {
-//             id: 6,
-//             title: "Props and Data Flow",
-//             type: "video",
-//             duration: "25 min",
-//             completed: false,
-//           },
-//           {
-//             id: 7,
-//             title: "Component Composition",
-//             type: "practice",
-//             duration: "45 min",
-//             completed: false,
-//           },
-//         ],
-//       },
-//       {
-//         id: 3,
-//         title: "State and Event Handling",
-//         lessons: [
-//           {
-//             id: 8,
-//             title: "useState Hook",
-//             type: "video",
-//             duration: "35 min",
-//             completed: false,
-//           },
-//           {
-//             id: 9,
-//             title: "Event Handling",
-//             type: "video",
-//             duration: "20 min",
-//             completed: false,
-//           },
-//           {
-//             id: 10,
-//             title: "State Management Best Practices",
-//             type: "reading",
-//             duration: "15 min",
-//             completed: false,
-//           },
-//         ],
-//       },
+//   // Sample lesson data based on your JSON structure
+//   const lessonData = {
+//     title: "Introduction to CSS",
+//     description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
+//     estimatedTime: 30,
+//     moduleInfo: "Module 1",
+    
+//     // Content Tab Data
+//     explanation: "CSS (Cascading Style Sheets) is the language used to style and layout web pages, controlling their visual appearance. It works alongside HTML to define how elements look, from colors and fonts to positioning and spacing. CSS rules consist of selectors that target elements and declarations that define styles. This lesson covers CSS syntax, ways to apply CSS (inline, internal, external), the cascade and specificity, and its role in modern web development. You'll learn how CSS integrates with HTML to create visually appealing, user-friendly interfaces and sets the foundation for responsive design.",
+    
+//     examples: [
+//       "h1 { color: blue; font-size: 24px; }",
+//       "<link rel=\"stylesheet\" href=\"styles.css\">"
 //     ],
+    
+//     realWorldApplication: "CSS is used in every website to style layouts, from simple blogs to complex e-commerce platforms, ensuring consistent and attractive designs.",
+    
+//     expertInsights: "Always use external stylesheets for maintainability. Understand the cascade to avoid specificity conflicts, and prefer classes over IDs for reusable styles.",
+    
+//     commonMistakes: [
+//       "Overusing !important, leading to specificity issues.",
+//       "Not separating CSS from HTML, causing maintenance challenges."
+//     ],
+    
 //     resources: [
 //       {
-//         id: 1,
-//         title: "React Official Documentation",
-//         type: "documentation",
-//         url: "#",
+//         title: "MDN — CSS Basics",
+//         url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
+//         type: "article"
 //       },
-//       { id: 2, title: "React Cheat Sheet", type: "download", url: "#" },
-//       { id: 3, title: "Component Patterns Guide", type: "guide", url: "#" },
-//       { id: 4, title: "Practice Exercises", type: "practice", url: "#" },
+//       {
+//         title: "CSS Tricks — Complete Guide",
+//         url: "https://css-tricks.com/guides/beginner/",
+//         type: "guide"
+//       }
 //     ],
-//     customSources: [
+
+//     // Exercise Tab Data
+//     exercises: [
 //       {
-//         id: 1,
-//         title: "Interactive React Playground",
-//         description: "Practice React concepts in real-time",
-//         type: "interactive",
-//       },
-//       {
-//         id: 2,
-//         title: "AI-Generated Code Examples",
-//         description: "Personalized examples based on your progress",
-//         type: "ai-generated",
-//       },
-//       {
-//         id: 3,
-//         title: "Smart Quiz Generator",
-//         description: "Adaptive quizzes tailored to your learning",
-//         type: "quiz",
-//       },
+//         title: "Apply Basic CSS",
+//         prompt: "Create an HTML page with a heading and paragraph, and use an external CSS file to style the heading blue and the paragraph with a 16px font size.",
+//         difficulty: "easy",
+//         hints: [
+//           "Use a <link> tag to connect the CSS file",
+//           "Target elements with type selectors"
+//         ],
+//         solution: "HTML: <h1>Title</h1><p>Text</p>\nCSS: h1 { color: blue; } p { font-size: 16px; }"
+//       }
 //     ],
+
+//     // Quiz Tab Data
+//     quiz: [
+//       {
+//         question: "What does CSS stand for?",
+//         options: ["Cascading Style Sheets", "Creative Style System", "Content Style Sheets", "Cascading Script System"],
+//         correctOption: [0],
+//         explanation: "CSS stands for Cascading Style Sheets, which describes how the styles cascade down and apply to HTML elements."
+//       },
+//       {
+//         question: "How do you apply an external CSS file?",
+//         options: ["<style>", "<script>", "<link>", "<css>"],
+//         correctOption: [2],
+//         explanation: "The <link> tag is used to connect external CSS files to HTML documents."
+//       },
+//       {
+//         question: "Which of the following are valid CSS selectors? (Multiple answers)",
+//         options: [".class-name", "#id-name", "element-name", "::pseudo-element"],
+//         correctOption: [0, 1, 2, 3],
+//         explanation: "All of these are valid CSS selectors: class selectors (.), ID selectors (#), element selectors, and pseudo-element selectors (::)."
+//       }
+//     ]
 //   };
 
-//   const toggleLessonCompletion = (lessonId) => {
-//     const newCompleted = new Set(completedLessons);
-//     if (newCompleted.has(lessonId)) {
-//       newCompleted.delete(lessonId);
+//   const handleAnswerSelect = (questionIndex, optionIndex) => {
+//     const currentAnswers = selectedAnswers[questionIndex] || [];
+//     const question = lessonData.quiz[questionIndex];
+    
+//     if (question.correctOption.length > 1) {
+//       // Multiple choice
+//       if (currentAnswers.includes(optionIndex)) {
+//         setSelectedAnswers({
+//           ...selectedAnswers,
+//           [questionIndex]: currentAnswers.filter(i => i !== optionIndex)
+//         });
+//       } else {
+//         setSelectedAnswers({
+//           ...selectedAnswers,
+//           [questionIndex]: [...currentAnswers, optionIndex]
+//         });
+//       }
 //     } else {
-//       newCompleted.add(lessonId);
-//     }
-//     setCompletedLessons(newCompleted);
-//   };
-
-//   const getTypeIcon = (type) => {
-//     switch (type) {
-//       case "video":
-//         return <Video className="w-4 h-4" />;
-//       case "reading":
-//         return <FileText className="w-4 h-4" />;
-//       case "practice":
-//         return <BookOpen className="w-4 h-4" />;
-//       default:
-//         return <Circle className="w-4 h-4" />;
+//       // Single choice
+//       setSelectedAnswers({
+//         ...selectedAnswers,
+//         [questionIndex]: [optionIndex]
+//       });
 //     }
 //   };
 
-//   const getTypeColor = (type) => {
-//     switch (type) {
-//       case "video":
-//         return "text-blue-400";
-//       case "reading":
-//         return "text-green-400";
-//       case "practice":
-//         return "text-purple-400";
-//       default:
-//         return "text-gray-400";
-//     }
+//   const checkQuizResults = () => {
+//     setShowResults(true);
 //   };
+
+//   const isAnswerCorrect = (questionIndex) => {
+//     const userAnswers = selectedAnswers[questionIndex] || [];
+//     const correctAnswers = lessonData.quiz[questionIndex].correctOption;
+    
+//     return userAnswers.length === correctAnswers.length && 
+//            userAnswers.every(answer => correctAnswers.includes(answer));
+//   };
+
+//   const getScorePercentage = () => {
+//     const correctAnswers = lessonData.quiz.filter((_, index) => isAnswerCorrect(index)).length;
+//     return Math.round((correctAnswers / lessonData.quiz.length) * 100);
+//   };
+
+//   const copyToClipboard = (text) => {
+//     navigator.clipboard.writeText(text);
+//     setCopied(true);
+//     setTimeout(() => setCopied(false), 2000);
+//   };
+
+//   const tabs = [
+//     { id: 'content', label: 'Content', icon: BookOpen },
+//     { id: 'exercise', label: 'Exercise', icon: Target },
+//     { id: 'quiz', label: 'Quiz', icon: HelpCircle }
+//   ];
 
 //   return (
-//     <div className="min-h-screen bg-slate-900 text-white pt-18">
+//     <div className="min-h-screen bg-[#0b1120] text-white">
 //       {/* Header */}
-//       <motion.div
-//         initial={{ opacity: 0, y: -20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         className="bg-slate-800 border-b border-slate-700"
-//       >
-//         <div className="max-w-7xl mx-auto px-6 py-6">
-//           <div className="flex items-center justify-between">
-//             <div>
-//               <div className="flex items-center gap-3 mb-2">
-//                 <div className="bg-gradient-to-r from-green-400 to-emerald-500 p-2 rounded-lg">
-//                   <BookOpen className="w-6 h-6 text-white" />
-//                 </div>
-//                 <div>
-//                   <h1 className="text-2xl font-bold">{courseData.title}</h1>
-//                   <p className="text-slate-400">
-//                     {courseData.level} • {courseData.duration}
-//                   </p>
-//                 </div>
-//               </div>
-//               <div className="flex items-center gap-4">
-//                 <div className="flex items-center gap-2">
-//                   <div className="w-48 h-2 bg-slate-700 rounded-full overflow-hidden">
-//                     <motion.div
-//                       className="h-full bg-gradient-to-r from-green-400 to-emerald-500"
-//                       initial={{ width: 0 }}
-//                       animate={{
-//                         width: `${
-//                           (courseData.progress / courseData.total) * 100
-//                         }%`,
-//                       }}
-//                       transition={{ duration: 1, delay: 0.5 }}
-//                     />
-//                   </div>
-//                   <span className="text-sm text-slate-400">
-//                     {courseData.progress}/{courseData.total} complete
-//                   </span>
-//                 </div>
+//       <div className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50">
+//         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+//           {/* Navigation */}
+//           <div className="flex items-center justify-between py-4">
+//             <div className="flex items-center space-x-4">
+//               <motion.button
+//                 whileHover={{ scale: 1.05 }}
+//                 whileTap={{ scale: 0.95 }}
+//                 className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+//               >
+//                 <ChevronLeft className="w-5 h-5" />
+//               </motion.button>
+//               <div className="text-sm text-gray-400">
+//                 <span>CSS Essentials</span> • <span>{lessonData.moduleInfo}</span>
 //               </div>
 //             </div>
-//             <div className="flex items-center gap-3">
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
-//               >
-//                 <Bookmark className="w-5 h-5" />
-//               </motion.button>
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 className="p-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
-//               >
-//                 <Share2 className="w-5 h-5" />
-//               </motion.button>
+            
+//             <motion.button
+//               whileHover={{ scale: 1.05 }}
+//               whileTap={{ scale: 0.95 }}
+//               className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+//             >
+//               <ChevronRight className="w-5 h-5" />
+//             </motion.button>
+//           </div>
+
+//           {/* Lesson Header */}
+//           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 mb-6">
+//             <h1 className="text-3xl font-bold mb-2">{lessonData.title}</h1>
+//             <p className="text-blue-100 mb-4">{lessonData.description}</p>
+//             <div className="flex items-center space-x-4">
+//               <div className="flex items-center space-x-2">
+//                 <Clock className="w-4 h-4" />
+//                 <span className="text-sm">{lessonData.estimatedTime} mins</span>
+//               </div>
+//               <div className="flex items-center space-x-2">
+//                 <Target className="w-4 h-4" />
+//                 <span className="text-sm">{lessonData.moduleInfo}</span>
+//               </div>
 //             </div>
 //           </div>
-//         </div>
-//       </motion.div>
 
-//       <div className="max-w-7xl mx-auto px-6 py-8">
-//         <div className="grid lg:grid-cols-3 gap-8">
-//           {/* Main Content */}
-//           <div className="lg:col-span-2 space-y-6">
-//             {/* Course Sections */}
+//           {/* Tabs */}
+//           <div className="flex space-x-1">
+//             {tabs.map((tab) => {
+//               const IconComponent = tab.icon;
+//               return (
+//                 <motion.button
+//                   key={tab.id}
+//                   onClick={() => setActiveTab(tab.id)}
+//                   className={`px-6 py-3 rounded-t-lg flex items-center space-x-2 transition-all ${
+//                     activeTab === tab.id
+//                       ? 'bg-gray-800 text-blue-400 border-b-2 border-blue-400'
+//                       : 'bg-gray-900/50 text-gray-400 hover:text-gray-300'
+//                   }`}
+//                   whileHover={{ scale: 1.02 }}
+//                   whileTap={{ scale: 0.98 }}
+//                 >
+//                   <IconComponent className="w-4 h-4" />
+//                   <span>{tab.label}</span>
+//                 </motion.button>
+//               );
+//             })}
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+//         <AnimatePresence mode="wait">
+//           {/* Content Tab */}
+//           {activeTab === 'content' && (
 //             <motion.div
+//               key="content"
 //               initial={{ opacity: 0, y: 20 }}
 //               animate={{ opacity: 1, y: 0 }}
-//               transition={{ delay: 0.2 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.3 }}
+//               className="space-y-8"
 //             >
-//               <h2 className="text-xl font-semibold mb-4">Course Content</h2>
-//               <div className="space-y-4">
-//                 {courseData.sections.map((section, sectionIndex) => (
-//                   <motion.div
-//                     key={section.id}
-//                     initial={{ opacity: 0, x: -20 }}
-//                     animate={{ opacity: 1, x: 0 }}
-//                     transition={{ delay: 0.3 + sectionIndex * 0.1 }}
-//                     className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden"
-//                   >
-//                     <motion.button
-//                       onClick={() =>
-//                         setActiveSection(
-//                           activeSection === sectionIndex ? -1 : sectionIndex
-//                         )
-//                       }
-//                       className="w-full p-4 flex items-center justify-between hover:bg-slate-750 transition-colors"
-//                       whileHover={{ backgroundColor: "rgb(51, 65, 85)" }}
-//                     >
-//                       <div className="flex items-center gap-3">
-//                         <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-2 rounded-lg">
-//                           <BookOpen className="w-5 h-5 text-white" />
-//                         </div>
-//                         <div className="text-left">
-//                           <h3 className="font-medium">{section.title}</h3>
-//                           <p className="text-sm text-slate-400">
-//                             {section.lessons.length} lessons
-//                           </p>
-//                         </div>
-//                       </div>
-//                       <motion.div
-//                         animate={{
-//                           rotate: activeSection === sectionIndex ? 90 : 0,
-//                         }}
-//                         transition={{ duration: 0.2 }}
-//                       >
-//                         <ChevronRight className="w-5 h-5 text-slate-400" />
-//                       </motion.div>
-//                     </motion.button>
+//               {/* Explanation Section */}
+//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <BookOpen className="w-5 h-5 mr-2 text-blue-400" />
+//                   Explanation
+//                 </h2>
+//                 <p className="text-gray-300 leading-relaxed">{lessonData.explanation}</p>
+//               </section>
 
+//               {/* Examples Section */}
+//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <Code className="w-5 h-5 mr-2 text-green-400" />
+//                   Code Examples
+//                 </h2>
+//                 <div className="space-y-4">
+//                   {lessonData.examples.map((example, index) => (
+//                     <div key={index} className="bg-gray-900 rounded-lg p-4 relative group">
+//                       <button
+//                         onClick={() => copyToClipboard(example)}
+//                         className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+//                       >
+//                         {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+//                       </button>
+//                       <pre className="text-sm overflow-x-auto">
+//                         <code className="text-green-300">{example}</code>
+//                       </pre>
+//                     </div>
+//                   ))}
+//                 </div>
+//               </section>
+
+//               {/* Real World Application */}
+//               <section className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <Play className="w-5 h-5 mr-2 text-purple-400" />
+//                   Real World Application
+//                 </h2>
+//                 <p className="text-gray-300">{lessonData.realWorldApplication}</p>
+//               </section>
+
+//               {/* Expert Insights */}
+//               <section className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
+//                   Expert Insights
+//                 </h2>
+//                 <p className="text-gray-300">{lessonData.expertInsights}</p>
+//               </section>
+
+//               {/* Common Mistakes */}
+//               <section className="bg-gradient-to-r from-red-500/10 to-pink-500/10 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <AlertTriangle className="w-5 h-5 mr-2 text-red-400" />
+//                   Common Mistakes
+//                 </h2>
+//                 <ul className="space-y-2">
+//                   {lessonData.commonMistakes.map((mistake, index) => (
+//                     <li key={index} className="flex items-start space-x-2 text-gray-300">
+//                       <span className="text-red-400 mt-1">•</span>
+//                       <span>{mistake}</span>
+//                     </li>
+//                   ))}
+//                 </ul>
+//               </section>
+
+//               {/* Resources */}
+//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
+//                   <ExternalLink className="w-5 h-5 mr-2 text-blue-400" />
+//                   Additional Resources
+//                 </h2>
+//                 <div className="grid md:grid-cols-2 gap-4">
+//                   {lessonData.resources.map((resource, index) => (
+//                     <motion.a
+//                       key={index}
+//                       href={resource.url}
+//                       target="_blank"
+//                       rel="noopener noreferrer"
+//                       className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg hover:bg-gray-900 transition-colors group"
+//                       whileHover={{ scale: 1.02 }}
+//                     >
+//                       <div>
+//                         <h4 className="font-semibold text-blue-400 group-hover:text-blue-300">
+//                           {resource.title}
+//                         </h4>
+//                         <p className="text-sm text-gray-400 capitalize">{resource.type}</p>
+//                       </div>
+//                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400" />
+//                     </motion.a>
+//                   ))}
+//                 </div>
+//               </section>
+//             </motion.div>
+//           )}
+
+//           {/* Exercise Tab */}
+//           {activeTab === 'exercise' && (
+//             <motion.div
+//               key="exercise"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.3 }}
+//               className="space-y-6"
+//             >
+//               {lessonData.exercises.map((exercise, index) => (
+//                 <div key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//                   <div className="flex items-start justify-between mb-4">
+//                     <div>
+//                       <h2 className="text-xl font-semibold mb-2">{exercise.title}</h2>
+//                       <span className={`px-3 py-1 rounded-full text-sm ${
+//                         exercise.difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
+//                         exercise.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
+//                         'bg-red-500/20 text-red-400'
+//                       }`}>
+//                         {exercise.difficulty}
+//                       </span>
+//                     </div>
+//                     <motion.button
+//                       onClick={() => setExerciseCompleted(!exerciseCompleted)}
+//                       className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
+//                         exerciseCompleted 
+//                           ? 'bg-green-500 text-white' 
+//                           : 'bg-blue-500 hover:bg-blue-600 text-white'
+//                       }`}
+//                       whileHover={{ scale: 1.05 }}
+//                       whileTap={{ scale: 0.95 }}
+//                     >
+//                       {exerciseCompleted ? (
+//                         <>
+//                           <CheckCircle className="w-4 h-4" />
+//                           <span>Completed</span>
+//                         </>
+//                       ) : (
+//                         <>
+//                           <Play className="w-4 h-4" />
+//                           <span>Start Exercise</span>
+//                         </>
+//                       )}
+//                     </motion.button>
+//                   </div>
+
+//                   <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
+//                     <h3 className="font-semibold mb-2">Task:</h3>
+//                     <p className="text-gray-300">{exercise.prompt}</p>
+//                   </div>
+
+//                   {/* Hints */}
+//                   <div className="mb-6">
+//                     <h3 className="font-semibold mb-3 flex items-center">
+//                       <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
+//                       Hints
+//                     </h3>
+//                     <ul className="space-y-2">
+//                       {exercise.hints.map((hint, hintIndex) => (
+//                         <li key={hintIndex} className="flex items-start space-x-2 text-gray-300">
+//                           <span className="text-yellow-400 mt-1">💡</span>
+//                           <span>{hint}</span>
+//                         </li>
+//                       ))}
+//                     </ul>
+//                   </div>
+
+//                   {/* Solution */}
+//                   <div>
+//                     <div className="flex items-center justify-between mb-3">
+//                       <h3 className="font-semibold">Solution</h3>
+//                       <motion.button
+//                         onClick={() => setShowSolution(!showSolution)}
+//                         className="flex items-center space-x-2 px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+//                         whileHover={{ scale: 1.05 }}
+//                         whileTap={{ scale: 0.95 }}
+//                       >
+//                         {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+//                         <span>{showSolution ? 'Hide' : 'Show'}</span>
+//                       </motion.button>
+//                     </div>
+                    
 //                     <AnimatePresence>
-//                       {activeSection === sectionIndex && (
+//                       {showSolution && (
 //                         <motion.div
 //                           initial={{ height: 0, opacity: 0 }}
-//                           animate={{ height: "auto", opacity: 1 }}
+//                           animate={{ height: 'auto', opacity: 1 }}
 //                           exit={{ height: 0, opacity: 0 }}
 //                           transition={{ duration: 0.3 }}
-//                           className="border-t border-slate-700"
+//                           className="overflow-hidden"
 //                         >
-//                           <div className="p-4 space-y-2">
-//                             {section.lessons.map((lesson, lessonIndex) => (
-//                               <motion.div
-//                                 key={lesson.id}
-//                                 initial={{ opacity: 0, x: -10 }}
-//                                 animate={{ opacity: 1, x: 0 }}
-//                                 transition={{ delay: lessonIndex * 0.05 }}
-//                                 className="flex items-center justify-between p-3 hover:bg-slate-700 rounded-lg transition-colors cursor-pointer group"
-//                               >
-//                                 <div className="flex items-center gap-3">
-//                                   <motion.button
-//                                     onClick={() =>
-//                                       toggleLessonCompletion(lesson.id)
-//                                     }
-//                                     whileHover={{ scale: 1.1 }}
-//                                     whileTap={{ scale: 0.9 }}
-//                                   >
-//                                     {completedLessons.has(lesson.id) ? (
-//                                       <CheckCircle2 className="w-5 h-5 text-green-400" />
-//                                     ) : (
-//                                       <Circle className="w-5 h-5 text-slate-400" />
-//                                     )}
-//                                   </motion.button>
-//                                   <div
-//                                     className={`${getTypeColor(lesson.type)}`}
-//                                   >
-//                                     {getTypeIcon(lesson.type)}
-//                                   </div>
-//                                   <div>
-//                                     <p className="font-medium text-sm">
-//                                       {lesson.title}
-//                                     </p>
-//                                     <div className="flex items-center gap-2 text-xs text-slate-400">
-//                                       <Clock className="w-3 h-3" />
-//                                       <span>{lesson.duration}</span>
-//                                     </div>
-//                                   </div>
-//                                 </div>
-//                                 <motion.button
-//                                   whileHover={{ scale: 1.1 }}
-//                                   whileTap={{ scale: 0.9 }}
-//                                   className="opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 p-2 rounded-lg"
-//                                 >
-//                                   <Play className="w-4 h-4" />
-//                                 </motion.button>
-//                               </motion.div>
-//                             ))}
+//                           <div className="bg-gray-900 rounded-lg p-4 relative group">
+//                             <button
+//                               onClick={() => copyToClipboard(exercise.solution)}
+//                               className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+//                             >
+//                               {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+//                             </button>
+//                             <pre className="text-sm overflow-x-auto">
+//                               <code className="text-green-300">{exercise.solution}</code>
+//                             </pre>
 //                           </div>
 //                         </motion.div>
 //                       )}
 //                     </AnimatePresence>
-//                   </motion.div>
-//                 ))}
-//               </div>
+//                   </div>
+//                 </div>
+//               ))}
 //             </motion.div>
-//           </div>
+//           )}
 
-//           {/* Sidebar */}
-//           <div className="space-y-6">
-//             {/* Resources */}
+//           {/* Quiz Tab */}
+//           {activeTab === 'quiz' && (
 //             <motion.div
-//               initial={{ opacity: 0, x: 20 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ delay: 0.4 }}
-//               className="bg-slate-800 rounded-xl p-6 border border-slate-700"
+//               key="quiz"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.3 }}
+//               className="space-y-6"
 //             >
-//               <h3 className="font-semibold mb-4 flex items-center gap-2">
-//                 <FileText className="w-5 h-5 text-blue-400" />
-//                 Resources
-//               </h3>
-//               <div className="space-y-3">
-//                 {courseData.resources.map((resource, index) => (
-//                   <motion.a
-//                     key={resource.id}
-//                     href={resource.url}
-//                     initial={{ opacity: 0, y: 10 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     transition={{ delay: 0.5 + index * 0.05 }}
-//                     className="flex items-center justify-between p-3 hover:bg-slate-700 rounded-lg transition-colors group"
-//                   >
-//                     <span className="text-sm font-medium">
-//                       {resource.title}
-//                     </span>
-//                     <div className="flex items-center gap-2">
-//                       {resource.type === "download" && (
-//                         <Download className="w-4 h-4 text-green-400" />
+//               {/* Quiz Header */}
+//               <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
+//                 <h2 className="text-2xl font-semibold mb-2">Knowledge Check</h2>
+//                 <p className="text-gray-300">Test your understanding of the concepts covered in this lesson.</p>
+//               </div>
+
+//               {/* Quiz Questions */}
+//               <div className="space-y-6">
+//                 {lessonData.quiz.map((question, questionIndex) => (
+//                   <div key={questionIndex} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//                     <div className="flex items-start justify-between mb-4">
+//                       <h3 className="text-lg font-semibold">
+//                         {questionIndex + 1}. {question.question}
+//                       </h3>
+//                       {question.correctOption.length > 1 && (
+//                         <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm">
+//                           Multiple Choice
+//                         </span>
 //                       )}
-//                       <ExternalLink className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
 //                     </div>
-//                   </motion.a>
-//                 ))}
-//               </div>
-//             </motion.div>
 
-//             {/* AI-Generated Content */}
-//             <motion.div
-//               initial={{ opacity: 0, x: 20 }}
-//               animate={{ opacity: 1, x: 0 }}
-//               transition={{ delay: 0.6 }}
-//               className="bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl p-6 border border-purple-500/30"
-//             >
-//               <h3 className="font-semibold mb-4 flex items-center gap-2">
-//                 <Star className="w-5 h-5 text-purple-400" />
-//                 Smart Learning Tools
-//               </h3>
-//               <div className="space-y-4">
-//                 {courseData.customSources.map((source, index) => (
-//                   <motion.div
-//                     key={source.id}
-//                     initial={{ opacity: 0, y: 10 }}
-//                     animate={{ opacity: 1, y: 0 }}
-//                     transition={{ delay: 0.7 + index * 0.05 }}
-//                     className="p-3 bg-white/5 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
-//                   >
-//                     <h4 className="font-medium text-sm mb-1">{source.title}</h4>
-//                     <p className="text-xs text-slate-400">
-//                       {source.description}
-//                     </p>
-//                   </motion.div>
+//                     <div className="space-y-3">
+//                       {question.options.map((option, optionIndex) => {
+//                         const isSelected = selectedAnswers[questionIndex]?.includes(optionIndex);
+//                         const isCorrect = question.correctOption.includes(optionIndex);
+//                         const showResult = showResults;
+                        
+//                         let buttonClass = "w-full p-4 text-left border-2 rounded-lg transition-all ";
+                        
+//                         if (showResult) {
+//                           if (isCorrect) {
+//                             buttonClass += "border-green-500 bg-green-500/20 text-green-300";
+//                           } else if (isSelected && !isCorrect) {
+//                             buttonClass += "border-red-500 bg-red-500/20 text-red-300";
+//                           } else {
+//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300";
+//                           }
+//                         } else {
+//                           if (isSelected) {
+//                             buttonClass += "border-blue-500 bg-blue-500/20 text-blue-300";
+//                           } else {
+//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300 hover:border-gray-500";
+//                           }
+//                         }
+
+//                         return (
+//                           <motion.button
+//                             key={optionIndex}
+//                             onClick={() => !showResults && handleAnswerSelect(questionIndex, optionIndex)}
+//                             className={buttonClass}
+//                             whileHover={!showResults ? { scale: 1.01 } : {}}
+//                             whileTap={!showResults ? { scale: 0.99 } : {}}
+//                             disabled={showResults}
+//                           >
+//                             <div className="flex items-center justify-between">
+//                               <span>{option}</span>
+//                               {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-400" />}
+//                               {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400" />}
+//                             </div>
+//                           </motion.button>
+//                         );
+//                       })}
+//                     </div>
+
+//                     {/* Show explanation after results */}
+//                     {showResults && (
+//                       <motion.div
+//                         initial={{ opacity: 0, height: 0 }}
+//                         animate={{ opacity: 1, height: 'auto' }}
+//                         className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg"
+//                       >
+//                         <p className="text-blue-300 text-sm">
+//                           <strong>Explanation:</strong> {question.explanation}
+//                         </p>
+//                       </motion.div>
+//                     )}
+//                   </div>
 //                 ))}
 //               </div>
-//               <motion.button
-//                 whileHover={{ scale: 1.02 }}
-//                 whileTap={{ scale: 0.98 }}
-//                 className="w-full mt-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 py-2 px-4 rounded-lg font-medium text-sm transition-all"
-//               >
-//                 Explore AI Tools
-//               </motion.button>
+
+//               {/* Quiz Actions */}
+//               <div className="flex items-center justify-between">
+//                 <div className="text-gray-400">
+//                   Questions answered: {Object.keys(selectedAnswers).length} / {lessonData.quiz.length}
+//                 </div>
+                
+//                 {!showResults ? (
+//                   <motion.button
+//                     onClick={checkQuizResults}
+//                     disabled={Object.keys(selectedAnswers).length !== lessonData.quiz.length}
+//                     className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+//                     whileHover={{ scale: 1.05 }}
+//                     whileTap={{ scale: 0.95 }}
+//                   >
+//                     Submit Quiz
+//                   </motion.button>
+//                 ) : (
+//                   <div className="flex items-center space-x-4">
+//                     <div className="text-right">
+//                       <p className="text-sm text-gray-400">Your Score</p>
+//                       <p className="text-xl font-bold text-blue-400">{getScorePercentage()}%</p>
+//                     </div>
+//                     <motion.button
+//                       onClick={() => {
+//                         setSelectedAnswers({});
+//                         setShowResults(false);
+//                       }}
+//                       className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors"
+//                       whileHover={{ scale: 1.05 }}
+//                       whileTap={{ scale: 0.95 }}
+//                     >
+//                       Retake Quiz
+//                     </motion.button>
+//                   </div>
+//                 )}
+//               </div>
 //             </motion.div>
-//           </div>
-//         </div>
+//           )}
+//         </AnimatePresence>
 //       </div>
 //     </div>
 //   );
 // };
 
-// export default LearningModule;
+// export default LessonContentPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//MODULE PAGE DESIGN
+// "use client"
+// import React, { useState } from 'react';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import {
+//   Play,
+//   BookOpen,
+//   Clock,
+//   CheckCircle,
+//   Star,
+//   ArrowRight,
+//   Users,
+//   Target,
+//   Award,
+//   ChevronDown,
+//   ChevronRight,
+//   ExternalLink,
+//   Lightbulb,
+//   AlertTriangle,
+//   Code,
+//   PenTool
+// } from 'lucide-react';
+
+// const LearningModulePage = () => {
+//   const [expandedLesson, setExpandedLesson] = useState(null);
+//   const [activeTab, setActiveTab] = useState('overview');
+
+//   // Sample data based on your structure
+//   const courseData = {
+//     domain: "Web Development",
+//     course: {
+//       title: "CSS Essentials: Styling the Web",
+//       shortDescription: "A beginner-friendly course on CSS, teaching core concepts like selectors, the box model, colors, and typography to create visually appealing web pages.",
+//       tags: ["css", "web", "styling", "typography", "beginner", "frontend"],
+//       levelSummary: [{
+//         level: "Beginner",
+//         overview: "Learn CSS fundamentals and style a responsive, visually appealing web page.",
+//         moduleCount: 1
+//       }]
+//     },
+//     module: {
+//       title: "Module 1 — Core CSS Concepts",
+//       description: "Explore the fundamentals of CSS, including selectors, the box model, color systems, and typography for effective web styling.",
+//     },
+//     lessons: [
+//       {
+//         id: "652f3f99def98ef901651c11",
+//         title: "Introduction to CSS",
+//         description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
+//         estimatedTime: 30,
+//         completed: true
+//       },
+//       {
+//         id: "652f3f99def98ef901651c12",
+//         title: "CSS Selectors",
+//         description: "Learn how to target HTML elements using CSS selectors, including type, class, ID, and advanced combinators.",
+//         estimatedTime: 45,
+//         completed: true
+//       },
+//       {
+//         id: "652f3f99def98ef901651c13",
+//         title: "The Box Model",
+//         description: "Master the CSS box model to control spacing, borders, and layout of web elements.",
+//         estimatedTime: 50,
+//         completed: false
+//       },
+//       {
+//         id: "652f3f99def98ef901651c14",
+//         title: "Colors in CSS",
+//         description: "Explore CSS color systems, including named colors, hex, RGB, and HSL, for vibrant designs.",
+//         estimatedTime: 40,
+//         completed: false
+//       },
+//       {
+//         id: "652f3f99def98ef901651c15",
+//         title: "Typography in CSS",
+//         description: "Control text appearance with CSS typography properties like font-family, font-size, and line-height.",
+//         estimatedTime: 50,
+//         completed: false
+//       },
+//       {
+//         id: "652f3f99def98ef901651c16",
+//         title: "Applying CSS to a Project",
+//         description: "Combine CSS selectors, box model, colors, and typography to style and deploy a styled web page.",
+//         estimatedTime: 75,
+//         completed: false
+//       }
+//     ]
+//   };
+
+//   const completedLessons = courseData.lessons.filter(lesson => lesson.completed).length;
+//   const totalLessons = courseData.lessons.length;
+//   const progressPercentage = (completedLessons / totalLessons) * 100;
+//   const totalTime = courseData.lessons.reduce((sum, lesson) => sum + lesson.estimatedTime, 0);
+
+//   const toggleLesson = (lessonId) => {
+//     setExpandedLesson(expandedLesson === lessonId ? null : lessonId);
+//   };
+
+//   const containerVariants = {
+//     hidden: { opacity: 0 },
+//     visible: {
+//       opacity: 1,
+//       transition: {
+//         staggerChildren: 0.1
+//       }
+//     }
+//   };
+
+//   const itemVariants = {
+//     hidden: { opacity: 0, y: 20 },
+//     visible: {
+//       opacity: 1,
+//       y: 0,
+//       transition: { duration: 0.5 }
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-[#0b1120] text-white">
+//       {/* Header */}
+//       <motion.header 
+//         initial={{ opacity: 0, y: -20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50"
+//       >
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+//           <div className="flex items-center justify-between">
+//             <div className="flex items-center space-x-4">
+//               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+//                 <BookOpen className="w-5 h-5" />
+//               </div>
+//               <div>
+//                 <p className="text-sm text-gray-400">{courseData.domain}</p>
+//                 <h1 className="text-xl font-semibold">{courseData.course.title}</h1>
+//               </div>
+//             </div>
+//             <div className="flex items-center space-x-4">
+//               <div className="text-right">
+//                 <p className="text-sm text-gray-400">Progress</p>
+//                 <p className="font-semibold text-blue-400">{Math.round(progressPercentage)}%</p>
+//               </div>
+//               <div className="w-16 h-16 relative">
+//                 <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
+//                   <circle
+//                     cx="32"
+//                     cy="32"
+//                     r="28"
+//                     stroke="currentColor"
+//                     strokeWidth="4"
+//                     fill="none"
+//                     className="text-gray-700"
+//                   />
+//                   <circle
+//                     cx="32"
+//                     cy="32"
+//                     r="28"
+//                     stroke="currentColor"
+//                     strokeWidth="4"
+//                     fill="none"
+//                     strokeDasharray={`${progressPercentage * 1.76} 176`}
+//                     className="text-blue-500"
+//                   />
+//                 </svg>
+//                 <div className="absolute inset-0 flex items-center justify-center">
+//                   <span className="text-xs font-semibold">{completedLessons}/{totalLessons}</span>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </motion.header>
+
+//       {/* Main Content */}
+//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+//         <motion.div
+//           variants={containerVariants}
+//           initial="hidden"
+//           animate="visible"
+//           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+//         >
+//           {/* Left Column - Course Info */}
+//           <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
+//             {/* Course Header */}
+//             <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
+//               <div className="flex items-start justify-between mb-4">
+//                 <div>
+//                   <h2 className="text-2xl font-bold mb-2">{courseData.module.title}</h2>
+//                   <p className="text-gray-300 leading-relaxed">{courseData.module.description}</p>
+//                 </div>
+//                 <div className="flex items-center space-x-2 bg-blue-500/20 px-3 py-1 rounded-full">
+//                   <Award className="w-4 h-4 text-blue-400" />
+//                   <span className="text-sm text-blue-400">{courseData.course.levelSummary[0].level}</span>
+//                 </div>
+//               </div>
+              
+//               {/* Tags */}
+//               <div className="flex flex-wrap gap-2 mb-4">
+//                 {courseData.course.tags.map((tag, index) => (
+//                   <span
+//                     key={index}
+//                     className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm"
+//                   >
+//                     #{tag}
+//                   </span>
+//                 ))}
+//               </div>
+
+//               {/* Stats */}
+//               <div className="grid grid-cols-3 gap-4">
+//                 <div className="text-center p-3 bg-black/20 rounded-lg">
+//                   <BookOpen className="w-5 h-5 text-blue-400 mx-auto mb-1" />
+//                   <p className="text-sm text-gray-400">Lessons</p>
+//                   <p className="font-semibold">{totalLessons}</p>
+//                 </div>
+//                 <div className="text-center p-3 bg-black/20 rounded-lg">
+//                   <Clock className="w-5 h-5 text-purple-400 mx-auto mb-1" />
+//                   <p className="text-sm text-gray-400">Duration</p>
+//                   <p className="font-semibold">{Math.floor(totalTime / 60)}h {totalTime % 60}m</p>
+//                 </div>
+//                 <div className="text-center p-3 bg-black/20 rounded-lg">
+//                   <Target className="w-5 h-5 text-green-400 mx-auto mb-1" />
+//                   <p className="text-sm text-gray-400">Completed</p>
+//                   <p className="font-semibold">{completedLessons}/{totalLessons}</p>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Lessons List */}
+//             <div className="space-y-4">
+//               <h3 className="text-xl font-semibold mb-4">Lessons</h3>
+              
+//               {courseData.lessons.map((lesson, index) => (
+//                 <motion.div
+//                   key={lesson.id}
+//                   variants={itemVariants}
+//                   className={`border rounded-2xl transition-all duration-300 ${
+//                     lesson.completed 
+//                       ? 'border-green-500/30 bg-green-500/10' 
+//                       : 'border-gray-700 bg-gray-800/30'
+//                   }`}
+//                 >
+//                   <div
+//                     className="p-6 cursor-pointer"
+//                     onClick={() => toggleLesson(lesson.id)}
+//                   >
+//                     <div className="flex items-center justify-between">
+//                       <div className="flex items-center space-x-4">
+//                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+//                           lesson.completed 
+//                             ? 'bg-green-500 text-white' 
+//                             : 'bg-gray-700 text-gray-400'
+//                         }`}>
+//                           {lesson.completed ? (
+//                             <CheckCircle className="w-5 h-5" />
+//                           ) : (
+//                             <span className="font-semibold">{index + 1}</span>
+//                           )}
+//                         </div>
+//                         <div>
+//                           <h4 className="font-semibold text-lg">{lesson.title}</h4>
+//                           <p className="text-gray-400 text-sm">{lesson.description}</p>
+//                           <div className="flex items-center space-x-4 mt-2">
+//                             <div className="flex items-center space-x-1 text-gray-500">
+//                               <Clock className="w-4 h-4" />
+//                               <span className="text-sm">{lesson.estimatedTime} min</span>
+//                             </div>
+//                             {lesson.completed && (
+//                               <div className="flex items-center space-x-1 text-green-400">
+//                                 <CheckCircle className="w-4 h-4" />
+//                                 <span className="text-sm">Completed</span>
+//                               </div>
+//                             )}
+//                           </div>
+//                         </div>
+//                       </div>
+//                       <div className="flex items-center space-x-2">
+//                         {!lesson.completed && (
+//                           <motion.button
+//                             whileHover={{ scale: 1.05 }}
+//                             whileTap={{ scale: 0.95 }}
+//                             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
+//                           >
+//                             <Play className="w-4 h-4" />
+//                             <span>Start</span>
+//                           </motion.button>
+//                         )}
+//                         {expandedLesson === lesson.id ? (
+//                           <ChevronDown className="w-5 h-5 text-gray-400" />
+//                         ) : (
+//                           <ChevronRight className="w-5 h-5 text-gray-400" />
+//                         )}
+//                       </div>
+//                     </div>
+//                   </div>
+
+//                   {/* Expanded Content */}
+//                   <AnimatePresence>
+//                     {expandedLesson === lesson.id && (
+//                       <motion.div
+//                         initial={{ height: 0, opacity: 0 }}
+//                         animate={{ height: 'auto', opacity: 1 }}
+//                         exit={{ height: 0, opacity: 0 }}
+//                         transition={{ duration: 0.3 }}
+//                         className="overflow-hidden"
+//                       >
+//                         <div className="px-6 pb-6 border-t border-gray-700 pt-4 mt-4">
+//                           <div className="grid md:grid-cols-2 gap-6">
+//                             <div>
+//                               <h5 className="font-semibold mb-2 flex items-center">
+//                                 <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
+//                                 Key Concepts
+//                               </h5>
+//                               <ul className="text-sm text-gray-300 space-y-1">
+//                                 <li>• CSS syntax and structure</li>
+//                                 <li>• Applying styles to HTML</li>
+//                                 <li>• External stylesheets</li>
+//                                 <li>• CSS cascade and specificity</li>
+//                               </ul>
+//                             </div>
+//                             <div>
+//                               <h5 className="font-semibold mb-2 flex items-center">
+//                                 <Code className="w-4 h-4 mr-2 text-blue-400" />
+//                                 What You'll Learn
+//                               </h5>
+//                               <ul className="text-sm text-gray-300 space-y-1">
+//                                 <li>• Write CSS rules and declarations</li>
+//                                 <li>• Link CSS files to HTML</li>
+//                                 <li>• Understand CSS specificity</li>
+//                                 <li>• Debug CSS issues</li>
+//                               </ul>
+//                             </div>
+//                           </div>
+//                         </div>
+//                       </motion.div>
+//                     )}
+//                   </AnimatePresence>
+//                 </motion.div>
+//               ))}
+//             </div>
+//           </motion.div>
+
+//           {/* Right Sidebar */}
+//           <motion.div variants={itemVariants} className="space-y-6">
+//             {/* Progress Card */}
+//             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//               <h3 className="font-semibold mb-4">Your Progress</h3>
+//               <div className="space-y-4">
+//                 <div>
+//                   <div className="flex justify-between text-sm mb-2">
+//                     <span>Module Progress</span>
+//                     <span>{Math.round(progressPercentage)}%</span>
+//                   </div>
+//                   <div className="w-full bg-gray-700 rounded-full h-2">
+//                     <motion.div
+//                       initial={{ width: 0 }}
+//                       animate={{ width: `${progressPercentage}%` }}
+//                       transition={{ duration: 1, delay: 0.5 }}
+//                       className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
+//                     />
+//                   </div>
+//                 </div>
+                
+//                 <div className="grid grid-cols-2 gap-4 pt-4">
+//                   <div className="text-center">
+//                     <div className="text-2xl font-bold text-blue-400">{completedLessons}</div>
+//                     <div className="text-sm text-gray-400">Completed</div>
+//                   </div>
+//                   <div className="text-center">
+//                     <div className="text-2xl font-bold text-purple-400">{totalLessons - completedLessons}</div>
+//                     <div className="text-sm text-gray-400">Remaining</div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Quick Actions */}
+//             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+//               <h3 className="font-semibold mb-4">Quick Actions</h3>
+//               <div className="space-y-3">
+//                 <motion.button
+//                   whileHover={{ scale: 1.02 }}
+//                   whileTap={{ scale: 0.98 }}
+//                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+//                 >
+//                   <Play className="w-4 h-4" />
+//                   <span>Continue Learning</span>
+//                 </motion.button>
+                
+//                 <motion.button
+//                   whileHover={{ scale: 1.02 }}
+//                   whileTap={{ scale: 0.98 }}
+//                   className="w-full bg-gray-600 hover:bg-gray-500 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+//                 >
+//                   <BookOpen className="w-4 h-4" />
+//                   <span>View Resources</span>
+//                 </motion.button>
+                
+//                 <motion.button
+//                   whileHover={{ scale: 1.02 }}
+//                   whileTap={{ scale: 0.98 }}
+//                   className="w-full border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
+//                 >
+//                   <Users className="w-4 h-4" />
+//                   <span>Join Discussion</span>
+//                 </motion.button>
+//               </div>
+//             </div>
+
+//             {/* Learning Tips */}
+//             <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
+//               <h3 className="font-semibold mb-4 flex items-center">
+//                 <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
+//                 Learning Tips
+//               </h3>
+//               <div className="space-y-3 text-sm text-gray-300">
+//                 <div className="flex items-start space-x-2">
+//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+//                   <p>Practice each CSS property with real examples</p>
+//                 </div>
+//                 <div className="flex items-start space-x-2">
+//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+//                   <p>Use browser DevTools to experiment with styles</p>
+//                 </div>
+//                 <div className="flex items-start space-x-2">
+//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
+//                   <p>Build small projects to reinforce learning</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </motion.div>
+//         </motion.div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LearningModulePage;
