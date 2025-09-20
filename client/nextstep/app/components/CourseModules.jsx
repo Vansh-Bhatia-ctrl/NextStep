@@ -4,6 +4,7 @@ import { ChevronRight, CircleCheckBig, Timer } from "lucide-react";
 import { motion } from "framer-motion";
 import useModuleStore from "../store/useModulesStore";
 import { useAuth, useUser } from "@clerk/nextjs";
+import useUserDomain from "../store/useUserDomain";
 
 const COMPLETED_COURSES = [
   {
@@ -57,19 +58,34 @@ const COURSES = [
   },
 ];
 
-const CourseModules = () => {
+const CourseModules = ({ level }) => {
   const { getLearningContent } = useModuleStore();
-  const { getToken } = useAuth();
+  const { getToken, isSignedIn } = useAuth();
+  const { clearCache, fetchDomain } = useUserDomain();
   const { user, isLoaded } = useUser();
+
   useEffect(() => {
     const getData = async () => {
       const token = await getToken();
       if (!user || !isLoaded) return;
-      await getLearningContent(token);
+      await getLearningContent(token, level);
     };
 
     getData();
   }, [getLearningContent, isLoaded]);
+
+  useEffect(() => {
+    const setDomainCache = async () => {
+      const token = await getToken();
+      if (!isSignedIn) {
+        clearCache();
+      } else {
+        fetchDomain(token);
+      }
+    };
+
+    setDomainCache();
+  }, [isSignedIn, clearCache]);
 
   if (!isLoaded) {
     return <div className="text-white">Loading user...</div>;
@@ -132,7 +148,7 @@ const CourseModules = () => {
             {COURSES.map((course) => (
               <div
                 key={course.id}
-                className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer"
+                className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in"
               >
                 <div className="flex items-center gap-2 md:gap-4">
                   <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">

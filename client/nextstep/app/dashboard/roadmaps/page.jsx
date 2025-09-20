@@ -53,7 +53,7 @@ const page = () => {
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-4 xl:grid-cols-3">
               {ROADMAPS.map((roadmap) => (
                 <Link
-                  href={`/dashboard/roadmaps/${roadmap.id}`}
+                  href={`/dashboard/roadmaps/${roadmap.level}`}
                   key={roadmap.id}
                 >
                   <motion.div

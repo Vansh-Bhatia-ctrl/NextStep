@@ -1,7 +1,9 @@
 "use client";
 import { BookOpen, Target, Timer } from "lucide-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import useModuleStore from "../store/useModulesStore";
+import { useUser, useAuth } from "@clerk/nextjs";
 
 const STATS = [
   {
@@ -36,7 +38,19 @@ const TAGS = [
   "#frontend",
 ];
 
-const ModuleHeader = () => {
+const ModuleHeader = ({ level }) => {
+  const { user, isLoaded } = useUser();
+  const { getToken } = useAuth();
+  const { getLearningContent, modules, lessons } = useModuleStore();
+  useEffect(() => {
+    const getData = async () => {
+      const token = await getToken();
+      if (!user || !isLoaded) return;
+      await getLearningContent(token, level);
+    };
+
+    getData();
+  }, [getLearningContent, isLoaded]);
   return (
     <>
       <motion.div
@@ -45,13 +59,9 @@ const ModuleHeader = () => {
         className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 border border-blue-500/30 rounded-lg"
       >
         <div>
-          <p className="text-white font-bold text-2xl">
-            Module 1 — Core CSS Concepts
-          </p>
-          <p className="text-slate-400 mt-4">
-            Explore the fundamentals of CSS, including selectors, the box model,
-            color systems, and typography for effective web styling.
-          </p>
+          <p className="text-white font-bold text-2xl">{modules[0]?.title}</p>
+
+          <p className="text-slate-400 mt-4">{modules[0]?.description}</p>
         </div>
         <div className="flex flex-wrap gap-2 mt-4">
           {TAGS.map((tag, index) => (

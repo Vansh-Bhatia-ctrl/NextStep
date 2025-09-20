@@ -7,10 +7,10 @@ const useModuleStore = create((set, get) => ({
   lessons: [],
   learningContent: [],
 
-  getLearningContent: async (token) => {
+  getLearningContent: async (token, level) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_DEV_URL}/api/sendlearningcontent/learningcontent`,
+        `${process.env.NEXT_PUBLIC_BACKEND_DEV_URL}/api/sendlearningcontent/${level}`,
         {
           method: "GET",
           headers: {
@@ -26,7 +26,13 @@ const useModuleStore = create((set, get) => ({
 
       const data = await response.json();
       console.log("fetched data for learning modules: ", data);
-      return data;
+      set({
+        domain: data.domain,
+        courses: data.course,
+        modules: data.module,
+        lessons: data.lesson,
+        learningContent: data.learningContent,
+      });
     } catch (error) {
       console.log(
         "Something went wrong, please try again.",
