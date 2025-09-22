@@ -7,15 +7,16 @@ const LearningContent = require("../models/LearningContent.model");
 const sendModulesData = async (req, res) => {
   try {
     const userId = req.user.clerkUserId;
+    const { level } = req.params;
     if (!userId) {
       return res.status(401).json({ message: "User is not authenticated." });
     }
-    
-    const domain = await Domain.find();
-    const course = await Course.find();
-    const module = await Module.find();
-    const lesson = await Lesson.find();
-    const learningContent = await LearningContent.find();
+
+    const domain = await Domain.find({ level: level });
+    const course = await Course.find({ "levelSummary.level": level });
+    const module = await Module.find({ level: level });
+    const lesson = await Lesson.find({ level: level });
+    const learningContent = await LearningContent.find({ level: level });
 
     if (!domain || !course || !module || !lesson || !learningContent) {
       return res.status(400).json({ message: "No data found" });

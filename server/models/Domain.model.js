@@ -7,6 +7,11 @@ const DomainSchema = new Schema(
       type: Schema.Types.ObjectId,
       default: () => new mongoose.Types.ObjectId(),
     },
+    level: {
+      type: String,
+      enum: ["Beginner", "Intermediate", "Advanced"],
+      required: true,
+    },
     name: { type: String, required: true, index: true },
     slug: { type: String, required: true, index: true },
     description: { type: String },

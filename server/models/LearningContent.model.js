@@ -8,6 +8,11 @@ const ResourceSchema = require("./schemas/Resource.schema");
 const LearningContentSchema = new Schema(
   {
     lessonId: { type: Schema.Types.ObjectId, ref: "Lesson", index: true },
+    level: {
+      type: String,
+      enum: ["Beginner", "Intermediate", "Advanced"],
+      required: true,
+    },
     explanation: { type: String },
     examples: { type: [String], default: [] },
     realWorldApplication: { type: String },

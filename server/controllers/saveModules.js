@@ -1,4 +1,5 @@
-const webDevBeginner = require("../data/web-dev-intermidiate.json");
+const webDevBeginner = require("../data/web-dev-beginner-with-ids.json");
+const webDevIntermediate = require("../data/web-dev-intermediate-with-ids.json");
 const mongoose = require("mongoose");
 const Domain = require("../models/Domain.model");
 const Course = require("../models/Course.model");
@@ -6,15 +7,23 @@ const Module = require("../models/Module.model");
 const Lesson = require("../models/Lesson.model");
 const LearningContent = require("../models/LearningContent.model");
 
-const toObejctId = (val) => {
-  if (!val || typeof val !== "string") return val;
-  if (/^[0-9a-fA-F]{24}$/.test(val)) return new mongoose.Types.ObjectId(val);
-  return val;
-};
-
 const insertData = async (req, res) => {
   try {
-    const payloadArray = webDevBeginner;
+    const allDataSets = [...webDevBeginner, ...webDevIntermediate];
+
+    await Promise.all([
+      Domain.deleteMany({}),
+      Course.deleteMany({}),
+      Module.deleteMany({}),
+      Lesson.deleteMany({}),
+      LearningContent.deleteMany({}),
+    ]);
+
+    let domainOrder = 0;
+    let courseOrder = 0;
+    let moduleOrder = 0;
+    let lessonOrder = 0;
+    let contentOrder = 0;
 
     const allDomains = [];
     const allCourses = [];
@@ -22,65 +31,63 @@ const insertData = async (req, res) => {
     const allLessons = [];
     const allLearningContents = [];
 
-    for (const payload of payloadArray) {
+    for (let i = 0; i < allDataSets.length; i++) {
+      const payload = allDataSets[i];
+
       if (!payload.domains || !payload.modules || !payload.courses) {
         return res.status(400).json({ message: "Invalid JSON format." });
       }
 
-      allDomains.push(
-        ...payload.domains.map((d) => ({
+      payload.domains.forEach((d) => {
+        allDomains.push({
           ...d,
-          _id: d._id,
-          domainId: d.domainId,
-        }))
-      );
+          insertionOrder: domainOrder++,
+          documentOrder: i,
+        });
+      });
 
-      allCourses.push(
-        ...payload.courses.map((c) => ({
+      payload.courses.forEach((c) => {
+        allCourses.push({
           ...c,
-          _id: c._id,
-          courseId: new mongoose.Types.ObjectId(c.courseId),
-          domainId: c.domainId,
-        }))
-      );
+          insertionOrder: courseOrder++,
+          documentOrder: i,
+        });
+      });
 
-      allModules.push(
-        ...payload.modules.map((m) => ({
+      payload.modules.forEach((m) => {
+        allModules.push({
           ...m,
-          _id: m._id,
-          moduleId: m.moduleId,
-          courseId: new mongoose.Types.ObjectId(m.courseId),
-        }))
-      );
+          insertionOrder: moduleOrder++,
+          documentOrder: i,
+        });
+      });
 
-      allLessons.push(
-        ...payload.lessons.map((l) => ({
+      payload.lessons.forEach((l) => {
+        allLessons.push({
           ...l,
-          _id: l._id,
-          lessonId: l.lessonId,
-          moduleId: new mongoose.Types.ObjectId(l.moduleId),
-          contentId: l.contentId,
-        }))
-      );
+          insertionOrder: lessonOrder++,
+          documentOrder: i,
+        });
+      });
 
-      allLearningContents.push(
-        ...payload.learningContents.map((lc) => ({
+      payload.learningContents.forEach((lc) => {
+        allLearningContents.push({
           ...lc,
-          _id: lc._id,
-          lessonId: lc.lessonId ? lc.lessonId : undefined,
-        }))
-      );
+          insertionOrder: contentOrder++,
+          documentOrder: i,
+        });
+      });
     }
 
-    await Domain.insertMany(allDomains);
-    await Course.insertMany(allCourses);
-    await Module.insertMany(allModules);
-    await Lesson.insertMany(allLessons);
-    await LearningContent.insertMany(allLearningContents);
+    await Domain.insertMany(allDomains, { ordered: true });
+    await Course.insertMany(allCourses, { ordered: true });
+    await Module.insertMany(allModules, { ordered: true });
+    await Lesson.insertMany(allLessons, { ordered: true });
+    await LearningContent.insertMany(allLearningContents, { ordered: true });
 
     return res.status(201).json({
       ok: true,
-      message: "Web Dev Beginner module imported successfully",
+      message: "All web development data imported successfully",
       counts: {
         domains: allDomains.length,
         courses: allCourses.length,
@@ -88,11 +95,16 @@ const insertData = async (req, res) => {
         lessons: allLessons.length,
         learningContents: allLearningContents.length,
       },
+      datasets: {
+        beginner: webDevBeginner.length,
+        intermediate: webDevIntermediate.length,
+        total: allDataSets.length,
+      },
     });
   } catch (error) {
     console.log("Error adding data to db: ", error, error.message);
     return res.status(500).json({
-      message: "Soemthing went wrong. Please try again!",
+      message: "Something went wrong. Please try again!",
       errorMessage: error.message,
       error: error,
     });
@@ -100,3 +112,4 @@ const insertData = async (req, res) => {
 };
 
 module.exports = { insertData };
+
