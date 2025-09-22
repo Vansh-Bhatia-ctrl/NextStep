@@ -1,33 +1,11 @@
 "use client";
 import { BookOpen, Target, Timer } from "lucide-react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useModuleStore from "../store/useModulesStore";
 import { useUser, useAuth } from "@clerk/nextjs";
-
-const STATS = [
-  {
-    id: 1,
-    icon: BookOpen,
-    label: "Lessons",
-    miniLable: 6,
-    color: "text-blue-600",
-  },
-  {
-    id: 2,
-    icon: Timer,
-    label: "Duration",
-    miniLable: "4h 50m",
-    color: "text-purple-600",
-  },
-  {
-    id: 3,
-    icon: Target,
-    label: "Completed",
-    miniLable: "2/6",
-    color: "text-yellow-600",
-  },
-];
+import moment from "moment";
+import "moment-duration-format";
 
 const TAGS = [
   "#css",
@@ -41,16 +19,32 @@ const TAGS = [
 const ModuleHeader = ({ level }) => {
   const { user, isLoaded } = useUser();
   const { getToken } = useAuth();
-  const { getLearningContent, modules, lessons } = useModuleStore();
+  const {
+    getLearningContent,
+    modules,
+    index,
+    loading,
+    estimatedTime,
+    getEstimatedTime,
+    moduleSpecificLessons,
+  } = useModuleStore();
+
   useEffect(() => {
     const getData = async () => {
       const token = await getToken();
       if (!user || !isLoaded) return;
       await getLearningContent(token, level);
     };
-
     getData();
   }, [getLearningContent, isLoaded]);
+
+  useEffect(() => {
+    getEstimatedTime();
+  }, [index]);
+
+  if (loading) {
+    return <p className="text-white">Loading...</p>;
+  }
   return (
     <>
       <motion.div
@@ -59,9 +53,11 @@ const ModuleHeader = ({ level }) => {
         className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-4 border border-blue-500/30 rounded-lg"
       >
         <div>
-          <p className="text-white font-bold text-2xl">{modules[0]?.title}</p>
+          <p className="text-white font-bold text-2xl">
+            {modules[index]?.title}
+          </p>
 
-          <p className="text-slate-400 mt-4">{modules[0]?.description}</p>
+          <p className="text-slate-400 mt-4">{modules[index]?.description}</p>
         </div>
         <div className="flex flex-wrap gap-2 mt-4">
           {TAGS.map((tag, index) => (
@@ -75,21 +71,27 @@ const ModuleHeader = ({ level }) => {
         </div>
 
         <div className="mt-4 grid grid-cols-3 items-center justify-between gap-2">
-          {STATS.map((stats) => {
-            const Icon = stats.icon;
-            return (
-              <div
-                key={stats.id}
-                className="bg-white/10 px-2 py-4 rounded-xl flex flex-col items-center justify-center"
-              >
-                <Icon className={`${stats.color}`} />
-                <p className="text-slate-400 font-light text-center">
-                  {stats.label}
-                </p>
-                <p className="text-white font-bold">{stats.miniLable}</p>
-              </div>
-            );
-          })}
+          <div className="bg-white/10 px-2 py-4 rounded-xl flex flex-col items-center justify-center">
+            <BookOpen className="text-blue-600" />
+            <p className="text-slate-400 font-light text-center">Lessons</p>
+            <p className="text-white font-bold text-lg">
+              {modules[index]?.lessonIds.length}
+            </p>
+          </div>
+
+          <div className="bg-white/10 px-2 py-4 rounded-xl flex flex-col items-center justify-center">
+            <Timer className="text-purple-600" />
+            <p className="text-slate-400 font-light text-center">Duration</p>
+            <p className="text-white font-bold">
+              {moment.duration(estimatedTime, "minutes").format("h[h] m[m]")}
+            </p>
+          </div>
+
+          <div className="bg-white/10 px-2 py-4 rounded-xl flex flex-col items-center justify-center">
+            <Target className="text-yellow-600" />
+            <p className="text-slate-400 font-light text-center">Completed</p>
+            <p className="text-white font-bold">0/6</p>
+          </div>
         </div>
       </motion.div>
     </>

@@ -59,7 +59,14 @@ const COURSES = [
 ];
 
 const CourseModules = ({ level }) => {
-  const { getLearningContent } = useModuleStore();
+  const {
+    getLearningContent,
+    loading,
+    lessons,
+    modules,
+    index,
+    learningContent,
+  } = useModuleStore();
   const { getToken, isSignedIn } = useAuth();
   const { clearCache, fetchDomain } = useUserDomain();
   const { user, isLoaded } = useUser();
@@ -87,8 +94,17 @@ const CourseModules = ({ level }) => {
     setDomainCache();
   }, [isSignedIn, clearCache]);
 
-  if (!isLoaded) {
-    return <div className="text-white">Loading user...</div>;
+  const moduleSpecificLessons = lessons.filter(
+    (l) => l.moduleId === modules[index]?._id
+  );
+
+  const timeMap = {};
+  learningContent.forEach((content) => {
+    timeMap[content.lessonId] = content.estimatedTime;
+  });
+
+  if (loading) {
+    return <div className="text-white">Loading</div>;
   }
 
   return (
@@ -104,7 +120,7 @@ const CourseModules = ({ level }) => {
 
         <div className="mt-4">
           <div className="space-y-4">
-            {COMPLETED_COURSES.map((course) => (
+            {/* {COMPLETED_COURSES.map((course) => (
               <div
                 key={course.id}
                 className="bg-green-500/10 rounded-lg border border-green-500/20 p-5 cursor-pointer"
@@ -143,21 +159,21 @@ const CourseModules = ({ level }) => {
                   </div>
                 </div>
               </div>
-            ))}
+            ))} */}
 
-            {COURSES.map((course) => (
+            {moduleSpecificLessons.map((course) => (
               <div
-                key={course.id}
+                key={course._id}
                 className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in"
               >
                 <div className="flex items-center gap-2 md:gap-4">
                   <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">
-                    <p className="text-slate-300">{course.courseNumber}</p>
+                    <p className="text-slate-300">{course.order}</p>
                   </div>
                   <div className="flex items-center justify-between w-full">
                     <div>
                       <p className="text-white text-lg font-semibold">
-                        {course.label}
+                        {course.title}
                       </p>
                       <p className="text-slate-400 text-sm">
                         {course.description}
@@ -166,7 +182,7 @@ const CourseModules = ({ level }) => {
                         <div className="flex items-center gap-2">
                           <Timer color="#64748b" className="w-5 h-5" />
                           <p className="text-slate-500 text-sm">
-                            {course.time}
+                            {timeMap[course._id] || 0} mins
                           </p>
                         </div>
                       </div>
