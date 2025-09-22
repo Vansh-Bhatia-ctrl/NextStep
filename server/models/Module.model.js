@@ -18,7 +18,6 @@ const ModuleSchema = new Schema(
     courseId: {
       type: Schema.Types.ObjectId,
       ref: "Course",
-      required: true,
       index: true,
     },
     order: { type: Number, default: 0 },

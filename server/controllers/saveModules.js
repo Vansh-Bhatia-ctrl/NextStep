@@ -1,5 +1,6 @@
 const webDevBeginner = require("../data/web-dev-beginner-with-ids.json");
 const webDevIntermediate = require("../data/web-dev-intermediate-with-ids.json");
+const webDevAdvance = require("../data/web-dev-advanced-with-correct-ids.json");
 const mongoose = require("mongoose");
 const Domain = require("../models/Domain.model");
 const Course = require("../models/Course.model");
@@ -9,7 +10,11 @@ const LearningContent = require("../models/LearningContent.model");
 
 const insertData = async (req, res) => {
   try {
-    const allDataSets = [...webDevBeginner, ...webDevIntermediate];
+    const allDataSets = [
+      ...webDevBeginner,
+      ...webDevIntermediate,
+      ...webDevAdvance,
+    ];
 
     await Promise.all([
       Domain.deleteMany({}),
@@ -112,4 +117,3 @@ const insertData = async (req, res) => {
 };
 
 module.exports = { insertData };
-
