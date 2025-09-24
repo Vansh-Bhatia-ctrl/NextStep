@@ -8,7 +8,7 @@ on:
 
 jobs:
   client:
-    name: Client (frontend)
+    name: Client (Frontend)
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
