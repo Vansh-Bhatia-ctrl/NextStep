@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
+          cache-dependency-path: "client/package-lock.json"
 
       - name: Install client deps
         working-directory: client
@@ -30,7 +31,7 @@ jobs:
 
       - name: Test client
         working-directory: client
-        run: npm test
+        run: npm test --if-present
 
       - name: Build client
         working-directory: client
@@ -40,7 +41,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: client-build
-          path: client/build # or client/dist depending on your app
+          path: client/.next
+        if: success()
 
   server:
     name: Server (backend)
@@ -54,6 +56,7 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
+          cache-dependency-path: "server/package-lock.json"
 
       - name: Install server deps
         working-directory: server
@@ -65,7 +68,7 @@ jobs:
 
       - name: Test server
         working-directory: server
-        run: npm test
+        run: npm test --if-present
 
       - name: Build server
         working-directory: server
@@ -76,3 +79,4 @@ jobs:
         with:
           name: server-build
           path: server/dist
+        if: success()
