@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: "18"
           cache: "npm"
-          cache-dependency-path: "client/package-lock.json"
+          cache-dependency-path: "client/nextstep/package-lock.json"
 
       - name: Install client deps
         working-directory: client
