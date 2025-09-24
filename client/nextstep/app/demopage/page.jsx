@@ -627,257 +627,257 @@
 
 
 
-"use client"
-import React from "react";
-import { motion } from "framer-motion";
+// "use client"
+// import React from "react";
+// import { motion } from "framer-motion";
 
-const UniversalLoading = ({ 
-  width = "w-full", 
-  height = "h-16", 
-  rounded = "rounded-lg",
-  className = "",
-  showText = false,
-  text = "Loading...",
-  intensity = "medium" // "low", "medium", "high"
-}) => {
-  // Different glow intensities based on your app's theme
-  const glowIntensities = {
-    low: "shadow-lg shadow-blue-500/10",
-    medium: "shadow-xl shadow-blue-500/20",
-    high: "shadow-2xl shadow-blue-500/30"
-  };
+// const UniversalLoading = ({ 
+//   width = "w-full", 
+//   height = "h-16", 
+//   rounded = "rounded-lg",
+//   className = "",
+//   showText = false,
+//   text = "Loading...",
+//   intensity = "medium" // "low", "medium", "high"
+// }) => {
+//   // Different glow intensities based on your app's theme
+//   const glowIntensities = {
+//     low: "shadow-lg shadow-blue-500/10",
+//     medium: "shadow-xl shadow-blue-500/20",
+//     high: "shadow-2xl shadow-blue-500/30"
+//   };
 
-  const pulseVariants = {
-    initial: { 
-      opacity: 0.4,
-      scale: 0.95,
-      boxShadow: "0 0 0 rgba(59, 130, 246, 0)"
-    },
-    animate: { 
-      opacity: [0.4, 0.8, 0.4],
-      scale: [0.95, 1.02, 0.95],
-      boxShadow: [
-        "0 0 0 rgba(59, 130, 246, 0)",
-        "0 0 30px rgba(59, 130, 246, 0.3)",
-        "0 0 0 rgba(59, 130, 246, 0)"
-      ]
-    }
-  };
+//   const pulseVariants = {
+//     initial: { 
+//       opacity: 0.4,
+//       scale: 0.95,
+//       boxShadow: "0 0 0 rgba(59, 130, 246, 0)"
+//     },
+//     animate: { 
+//       opacity: [0.4, 0.8, 0.4],
+//       scale: [0.95, 1.02, 0.95],
+//       boxShadow: [
+//         "0 0 0 rgba(59, 130, 246, 0)",
+//         "0 0 30px rgba(59, 130, 246, 0.3)",
+//         "0 0 0 rgba(59, 130, 246, 0)"
+//       ]
+//     }
+//   };
 
-  const shimmerVariants = {
-    initial: { x: "-100%" },
-    animate: { x: "100%" }
-  };
+//   const shimmerVariants = {
+//     initial: { x: "-100%" },
+//     animate: { x: "100%" }
+//   };
 
-  return (
-    <div className={`${width} ${className}`}>
-      <motion.div
-        className={`
-          ${height} 
-          ${rounded} 
-          bg-gradient-to-r from-slate-800/50 via-slate-700/50 to-slate-800/50
-          border border-slate-600/30
-          relative 
-          overflow-hidden
-          ${glowIntensities[intensity]}
-        `}
-        variants={pulseVariants}
-        initial="initial"
-        animate="animate"
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      >
-        {/* Main shimmer effect */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
-          variants={shimmerVariants}
-          initial="initial"
-          animate="animate"
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.2
-          }}
-        />
+//   return (
+//     <div className={`${width} ${className}`}>
+//       <motion.div
+//         className={`
+//           ${height} 
+//           ${rounded} 
+//           bg-gradient-to-r from-slate-800/50 via-slate-700/50 to-slate-800/50
+//           border border-slate-600/30
+//           relative 
+//           overflow-hidden
+//           ${glowIntensities[intensity]}
+//         `}
+//         variants={pulseVariants}
+//         initial="initial"
+//         animate="animate"
+//         transition={{
+//           duration: 2,
+//           repeat: Infinity,
+//           ease: "easeInOut"
+//         }}
+//       >
+//         {/* Main shimmer effect */}
+//         <motion.div
+//           className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
+//           variants={shimmerVariants}
+//           initial="initial"
+//           animate="animate"
+//           transition={{
+//             duration: 1.5,
+//             repeat: Infinity,
+//             ease: "easeInOut",
+//             delay: 0.2
+//           }}
+//         />
         
-        {/* Secondary subtle shimmer */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/10 to-transparent"
-          variants={shimmerVariants}
-          initial="initial"
-          animate="animate"
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.8
-          }}
-        />
+//         {/* Secondary subtle shimmer */}
+//         <motion.div
+//           className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/10 to-transparent"
+//           variants={shimmerVariants}
+//           initial="initial"
+//           animate="animate"
+//           transition={{
+//             duration: 2,
+//             repeat: Infinity,
+//             ease: "easeInOut",
+//             delay: 0.8
+//           }}
+//         />
 
-        {/* Content area with subtle pattern */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-transparent to-slate-900/20" />
+//         {/* Content area with subtle pattern */}
+//         <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-transparent to-slate-900/20" />
         
-        {/* Optional loading text */}
-        {showText && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.span
-              className="text-slate-400 text-sm font-medium"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              {text}
-            </motion.span>
-          </div>
-        )}
-      </motion.div>
-    </div>
-  );
-};
+//         {/* Optional loading text */}
+//         {showText && (
+//           <div className="absolute inset-0 flex items-center justify-center">
+//             <motion.span
+//               className="text-slate-400 text-sm font-medium"
+//               animate={{ opacity: [0.5, 1, 0.5] }}
+//               transition={{
+//                 duration: 1.5,
+//                 repeat: Infinity,
+//                 ease: "easeInOut"
+//               }}
+//             >
+//               {text}
+//             </motion.span>
+//           </div>
+//         )}
+//       </motion.div>
+//     </div>
+//   );
+// };
 
-// Preset configurations for common use cases
-export const LoadingCard = ({ className = "" }) => (
-  <UniversalLoading 
-    width="w-full" 
-    height="h-32" 
-    rounded="rounded-xl"
-    intensity="medium"
-    className={className}
-  />
-);
+// // Preset configurations for common use cases
+// export const LoadingCard = ({ className = "" }) => (
+//   <UniversalLoading 
+//     width="w-full" 
+//     height="h-32" 
+//     rounded="rounded-xl"
+//     intensity="medium"
+//     className={className}
+//   />
+// );
 
-export const LoadingButton = ({ className = "" }) => (
-  <UniversalLoading 
-    width="w-full" 
-    height="h-12" 
-    rounded="rounded-lg"
-    intensity="low"
-    className={className}
-  />
-);
+// export const LoadingButton = ({ className = "" }) => (
+//   <UniversalLoading 
+//     width="w-full" 
+//     height="h-12" 
+//     rounded="rounded-lg"
+//     intensity="low"
+//     className={className}
+//   />
+// );
 
-export const LoadingBanner = ({ className = "" }) => (
-  <UniversalLoading 
-    width="w-full" 
-    height="h-24" 
-    rounded="rounded-2xl"
-    intensity="high"
-    showText={true}
-    text="Loading content..."
-    className={className}
-  />
-);
+// export const LoadingBanner = ({ className = "" }) => (
+//   <UniversalLoading 
+//     width="w-full" 
+//     height="h-24" 
+//     rounded="rounded-2xl"
+//     intensity="high"
+//     showText={true}
+//     text="Loading content..."
+//     className={className}
+//   />
+// );
 
-export const LoadingAvatar = ({ className = "" }) => (
-  <UniversalLoading 
-    width="w-12" 
-    height="h-12" 
-    rounded="rounded-full"
-    intensity="low"
-    className={className}
-  />
-);
+// export const LoadingAvatar = ({ className = "" }) => (
+//   <UniversalLoading 
+//     width="w-12" 
+//     height="h-12" 
+//     rounded="rounded-full"
+//     intensity="low"
+//     className={className}
+//   />
+// );
 
-export const LoadingText = ({ width = "w-32", className = "" }) => (
-  <UniversalLoading 
-    width={width} 
-    height="h-4" 
-    rounded="rounded"
-    intensity="low"
-    className={className}
-  />
-);
+// export const LoadingText = ({ width = "w-32", className = "" }) => (
+//   <UniversalLoading 
+//     width={width} 
+//     height="h-4" 
+//     rounded="rounded"
+//     intensity="low"
+//     className={className}
+//   />
+// );
 
-// Demo component showing various usage examples
-const LoadingDemo = () => (
-  <div className="min-h-screen bg-slate-900 p-8 space-y-8">
-    <div className="max-w-4xl mx-auto space-y-8">
+// // Demo component showing various usage examples
+// const LoadingDemo = () => (
+//   <div className="min-h-screen bg-slate-900 p-8 space-y-8">
+//     <div className="max-w-4xl mx-auto space-y-8">
       
-      {/* Header */}
-      <div className="text-center space-y-2">
-        <h1 className="text-3xl font-bold text-white">Universal Loading States</h1>
-        <p className="text-slate-400">Consistent loading experience across your learning platform</p>
-      </div>
+//       {/* Header */}
+//       <div className="text-center space-y-2">
+//         <h1 className="text-3xl font-bold text-white">Universal Loading States</h1>
+//         <p className="text-slate-400">Consistent loading experience across your learning platform</p>
+//       </div>
 
-      {/* Card Loading Examples */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Course Cards</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <LoadingCard />
-          <LoadingCard />
-          <LoadingCard />
-        </div>
-      </div>
+//       {/* Card Loading Examples */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Course Cards</h2>
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//           <LoadingCard />
+//           <LoadingCard />
+//           <LoadingCard />
+//         </div>
+//       </div>
 
-      {/* List Item Loading */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Lesson List</h2>
-        <div className="space-y-3">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="flex items-center gap-4">
-              <LoadingAvatar />
-              <div className="flex-1 space-y-2">
-                <LoadingText width="w-48" />
-                <LoadingText width="w-32" />
-              </div>
-              <LoadingButton className="w-24" />
-            </div>
-          ))}
-        </div>
-      </div>
+//       {/* List Item Loading */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Lesson List</h2>
+//         <div className="space-y-3">
+//           {[1, 2, 3, 4].map((i) => (
+//             <div key={i} className="flex items-center gap-4">
+//               <LoadingAvatar />
+//               <div className="flex-1 space-y-2">
+//                 <LoadingText width="w-48" />
+//                 <LoadingText width="w-32" />
+//               </div>
+//               <LoadingButton className="w-24" />
+//             </div>
+//           ))}
+//         </div>
+//       </div>
 
-      {/* Banner Loading */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Module Header</h2>
-        <LoadingBanner />
-      </div>
+//       {/* Banner Loading */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Module Header</h2>
+//         <LoadingBanner />
+//       </div>
 
-      {/* Custom Sizes */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Custom Sizes</h2>
-        <div className="space-y-4">
-          <UniversalLoading width="w-full" height="h-8" rounded="rounded" intensity="low" />
-          <UniversalLoading width="w-2/3" height="h-16" rounded="rounded-lg" intensity="medium" />
-          <UniversalLoading width="w-1/2" height="h-24" rounded="rounded-xl" intensity="high" />
-        </div>
-      </div>
+//       {/* Custom Sizes */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Custom Sizes</h2>
+//         <div className="space-y-4">
+//           <UniversalLoading width="w-full" height="h-8" rounded="rounded" intensity="low" />
+//           <UniversalLoading width="w-2/3" height="h-16" rounded="rounded-lg" intensity="medium" />
+//           <UniversalLoading width="w-1/2" height="h-24" rounded="rounded-xl" intensity="high" />
+//         </div>
+//       </div>
 
-      {/* Progress Indicators */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Progress & Stats</h2>
-        <div className="grid grid-cols-3 gap-4">
-          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-          <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-        </div>
-      </div>
+//       {/* Progress Indicators */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Progress & Stats</h2>
+//         <div className="grid grid-cols-3 gap-4">
+//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
+//         </div>
+//       </div>
 
-      {/* Full Page Loading */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-white">Page Loading</h2>
-        <UniversalLoading 
-          width="w-full" 
-          height="h-96" 
-          rounded="rounded-2xl"
-          intensity="high"
-          showText={true}
-          text="Loading your learning dashboard..."
-        />
-      </div>
+//       {/* Full Page Loading */}
+//       <div className="space-y-4">
+//         <h2 className="text-xl font-semibold text-white">Page Loading</h2>
+//         <UniversalLoading 
+//           width="w-full" 
+//           height="h-96" 
+//           rounded="rounded-2xl"
+//           intensity="high"
+//           showText={true}
+//           text="Loading your learning dashboard..."
+//         />
+//       </div>
 
-    </div>
-  </div>
-);
+//     </div>
+//   </div>
+// );
 
-export default LoadingDemo;
-export { UniversalLoading };
+// export default LoadingDemo;
+// export { UniversalLoading };
 
 
 
@@ -899,592 +899,592 @@ export { UniversalLoading };
 
 
 //ACTUAL COURSE CONTENT  PAGE
-// "use client"
-// import React, { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import {
-//   BookOpen,
-//   Target,
-//   HelpCircle,
-//   Clock,
-//   ChevronLeft,
-//   ChevronRight,
-//   Play,
-//   Code,
-//   Lightbulb,
-//   AlertTriangle,
-//   ExternalLink,
-//   CheckCircle,
-//   XCircle,
-//   Eye,
-//   EyeOff,
-//   Copy,
-//   Check
-// } from 'lucide-react';
+"use client"
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  BookOpen,
+  Target,
+  HelpCircle,
+  Clock,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Code,
+  Lightbulb,
+  AlertTriangle,
+  ExternalLink,
+  CheckCircle,
+  XCircle,
+  Eye,
+  EyeOff,
+  Copy,
+  Check
+} from 'lucide-react';
 
-// const LessonContentPage = () => {
-//   const [activeTab, setActiveTab] = useState('content');
-//   const [selectedAnswers, setSelectedAnswers] = useState({});
-//   const [showResults, setShowResults] = useState(false);
-//   const [exerciseCompleted, setExerciseCompleted] = useState(false);
-//   const [showSolution, setShowSolution] = useState(false);
-//   const [copied, setCopied] = useState(false);
+const LessonContentPage = () => {
+  const [activeTab, setActiveTab] = useState('content');
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
+  const [exerciseCompleted, setExerciseCompleted] = useState(false);
+  const [showSolution, setShowSolution] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-//   // Sample lesson data based on your JSON structure
-//   const lessonData = {
-//     title: "Introduction to CSS",
-//     description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
-//     estimatedTime: 30,
-//     moduleInfo: "Module 1",
+  // Sample lesson data based on your JSON structure
+  const lessonData = {
+    title: "Introduction to CSS",
+    description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
+    estimatedTime: 30,
+    moduleInfo: "Module 1",
     
-//     // Content Tab Data
-//     explanation: "CSS (Cascading Style Sheets) is the language used to style and layout web pages, controlling their visual appearance. It works alongside HTML to define how elements look, from colors and fonts to positioning and spacing. CSS rules consist of selectors that target elements and declarations that define styles. This lesson covers CSS syntax, ways to apply CSS (inline, internal, external), the cascade and specificity, and its role in modern web development. You'll learn how CSS integrates with HTML to create visually appealing, user-friendly interfaces and sets the foundation for responsive design.",
+    // Content Tab Data
+    explanation: "CSS (Cascading Style Sheets) is the language used to style and layout web pages, controlling their visual appearance. It works alongside HTML to define how elements look, from colors and fonts to positioning and spacing. CSS rules consist of selectors that target elements and declarations that define styles. This lesson covers CSS syntax, ways to apply CSS (inline, internal, external), the cascade and specificity, and its role in modern web development. You'll learn how CSS integrates with HTML to create visually appealing, user-friendly interfaces and sets the foundation for responsive design.",
     
-//     examples: [
-//       "h1 { color: blue; font-size: 24px; }",
-//       "<link rel=\"stylesheet\" href=\"styles.css\">"
-//     ],
+    examples: [
+      "h1 { color: blue; font-size: 24px; }",
+      "<link rel=\"stylesheet\" href=\"styles.css\">"
+    ],
     
-//     realWorldApplication: "CSS is used in every website to style layouts, from simple blogs to complex e-commerce platforms, ensuring consistent and attractive designs.",
+    realWorldApplication: "CSS is used in every website to style layouts, from simple blogs to complex e-commerce platforms, ensuring consistent and attractive designs.",
     
-//     expertInsights: "Always use external stylesheets for maintainability. Understand the cascade to avoid specificity conflicts, and prefer classes over IDs for reusable styles.",
+    expertInsights: "Always use external stylesheets for maintainability. Understand the cascade to avoid specificity conflicts, and prefer classes over IDs for reusable styles.",
     
-//     commonMistakes: [
-//       "Overusing !important, leading to specificity issues.",
-//       "Not separating CSS from HTML, causing maintenance challenges."
-//     ],
+    commonMistakes: [
+      "Overusing !important, leading to specificity issues.",
+      "Not separating CSS from HTML, causing maintenance challenges."
+    ],
     
-//     resources: [
-//       {
-//         title: "MDN — CSS Basics",
-//         url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
-//         type: "article"
-//       },
-//       {
-//         title: "CSS Tricks — Complete Guide",
-//         url: "https://css-tricks.com/guides/beginner/",
-//         type: "guide"
-//       }
-//     ],
+    resources: [
+      {
+        title: "MDN — CSS Basics",
+        url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
+        type: "article"
+      },
+      {
+        title: "CSS Tricks — Complete Guide",
+        url: "https://css-tricks.com/guides/beginner/",
+        type: "guide"
+      }
+    ],
 
-//     // Exercise Tab Data
-//     exercises: [
-//       {
-//         title: "Apply Basic CSS",
-//         prompt: "Create an HTML page with a heading and paragraph, and use an external CSS file to style the heading blue and the paragraph with a 16px font size.",
-//         difficulty: "easy",
-//         hints: [
-//           "Use a <link> tag to connect the CSS file",
-//           "Target elements with type selectors"
-//         ],
-//         solution: "HTML: <h1>Title</h1><p>Text</p>\nCSS: h1 { color: blue; } p { font-size: 16px; }"
-//       }
-//     ],
+    // Exercise Tab Data
+    exercises: [
+      {
+        title: "Apply Basic CSS",
+        prompt: "Create an HTML page with a heading and paragraph, and use an external CSS file to style the heading blue and the paragraph with a 16px font size.",
+        difficulty: "easy",
+        hints: [
+          "Use a <link> tag to connect the CSS file",
+          "Target elements with type selectors"
+        ],
+        solution: "HTML: <h1>Title</h1><p>Text</p>\nCSS: h1 { color: blue; } p { font-size: 16px; }"
+      }
+    ],
 
-//     // Quiz Tab Data
-//     quiz: [
-//       {
-//         question: "What does CSS stand for?",
-//         options: ["Cascading Style Sheets", "Creative Style System", "Content Style Sheets", "Cascading Script System"],
-//         correctOption: [0],
-//         explanation: "CSS stands for Cascading Style Sheets, which describes how the styles cascade down and apply to HTML elements."
-//       },
-//       {
-//         question: "How do you apply an external CSS file?",
-//         options: ["<style>", "<script>", "<link>", "<css>"],
-//         correctOption: [2],
-//         explanation: "The <link> tag is used to connect external CSS files to HTML documents."
-//       },
-//       {
-//         question: "Which of the following are valid CSS selectors? (Multiple answers)",
-//         options: [".class-name", "#id-name", "element-name", "::pseudo-element"],
-//         correctOption: [0, 1, 2, 3],
-//         explanation: "All of these are valid CSS selectors: class selectors (.), ID selectors (#), element selectors, and pseudo-element selectors (::)."
-//       }
-//     ]
-//   };
+    // Quiz Tab Data
+    quiz: [
+      {
+        question: "What does CSS stand for?",
+        options: ["Cascading Style Sheets", "Creative Style System", "Content Style Sheets", "Cascading Script System"],
+        correctOption: [0],
+        explanation: "CSS stands for Cascading Style Sheets, which describes how the styles cascade down and apply to HTML elements."
+      },
+      {
+        question: "How do you apply an external CSS file?",
+        options: ["<style>", "<script>", "<link>", "<css>"],
+        correctOption: [2],
+        explanation: "The <link> tag is used to connect external CSS files to HTML documents."
+      },
+      {
+        question: "Which of the following are valid CSS selectors? (Multiple answers)",
+        options: [".class-name", "#id-name", "element-name", "::pseudo-element"],
+        correctOption: [0, 1, 2, 3],
+        explanation: "All of these are valid CSS selectors: class selectors (.), ID selectors (#), element selectors, and pseudo-element selectors (::)."
+      }
+    ]
+  };
 
-//   const handleAnswerSelect = (questionIndex, optionIndex) => {
-//     const currentAnswers = selectedAnswers[questionIndex] || [];
-//     const question = lessonData.quiz[questionIndex];
+  const handleAnswerSelect = (questionIndex, optionIndex) => {
+    const currentAnswers = selectedAnswers[questionIndex] || [];
+    const question = lessonData.quiz[questionIndex];
     
-//     if (question.correctOption.length > 1) {
-//       // Multiple choice
-//       if (currentAnswers.includes(optionIndex)) {
-//         setSelectedAnswers({
-//           ...selectedAnswers,
-//           [questionIndex]: currentAnswers.filter(i => i !== optionIndex)
-//         });
-//       } else {
-//         setSelectedAnswers({
-//           ...selectedAnswers,
-//           [questionIndex]: [...currentAnswers, optionIndex]
-//         });
-//       }
-//     } else {
-//       // Single choice
-//       setSelectedAnswers({
-//         ...selectedAnswers,
-//         [questionIndex]: [optionIndex]
-//       });
-//     }
-//   };
+    if (question.correctOption.length > 1) {
+      // Multiple choice
+      if (currentAnswers.includes(optionIndex)) {
+        setSelectedAnswers({
+          ...selectedAnswers,
+          [questionIndex]: currentAnswers.filter(i => i !== optionIndex)
+        });
+      } else {
+        setSelectedAnswers({
+          ...selectedAnswers,
+          [questionIndex]: [...currentAnswers, optionIndex]
+        });
+      }
+    } else {
+      // Single choice
+      setSelectedAnswers({
+        ...selectedAnswers,
+        [questionIndex]: [optionIndex]
+      });
+    }
+  };
 
-//   const checkQuizResults = () => {
-//     setShowResults(true);
-//   };
+  const checkQuizResults = () => {
+    setShowResults(true);
+  };
 
-//   const isAnswerCorrect = (questionIndex) => {
-//     const userAnswers = selectedAnswers[questionIndex] || [];
-//     const correctAnswers = lessonData.quiz[questionIndex].correctOption;
+  const isAnswerCorrect = (questionIndex) => {
+    const userAnswers = selectedAnswers[questionIndex] || [];
+    const correctAnswers = lessonData.quiz[questionIndex].correctOption;
     
-//     return userAnswers.length === correctAnswers.length && 
-//            userAnswers.every(answer => correctAnswers.includes(answer));
-//   };
+    return userAnswers.length === correctAnswers.length && 
+           userAnswers.every(answer => correctAnswers.includes(answer));
+  };
 
-//   const getScorePercentage = () => {
-//     const correctAnswers = lessonData.quiz.filter((_, index) => isAnswerCorrect(index)).length;
-//     return Math.round((correctAnswers / lessonData.quiz.length) * 100);
-//   };
+  const getScorePercentage = () => {
+    const correctAnswers = lessonData.quiz.filter((_, index) => isAnswerCorrect(index)).length;
+    return Math.round((correctAnswers / lessonData.quiz.length) * 100);
+  };
 
-//   const copyToClipboard = (text) => {
-//     navigator.clipboard.writeText(text);
-//     setCopied(true);
-//     setTimeout(() => setCopied(false), 2000);
-//   };
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-//   const tabs = [
-//     { id: 'content', label: 'Content', icon: BookOpen },
-//     { id: 'exercise', label: 'Exercise', icon: Target },
-//     { id: 'quiz', label: 'Quiz', icon: HelpCircle }
-//   ];
+  const tabs = [
+    { id: 'content', label: 'Content', icon: BookOpen },
+    { id: 'exercise', label: 'Exercise', icon: Target },
+    { id: 'quiz', label: 'Quiz', icon: HelpCircle }
+  ];
 
-//   return (
-//     <div className="min-h-screen bg-[#0b1120] text-white">
-//       {/* Header */}
-//       <div className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50">
-//         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-//           {/* Navigation */}
-//           <div className="flex items-center justify-between py-4">
-//             <div className="flex items-center space-x-4">
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
-//               >
-//                 <ChevronLeft className="w-5 h-5" />
-//               </motion.button>
-//               <div className="text-sm text-gray-400">
-//                 <span>CSS Essentials</span> • <span>{lessonData.moduleInfo}</span>
-//               </div>
-//             </div>
+  return (
+    <div className="min-h-screen bg-[#0b1120] text-white">
+      {/* Header */}
+      <div className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Navigation */}
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center space-x-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </motion.button>
+              <div className="text-sm text-gray-400">
+                <span>CSS Essentials</span> • <span>{lessonData.moduleInfo}</span>
+              </div>
+            </div>
             
-//             <motion.button
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
-//             >
-//               <ChevronRight className="w-5 h-5" />
-//             </motion.button>
-//           </div>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </motion.button>
+          </div>
 
-//           {/* Lesson Header */}
-//           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 mb-6">
-//             <h1 className="text-3xl font-bold mb-2">{lessonData.title}</h1>
-//             <p className="text-blue-100 mb-4">{lessonData.description}</p>
-//             <div className="flex items-center space-x-4">
-//               <div className="flex items-center space-x-2">
-//                 <Clock className="w-4 h-4" />
-//                 <span className="text-sm">{lessonData.estimatedTime} mins</span>
-//               </div>
-//               <div className="flex items-center space-x-2">
-//                 <Target className="w-4 h-4" />
-//                 <span className="text-sm">{lessonData.moduleInfo}</span>
-//               </div>
-//             </div>
-//           </div>
+          {/* Lesson Header */}
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 mb-6">
+            <h1 className="text-3xl font-bold mb-2">{lessonData.title}</h1>
+            <p className="text-blue-100 mb-4">{lessonData.description}</p>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Clock className="w-4 h-4" />
+                <span className="text-sm">{lessonData.estimatedTime} mins</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Target className="w-4 h-4" />
+                <span className="text-sm">{lessonData.moduleInfo}</span>
+              </div>
+            </div>
+          </div>
 
-//           {/* Tabs */}
-//           <div className="flex space-x-1">
-//             {tabs.map((tab) => {
-//               const IconComponent = tab.icon;
-//               return (
-//                 <motion.button
-//                   key={tab.id}
-//                   onClick={() => setActiveTab(tab.id)}
-//                   className={`px-6 py-3 rounded-t-lg flex items-center space-x-2 transition-all ${
-//                     activeTab === tab.id
-//                       ? 'bg-gray-800 text-blue-400 border-b-2 border-blue-400'
-//                       : 'bg-gray-900/50 text-gray-400 hover:text-gray-300'
-//                   }`}
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                 >
-//                   <IconComponent className="w-4 h-4" />
-//                   <span>{tab.label}</span>
-//                 </motion.button>
-//               );
-//             })}
-//           </div>
-//         </div>
-//       </div>
+          {/* Tabs */}
+          <div className="flex space-x-1">
+            {tabs.map((tab) => {
+              const IconComponent = tab.icon;
+              return (
+                <motion.button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-6 py-3 rounded-t-lg flex items-center space-x-2 transition-all ${
+                    activeTab === tab.id
+                      ? 'bg-gray-800 text-blue-400 border-b-2 border-blue-400'
+                      : 'bg-gray-900/50 text-gray-400 hover:text-gray-300'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <IconComponent className="w-4 h-4" />
+                  <span>{tab.label}</span>
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
-//       {/* Main Content */}
-//       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//         <AnimatePresence mode="wait">
-//           {/* Content Tab */}
-//           {activeTab === 'content' && (
-//             <motion.div
-//               key="content"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-8"
-//             >
-//               {/* Explanation Section */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <BookOpen className="w-5 h-5 mr-2 text-blue-400" />
-//                   Explanation
-//                 </h2>
-//                 <p className="text-gray-300 leading-relaxed">{lessonData.explanation}</p>
-//               </section>
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <AnimatePresence mode="wait">
+          {/* Content Tab */}
+          {activeTab === 'content' && (
+            <motion.div
+              key="content"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-8"
+            >
+              {/* Explanation Section */}
+              <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <BookOpen className="w-5 h-5 mr-2 text-blue-400" />
+                  Explanation
+                </h2>
+                <p className="text-gray-300 leading-relaxed">{lessonData.explanation}</p>
+              </section>
 
-//               {/* Examples Section */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Code className="w-5 h-5 mr-2 text-green-400" />
-//                   Code Examples
-//                 </h2>
-//                 <div className="space-y-4">
-//                   {lessonData.examples.map((example, index) => (
-//                     <div key={index} className="bg-gray-900 rounded-lg p-4 relative group">
-//                       <button
-//                         onClick={() => copyToClipboard(example)}
-//                         className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-//                       >
-//                         {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-//                       </button>
-//                       <pre className="text-sm overflow-x-auto">
-//                         <code className="text-green-300">{example}</code>
-//                       </pre>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </section>
+              {/* Examples Section */}
+              <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <Code className="w-5 h-5 mr-2 text-green-400" />
+                  Code Examples
+                </h2>
+                <div className="space-y-4">
+                  {lessonData.examples.map((example, index) => (
+                    <div key={index} className="bg-gray-900 rounded-lg p-4 relative group">
+                      <button
+                        onClick={() => copyToClipboard(example)}
+                        className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                      </button>
+                      <pre className="text-sm overflow-x-auto">
+                        <code className="text-green-300">{example}</code>
+                      </pre>
+                    </div>
+                  ))}
+                </div>
+              </section>
 
-//               {/* Real World Application */}
-//               <section className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Play className="w-5 h-5 mr-2 text-purple-400" />
-//                   Real World Application
-//                 </h2>
-//                 <p className="text-gray-300">{lessonData.realWorldApplication}</p>
-//               </section>
+              {/* Real World Application */}
+              <section className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <Play className="w-5 h-5 mr-2 text-purple-400" />
+                  Real World Application
+                </h2>
+                <p className="text-gray-300">{lessonData.realWorldApplication}</p>
+              </section>
 
-//               {/* Expert Insights */}
-//               <section className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
-//                   Expert Insights
-//                 </h2>
-//                 <p className="text-gray-300">{lessonData.expertInsights}</p>
-//               </section>
+              {/* Expert Insights */}
+              <section className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
+                  Expert Insights
+                </h2>
+                <p className="text-gray-300">{lessonData.expertInsights}</p>
+              </section>
 
-//               {/* Common Mistakes */}
-//               <section className="bg-gradient-to-r from-red-500/10 to-pink-500/10 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <AlertTriangle className="w-5 h-5 mr-2 text-red-400" />
-//                   Common Mistakes
-//                 </h2>
-//                 <ul className="space-y-2">
-//                   {lessonData.commonMistakes.map((mistake, index) => (
-//                     <li key={index} className="flex items-start space-x-2 text-gray-300">
-//                       <span className="text-red-400 mt-1">•</span>
-//                       <span>{mistake}</span>
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </section>
+              {/* Common Mistakes */}
+              <section className="bg-gradient-to-r from-red-500/10 to-pink-500/10 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <AlertTriangle className="w-5 h-5 mr-2 text-red-400" />
+                  Common Mistakes
+                </h2>
+                <ul className="space-y-2">
+                  {lessonData.commonMistakes.map((mistake, index) => (
+                    <li key={index} className="flex items-start space-x-2 text-gray-300">
+                      <span className="text-red-400 mt-1">•</span>
+                      <span>{mistake}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
 
-//               {/* Resources */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <ExternalLink className="w-5 h-5 mr-2 text-blue-400" />
-//                   Additional Resources
-//                 </h2>
-//                 <div className="grid md:grid-cols-2 gap-4">
-//                   {lessonData.resources.map((resource, index) => (
-//                     <motion.a
-//                       key={index}
-//                       href={resource.url}
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg hover:bg-gray-900 transition-colors group"
-//                       whileHover={{ scale: 1.02 }}
-//                     >
-//                       <div>
-//                         <h4 className="font-semibold text-blue-400 group-hover:text-blue-300">
-//                           {resource.title}
-//                         </h4>
-//                         <p className="text-sm text-gray-400 capitalize">{resource.type}</p>
-//                       </div>
-//                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400" />
-//                     </motion.a>
-//                   ))}
-//                 </div>
-//               </section>
-//             </motion.div>
-//           )}
+              {/* Resources */}
+              <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h2 className="text-xl font-semibold mb-4 flex items-center">
+                  <ExternalLink className="w-5 h-5 mr-2 text-blue-400" />
+                  Additional Resources
+                </h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {lessonData.resources.map((resource, index) => (
+                    <motion.a
+                      key={index}
+                      href={resource.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg hover:bg-gray-900 transition-colors group"
+                      whileHover={{ scale: 1.02 }}
+                    >
+                      <div>
+                        <h4 className="font-semibold text-blue-400 group-hover:text-blue-300">
+                          {resource.title}
+                        </h4>
+                        <p className="text-sm text-gray-400 capitalize">{resource.type}</p>
+                      </div>
+                      <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400" />
+                    </motion.a>
+                  ))}
+                </div>
+              </section>
+            </motion.div>
+          )}
 
-//           {/* Exercise Tab */}
-//           {activeTab === 'exercise' && (
-//             <motion.div
-//               key="exercise"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-6"
-//             >
-//               {lessonData.exercises.map((exercise, index) => (
-//                 <div key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                   <div className="flex items-start justify-between mb-4">
-//                     <div>
-//                       <h2 className="text-xl font-semibold mb-2">{exercise.title}</h2>
-//                       <span className={`px-3 py-1 rounded-full text-sm ${
-//                         exercise.difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
-//                         exercise.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-//                         'bg-red-500/20 text-red-400'
-//                       }`}>
-//                         {exercise.difficulty}
-//                       </span>
-//                     </div>
-//                     <motion.button
-//                       onClick={() => setExerciseCompleted(!exerciseCompleted)}
-//                       className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
-//                         exerciseCompleted 
-//                           ? 'bg-green-500 text-white' 
-//                           : 'bg-blue-500 hover:bg-blue-600 text-white'
-//                       }`}
-//                       whileHover={{ scale: 1.05 }}
-//                       whileTap={{ scale: 0.95 }}
-//                     >
-//                       {exerciseCompleted ? (
-//                         <>
-//                           <CheckCircle className="w-4 h-4" />
-//                           <span>Completed</span>
-//                         </>
-//                       ) : (
-//                         <>
-//                           <Play className="w-4 h-4" />
-//                           <span>Start Exercise</span>
-//                         </>
-//                       )}
-//                     </motion.button>
-//                   </div>
+          {/* Exercise Tab */}
+          {activeTab === 'exercise' && (
+            <motion.div
+              key="exercise"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              {lessonData.exercises.map((exercise, index) => (
+                <div key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h2 className="text-xl font-semibold mb-2">{exercise.title}</h2>
+                      <span className={`px-3 py-1 rounded-full text-sm ${
+                        exercise.difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
+                        exercise.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
+                        'bg-red-500/20 text-red-400'
+                      }`}>
+                        {exercise.difficulty}
+                      </span>
+                    </div>
+                    <motion.button
+                      onClick={() => setExerciseCompleted(!exerciseCompleted)}
+                      className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
+                        exerciseCompleted 
+                          ? 'bg-green-500 text-white' 
+                          : 'bg-blue-500 hover:bg-blue-600 text-white'
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {exerciseCompleted ? (
+                        <>
+                          <CheckCircle className="w-4 h-4" />
+                          <span>Completed</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="w-4 h-4" />
+                          <span>Start Exercise</span>
+                        </>
+                      )}
+                    </motion.button>
+                  </div>
 
-//                   <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
-//                     <h3 className="font-semibold mb-2">Task:</h3>
-//                     <p className="text-gray-300">{exercise.prompt}</p>
-//                   </div>
+                  <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
+                    <h3 className="font-semibold mb-2">Task:</h3>
+                    <p className="text-gray-300">{exercise.prompt}</p>
+                  </div>
 
-//                   {/* Hints */}
-//                   <div className="mb-6">
-//                     <h3 className="font-semibold mb-3 flex items-center">
-//                       <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
-//                       Hints
-//                     </h3>
-//                     <ul className="space-y-2">
-//                       {exercise.hints.map((hint, hintIndex) => (
-//                         <li key={hintIndex} className="flex items-start space-x-2 text-gray-300">
-//                           <span className="text-yellow-400 mt-1">💡</span>
-//                           <span>{hint}</span>
-//                         </li>
-//                       ))}
-//                     </ul>
-//                   </div>
+                  {/* Hints */}
+                  <div className="mb-6">
+                    <h3 className="font-semibold mb-3 flex items-center">
+                      <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
+                      Hints
+                    </h3>
+                    <ul className="space-y-2">
+                      {exercise.hints.map((hint, hintIndex) => (
+                        <li key={hintIndex} className="flex items-start space-x-2 text-gray-300">
+                          <span className="text-yellow-400 mt-1">💡</span>
+                          <span>{hint}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
 
-//                   {/* Solution */}
-//                   <div>
-//                     <div className="flex items-center justify-between mb-3">
-//                       <h3 className="font-semibold">Solution</h3>
-//                       <motion.button
-//                         onClick={() => setShowSolution(!showSolution)}
-//                         className="flex items-center space-x-2 px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-//                         whileHover={{ scale: 1.05 }}
-//                         whileTap={{ scale: 0.95 }}
-//                       >
-//                         {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-//                         <span>{showSolution ? 'Hide' : 'Show'}</span>
-//                       </motion.button>
-//                     </div>
+                  {/* Solution */}
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="font-semibold">Solution</h3>
+                      <motion.button
+                        onClick={() => setShowSolution(!showSolution)}
+                        className="flex items-center space-x-2 px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        <span>{showSolution ? 'Hide' : 'Show'}</span>
+                      </motion.button>
+                    </div>
                     
-//                     <AnimatePresence>
-//                       {showSolution && (
-//                         <motion.div
-//                           initial={{ height: 0, opacity: 0 }}
-//                           animate={{ height: 'auto', opacity: 1 }}
-//                           exit={{ height: 0, opacity: 0 }}
-//                           transition={{ duration: 0.3 }}
-//                           className="overflow-hidden"
-//                         >
-//                           <div className="bg-gray-900 rounded-lg p-4 relative group">
-//                             <button
-//                               onClick={() => copyToClipboard(exercise.solution)}
-//                               className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-//                             >
-//                               {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-//                             </button>
-//                             <pre className="text-sm overflow-x-auto">
-//                               <code className="text-green-300">{exercise.solution}</code>
-//                             </pre>
-//                           </div>
-//                         </motion.div>
-//                       )}
-//                     </AnimatePresence>
-//                   </div>
-//                 </div>
-//               ))}
-//             </motion.div>
-//           )}
+                    <AnimatePresence>
+                      {showSolution && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="bg-gray-900 rounded-lg p-4 relative group">
+                            <button
+                              onClick={() => copyToClipboard(exercise.solution)}
+                              className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                            >
+                              {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                            </button>
+                            <pre className="text-sm overflow-x-auto">
+                              <code className="text-green-300">{exercise.solution}</code>
+                            </pre>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          )}
 
-//           {/* Quiz Tab */}
-//           {activeTab === 'quiz' && (
-//             <motion.div
-//               key="quiz"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-6"
-//             >
-//               {/* Quiz Header */}
-//               <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
-//                 <h2 className="text-2xl font-semibold mb-2">Knowledge Check</h2>
-//                 <p className="text-gray-300">Test your understanding of the concepts covered in this lesson.</p>
-//               </div>
+          {/* Quiz Tab */}
+          {activeTab === 'quiz' && (
+            <motion.div
+              key="quiz"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-6"
+            >
+              {/* Quiz Header */}
+              <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
+                <h2 className="text-2xl font-semibold mb-2">Knowledge Check</h2>
+                <p className="text-gray-300">Test your understanding of the concepts covered in this lesson.</p>
+              </div>
 
-//               {/* Quiz Questions */}
-//               <div className="space-y-6">
-//                 {lessonData.quiz.map((question, questionIndex) => (
-//                   <div key={questionIndex} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                     <div className="flex items-start justify-between mb-4">
-//                       <h3 className="text-lg font-semibold">
-//                         {questionIndex + 1}. {question.question}
-//                       </h3>
-//                       {question.correctOption.length > 1 && (
-//                         <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm">
-//                           Multiple Choice
-//                         </span>
-//                       )}
-//                     </div>
+              {/* Quiz Questions */}
+              <div className="space-y-6">
+                {lessonData.quiz.map((question, questionIndex) => (
+                  <div key={questionIndex} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-lg font-semibold">
+                        {questionIndex + 1}. {question.question}
+                      </h3>
+                      {question.correctOption.length > 1 && (
+                        <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm">
+                          Multiple Choice
+                        </span>
+                      )}
+                    </div>
 
-//                     <div className="space-y-3">
-//                       {question.options.map((option, optionIndex) => {
-//                         const isSelected = selectedAnswers[questionIndex]?.includes(optionIndex);
-//                         const isCorrect = question.correctOption.includes(optionIndex);
-//                         const showResult = showResults;
+                    <div className="space-y-3">
+                      {question.options.map((option, optionIndex) => {
+                        const isSelected = selectedAnswers[questionIndex]?.includes(optionIndex);
+                        const isCorrect = question.correctOption.includes(optionIndex);
+                        const showResult = showResults;
                         
-//                         let buttonClass = "w-full p-4 text-left border-2 rounded-lg transition-all ";
+                        let buttonClass = "w-full p-4 text-left border-2 rounded-lg transition-all ";
                         
-//                         if (showResult) {
-//                           if (isCorrect) {
-//                             buttonClass += "border-green-500 bg-green-500/20 text-green-300";
-//                           } else if (isSelected && !isCorrect) {
-//                             buttonClass += "border-red-500 bg-red-500/20 text-red-300";
-//                           } else {
-//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300";
-//                           }
-//                         } else {
-//                           if (isSelected) {
-//                             buttonClass += "border-blue-500 bg-blue-500/20 text-blue-300";
-//                           } else {
-//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300 hover:border-gray-500";
-//                           }
-//                         }
+                        if (showResult) {
+                          if (isCorrect) {
+                            buttonClass += "border-green-500 bg-green-500/20 text-green-300";
+                          } else if (isSelected && !isCorrect) {
+                            buttonClass += "border-red-500 bg-red-500/20 text-red-300";
+                          } else {
+                            buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300";
+                          }
+                        } else {
+                          if (isSelected) {
+                            buttonClass += "border-blue-500 bg-blue-500/20 text-blue-300";
+                          } else {
+                            buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300 hover:border-gray-500";
+                          }
+                        }
 
-//                         return (
-//                           <motion.button
-//                             key={optionIndex}
-//                             onClick={() => !showResults && handleAnswerSelect(questionIndex, optionIndex)}
-//                             className={buttonClass}
-//                             whileHover={!showResults ? { scale: 1.01 } : {}}
-//                             whileTap={!showResults ? { scale: 0.99 } : {}}
-//                             disabled={showResults}
-//                           >
-//                             <div className="flex items-center justify-between">
-//                               <span>{option}</span>
-//                               {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-400" />}
-//                               {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400" />}
-//                             </div>
-//                           </motion.button>
-//                         );
-//                       })}
-//                     </div>
+                        return (
+                          <motion.button
+                            key={optionIndex}
+                            onClick={() => !showResults && handleAnswerSelect(questionIndex, optionIndex)}
+                            className={buttonClass}
+                            whileHover={!showResults ? { scale: 1.01 } : {}}
+                            whileTap={!showResults ? { scale: 0.99 } : {}}
+                            disabled={showResults}
+                          >
+                            <div className="flex items-center justify-between">
+                              <span>{option}</span>
+                              {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-400" />}
+                              {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400" />}
+                            </div>
+                          </motion.button>
+                        );
+                      })}
+                    </div>
 
-//                     {/* Show explanation after results */}
-//                     {showResults && (
-//                       <motion.div
-//                         initial={{ opacity: 0, height: 0 }}
-//                         animate={{ opacity: 1, height: 'auto' }}
-//                         className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg"
-//                       >
-//                         <p className="text-blue-300 text-sm">
-//                           <strong>Explanation:</strong> {question.explanation}
-//                         </p>
-//                       </motion.div>
-//                     )}
-//                   </div>
-//                 ))}
-//               </div>
+                    {/* Show explanation after results */}
+                    {showResults && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg"
+                      >
+                        <p className="text-blue-300 text-sm">
+                          <strong>Explanation:</strong> {question.explanation}
+                        </p>
+                      </motion.div>
+                    )}
+                  </div>
+                ))}
+              </div>
 
-//               {/* Quiz Actions */}
-//               <div className="flex items-center justify-between">
-//                 <div className="text-gray-400">
-//                   Questions answered: {Object.keys(selectedAnswers).length} / {lessonData.quiz.length}
-//                 </div>
+              {/* Quiz Actions */}
+              <div className="flex items-center justify-between">
+                <div className="text-gray-400">
+                  Questions answered: {Object.keys(selectedAnswers).length} / {lessonData.quiz.length}
+                </div>
                 
-//                 {!showResults ? (
-//                   <motion.button
-//                     onClick={checkQuizResults}
-//                     disabled={Object.keys(selectedAnswers).length !== lessonData.quiz.length}
-//                     className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-//                     whileHover={{ scale: 1.05 }}
-//                     whileTap={{ scale: 0.95 }}
-//                   >
-//                     Submit Quiz
-//                   </motion.button>
-//                 ) : (
-//                   <div className="flex items-center space-x-4">
-//                     <div className="text-right">
-//                       <p className="text-sm text-gray-400">Your Score</p>
-//                       <p className="text-xl font-bold text-blue-400">{getScorePercentage()}%</p>
-//                     </div>
-//                     <motion.button
-//                       onClick={() => {
-//                         setSelectedAnswers({});
-//                         setShowResults(false);
-//                       }}
-//                       className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors"
-//                       whileHover={{ scale: 1.05 }}
-//                       whileTap={{ scale: 0.95 }}
-//                     >
-//                       Retake Quiz
-//                     </motion.button>
-//                   </div>
-//                 )}
-//               </div>
-//             </motion.div>
-//           )}
-//         </AnimatePresence>
-//       </div>
-//     </div>
-//   );
-// };
+                {!showResults ? (
+                  <motion.button
+                    onClick={checkQuizResults}
+                    disabled={Object.keys(selectedAnswers).length !== lessonData.quiz.length}
+                    className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Submit Quiz
+                  </motion.button>
+                ) : (
+                  <div className="flex items-center space-x-4">
+                    <div className="text-right">
+                      <p className="text-sm text-gray-400">Your Score</p>
+                      <p className="text-xl font-bold text-blue-400">{getScorePercentage()}%</p>
+                    </div>
+                    <motion.button
+                      onClick={() => {
+                        setSelectedAnswers({});
+                        setShowResults(false);
+                      }}
+                      className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Retake Quiz
+                    </motion.button>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
 
-// export default LessonContentPage;
+export default LessonContentPage;
 
 
 
