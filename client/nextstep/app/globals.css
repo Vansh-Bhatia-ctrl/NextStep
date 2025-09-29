@@ -17,3 +17,36 @@
 
 @media (prefers-color-scheme: dark) {
 }
+
+ 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b1120;
+}
+
+ 
+::-webkit-scrollbar-thumb {
+  background: #0b1120;
+  border-radius: 0%;
+}
+
+ 
+::-webkit-scrollbar-thumb:hover {
+  background: #0b1120;
+  border-radius: 0%;
+}
+
+ 
+* {
+  scrollbar-width: none;
+}
+
+ 
+* {
+  -ms-overflow-style: none;
+}

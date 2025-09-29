@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import useModuleStore from "../store/useModulesStore";
 import { useAuth, useUser } from "@clerk/nextjs";
 import useUserDomain from "../store/useUserDomain";
+import Link from "next/link";
 
 const COMPLETED_COURSES = [
   {
@@ -120,81 +121,43 @@ const CourseModules = ({ level }) => {
 
         <div className="mt-4">
           <div className="space-y-4">
-            {/* {COMPLETED_COURSES.map((course) => (
-              <div
-                key={course.id}
-                className="bg-green-500/10 rounded-lg border border-green-500/20 p-5 cursor-pointer"
-              >
-                <div className="flex items-center gap-2 md:gap-4">
-                  <div className="bg-green-500 p-2 rounded-full flex items-start">
-                    <CircleCheckBig color="#fff" />
-                  </div>
-                  <div className="flex items-center justify-between w-full">
-                    <div>
-                      <p className="text-white text-lg font-semibold">
-                        {course.label}
-                      </p>
-                      <p className="text-slate-400 text-sm">
-                        {course.description}
-                      </p>
-                      <div className="flex items-center gap-6 mt-4">
-                        <div className="flex items-center gap-2">
-                          <Timer color="#64748b" className="w-5 h-5" />
-                          <p className="text-slate-500 text-sm">
-                            {course.time}
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <CircleCheckBig color="#22c55e" className="w-5 h-5" />
-                          <p className="text-green-500 text-sm">Completed</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <ChevronRight
-                      color="#64748b"
-                      className="w-10 h-10 md:w-7 md:h-7"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))} */}
-
             {moduleSpecificLessons.map((course) => (
-              <div
+              <Link
+                href={`/dashboard/roadmaps/${level}/${course._id}`}
                 key={course._id}
-                className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in"
+                className="flex flex-col"
               >
-                <div className="flex items-center gap-2 md:gap-4">
-                  <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">
-                    <p className="text-slate-300">{course.order}</p>
-                  </div>
-                  <div className="flex items-center justify-between w-full">
-                    <div>
-                      <p className="text-white text-lg font-semibold">
-                        {course.title}
-                      </p>
-                      <p className="text-slate-400 text-sm">
-                        {course.description}
-                      </p>
-                      <div className="flex items-center gap-6 mt-4">
-                        <div className="flex items-center gap-2">
-                          <Timer color="#64748b" className="w-5 h-5" />
-                          <p className="text-slate-500 text-sm">
-                            {timeMap[course._id] || 0} mins
-                          </p>
+                <div className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in">
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">
+                      <p className="text-slate-300">{course.order}</p>
+                    </div>
+                    <div className="flex items-center justify-between w-full">
+                      <div>
+                        <p className="text-white text-lg font-semibold">
+                          {course.title}
+                        </p>
+                        <p className="text-slate-400 text-sm">
+                          {course.description}
+                        </p>
+                        <div className="flex items-center gap-6 mt-4">
+                          <div className="flex items-center gap-2">
+                            <Timer color="#64748b" className="w-5 h-5" />
+                            <p className="text-slate-500 text-sm">
+                              {timeMap[course._id] || 0} mins
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <ChevronRight
-                      color="#64748b"
-                      className="w-10 h-10 md:w-7 md:h-7"
-                    />
+                      <ChevronRight
+                        color="#64748b"
+                        className="w-10 h-10 md:w-7 md:h-7"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

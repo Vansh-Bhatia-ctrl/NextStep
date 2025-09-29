@@ -32,7 +32,6 @@ const page = async ({ params }) => {
 
                 <QuickActions />
 
-                <LearningInsights />
                 <PrevAndNextBttns />
               </div>
             </div>
