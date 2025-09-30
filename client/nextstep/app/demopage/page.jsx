@@ -1495,6 +1495,245 @@ export default LessonContentPage;
 
 
 
+//AI ASSISTANCE PART
+// "use client"
+// import React, { useState, useRef, useEffect } from 'react';
+// import { Send, Bot, User, Sparkles, BookOpen, Code, HelpCircle, Zap, X } from 'lucide-react';
+// import { motion, AnimatePresence } from 'framer-motion';
+
+// const AiAssistantPage = () => {
+//   const [messages, setMessages] = useState([
+//     {
+//       id: 1,
+//       type: 'bot',
+//       content: "Hi! I'm your AI learning assistant. I can help you with questions about your courses, clarify concepts, or guide you through exercises. How can I assist you today?",
+//       timestamp: new Date()
+//     }
+//   ]);
+//   const [inputValue, setInputValue] = useState('');
+//   const [isTyping, setIsTyping] = useState(false);
+//   const messagesEndRef = useRef(null);
+
+//   const scrollToBottom = () => {
+//     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+//   };
+
+//   useEffect(() => {
+//     scrollToBottom();
+//   }, [messages]);
+
+//   const quickPrompts = [
+//     { icon: BookOpen, text: "Explain this concept", color: "from-blue-500 to-purple-500" },
+//     { icon: Code, text: "Help with code", color: "from-purple-500 to-pink-500" },
+//     { icon: HelpCircle, text: "Quiz me", color: "from-pink-500 to-red-500" },
+//     { icon: Zap, text: "Quick tip", color: "from-blue-400 to-cyan-400" }
+//   ];
+
+//   const handleSendMessage = () => {
+//     if (!inputValue.trim()) return;
+
+//     const userMessage = {
+//       id: messages.length + 1,
+//       type: 'user',
+//       content: inputValue,
+//       timestamp: new Date()
+//     };
+
+//     setMessages([...messages, userMessage]);
+//     setInputValue('');
+//     setIsTyping(true);
+
+//     setTimeout(() => {
+//       const botMessage = {
+//         id: messages.length + 2,
+//         type: 'bot',
+//         content: "I understand your question. Let me help you with that. This is a demo response showing how the AI assistant would interact with you.",
+//         timestamp: new Date()
+//       };
+//       setMessages(prev => [...prev, botMessage]);
+//       setIsTyping(false);
+//     }, 1500);
+//   };
+
+//   const handleQuickPrompt = (text) => {
+//     setInputValue(text);
+//   };
+
+//   const handleKeyPress = (e) => {
+//     if (e.key === 'Enter' && !e.shiftKey) {
+//       e.preventDefault();
+//       handleSendMessage();
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
+//       {/* Header */}
+//       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm sticky top-0 z-10">
+//         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+//           <div className="flex items-center gap-3">
+//             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+//               <Bot className="w-6 h-6" />
+//             </div>
+//             <div>
+//               <h1 className="text-xl font-semibold">AI Assistant</h1>
+//               <p className="text-sm text-slate-400">Always here to help</p>
+//             </div>
+//           </div>
+//           <div className="flex items-center gap-2">
+//             <motion.div
+//               whileHover={{ scale: 1.05 }}
+//               whileTap={{ scale: 0.95 }}
+//               className="px-4 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-2"
+//             >
+//               <Sparkles className="w-4 h-4 text-blue-400" />
+//               <span className="text-sm">Premium</span>
+//             </motion.div>
+//           </div>
+//         </div>
+//       </header>
+
+//       <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col h-[calc(100vh-88px)]">
+//         {/* Quick Prompts */}
+//         {messages.length <= 1 && (
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             className="mb-6"
+//           >
+//             <h2 className="text-sm font-medium text-slate-400 mb-3">Quick Actions</h2>
+//             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+//               {quickPrompts.map((prompt, index) => (
+//                 <motion.button
+//                   key={index}
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: index * 0.1 }}
+//                   whileHover={{ scale: 1.02, y: -2 }}
+//                   whileTap={{ scale: 0.98 }}
+//                   onClick={() => handleQuickPrompt(prompt.text)}
+//                   className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all group"
+//                 >
+//                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${prompt.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+//                     <prompt.icon className="w-5 h-5 text-white" />
+//                   </div>
+//                   <p className="text-sm text-slate-300 text-left">{prompt.text}</p>
+//                 </motion.button>
+//               ))}
+//             </div>
+//           </motion.div>
+//         )}
+
+//         {/* Messages */}
+//         <div className="flex-1 overflow-y-auto mb-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+//           <AnimatePresence>
+//             {messages.map((message, index) => (
+//               <motion.div
+//                 key={message.id}
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ delay: index * 0.1 }}
+//                 className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+//               >
+//                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+//                   message.type === 'bot' 
+//                     ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
+//                     : 'bg-slate-800'
+//                 }`}>
+//                   {message.type === 'bot' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
+//                 </div>
+//                 <div className={`flex-1 max-w-2xl ${message.type === 'user' ? 'flex justify-end' : ''}`}>
+//                   <div className={`p-4 rounded-2xl ${
+//                     message.type === 'bot'
+//                       ? 'bg-slate-900/50 border border-slate-800'
+//                       : 'bg-gradient-to-br from-blue-600 to-purple-600'
+//                   }`}>
+//                     <p className="text-sm leading-relaxed">{message.content}</p>
+//                   </div>
+//                   <p className="text-xs text-slate-500 mt-1 px-2">
+//                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+//                   </p>
+//                 </div>
+//               </motion.div>
+//             ))}
+//           </AnimatePresence>
+
+//           {isTyping && (
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               className="flex gap-3"
+//             >
+//               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+//                 <Bot className="w-5 h-5" />
+//               </div>
+//               <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl">
+//                 <div className="flex gap-1">
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+//                     className="w-2 h-2 bg-blue-400 rounded-full"
+//                   />
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+//                     className="w-2 h-2 bg-purple-400 rounded-full"
+//                   />
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+//                     className="w-2 h-2 bg-pink-400 rounded-full"
+//                   />
+//                 </div>
+//               </div>
+//             </motion.div>
+//           )}
+//           <div ref={messagesEndRef} />
+//         </div>
+
+//         {/* Input Area */}
+//         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4">
+//           <div className="flex gap-3">
+//             <input
+//               type="text"
+//               value={inputValue}
+//               onChange={(e) => setInputValue(e.target.value)}
+//               onKeyPress={handleKeyPress}
+//               placeholder="Ask me anything about your learning..."
+//               className="flex-1 bg-transparent outline-none text-sm placeholder:text-slate-500"
+//             />
+//             <motion.button
+//               whileHover={{ scale: 1.05 }}
+//               whileTap={{ scale: 0.95 }}
+//               onClick={handleSendMessage}
+//               disabled={!inputValue.trim()}
+//               className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+//                 inputValue.trim()
+//                   ? 'bg-gradient-to-br from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/20'
+//                   : 'bg-slate-800 opacity-50 cursor-not-allowed'
+//               }`}
+//             >
+//               <Send className="w-5 h-5" />
+//             </motion.button>
+//           </div>
+//           <p className="text-xs text-slate-500 mt-3">
+//             Press Enter to send • Shift + Enter for new line
+//           </p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AiAssistantPage;
+
+
+
+
+
+
+
+
 
 
 
