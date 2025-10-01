@@ -7,10 +7,12 @@ import ExplanationSection from "@/app/components/ExplanationSection";
 import LearningTips from "@/app/components/LearningTips";
 import LessonsHeader from "@/app/components/LessonsHeader";
 import LessonTitle from "@/app/components/LessonTitle";
+import QuizSection from "@/app/components/QuizSection";
 import RealWorldApplication from "@/app/components/RealWorldApplication";
 import useModuleStore from "@/app/store/useModulesStore";
 import useUiStore from "@/app/store/useUiStore";
 import { AnimatePresence, motion } from "framer-motion";
+import { Bot } from "lucide-react";
 
 import { useParams } from "next/navigation";
 import React from "react";
@@ -93,6 +95,16 @@ const page = () => {
                   learningContent={lessonSpecificLearningContent}
                 />
               )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {selectedOption === 3 && (
+                <QuizSection learningContent={lessonSpecificLearningContent} />
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {selectedOption === 4 && <div></div>}
             </AnimatePresence>
           </div>
         </div>
