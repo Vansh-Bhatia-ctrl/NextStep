@@ -1,5 +1,6 @@
 "use client";
 import AdditionalResources from "@/app/components/AdditionalResources";
+import AiChatSection from "@/app/components/AiChatSection";
 import CodeExampleSection from "@/app/components/CodeExampleSection";
 import CommonMistakes from "@/app/components/CommonMistakes";
 import ExerciseSection from "@/app/components/ExerciseSection";
@@ -12,7 +13,6 @@ import RealWorldApplication from "@/app/components/RealWorldApplication";
 import useModuleStore from "@/app/store/useModulesStore";
 import useUiStore from "@/app/store/useUiStore";
 import { AnimatePresence, motion } from "framer-motion";
-import { Bot } from "lucide-react";
 
 import { useParams } from "next/navigation";
 import React from "react";
@@ -104,7 +104,7 @@ const page = () => {
             </AnimatePresence>
 
             <AnimatePresence>
-              {selectedOption === 4 && <div></div>}
+              {selectedOption === 4 && <AiChatSection />}
             </AnimatePresence>
           </div>
         </div>
