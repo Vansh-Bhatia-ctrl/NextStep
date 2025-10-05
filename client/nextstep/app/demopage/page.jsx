@@ -1496,240 +1496,608 @@
 
 
 //AI ASSISTANCE PART
+// "use client"
+// import React, { useState, useRef, useEffect } from 'react';
+// import { Send, Bot, User, Sparkles, BookOpen, Code, HelpCircle, Zap, X } from 'lucide-react';
+// import { motion, AnimatePresence } from 'framer-motion';
+
+// const AiAssistantPage = () => {
+//   const [messages, setMessages] = useState([
+//     {
+//       id: 1,
+//       type: 'bot',
+//       content: "Hi! I'm your AI learning assistant. I can help you with questions about your courses, clarify concepts, or guide you through exercises. How can I assist you today?",
+//       timestamp: new Date()
+//     }
+//   ]);
+//   const [inputValue, setInputValue] = useState('');
+//   const [isTyping, setIsTyping] = useState(false);
+//   const messagesEndRef = useRef(null);
+
+//   const scrollToBottom = () => {
+//     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+//   };
+
+//   useEffect(() => {
+//     scrollToBottom();
+//   }, [messages]);
+
+//   const quickPrompts = [
+//     { icon: BookOpen, text: "Explain this concept", color: "from-blue-500 to-purple-500" },
+//     { icon: Code, text: "Help with code", color: "from-purple-500 to-pink-500" },
+//     { icon: HelpCircle, text: "Quiz me", color: "from-pink-500 to-red-500" },
+//     { icon: Zap, text: "Quick tip", color: "from-blue-400 to-cyan-400" }
+//   ];
+
+//   const handleSendMessage = () => {
+//     if (!inputValue.trim()) return;
+
+//     const userMessage = {
+//       id: messages.length + 1,
+//       type: 'user',
+//       content: inputValue,
+//       timestamp: new Date()
+//     };
+
+//     setMessages([...messages, userMessage]);
+//     setInputValue('');
+//     setIsTyping(true);
+
+//     setTimeout(() => {
+//       const botMessage = {
+//         id: messages.length + 2,
+//         type: 'bot',
+//         content: "I understand your question. Let me help you with that. This is a demo response showing how the AI assistant would interact with you.",
+//         timestamp: new Date()
+//       };
+//       setMessages(prev => [...prev, botMessage]);
+//       setIsTyping(false);
+//     }, 1500);
+//   };
+
+//   const handleQuickPrompt = (text) => {
+//     setInputValue(text);
+//   };
+
+//   const handleKeyPress = (e) => {
+//     if (e.key === 'Enter' && !e.shiftKey) {
+//       e.preventDefault();
+//       handleSendMessage();
+//     }
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white mt-16">
+//       {/* Header */}
+//       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm sticky top-0 z-10">
+//         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+//           <div className="flex items-center gap-3">
+//             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+//               <Bot className="w-6 h-6" />
+//             </div>
+//             <div>
+//               <h1 className="text-xl font-semibold">AI Assistant</h1>
+//               <p className="text-sm text-slate-400">Always here to help</p>
+//             </div>
+//           </div>
+//           <div className="flex items-center gap-2">
+//             <motion.div
+//               whileHover={{ scale: 1.05 }}
+//               whileTap={{ scale: 0.95 }}
+//               className="px-4 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-2"
+//             >
+//               <Sparkles className="w-4 h-4 text-blue-400" />
+//               <span className="text-sm">Premium</span>
+//             </motion.div>
+//           </div>
+//         </div>
+//       </header>
+
+//       <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col h-[calc(100vh-88px)]">
+//         {/* Quick Prompts */}
+//         {messages.length <= 1 && (
+//           <motion.div
+//             initial={{ opacity: 0, y: 20 }}
+//             animate={{ opacity: 1, y: 0 }}
+//             className="mb-6"
+//           >
+//             <h2 className="text-sm font-medium text-slate-400 mb-3">Quick Actions</h2>
+//             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+//               {quickPrompts.map((prompt, index) => (
+//                 <motion.button
+//                   key={index}
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: index * 0.1 }}
+//                   whileHover={{ scale: 1.02, y: -2 }}
+//                   whileTap={{ scale: 0.98 }}
+//                   onClick={() => handleQuickPrompt(prompt.text)}
+//                   className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all group"
+//                 >
+//                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${prompt.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+//                     <prompt.icon className="w-5 h-5 text-white" />
+//                   </div>
+//                   <p className="text-sm text-slate-300 text-left">{prompt.text}</p>
+//                 </motion.button>
+//               ))}
+//             </div>
+//           </motion.div>
+//         )}
+
+//         {/* Messages */}
+//         <div className="flex-1 overflow-y-auto mb-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
+//           <AnimatePresence>
+//             {messages.map((message, index) => (
+//               <motion.div
+//                 key={message.id}
+//                 initial={{ opacity: 0, y: 20 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ delay: index * 0.1 }}
+//                 className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+//               >
+//                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+//                   message.type === 'bot' 
+//                     ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
+//                     : 'bg-slate-800'
+//                 }`}>
+//                   {message.type === 'bot' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
+//                 </div>
+//                 <div className={`flex-1 max-w-2xl ${message.type === 'user' ? 'flex justify-end' : ''}`}>
+//                   <div className={`p-4 rounded-2xl ${
+//                     message.type === 'bot'
+//                       ? 'bg-slate-900/50 border border-slate-800'
+//                       : 'bg-gradient-to-br from-blue-600 to-purple-600'
+//                   }`}>
+//                     <p className="text-sm leading-relaxed">{message.content}</p>
+//                   </div>
+//                   <p className="text-xs text-slate-500 mt-1 px-2">
+//                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+//                   </p>
+//                 </div>
+//               </motion.div>
+//             ))}
+//           </AnimatePresence>
+
+//           {isTyping && (
+//             <motion.div
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               className="flex gap-3"
+//             >
+//               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+//                 <Bot className="w-5 h-5" />
+//               </div>
+//               <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl">
+//                 <div className="flex gap-1">
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
+//                     className="w-2 h-2 bg-blue-400 rounded-full"
+//                   />
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
+//                     className="w-2 h-2 bg-purple-400 rounded-full"
+//                   />
+//                   <motion.div
+//                     animate={{ scale: [1, 1.2, 1] }}
+//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
+//                     className="w-2 h-2 bg-pink-400 rounded-full"
+//                   />
+//                 </div>
+//               </div>
+//             </motion.div>
+//           )}
+//           <div ref={messagesEndRef} />
+//         </div>
+
+//         {/* Input Area */}
+//         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4">
+//           <div className="flex gap-3">
+//             <input
+//               type="text"
+//               value={inputValue}
+//               onChange={(e) => setInputValue(e.target.value)}
+//               onKeyPress={handleKeyPress}
+//               placeholder="Ask me anything about your learning..."
+//               className="flex-1 bg-transparent outline-none text-sm placeholder:text-slate-500"
+//             />
+//             <motion.button
+//               whileHover={{ scale: 1.05 }}
+//               whileTap={{ scale: 0.95 }}
+//               onClick={handleSendMessage}
+//               disabled={!inputValue.trim()}
+//               className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+//                 inputValue.trim()
+//                   ? 'bg-gradient-to-br from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/20'
+//                   : 'bg-slate-800 opacity-50 cursor-not-allowed'
+//               }`}
+//             >
+//               <Send className="w-5 h-5" />
+//             </motion.button>
+//           </div>
+//           <p className="text-xs text-slate-500 mt-3">
+//             Press Enter to send • Shift + Enter for new line
+//           </p>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AiAssistantPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
 "use client"
-import React, { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, BookOpen, Code, HelpCircle, Zap, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from 'react';
+import { Wifi, Lock, CheckCircle, XCircle, ArrowRight, Server, Monitor } from 'lucide-react';
 
-const AiAssistantPage = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      type: 'bot',
-      content: "Hi! I'm your AI learning assistant. I can help you with questions about your courses, clarify concepts, or guide you through exercises. How can I assist you today?",
-      timestamp: new Date()
-    }
-  ]);
-  const [inputValue, setInputValue] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef(null);
+const WebSocketHandshakeExplainer = () => {
+  const [activeTab, setActiveTab] = useState('concept');
+  const [animationStep, setAnimationStep] = useState(0);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const quickPrompts = [
-    { icon: BookOpen, text: "Explain this concept", color: "from-blue-500 to-purple-500" },
-    { icon: Code, text: "Help with code", color: "from-purple-500 to-pink-500" },
-    { icon: HelpCircle, text: "Quiz me", color: "from-pink-500 to-red-500" },
-    { icon: Zap, text: "Quick tip", color: "from-blue-400 to-cyan-400" }
-  ];
-
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-
-    const userMessage = {
-      id: messages.length + 1,
-      type: 'user',
-      content: inputValue,
-      timestamp: new Date()
-    };
-
-    setMessages([...messages, userMessage]);
-    setInputValue('');
-    setIsTyping(true);
-
-    setTimeout(() => {
-      const botMessage = {
-        id: messages.length + 2,
-        type: 'bot',
-        content: "I understand your question. Let me help you with that. This is a demo response showing how the AI assistant would interact with you.",
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, botMessage]);
-      setIsTyping(false);
+  const startAnimation = () => {
+    setAnimationStep(0);
+    const interval = setInterval(() => {
+      setAnimationStep(prev => {
+        if (prev >= 4) {
+          clearInterval(interval);
+          return prev;
+        }
+        return prev + 1;
+      });
     }, 1500);
   };
 
-  const handleQuickPrompt = (text) => {
-    setInputValue(text);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
+  React.useEffect(() => {
+    if (activeTab === 'visual') {
+      startAnimation();
     }
-  };
+  }, [activeTab]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white mt-16">
-      {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-              <Bot className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-semibold">AI Assistant</h1>
-              <p className="text-sm text-slate-400">Always here to help</p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 pt-22">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-purple-500/20 overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6">
+            <div className="flex items-center gap-3">
+              <Wifi className="w-8 h-8 text-white" />
+              <div>
+                <h1 className="text-2xl font-bold text-white">WebSocket Handshake & Authentication</h1>
+                <p className="text-purple-100 text-sm">Understanding Socket.IO with Clerk</p>
+              </div>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-2"
-            >
-              <Sparkles className="w-4 h-4 text-blue-400" />
-              <span className="text-sm">Premium</span>
-            </motion.div>
-          </div>
-        </div>
-      </header>
 
-      <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col h-[calc(100vh-88px)]">
-        {/* Quick Prompts */}
-        {messages.length <= 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6"
-          >
-            <h2 className="text-sm font-medium text-slate-400 mb-3">Quick Actions</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-              {quickPrompts.map((prompt, index) => (
-                <motion.button
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => handleQuickPrompt(prompt.text)}
-                  className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all group"
-                >
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${prompt.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-                    <prompt.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <p className="text-sm text-slate-300 text-left">{prompt.text}</p>
-                </motion.button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto mb-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
-          <AnimatePresence>
-            {messages.map((message, index) => (
-              <motion.div
-                key={message.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
+          {/* Tabs */}
+          <div className="flex border-b border-slate-700">
+            {['concept', 'visual', 'code', 'flow'].map(tab => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
+                  activeTab === tab
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-slate-800/50 text-slate-400 hover:text-white'
+                }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                  message.type === 'bot' 
-                    ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
-                    : 'bg-slate-800'
-                }`}>
-                  {message.type === 'bot' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
-                </div>
-                <div className={`flex-1 max-w-2xl ${message.type === 'user' ? 'flex justify-end' : ''}`}>
-                  <div className={`p-4 rounded-2xl ${
-                    message.type === 'bot'
-                      ? 'bg-slate-900/50 border border-slate-800'
-                      : 'bg-gradient-to-br from-blue-600 to-purple-600'
-                  }`}>
-                    <p className="text-sm leading-relaxed">{message.content}</p>
+                {tab === 'concept' && '🤝 What is Handshake?'}
+                {tab === 'visual' && '🎬 Visual Flow'}
+                {tab === 'code' && '💻 Code Example'}
+                {tab === 'flow' && '🔐 Why userId?'}
+              </button>
+            ))}
+          </div>
+
+          {/* Content */}
+          <div className="p-6">
+            {activeTab === 'concept' && (
+              <div className="space-y-6">
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h2 className="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
+                    <Wifi className="w-5 h-5" />
+                    What is a Handshake?
+                  </h2>
+                  <p className="text-slate-300 leading-relaxed mb-4">
+                    A <span className="text-purple-400 font-semibold">handshake</span> is the initial connection process between a client (browser) and server. 
+                    Think of it like introducing yourself when you meet someone new!
+                  </p>
+                  <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-purple-500">
+                    <p className="text-slate-300 text-sm">
+                      <strong className="text-white">Real-world analogy:</strong> When you enter a building with security, 
+                      you show your ID badge at the entrance. The guard checks it and lets you in. That's exactly what a handshake does!
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-500 mt-1 px-2">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                </div>
+
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h2 className="text-xl font-bold text-blue-400 mb-4">The Handshake Process</h2>
+                  <div className="space-y-4">
+                    {[
+                      { step: 1, title: 'Client Initiates', desc: 'Browser sends connection request with auth data', color: 'purple' },
+                      { step: 2, title: 'Server Receives', desc: 'Middleware intercepts the request', color: 'blue' },
+                      { step: 3, title: 'Authentication', desc: 'Server validates the userId from Clerk', color: 'green' },
+                      { step: 4, title: 'Connection Established', desc: 'If valid, WebSocket connection opens', color: 'emerald' }
+                    ].map(item => (
+                      <div key={item.step} className="flex items-start gap-3">
+                        <div className={`bg-${item.color}-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0`}>
+                          {item.step}
+                        </div>
+                        <div>
+                          <p className="text-white font-semibold">{item.title}</p>
+                          <p className="text-slate-400 text-sm">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-6 border border-purple-500/30">
+                  <h3 className="text-lg font-bold text-white mb-3">🎯 Key Point</h3>
+                  <p className="text-slate-300">
+                    The handshake happens <strong className="text-purple-400">ONCE</strong> when the connection is established, 
+                    not with every message. This is why we attach <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code> - 
+                    so we can identify the user for all subsequent messages!
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-
-          {isTyping && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex gap-3"
-            >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <Bot className="w-5 h-5" />
               </div>
-              <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl">
-                <div className="flex gap-1">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-                    className="w-2 h-2 bg-blue-400 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-                    className="w-2 h-2 bg-purple-400 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-                    className="w-2 h-2 bg-pink-400 rounded-full"
-                  />
+            )}
+
+            {activeTab === 'visual' && (
+              <div className="space-y-6">
+                <button
+                  onClick={startAnimation}
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+                >
+                  🔄 Replay Animation
+                </button>
+
+                <div className="relative bg-slate-900/50 rounded-xl p-8 min-h-[400px]">
+                  {/* Client Side */}
+                  <div className={`absolute left-8 top-8 transition-all duration-500 ${animationStep >= 0 ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className="bg-blue-600 rounded-xl p-4 shadow-lg">
+                      <Monitor className="w-8 h-8 text-white mb-2" />
+                      <p className="text-white font-bold">Client Browser</p>
+                      <p className="text-blue-200 text-sm">Your React App</p>
+                    </div>
+                  </div>
+
+                  {/* Server Side */}
+                  <div className={`absolute right-8 top-8 transition-all duration-500 ${animationStep >= 0 ? 'opacity-100' : 'opacity-0'}`}>
+                    <div className="bg-purple-600 rounded-xl p-4 shadow-lg">
+                      <Server className="w-8 h-8 text-white mb-2" />
+                      <p className="text-white font-bold">Server</p>
+                      <p className="text-purple-200 text-sm">Node.js + Socket.IO</p>
+                    </div>
+                  </div>
+
+                  {/* Step 1: Connection Request */}
+                  {animationStep >= 1 && (
+                    <div className="absolute left-8 top-40 animate-pulse">
+                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-blue-500 max-w-xs">
+                        <p className="text-blue-400 font-bold text-sm mb-2">1️⃣ Connection Request</p>
+                        <code className="text-xs text-slate-300 block">
+                          {`{ auth: { userId: "user_123" } }`}
+                        </code>
+                        <ArrowRight className="w-6 h-6 text-blue-400 mt-2 animate-bounce" style={{ transform: 'rotate(0deg)' }} />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 2: Middleware Check */}
+                  {animationStep >= 2 && (
+                    <div className="absolute right-8 top-40 animate-pulse">
+                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-yellow-500 max-w-xs">
+                        <p className="text-yellow-400 font-bold text-sm mb-2">2️⃣ Middleware Check</p>
+                        <code className="text-xs text-slate-300 block">
+                          socketAuthMiddleware()
+                        </code>
+                        <Lock className="w-6 h-6 text-yellow-400 mt-2" />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 3: Validation */}
+                  {animationStep >= 3 && (
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse">
+                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-green-500">
+                        <p className="text-green-400 font-bold text-sm mb-2">3️⃣ Validation</p>
+                        <CheckCircle className="w-8 h-8 text-green-400 mx-auto" />
+                        <p className="text-xs text-slate-300 mt-2">userId is valid!</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 4: Connected */}
+                  {animationStep >= 4 && (
+                    <div className="absolute left-1/2 bottom-8 -translate-x-1/2 animate-pulse">
+                      <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg p-4 shadow-xl">
+                        <CheckCircle className="w-8 h-8 text-white mx-auto mb-2" />
+                        <p className="text-white font-bold">✅ Connected!</p>
+                        <p className="text-green-100 text-sm">socket.userId = "user_123"</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </motion.div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
+            )}
 
-        {/* Input Area */}
-        <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4">
-          <div className="flex gap-3">
-            <input
-              type="text"
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ask me anything about your learning..."
-              className="flex-1 bg-transparent outline-none text-sm placeholder:text-slate-500"
-            />
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleSendMessage}
-              disabled={!inputValue.trim()}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-                inputValue.trim()
-                  ? 'bg-gradient-to-br from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/20'
-                  : 'bg-slate-800 opacity-50 cursor-not-allowed'
-              }`}
-            >
-              <Send className="w-5 h-5" />
-            </motion.button>
+            {activeTab === 'code' && (
+              <div className="space-y-6">
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h3 className="text-lg font-bold text-purple-400 mb-4">📱 Client Side (Your React Component)</h3>
+                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-slate-300">{`import { io } from 'socket.io-client';
+import { useUser } from '@clerk/nextjs';
+
+function AiChatSection() {
+  const { user } = useUser();
+  
+  useEffect(() => {
+    // Connect to Socket.IO with authentication
+    const socket = io('http://localhost:4000', {
+      auth: {
+        userId: user?.id  // ← This is where you pass userId!
+      }
+    });
+    
+    socket.on('connect', () => {
+      console.log('Connected to server!');
+    });
+    
+    return () => socket.disconnect();
+  }, [user]);
+  
+  return <div>Chat Component</div>;
+}`}</code>
+                  </pre>
+                </div>
+
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h3 className="text-lg font-bold text-blue-400 mb-4">🖥️ Server Side (Your Code)</h3>
+                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-slate-300">{`const socketAuthMiddleware = async (socket, next) => {
+  try {
+    // Extract userId from handshake auth object
+    const userId = socket.handshake.auth.userId;
+    
+    if (!userId) {
+      return next(new Error("userId is required"));
+    }
+    
+    // Attach userId to socket for later use
+    socket.userId = userId;  // ← Now available everywhere!
+    
+    next(); // Allow connection
+  } catch (error) {
+    next(new Error("Authentication failed"));
+  }
+};
+
+// Usage in Socket.IO
+io.use(socketAuthMiddleware);
+
+io.on('connection', (socket) => {
+  console.log('User connected:', socket.userId);
+  
+  socket.on('send-message', (message) => {
+    // You can use socket.userId in any event!
+    console.log(\`User \${socket.userId} sent: \${message}\`);
+  });
+});`}</code>
+                  </pre>
+                </div>
+
+                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-6 border border-purple-500/30">
+                  <h3 className="text-lg font-bold text-white mb-3">💡 What's Happening?</h3>
+                  <ol className="space-y-2 text-slate-300">
+                    <li><strong className="text-purple-400">1.</strong> Client sends <code className="bg-slate-900 px-2 py-1 rounded">userId</code> in the connection request</li>
+                    <li><strong className="text-purple-400">2.</strong> Server middleware intercepts during handshake</li>
+                    <li><strong className="text-purple-400">3.</strong> Validates and attaches userId to socket</li>
+                    <li><strong className="text-purple-400">4.</strong> Now every message knows which user sent it!</li>
+                  </ol>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'flow' && (
+              <div className="space-y-6">
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h2 className="text-xl font-bold text-purple-400 mb-4">🔐 Why Do We Use socket.handshake.auth.userId?</h2>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-purple-500">
+                      <h3 className="text-white font-bold mb-2">1. Security</h3>
+                      <p className="text-slate-300 text-sm">
+                        Clerk provides authenticated user IDs. By passing this during the handshake, you ensure only 
+                        authenticated users can connect to your WebSocket server.
+                      </p>
+                    </div>
+
+                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-blue-500">
+                      <h3 className="text-white font-bold mb-2">2. User Identification</h3>
+                      <p className="text-slate-300 text-sm">
+                        Every message, event, or action can be linked back to a specific user. This is crucial for 
+                        your AI chat where you need to know WHO is asking questions.
+                      </p>
+                    </div>
+
+                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-green-500">
+                      <h3 className="text-white font-bold mb-2">3. Persistence</h3>
+                      <p className="text-slate-300 text-sm">
+                        Once attached to <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code>, 
+                        it's available throughout the entire connection lifecycle. No need to send userId with every message!
+                      </p>
+                    </div>
+
+                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-yellow-500">
+                      <h3 className="text-white font-bold mb-2">4. Database Operations</h3>
+                      <p className="text-slate-300 text-sm">
+                        When saving chat history, you can use <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code> to 
+                        associate messages with the correct user in MongoDB.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl p-6 border border-red-500/30">
+                  <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                    <XCircle className="w-5 h-5 text-red-400" />
+                    What Happens Without It?
+                  </h3>
+                  <ul className="space-y-2 text-slate-300">
+                    <li>❌ You wouldn't know which user sent a message</li>
+                    <li>❌ Chat history couldn't be saved to the correct user</li>
+                    <li>❌ Multiple users would get mixed messages</li>
+                    <li>❌ No way to personalize AI responses</li>
+                  </ul>
+                </div>
+
+                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
+                  <h3 className="text-lg font-bold text-green-400 mb-4">✅ Real Usage Example</h3>
+                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
+                    <code className="text-sm text-slate-300">{`io.on('connection', (socket) => {
+  console.log(\`User \${socket.userId} connected\`);
+  
+  socket.on('ai-question', async (question) => {
+    // Save to database with user context
+    await ChatMessage.create({
+      userId: socket.userId,  // ← From Clerk auth
+      message: question,
+      timestamp: new Date()
+    });
+    
+    // Get personalized response
+    const userLevel = await getUserLevel(socket.userId);
+    const response = await getAIResponse(question, userLevel);
+    
+    socket.emit('ai-response', response);
+  });
+});`}</code>
+                  </pre>
+                </div>
+              </div>
+            )}
           </div>
-          <p className="text-xs text-slate-500 mt-3">
-            Press Enter to send • Shift + Enter for new line
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default AiAssistantPage;
-
-
-
-
+export default WebSocketHandshakeExplainer;
 
 
 
