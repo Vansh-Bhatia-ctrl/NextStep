@@ -6,7 +6,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { clerkMiddleware, requireAuth, getAuth } = require("@clerk/express");
 
-// 📦 Route imports
+//Route imports
 const saveUserInfo = require("./routes/saveuserInfoToDb");
 const saveQuestionsToDb = require("./routes/saveQues");
 const getQuestionsFromDb = require("./routes/fetchQuestionsFromDB");
@@ -17,12 +17,12 @@ const saveCareerPath = require("./routes/careerpath");
 const sendLearningModules = require("./routes/sendLearningContent");
 const getUserDomain = require("./routes/fetchUserDomain");
 const getChatHistory = require("./routes/aiChat");
+const quizAnswers = require("./routes/quizAnswersRoute");
 
 const chatSockets = require("./sockets/chatSockets");
 
 const app = express();
 
- 
 app.use(express.json());
 app.use(
   cors({
@@ -31,7 +31,6 @@ app.use(
   })
 );
 
- 
 app.use(
   clerkMiddleware({
     secretKey: process.env.CLERK_SECRET_KEY,
@@ -39,7 +38,6 @@ app.use(
   })
 );
 
- 
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -48,7 +46,6 @@ mongoose
   .then(() => console.log("✅ MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
- 
 app.get("/", (_req, res) => res.send("API up 🚀"));
 
 app.get("/api/ping", (_req, res) => res.json({ ok: true }));
@@ -69,6 +66,7 @@ app.use("/api/savecareer", saveCareerPath);
 app.use("/api/sendlearningcontent", sendLearningModules);
 app.use("/api/getlevel", getUserDomain);
 app.use("/api/chat", getChatHistory);
+app.use("/api/quiz", quizAnswers);
 
 // --- Error handling ---
 app.use((err, _req, res, _next) => {
@@ -90,7 +88,6 @@ const io = new Server(server, {
   },
 });
 
- 
 chatSockets(io);
 
 // --- Start server ---
