@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import useModuleStore from "../store/useModulesStore";
 
 const CompletionData = () => {
-  const { lessons, index } = useModuleStore();
+  const { modules, index } = useModuleStore();
   return (
     <>
       <motion.div
@@ -45,7 +45,7 @@ const CompletionData = () => {
 
             <div className="flex flex-col items-center">
               <p className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent text-2xl font-bold">
-                {lessons.length}
+                {modules[index]?.lessonIds.length}
               </p>
               <p className="text-slate-500 text-sm">Remaining</p>
             </div>
