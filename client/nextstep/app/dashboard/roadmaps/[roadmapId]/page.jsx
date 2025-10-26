@@ -2,7 +2,6 @@ import React from "react";
 import CompletionData from "@/app/components/CompletionData";
 import CourseModules from "@/app/components/CourseModules";
 import CourseNavbar from "@/app/components/CourseNavbar";
-import LearningInsights from "@/app/components/LearningInsights";
 import ModuleHeader from "@/app/components/ModuleHeader";
 import QuickActions from "@/app/components/QuickActions";
 import PrevAndNextBttns from "@/app/components/PrevAndNextBttns";
@@ -32,7 +31,6 @@ const page = async ({ params }) => {
 
                 <QuickActions />
 
-                <LearningInsights />
                 <PrevAndNextBttns />
               </div>
             </div>

@@ -11,7 +11,7 @@ const getUserDomain = async (req, res) => {
     const user = await User.findOne({ clerkUserId: userId });
 
     if (!user) {
-      return res.status(400).json({ message: "User not found." });
+      return res.status(401).json({ message: "User not found." });
     }
 
     const userDomain = user.domain;

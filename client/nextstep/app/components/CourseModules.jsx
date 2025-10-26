@@ -5,58 +5,7 @@ import { motion } from "framer-motion";
 import useModuleStore from "../store/useModulesStore";
 import { useAuth, useUser } from "@clerk/nextjs";
 import useUserDomain from "../store/useUserDomain";
-
-const COMPLETED_COURSES = [
-  {
-    id: 1,
-    label: "Introduction to CSS",
-    description:
-      "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
-    time: "30 mins",
-  },
-  {
-    id: 2,
-    label: "CSS Selectors",
-    description:
-      "Learn how to target HTML elements using CSS selectors, including type, class, ID, and advanced combinators.",
-    time: "45 mins",
-  },
-];
-
-const COURSES = [
-  {
-    id: 1,
-    courseNumber: "3",
-    label: "The Box Model",
-    description:
-      "Master the CSS box model to control spacing, borders, and layout of web elements.",
-    time: "50 min",
-  },
-  {
-    id: 2,
-    courseNumber: "4",
-    label: "Colors in CSS",
-    description:
-      "Explore CSS color systems, including named colors, hex, RGB, and HSL, for vibrant designs.",
-    time: "40 min",
-  },
-  {
-    id: 3,
-    courseNumber: "5",
-    label: "Typography in CSS",
-    description:
-      "Control text appearance with CSS typography properties like font-family, font-size, and line-height.",
-    time: "50 min",
-  },
-  {
-    id: 4,
-    courseNumber: "6",
-    label: "Applying CSS to a Project",
-    description:
-      "Combine CSS selectors, box model, colors, and typography to style and deploy a styled web page.",
-    time: "75 min",
-  },
-];
+import Link from "next/link";
 
 const CourseModules = ({ level }) => {
   const {
@@ -84,6 +33,8 @@ const CourseModules = ({ level }) => {
   useEffect(() => {
     const setDomainCache = async () => {
       const token = await getToken();
+      console.log(`token: ${token}`);
+
       if (!isSignedIn) {
         clearCache();
       } else {
@@ -120,81 +71,43 @@ const CourseModules = ({ level }) => {
 
         <div className="mt-4">
           <div className="space-y-4">
-            {/* {COMPLETED_COURSES.map((course) => (
-              <div
-                key={course.id}
-                className="bg-green-500/10 rounded-lg border border-green-500/20 p-5 cursor-pointer"
-              >
-                <div className="flex items-center gap-2 md:gap-4">
-                  <div className="bg-green-500 p-2 rounded-full flex items-start">
-                    <CircleCheckBig color="#fff" />
-                  </div>
-                  <div className="flex items-center justify-between w-full">
-                    <div>
-                      <p className="text-white text-lg font-semibold">
-                        {course.label}
-                      </p>
-                      <p className="text-slate-400 text-sm">
-                        {course.description}
-                      </p>
-                      <div className="flex items-center gap-6 mt-4">
-                        <div className="flex items-center gap-2">
-                          <Timer color="#64748b" className="w-5 h-5" />
-                          <p className="text-slate-500 text-sm">
-                            {course.time}
-                          </p>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                          <CircleCheckBig color="#22c55e" className="w-5 h-5" />
-                          <p className="text-green-500 text-sm">Completed</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <ChevronRight
-                      color="#64748b"
-                      className="w-10 h-10 md:w-7 md:h-7"
-                    />
-                  </div>
-                </div>
-              </div>
-            ))} */}
-
             {moduleSpecificLessons.map((course) => (
-              <div
+              <Link
+                href={`/dashboard/roadmaps/${level}/${course._id}`}
                 key={course._id}
-                className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in"
+                className="flex flex-col"
               >
-                <div className="flex items-center gap-2 md:gap-4">
-                  <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">
-                    <p className="text-slate-300">{course.order}</p>
-                  </div>
-                  <div className="flex items-center justify-between w-full">
-                    <div>
-                      <p className="text-white text-lg font-semibold">
-                        {course.title}
-                      </p>
-                      <p className="text-slate-400 text-sm">
-                        {course.description}
-                      </p>
-                      <div className="flex items-center gap-6 mt-4">
-                        <div className="flex items-center gap-2">
-                          <Timer color="#64748b" className="w-5 h-5" />
-                          <p className="text-slate-500 text-sm">
-                            {timeMap[course._id] || 0} mins
-                          </p>
+                <div className="bg-blue-500/10 rounded-lg border border-blue-500/20 p-5 cursor-pointer hover:bg-blue-400/20 transition-colors duration-200 ease-in">
+                  <div className="flex items-center gap-2 md:gap-4">
+                    <div className="bg-slate-500 px-3 py-[5px] h-9 w-9 rounded-full">
+                      <p className="text-slate-300">{course.order}</p>
+                    </div>
+                    <div className="flex items-center justify-between w-full">
+                      <div>
+                        <p className="text-white text-lg font-semibold">
+                          {course.title}
+                        </p>
+                        <p className="text-slate-400 text-sm">
+                          {course.description}
+                        </p>
+                        <div className="flex items-center gap-6 mt-4">
+                          <div className="flex items-center gap-2">
+                            <Timer color="#64748b" className="w-5 h-5" />
+                            <p className="text-slate-500 text-sm">
+                              {timeMap[course._id] || 0} mins
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <ChevronRight
-                      color="#64748b"
-                      className="w-10 h-10 md:w-7 md:h-7"
-                    />
+                      <ChevronRight
+                        color="#64748b"
+                        className="w-10 h-10 md:w-7 md:h-7"
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

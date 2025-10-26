@@ -28,9 +28,16 @@ const useUserDomain = create(
               headers: { Authorization: `Bearer ${token}` },
             }
           );
-
           if (!response.ok) {
-            throw new Error("Error fetching the domain.");
+            if (response.status === 401) {
+              throw new Error("Unauthorized - Please log in again");
+            } else if (response.status === 404) {
+              throw new Error("Domain not found");
+            } else if (response.status === 500) {
+              throw new Error("Server error - Please try again later");
+            } else {
+              throw new Error(`Error fetching the domain (${response.status})`);
+            }
           }
 
           const data = await response.json();
