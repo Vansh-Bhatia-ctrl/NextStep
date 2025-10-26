@@ -1,2557 +1,466 @@
-// "use client";
-// import React, { useState, useEffect } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// import {
-//   User,
-//   TrendingUp,
-//   BookOpen,
-//   MessageCircle,
-//   Users,
-//   Award,
-//   Target,
-//   ChevronRight,
-//   Send,
-//   MapPin,
-//   Calendar,
-//   CheckCircle,
-//   Circle,
-//   Star,
-//   ArrowUp,
-//   Brain,
-//   Rocket,
-//   Trophy,
-//   X,
-//   Menu,
-// } from "lucide-react";
-
-// const Dashboard = () => {
-//   const [activeTab, setActiveTab] = useState("overview");
-//   const [isChatOpen, setIsChatOpen] = useState(false);
-//   const [chatMessage, setChatMessage] = useState("");
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-//   // Mock user data
-//   const userData = {
-//     name: "Alex Johnson",
-//     level: "Intermediate",
-//     progress: 67,
-//     completedModules: 12,
-//     totalModules: 18,
-//     streak: 15,
-//     points: 2450,
-//   };
-
-//   const roadmaps = [
-//     {
-//       level: "Beginner",
-//       title: "Foundation Builder",
-//       progress: 85,
-//       modules: 8,
-//       completed: 7,
-//       icon: <BookOpen className="w-6 h-6" />,
-//       color: "from-green-400 to-green-600",
-//       description: "Master the fundamentals",
-//     },
-//     {
-//       level: "Intermediate",
-//       title: "Skill Enhancer",
-//       progress: 67,
-//       modules: 12,
-//       completed: 8,
-//       icon: <Target className="w-6 h-6" />,
-//       color: "from-blue-400 to-blue-600",
-//       description: "Build practical expertise",
-//     },
-//     {
-//       level: "Advanced",
-//       title: "Expert Path",
-//       progress: 15,
-//       modules: 15,
-//       completed: 2,
-//       icon: <Trophy className="w-6 h-6" />,
-//       color: "from-purple-400 to-purple-600",
-//       description: "Achieve mastery",
-//     },
-//   ];
-
-//   const recentActivities = [
-//     {
-//       id: 1,
-//       action: "Completed",
-//       item: "React Hooks Module",
-//       time: "2h ago",
-//       type: "completion",
-//     },
-//     {
-//       id: 2,
-//       action: "Started",
-//       item: "State Management Course",
-//       time: "1d ago",
-//       type: "start",
-//     },
-//     {
-//       id: 3,
-//       action: "Earned",
-//       item: "Problem Solver Badge",
-//       time: "3d ago",
-//       type: "achievement",
-//     },
-//     {
-//       id: 4,
-//       action: "Connected with",
-//       item: "Sarah Chen (Senior Developer)",
-//       time: "5d ago",
-//       type: "connection",
-//     },
-//   ];
-
-//   const nearbyProfessionals = [
-//     {
-//       id: 1,
-//       name: "Sarah Chen",
-//       role: "Senior Developer",
-//       company: "TechCorp",
-//       distance: "2.3 km",
-//       rating: 4.9,
-//     },
-//     {
-//       id: 2,
-//       name: "Mike Rodriguez",
-//       role: "Product Manager",
-//       company: "StartupXYZ",
-//       distance: "3.1 km",
-//       rating: 4.8,
-//     },
-//     {
-//       id: 3,
-//       name: "Emily Davis",
-//       role: "UX Designer",
-//       company: "DesignStudio",
-//       distance: "4.2 km",
-//       rating: 4.7,
-//     },
-//   ];
-
-//   const chatMessages = [
-//     {
-//       id: 1,
-//       type: "ai",
-//       message: "Hello! How can I help you with your learning journey today?",
-//     },
-//     { id: 2, type: "user", message: "I want to improve my React skills" },
-//     {
-//       id: 3,
-//       type: "ai",
-//       message:
-//         "Great! Based on your intermediate level, I recommend starting with the State Management module. Would you like me to create a personalized study plan?",
-//     },
-//   ];
-
-//   const sidebarItems = [
-//     {
-//       id: "overview",
-//       icon: <TrendingUp className="w-5 h-5" />,
-//       label: "Overview",
-//     },
-//     {
-//       id: "roadmaps",
-//       icon: <BookOpen className="w-5 h-5" />,
-//       label: "Roadmaps",
-//     },
-//     { id: "progress", icon: <Target className="w-5 h-5" />, label: "Progress" },
-//     {
-//       id: "professionals",
-//       icon: <Users className="w-5 h-5" />,
-//       label: "Professionals",
-//     },
-//   ];
-
-//   const containerVariants = {
-//     hidden: { opacity: 0 },
-//     visible: {
-//       opacity: 1,
-//       transition: { duration: 0.6, staggerChildren: 0.1 },
-//     },
-//   };
-
-//   const itemVariants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-//       {/* Header */}
-//       <motion.header
-//         initial={{ y: -50, opacity: 0 }}
-//         animate={{ y: 0, opacity: 1 }}
-//         className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700 px-6 py-4 sticky top-0 z-40"
-//       >
-//         <div className="flex items-center justify-between">
-//           <div className="flex items-center space-x-4">
-//             <button
-//               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-//               className="md:hidden p-2 rounded-lg bg-slate-700 hover:bg-slate-600 transition-colors"
-//             >
-//               <Menu className="w-5 h-5 text-white" />
-//             </button>
-//             <h1 className="text-2xl font-bold text-white">NextStep</h1>
-//             <div className="hidden md:flex items-center space-x-2 px-3 py-1 bg-blue-600/20 rounded-full">
-//               <Brain className="w-4 h-4 text-blue-400" />
-//               <span className="text-sm text-blue-300 font-medium">
-//                 {userData.level}
-//               </span>
-//             </div>
-//           </div>
-
-//           <div className="flex items-center space-x-4">
-//             <div className="flex items-center space-x-2 text-white">
-//               <Star className="w-5 h-5 text-yellow-400" />
-//               <span className="font-semibold">{userData.points}</span>
-//             </div>
-//             <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-//               <User className="w-6 h-6 text-white" />
-//             </div>
-//           </div>
-//         </div>
-//       </motion.header>
-
-//       <div className="flex">
-//         {/* Sidebar */}
-//         <AnimatePresence>
-//           {(isMobileMenuOpen || window.innerWidth >= 768) && (
-//             <motion.aside
-//               initial={{ x: -300, opacity: 0 }}
-//               animate={{ x: 0, opacity: 1 }}
-//               exit={{ x: -300, opacity: 0 }}
-//               className="fixed md:sticky top-0 md:top-[88px] left-0 h-screen md:h-[calc(100vh-88px)] w-64 bg-slate-800/50 backdrop-blur-sm border-r border-slate-700 z-30 md:z-10"
-//             >
-//               <div className="p-6 pt-20 md:pt-6">
-//                 <nav className="space-y-2">
-//                   {sidebarItems.map((item) => (
-//                     <motion.button
-//                       key={item.id}
-//                       whileHover={{ x: 4 }}
-//                       whileTap={{ scale: 0.98 }}
-//                       onClick={() => {
-//                         setActiveTab(item.id);
-//                         setIsMobileMenuOpen(false);
-//                       }}
-//                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
-//                         activeTab === item.id
-//                           ? "bg-blue-600 text-white shadow-lg shadow-blue-600/25"
-//                           : "text-slate-300 hover:bg-slate-700/50 hover:text-white"
-//                       }`}
-//                     >
-//                       {item.icon}
-//                       <span className="font-medium">{item.label}</span>
-//                     </motion.button>
-//                   ))}
-//                 </nav>
-
-//                 <div className="mt-8 p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-lg border border-purple-500/20">
-//                   <h3 className="text-white font-semibold mb-2">
-//                     Learning Streak
-//                   </h3>
-//                   <div className="flex items-center space-x-2">
-//                     <div className="flex space-x-1">
-//                       {[...Array(5)].map((_, i) => (
-//                         <div
-//                           key={i}
-//                           className="w-2 h-6 bg-gradient-to-t from-orange-500 to-yellow-400 rounded-full"
-//                         />
-//                       ))}
-//                     </div>
-//                     <span className="text-2xl font-bold text-white">
-//                       {userData.streak}
-//                     </span>
-//                     <span className="text-slate-300 text-sm">days</span>
-//                   </div>
-//                 </div>
-//               </div>
-//             </motion.aside>
-//           )}
-//         </AnimatePresence>
-
-//         {/* Main Content */}
-//         <main className="flex-1 p-6 md:ml-0">
-//           <motion.div
-//             variants={containerVariants}
-//             initial="hidden"
-//             animate="visible"
-//             className="max-w-7xl mx-auto"
-//           >
-//             {activeTab === "overview" && (
-//               <div className="space-y-6">
-//                 {/* Welcome Section */}
-//                 <motion.div
-//                   variants={itemVariants}
-//                   className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 text-white"
-//                 >
-//                   <div className="flex items-center justify-between">
-//                     <div>
-//                       <h2 className="text-3xl font-bold mb-2">
-//                         Welcome back, {userData.name}!
-//                       </h2>
-//                       <p className="text-blue-100">
-//                         Ready to take your next step in learning?
-//                       </p>
-//                     </div>
-//                     <div className="text-right">
-//                       <div className="text-4xl font-bold">
-//                         {userData.progress}%
-//                       </div>
-//                       <div className="text-sm text-blue-100">
-//                         Overall Progress
-//                       </div>
-//                     </div>
-//                   </div>
-//                   <div className="mt-4 bg-white/20 rounded-full h-2">
-//                     <motion.div
-//                       initial={{ width: 0 }}
-//                       animate={{ width: `${userData.progress}%` }}
-//                       transition={{ duration: 1.5, ease: "easeOut" }}
-//                       className="h-full bg-white rounded-full"
-//                     />
-//                   </div>
-//                 </motion.div>
-
-//                 {/* Stats Grid */}
-//                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-//                   {[
-//                     {
-//                       icon: <BookOpen className="w-8 h-8 text-blue-400" />,
-//                       title: "Modules Completed",
-//                       value: `${userData.completedModules}/${userData.totalModules}`,
-//                     },
-//                     {
-//                       icon: <Award className="w-8 h-8 text-yellow-400" />,
-//                       title: "Points Earned",
-//                       value: userData.points,
-//                     },
-//                     {
-//                       icon: <TrendingUp className="w-8 h-8 text-green-400" />,
-//                       title: "Learning Streak",
-//                       value: `${userData.streak} days`,
-//                     },
-//                   ].map((stat, index) => (
-//                     <motion.div
-//                       key={index}
-//                       variants={itemVariants}
-//                       whileHover={{ scale: 1.02, y: -5 }}
-//                       className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-//                     >
-//                       <div className="flex items-center space-x-4">
-//                         <div className="p-3 bg-slate-700 rounded-lg">
-//                           {stat.icon}
-//                         </div>
-//                         <div>
-//                           <h3 className="text-slate-300 text-sm">
-//                             {stat.title}
-//                           </h3>
-//                           <p className="text-white text-2xl font-bold">
-//                             {stat.value}
-//                           </p>
-//                         </div>
-//                       </div>
-//                     </motion.div>
-//                   ))}
-//                 </div>
-
-//                 {/* Recent Activity */}
-//                 <motion.div
-//                   variants={itemVariants}
-//                   className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-//                 >
-//                   <h3 className="text-white text-xl font-bold mb-4">
-//                     Recent Activity
-//                   </h3>
-//                   <div className="space-y-3">
-//                     {recentActivities.map((activity) => (
-//                       <motion.div
-//                         key={activity.id}
-//                         initial={{ x: -20, opacity: 0 }}
-//                         animate={{ x: 0, opacity: 1 }}
-//                         transition={{ delay: activity.id * 0.1 }}
-//                         className="flex items-center space-x-4 p-3 rounded-lg bg-slate-700/30 hover:bg-slate-700/50 transition-colors"
-//                       >
-//                         <div
-//                           className={`w-3 h-3 rounded-full ${
-//                             activity.type === "completion"
-//                               ? "bg-green-400"
-//                               : activity.type === "start"
-//                               ? "bg-blue-400"
-//                               : activity.type === "achievement"
-//                               ? "bg-yellow-400"
-//                               : "bg-purple-400"
-//                           }`}
-//                         />
-//                         <div className="flex-1">
-//                           <p className="text-white">
-//                             <span className="text-slate-300">
-//                               {activity.action}
-//                             </span>{" "}
-//                             {activity.item}
-//                           </p>
-//                           <p className="text-slate-400 text-sm">
-//                             {activity.time}
-//                           </p>
-//                         </div>
-//                       </motion.div>
-//                     ))}
-//                   </div>
-//                 </motion.div>
-//               </div>
-//             )}
-
-//             {activeTab === "roadmaps" && (
-//               <div className="space-y-6">
-//                 <motion.h2
-//                   variants={itemVariants}
-//                   className="text-3xl font-bold text-white"
-//                 >
-//                   Learning Roadmaps
-//                 </motion.h2>
-//                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-//                   {roadmaps.map((roadmap, index) => (
-//                     <motion.div
-//                       key={roadmap.level}
-//                       variants={itemVariants}
-//                       whileHover={{ scale: 1.02, y: -10 }}
-//                       className={`bg-gradient-to-br ${roadmap.color} rounded-2xl p-6 text-white relative overflow-hidden`}
-//                     >
-//                       <div className="relative z-10">
-//                         <div className="flex items-center justify-between mb-4">
-//                           <div className="p-2 bg-white/20 rounded-lg">
-//                             {roadmap.icon}
-//                           </div>
-//                           <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
-//                             {roadmap.level}
-//                           </span>
-//                         </div>
-//                         <h3 className="text-xl font-bold mb-2">
-//                           {roadmap.title}
-//                         </h3>
-//                         <p className="text-white/80 mb-4">
-//                           {roadmap.description}
-//                         </p>
-//                         <div className="mb-4">
-//                           <div className="flex justify-between text-sm mb-2">
-//                             <span>Progress</span>
-//                             <span>
-//                               {roadmap.completed}/{roadmap.modules}
-//                             </span>
-//                           </div>
-//                           <div className="bg-white/20 rounded-full h-2">
-//                             <motion.div
-//                               initial={{ width: 0 }}
-//                               animate={{ width: `${roadmap.progress}%` }}
-//                               transition={{ duration: 1.5, delay: index * 0.2 }}
-//                               className="h-full bg-white rounded-full"
-//                             />
-//                           </div>
-//                         </div>
-//                         <button className="w-full bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-lg py-3 font-semibold transition-colors flex items-center justify-center space-x-2">
-//                           <span>Continue Learning</span>
-//                           <ChevronRight className="w-4 h-4" />
-//                         </button>
-//                       </div>
-//                       <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -translate-y-16 translate-x-16" />
-//                     </motion.div>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-
-//             {activeTab === "professionals" && (
-//               <div className="space-y-6">
-//                 <motion.div
-//                   variants={itemVariants}
-//                   className="flex items-center justify-between"
-//                 >
-//                   <h2 className="text-3xl font-bold text-white">
-//                     Nearby Professionals
-//                   </h2>
-//                   <div className="flex items-center space-x-2 text-slate-300">
-//                     <MapPin className="w-5 h-5" />
-//                     <span>Delhi, India</span>
-//                   </div>
-//                 </motion.div>
-
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//                   {nearbyProfessionals.map((professional, index) => (
-//                     <motion.div
-//                       key={professional.id}
-//                       variants={itemVariants}
-//                       whileHover={{ scale: 1.02, y: -5 }}
-//                       className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-//                     >
-//                       <div className="flex items-center space-x-4 mb-4">
-//                         <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-//                           <User className="w-6 h-6 text-white" />
-//                         </div>
-//                         <div>
-//                           <h3 className="text-white font-semibold">
-//                             {professional.name}
-//                           </h3>
-//                           <p className="text-slate-300 text-sm">
-//                             {professional.role}
-//                           </p>
-//                         </div>
-//                       </div>
-
-//                       <div className="space-y-2 mb-4">
-//                         <p className="text-slate-400 text-sm">
-//                           {professional.company}
-//                         </p>
-//                         <div className="flex items-center justify-between text-sm">
-//                           <span className="text-slate-300">
-//                             {professional.distance} away
-//                           </span>
-//                           <div className="flex items-center space-x-1">
-//                             <Star className="w-4 h-4 text-yellow-400 fill-current" />
-//                             <span className="text-white">
-//                               {professional.rating}
-//                             </span>
-//                           </div>
-//                         </div>
-//                       </div>
-
-//                       <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors">
-//                         Connect
-//                       </button>
-//                     </motion.div>
-//                   ))}
-//                 </div>
-//               </div>
-//             )}
-//           </motion.div>
-//         </main>
-//       </div>
-
-//       {/* Chat Widget */}
-//       <AnimatePresence>
-//         {isChatOpen && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 100, scale: 0.8 }}
-//             animate={{ opacity: 1, y: 0, scale: 1 }}
-//             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-//             className="fixed bottom-24 right-6 w-80 h-96 bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 z-50"
-//           >
-//             <div className="flex items-center justify-between p-4 border-b border-slate-700">
-//               <h3 className="text-white font-semibold">
-//                 AI Learning Assistant
-//               </h3>
-//               <button
-//                 onClick={() => setIsChatOpen(false)}
-//                 className="text-slate-400 hover:text-white transition-colors"
-//               >
-//                 <X className="w-5 h-5" />
-//               </button>
-//             </div>
-
-//             <div className="h-64 p-4 overflow-y-auto space-y-3">
-//               {chatMessages.map((msg) => (
-//                 <div
-//                   key={msg.id}
-//                   className={`flex ${
-//                     msg.type === "user" ? "justify-end" : "justify-start"
-//                   }`}
-//                 >
-//                   <div
-//                     className={`max-w-xs p-3 rounded-lg ${
-//                       msg.type === "user"
-//                         ? "bg-blue-600 text-white"
-//                         : "bg-slate-700 text-slate-200"
-//                     }`}
-//                   >
-//                     {msg.message}
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-
-//             <div className="p-4 border-t border-slate-700">
-//               <div className="flex space-x-2">
-//                 <input
-//                   type="text"
-//                   value={chatMessage}
-//                   onChange={(e) => setChatMessage(e.target.value)}
-//                   placeholder="Ask me anything..."
-//                   className="flex-1 bg-slate-700 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//                 />
-//                 <button className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-colors">
-//                   <Send className="w-4 h-4" />
-//                 </button>
-//               </div>
-//             </div>
-//           </motion.div>
-//         )}
-//       </AnimatePresence>
-
-//       {/* Chat Button */}
-//       <motion.button
-//         onClick={() => setIsChatOpen(!isChatOpen)}
-//         whileHover={{ scale: 1.1 }}
-//         whileTap={{ scale: 0.9 }}
-//         className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/25 z-40"
-//       >
-//         <MessageCircle className="w-6 h-6 text-white" />
-//       </motion.button>
-
-//       {/* Mobile overlay */}
-//       {isMobileMenuOpen && (
-//         <div
-//           className="fixed inset-0 bg-black/50 z-20 md:hidden"
-//           onClick={() => setIsMobileMenuOpen(false)}
-//         />
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// "use client"
-// import React from "react";
-// import { motion } from "framer-motion";
-
-// const UniversalLoading = ({ 
-//   width = "w-full", 
-//   height = "h-16", 
-//   rounded = "rounded-lg",
-//   className = "",
-//   showText = false,
-//   text = "Loading...",
-//   intensity = "medium" // "low", "medium", "high"
-// }) => {
-//   // Different glow intensities based on your app's theme
-//   const glowIntensities = {
-//     low: "shadow-lg shadow-blue-500/10",
-//     medium: "shadow-xl shadow-blue-500/20",
-//     high: "shadow-2xl shadow-blue-500/30"
-//   };
-
-//   const pulseVariants = {
-//     initial: { 
-//       opacity: 0.4,
-//       scale: 0.95,
-//       boxShadow: "0 0 0 rgba(59, 130, 246, 0)"
-//     },
-//     animate: { 
-//       opacity: [0.4, 0.8, 0.4],
-//       scale: [0.95, 1.02, 0.95],
-//       boxShadow: [
-//         "0 0 0 rgba(59, 130, 246, 0)",
-//         "0 0 30px rgba(59, 130, 246, 0.3)",
-//         "0 0 0 rgba(59, 130, 246, 0)"
-//       ]
-//     }
-//   };
-
-//   const shimmerVariants = {
-//     initial: { x: "-100%" },
-//     animate: { x: "100%" }
-//   };
-
-//   return (
-//     <div className={`${width} ${className}`}>
-//       <motion.div
-//         className={`
-//           ${height} 
-//           ${rounded} 
-//           bg-gradient-to-r from-slate-800/50 via-slate-700/50 to-slate-800/50
-//           border border-slate-600/30
-//           relative 
-//           overflow-hidden
-//           ${glowIntensities[intensity]}
-//         `}
-//         variants={pulseVariants}
-//         initial="initial"
-//         animate="animate"
-//         transition={{
-//           duration: 2,
-//           repeat: Infinity,
-//           ease: "easeInOut"
-//         }}
-//       >
-//         {/* Main shimmer effect */}
-//         <motion.div
-//           className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-400/20 to-transparent"
-//           variants={shimmerVariants}
-//           initial="initial"
-//           animate="animate"
-//           transition={{
-//             duration: 1.5,
-//             repeat: Infinity,
-//             ease: "easeInOut",
-//             delay: 0.2
-//           }}
-//         />
-        
-//         {/* Secondary subtle shimmer */}
-//         <motion.div
-//           className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-400/10 to-transparent"
-//           variants={shimmerVariants}
-//           initial="initial"
-//           animate="animate"
-//           transition={{
-//             duration: 2,
-//             repeat: Infinity,
-//             ease: "easeInOut",
-//             delay: 0.8
-//           }}
-//         />
-
-//         {/* Content area with subtle pattern */}
-//         <div className="absolute inset-0 bg-gradient-to-br from-slate-800/20 via-transparent to-slate-900/20" />
-        
-//         {/* Optional loading text */}
-//         {showText && (
-//           <div className="absolute inset-0 flex items-center justify-center">
-//             <motion.span
-//               className="text-slate-400 text-sm font-medium"
-//               animate={{ opacity: [0.5, 1, 0.5] }}
-//               transition={{
-//                 duration: 1.5,
-//                 repeat: Infinity,
-//                 ease: "easeInOut"
-//               }}
-//             >
-//               {text}
-//             </motion.span>
-//           </div>
-//         )}
-//       </motion.div>
-//     </div>
-//   );
-// };
-
-// // Preset configurations for common use cases
-// export const LoadingCard = ({ className = "" }) => (
-//   <UniversalLoading 
-//     width="w-full" 
-//     height="h-32" 
-//     rounded="rounded-xl"
-//     intensity="medium"
-//     className={className}
-//   />
-// );
-
-// export const LoadingButton = ({ className = "" }) => (
-//   <UniversalLoading 
-//     width="w-full" 
-//     height="h-12" 
-//     rounded="rounded-lg"
-//     intensity="low"
-//     className={className}
-//   />
-// );
-
-// export const LoadingBanner = ({ className = "" }) => (
-//   <UniversalLoading 
-//     width="w-full" 
-//     height="h-24" 
-//     rounded="rounded-2xl"
-//     intensity="high"
-//     showText={true}
-//     text="Loading content..."
-//     className={className}
-//   />
-// );
-
-// export const LoadingAvatar = ({ className = "" }) => (
-//   <UniversalLoading 
-//     width="w-12" 
-//     height="h-12" 
-//     rounded="rounded-full"
-//     intensity="low"
-//     className={className}
-//   />
-// );
-
-// export const LoadingText = ({ width = "w-32", className = "" }) => (
-//   <UniversalLoading 
-//     width={width} 
-//     height="h-4" 
-//     rounded="rounded"
-//     intensity="low"
-//     className={className}
-//   />
-// );
-
-// // Demo component showing various usage examples
-// const LoadingDemo = () => (
-//   <div className="min-h-screen bg-slate-900 p-8 space-y-8">
-//     <div className="max-w-4xl mx-auto space-y-8">
-      
-//       {/* Header */}
-//       <div className="text-center space-y-2">
-//         <h1 className="text-3xl font-bold text-white">Universal Loading States</h1>
-//         <p className="text-slate-400">Consistent loading experience across your learning platform</p>
-//       </div>
-
-//       {/* Card Loading Examples */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Course Cards</h2>
-//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//           <LoadingCard />
-//           <LoadingCard />
-//           <LoadingCard />
-//         </div>
-//       </div>
-
-//       {/* List Item Loading */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Lesson List</h2>
-//         <div className="space-y-3">
-//           {[1, 2, 3, 4].map((i) => (
-//             <div key={i} className="flex items-center gap-4">
-//               <LoadingAvatar />
-//               <div className="flex-1 space-y-2">
-//                 <LoadingText width="w-48" />
-//                 <LoadingText width="w-32" />
-//               </div>
-//               <LoadingButton className="w-24" />
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-
-//       {/* Banner Loading */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Module Header</h2>
-//         <LoadingBanner />
-//       </div>
-
-//       {/* Custom Sizes */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Custom Sizes</h2>
-//         <div className="space-y-4">
-//           <UniversalLoading width="w-full" height="h-8" rounded="rounded" intensity="low" />
-//           <UniversalLoading width="w-2/3" height="h-16" rounded="rounded-lg" intensity="medium" />
-//           <UniversalLoading width="w-1/2" height="h-24" rounded="rounded-xl" intensity="high" />
-//         </div>
-//       </div>
-
-//       {/* Progress Indicators */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Progress & Stats</h2>
-//         <div className="grid grid-cols-3 gap-4">
-//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-//           <UniversalLoading width="w-full" height="h-20" rounded="rounded-lg" intensity="medium" />
-//         </div>
-//       </div>
-
-//       {/* Full Page Loading */}
-//       <div className="space-y-4">
-//         <h2 className="text-xl font-semibold text-white">Page Loading</h2>
-//         <UniversalLoading 
-//           width="w-full" 
-//           height="h-96" 
-//           rounded="rounded-2xl"
-//           intensity="high"
-//           showText={true}
-//           text="Loading your learning dashboard..."
-//         />
-//       </div>
-
-//     </div>
-//   </div>
-// );
-
-// export default LoadingDemo;
-// export { UniversalLoading };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//ACTUAL COURSE CONTENT  PAGE
-// "use client"
-// import React, { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import {
-//   BookOpen,
-//   Target,
-//   HelpCircle,
-//   Clock,
-//   ChevronLeft,
-//   ChevronRight,
-//   Play,
-//   Code,
-//   Lightbulb,
-//   AlertTriangle,
-//   ExternalLink,
-//   CheckCircle,
-//   XCircle,
-//   Eye,
-//   EyeOff,
-//   Copy,
-//   Check
-// } from 'lucide-react';
-
-// const LessonContentPage = () => {
-//   const [activeTab, setActiveTab] = useState('content');
-//   const [selectedAnswers, setSelectedAnswers] = useState({});
-//   const [showResults, setShowResults] = useState(false);
-//   const [exerciseCompleted, setExerciseCompleted] = useState(false);
-//   const [showSolution, setShowSolution] = useState(false);
-//   const [copied, setCopied] = useState(false);
-
-//   // Sample lesson data based on your JSON structure
-//   const lessonData = {
-//     title: "Introduction to CSS",
-//     description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
-//     estimatedTime: 30,
-//     moduleInfo: "Module 1",
-    
-//     // Content Tab Data
-//     explanation: "CSS (Cascading Style Sheets) is the language used to style and layout web pages, controlling their visual appearance. It works alongside HTML to define how elements look, from colors and fonts to positioning and spacing. CSS rules consist of selectors that target elements and declarations that define styles. This lesson covers CSS syntax, ways to apply CSS (inline, internal, external), the cascade and specificity, and its role in modern web development. You'll learn how CSS integrates with HTML to create visually appealing, user-friendly interfaces and sets the foundation for responsive design.",
-    
-//     examples: [
-//       "h1 { color: blue; font-size: 24px; }",
-//       "<link rel=\"stylesheet\" href=\"styles.css\">"
-//     ],
-    
-//     realWorldApplication: "CSS is used in every website to style layouts, from simple blogs to complex e-commerce platforms, ensuring consistent and attractive designs.",
-    
-//     expertInsights: "Always use external stylesheets for maintainability. Understand the cascade to avoid specificity conflicts, and prefer classes over IDs for reusable styles.",
-    
-//     commonMistakes: [
-//       "Overusing !important, leading to specificity issues.",
-//       "Not separating CSS from HTML, causing maintenance challenges."
-//     ],
-    
-//     resources: [
-//       {
-//         title: "MDN — CSS Basics",
-//         url: "https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics",
-//         type: "article"
-//       },
-//       {
-//         title: "CSS Tricks — Complete Guide",
-//         url: "https://css-tricks.com/guides/beginner/",
-//         type: "guide"
-//       }
-//     ],
-
-//     // Exercise Tab Data
-//     exercises: [
-//       {
-//         title: "Apply Basic CSS",
-//         prompt: "Create an HTML page with a heading and paragraph, and use an external CSS file to style the heading blue and the paragraph with a 16px font size.",
-//         difficulty: "easy",
-//         hints: [
-//           "Use a <link> tag to connect the CSS file",
-//           "Target elements with type selectors"
-//         ],
-//         solution: "HTML: <h1>Title</h1><p>Text</p>\nCSS: h1 { color: blue; } p { font-size: 16px; }"
-//       }
-//     ],
-
-//     // Quiz Tab Data
-//     quiz: [
-//       {
-//         question: "What does CSS stand for?",
-//         options: ["Cascading Style Sheets", "Creative Style System", "Content Style Sheets", "Cascading Script System"],
-//         correctOption: [0],
-//         explanation: "CSS stands for Cascading Style Sheets, which describes how the styles cascade down and apply to HTML elements."
-//       },
-//       {
-//         question: "How do you apply an external CSS file?",
-//         options: ["<style>", "<script>", "<link>", "<css>"],
-//         correctOption: [2],
-//         explanation: "The <link> tag is used to connect external CSS files to HTML documents."
-//       },
-//       {
-//         question: "Which of the following are valid CSS selectors? (Multiple answers)",
-//         options: [".class-name", "#id-name", "element-name", "::pseudo-element"],
-//         correctOption: [0, 1, 2, 3],
-//         explanation: "All of these are valid CSS selectors: class selectors (.), ID selectors (#), element selectors, and pseudo-element selectors (::)."
-//       }
-//     ]
-//   };
-
-//   const handleAnswerSelect = (questionIndex, optionIndex) => {
-//     const currentAnswers = selectedAnswers[questionIndex] || [];
-//     const question = lessonData.quiz[questionIndex];
-    
-//     if (question.correctOption.length > 1) {
-//       // Multiple choice
-//       if (currentAnswers.includes(optionIndex)) {
-//         setSelectedAnswers({
-//           ...selectedAnswers,
-//           [questionIndex]: currentAnswers.filter(i => i !== optionIndex)
-//         });
-//       } else {
-//         setSelectedAnswers({
-//           ...selectedAnswers,
-//           [questionIndex]: [...currentAnswers, optionIndex]
-//         });
-//       }
-//     } else {
-//       // Single choice
-//       setSelectedAnswers({
-//         ...selectedAnswers,
-//         [questionIndex]: [optionIndex]
-//       });
-//     }
-//   };
-
-//   const checkQuizResults = () => {
-//     setShowResults(true);
-//   };
-
-//   const isAnswerCorrect = (questionIndex) => {
-//     const userAnswers = selectedAnswers[questionIndex] || [];
-//     const correctAnswers = lessonData.quiz[questionIndex].correctOption;
-    
-//     return userAnswers.length === correctAnswers.length && 
-//            userAnswers.every(answer => correctAnswers.includes(answer));
-//   };
-
-//   const getScorePercentage = () => {
-//     const correctAnswers = lessonData.quiz.filter((_, index) => isAnswerCorrect(index)).length;
-//     return Math.round((correctAnswers / lessonData.quiz.length) * 100);
-//   };
-
-//   const copyToClipboard = (text) => {
-//     navigator.clipboard.writeText(text);
-//     setCopied(true);
-//     setTimeout(() => setCopied(false), 2000);
-//   };
-
-//   const tabs = [
-//     { id: 'content', label: 'Content', icon: BookOpen },
-//     { id: 'exercise', label: 'Exercise', icon: Target },
-//     { id: 'quiz', label: 'Quiz', icon: HelpCircle }
-//   ];
-
-//   return (
-//     <div className="min-h-screen bg-[#0b1120] text-white">
-//       {/* Header */}
-//       <div className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50">
-//         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-//           {/* Navigation */}
-//           <div className="flex items-center justify-between py-4">
-//             <div className="flex items-center space-x-4">
-//               <motion.button
-//                 whileHover={{ scale: 1.05 }}
-//                 whileTap={{ scale: 0.95 }}
-//                 className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
-//               >
-//                 <ChevronLeft className="w-5 h-5" />
-//               </motion.button>
-//               <div className="text-sm text-gray-400">
-//                 <span>CSS Essentials</span> • <span>{lessonData.moduleInfo}</span>
-//               </div>
-//             </div>
-            
-//             <motion.button
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors"
-//             >
-//               <ChevronRight className="w-5 h-5" />
-//             </motion.button>
-//           </div>
-
-//           {/* Lesson Header */}
-//           <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-6 mb-6">
-//             <h1 className="text-3xl font-bold mb-2">{lessonData.title}</h1>
-//             <p className="text-blue-100 mb-4">{lessonData.description}</p>
-//             <div className="flex items-center space-x-4">
-//               <div className="flex items-center space-x-2">
-//                 <Clock className="w-4 h-4" />
-//                 <span className="text-sm">{lessonData.estimatedTime} mins</span>
-//               </div>
-//               <div className="flex items-center space-x-2">
-//                 <Target className="w-4 h-4" />
-//                 <span className="text-sm">{lessonData.moduleInfo}</span>
-//               </div>
-//             </div>
-//           </div>
-
-//           {/* Tabs */}
-//           <div className="flex space-x-1">
-//             {tabs.map((tab) => {
-//               const IconComponent = tab.icon;
-//               return (
-//                 <motion.button
-//                   key={tab.id}
-//                   onClick={() => setActiveTab(tab.id)}
-//                   className={`px-6 py-3 rounded-t-lg flex items-center space-x-2 transition-all ${
-//                     activeTab === tab.id
-//                       ? 'bg-gray-800 text-blue-400 border-b-2 border-blue-400'
-//                       : 'bg-gray-900/50 text-gray-400 hover:text-gray-300'
-//                   }`}
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                 >
-//                   <IconComponent className="w-4 h-4" />
-//                   <span>{tab.label}</span>
-//                 </motion.button>
-//               );
-//             })}
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Main Content */}
-//       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//         <AnimatePresence mode="wait">
-//           {/* Content Tab */}
-//           {activeTab === 'content' && (
-//             <motion.div
-//               key="content"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-8"
-//             >
-//               {/* Explanation Section */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <BookOpen className="w-5 h-5 mr-2 text-blue-400" />
-//                   Explanation
-//                 </h2>
-//                 <p className="text-gray-300 leading-relaxed">{lessonData.explanation}</p>
-//               </section>
-
-//               {/* Examples Section */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Code className="w-5 h-5 mr-2 text-green-400" />
-//                   Code Examples
-//                 </h2>
-//                 <div className="space-y-4">
-//                   {lessonData.examples.map((example, index) => (
-//                     <div key={index} className="bg-gray-900 rounded-lg p-4 relative group">
-//                       <button
-//                         onClick={() => copyToClipboard(example)}
-//                         className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-//                       >
-//                         {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-//                       </button>
-//                       <pre className="text-sm overflow-x-auto">
-//                         <code className="text-green-300">{example}</code>
-//                       </pre>
-//                     </div>
-//                   ))}
-//                 </div>
-//               </section>
-
-//               {/* Real World Application */}
-//               <section className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 backdrop-blur-sm border border-purple-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Play className="w-5 h-5 mr-2 text-purple-400" />
-//                   Real World Application
-//                 </h2>
-//                 <p className="text-gray-300">{lessonData.realWorldApplication}</p>
-//               </section>
-
-//               {/* Expert Insights */}
-//               <section className="bg-gradient-to-r from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
-//                   Expert Insights
-//                 </h2>
-//                 <p className="text-gray-300">{lessonData.expertInsights}</p>
-//               </section>
-
-//               {/* Common Mistakes */}
-//               <section className="bg-gradient-to-r from-red-500/10 to-pink-500/10 backdrop-blur-sm border border-red-500/30 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <AlertTriangle className="w-5 h-5 mr-2 text-red-400" />
-//                   Common Mistakes
-//                 </h2>
-//                 <ul className="space-y-2">
-//                   {lessonData.commonMistakes.map((mistake, index) => (
-//                     <li key={index} className="flex items-start space-x-2 text-gray-300">
-//                       <span className="text-red-400 mt-1">•</span>
-//                       <span>{mistake}</span>
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </section>
-
-//               {/* Resources */}
-//               <section className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                 <h2 className="text-xl font-semibold mb-4 flex items-center">
-//                   <ExternalLink className="w-5 h-5 mr-2 text-blue-400" />
-//                   Additional Resources
-//                 </h2>
-//                 <div className="grid md:grid-cols-2 gap-4">
-//                   {lessonData.resources.map((resource, index) => (
-//                     <motion.a
-//                       key={index}
-//                       href={resource.url}
-//                       target="_blank"
-//                       rel="noopener noreferrer"
-//                       className="flex items-center justify-between p-4 bg-gray-900/50 rounded-lg hover:bg-gray-900 transition-colors group"
-//                       whileHover={{ scale: 1.02 }}
-//                     >
-//                       <div>
-//                         <h4 className="font-semibold text-blue-400 group-hover:text-blue-300">
-//                           {resource.title}
-//                         </h4>
-//                         <p className="text-sm text-gray-400 capitalize">{resource.type}</p>
-//                       </div>
-//                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400" />
-//                     </motion.a>
-//                   ))}
-//                 </div>
-//               </section>
-//             </motion.div>
-//           )}
-
-//           {/* Exercise Tab */}
-//           {activeTab === 'exercise' && (
-//             <motion.div
-//               key="exercise"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-6"
-//             >
-//               {lessonData.exercises.map((exercise, index) => (
-//                 <div key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                   <div className="flex items-start justify-between mb-4">
-//                     <div>
-//                       <h2 className="text-xl font-semibold mb-2">{exercise.title}</h2>
-//                       <span className={`px-3 py-1 rounded-full text-sm ${
-//                         exercise.difficulty === 'easy' ? 'bg-green-500/20 text-green-400' :
-//                         exercise.difficulty === 'medium' ? 'bg-yellow-500/20 text-yellow-400' :
-//                         'bg-red-500/20 text-red-400'
-//                       }`}>
-//                         {exercise.difficulty}
-//                       </span>
-//                     </div>
-//                     <motion.button
-//                       onClick={() => setExerciseCompleted(!exerciseCompleted)}
-//                       className={`px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors ${
-//                         exerciseCompleted 
-//                           ? 'bg-green-500 text-white' 
-//                           : 'bg-blue-500 hover:bg-blue-600 text-white'
-//                       }`}
-//                       whileHover={{ scale: 1.05 }}
-//                       whileTap={{ scale: 0.95 }}
-//                     >
-//                       {exerciseCompleted ? (
-//                         <>
-//                           <CheckCircle className="w-4 h-4" />
-//                           <span>Completed</span>
-//                         </>
-//                       ) : (
-//                         <>
-//                           <Play className="w-4 h-4" />
-//                           <span>Start Exercise</span>
-//                         </>
-//                       )}
-//                     </motion.button>
-//                   </div>
-
-//                   <div className="bg-gray-900/50 rounded-lg p-4 mb-6">
-//                     <h3 className="font-semibold mb-2">Task:</h3>
-//                     <p className="text-gray-300">{exercise.prompt}</p>
-//                   </div>
-
-//                   {/* Hints */}
-//                   <div className="mb-6">
-//                     <h3 className="font-semibold mb-3 flex items-center">
-//                       <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
-//                       Hints
-//                     </h3>
-//                     <ul className="space-y-2">
-//                       {exercise.hints.map((hint, hintIndex) => (
-//                         <li key={hintIndex} className="flex items-start space-x-2 text-gray-300">
-//                           <span className="text-yellow-400 mt-1">💡</span>
-//                           <span>{hint}</span>
-//                         </li>
-//                       ))}
-//                     </ul>
-//                   </div>
-
-//                   {/* Solution */}
-//                   <div>
-//                     <div className="flex items-center justify-between mb-3">
-//                       <h3 className="font-semibold">Solution</h3>
-//                       <motion.button
-//                         onClick={() => setShowSolution(!showSolution)}
-//                         className="flex items-center space-x-2 px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-//                         whileHover={{ scale: 1.05 }}
-//                         whileTap={{ scale: 0.95 }}
-//                       >
-//                         {showSolution ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-//                         <span>{showSolution ? 'Hide' : 'Show'}</span>
-//                       </motion.button>
-//                     </div>
-                    
-//                     <AnimatePresence>
-//                       {showSolution && (
-//                         <motion.div
-//                           initial={{ height: 0, opacity: 0 }}
-//                           animate={{ height: 'auto', opacity: 1 }}
-//                           exit={{ height: 0, opacity: 0 }}
-//                           transition={{ duration: 0.3 }}
-//                           className="overflow-hidden"
-//                         >
-//                           <div className="bg-gray-900 rounded-lg p-4 relative group">
-//                             <button
-//                               onClick={() => copyToClipboard(exercise.solution)}
-//                               className="absolute top-2 right-2 p-2 bg-gray-800 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-//                             >
-//                               {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
-//                             </button>
-//                             <pre className="text-sm overflow-x-auto">
-//                               <code className="text-green-300">{exercise.solution}</code>
-//                             </pre>
-//                           </div>
-//                         </motion.div>
-//                       )}
-//                     </AnimatePresence>
-//                   </div>
-//                 </div>
-//               ))}
-//             </motion.div>
-//           )}
-
-//           {/* Quiz Tab */}
-//           {activeTab === 'quiz' && (
-//             <motion.div
-//               key="quiz"
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               exit={{ opacity: 0, y: -20 }}
-//               transition={{ duration: 0.3 }}
-//               className="space-y-6"
-//             >
-//               {/* Quiz Header */}
-//               <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
-//                 <h2 className="text-2xl font-semibold mb-2">Knowledge Check</h2>
-//                 <p className="text-gray-300">Test your understanding of the concepts covered in this lesson.</p>
-//               </div>
-
-//               {/* Quiz Questions */}
-//               <div className="space-y-6">
-//                 {lessonData.quiz.map((question, questionIndex) => (
-//                   <div key={questionIndex} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//                     <div className="flex items-start justify-between mb-4">
-//                       <h3 className="text-lg font-semibold">
-//                         {questionIndex + 1}. {question.question}
-//                       </h3>
-//                       {question.correctOption.length > 1 && (
-//                         <span className="px-2 py-1 bg-blue-500/20 text-blue-400 rounded text-sm">
-//                           Multiple Choice
-//                         </span>
-//                       )}
-//                     </div>
-
-//                     <div className="space-y-3">
-//                       {question.options.map((option, optionIndex) => {
-//                         const isSelected = selectedAnswers[questionIndex]?.includes(optionIndex);
-//                         const isCorrect = question.correctOption.includes(optionIndex);
-//                         const showResult = showResults;
-                        
-//                         let buttonClass = "w-full p-4 text-left border-2 rounded-lg transition-all ";
-                        
-//                         if (showResult) {
-//                           if (isCorrect) {
-//                             buttonClass += "border-green-500 bg-green-500/20 text-green-300";
-//                           } else if (isSelected && !isCorrect) {
-//                             buttonClass += "border-red-500 bg-red-500/20 text-red-300";
-//                           } else {
-//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300";
-//                           }
-//                         } else {
-//                           if (isSelected) {
-//                             buttonClass += "border-blue-500 bg-blue-500/20 text-blue-300";
-//                           } else {
-//                             buttonClass += "border-gray-600 bg-gray-800/50 text-gray-300 hover:border-gray-500";
-//                           }
-//                         }
-
-//                         return (
-//                           <motion.button
-//                             key={optionIndex}
-//                             onClick={() => !showResults && handleAnswerSelect(questionIndex, optionIndex)}
-//                             className={buttonClass}
-//                             whileHover={!showResults ? { scale: 1.01 } : {}}
-//                             whileTap={!showResults ? { scale: 0.99 } : {}}
-//                             disabled={showResults}
-//                           >
-//                             <div className="flex items-center justify-between">
-//                               <span>{option}</span>
-//                               {showResult && isCorrect && <CheckCircle className="w-5 h-5 text-green-400" />}
-//                               {showResult && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-400" />}
-//                             </div>
-//                           </motion.button>
-//                         );
-//                       })}
-//                     </div>
-
-//                     {/* Show explanation after results */}
-//                     {showResults && (
-//                       <motion.div
-//                         initial={{ opacity: 0, height: 0 }}
-//                         animate={{ opacity: 1, height: 'auto' }}
-//                         className="mt-4 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg"
-//                       >
-//                         <p className="text-blue-300 text-sm">
-//                           <strong>Explanation:</strong> {question.explanation}
-//                         </p>
-//                       </motion.div>
-//                     )}
-//                   </div>
-//                 ))}
-//               </div>
-
-//               {/* Quiz Actions */}
-//               <div className="flex items-center justify-between">
-//                 <div className="text-gray-400">
-//                   Questions answered: {Object.keys(selectedAnswers).length} / {lessonData.quiz.length}
-//                 </div>
-                
-//                 {!showResults ? (
-//                   <motion.button
-//                     onClick={checkQuizResults}
-//                     disabled={Object.keys(selectedAnswers).length !== lessonData.quiz.length}
-//                     className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg transition-colors"
-//                     whileHover={{ scale: 1.05 }}
-//                     whileTap={{ scale: 0.95 }}
-//                   >
-//                     Submit Quiz
-//                   </motion.button>
-//                 ) : (
-//                   <div className="flex items-center space-x-4">
-//                     <div className="text-right">
-//                       <p className="text-sm text-gray-400">Your Score</p>
-//                       <p className="text-xl font-bold text-blue-400">{getScorePercentage()}%</p>
-//                     </div>
-//                     <motion.button
-//                       onClick={() => {
-//                         setSelectedAnswers({});
-//                         setShowResults(false);
-//                       }}
-//                       className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg transition-colors"
-//                       whileHover={{ scale: 1.05 }}
-//                       whileTap={{ scale: 0.95 }}
-//                     >
-//                       Retake Quiz
-//                     </motion.button>
-//                   </div>
-//                 )}
-//               </div>
-//             </motion.div>
-//           )}
-//         </AnimatePresence>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LessonContentPage;
-
-
-
-
-
-
-
-
-
-
-//AI ASSISTANCE PART
-// "use client"
-// import React, { useState, useRef, useEffect } from 'react';
-// import { Send, Bot, User, Sparkles, BookOpen, Code, HelpCircle, Zap, X } from 'lucide-react';
-// import { motion, AnimatePresence } from 'framer-motion';
-
-// const AiAssistantPage = () => {
-//   const [messages, setMessages] = useState([
-//     {
-//       id: 1,
-//       type: 'bot',
-//       content: "Hi! I'm your AI learning assistant. I can help you with questions about your courses, clarify concepts, or guide you through exercises. How can I assist you today?",
-//       timestamp: new Date()
-//     }
-//   ]);
-//   const [inputValue, setInputValue] = useState('');
-//   const [isTyping, setIsTyping] = useState(false);
-//   const messagesEndRef = useRef(null);
-
-//   const scrollToBottom = () => {
-//     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-//   };
-
-//   useEffect(() => {
-//     scrollToBottom();
-//   }, [messages]);
-
-//   const quickPrompts = [
-//     { icon: BookOpen, text: "Explain this concept", color: "from-blue-500 to-purple-500" },
-//     { icon: Code, text: "Help with code", color: "from-purple-500 to-pink-500" },
-//     { icon: HelpCircle, text: "Quiz me", color: "from-pink-500 to-red-500" },
-//     { icon: Zap, text: "Quick tip", color: "from-blue-400 to-cyan-400" }
-//   ];
-
-//   const handleSendMessage = () => {
-//     if (!inputValue.trim()) return;
-
-//     const userMessage = {
-//       id: messages.length + 1,
-//       type: 'user',
-//       content: inputValue,
-//       timestamp: new Date()
-//     };
-
-//     setMessages([...messages, userMessage]);
-//     setInputValue('');
-//     setIsTyping(true);
-
-//     setTimeout(() => {
-//       const botMessage = {
-//         id: messages.length + 2,
-//         type: 'bot',
-//         content: "I understand your question. Let me help you with that. This is a demo response showing how the AI assistant would interact with you.",
-//         timestamp: new Date()
-//       };
-//       setMessages(prev => [...prev, botMessage]);
-//       setIsTyping(false);
-//     }, 1500);
-//   };
-
-//   const handleQuickPrompt = (text) => {
-//     setInputValue(text);
-//   };
-
-//   const handleKeyPress = (e) => {
-//     if (e.key === 'Enter' && !e.shiftKey) {
-//       e.preventDefault();
-//       handleSendMessage();
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white mt-16">
-//       {/* Header */}
-//       <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm sticky top-0 z-10">
-//         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-//           <div className="flex items-center gap-3">
-//             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-//               <Bot className="w-6 h-6" />
-//             </div>
-//             <div>
-//               <h1 className="text-xl font-semibold">AI Assistant</h1>
-//               <p className="text-sm text-slate-400">Always here to help</p>
-//             </div>
-//           </div>
-//           <div className="flex items-center gap-2">
-//             <motion.div
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               className="px-4 py-2 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-colors cursor-pointer flex items-center gap-2"
-//             >
-//               <Sparkles className="w-4 h-4 text-blue-400" />
-//               <span className="text-sm">Premium</span>
-//             </motion.div>
-//           </div>
-//         </div>
-//       </header>
-
-//       <div className="max-w-5xl mx-auto px-6 py-8 flex flex-col h-[calc(100vh-88px)]">
-//         {/* Quick Prompts */}
-//         {messages.length <= 1 && (
-//           <motion.div
-//             initial={{ opacity: 0, y: 20 }}
-//             animate={{ opacity: 1, y: 0 }}
-//             className="mb-6"
-//           >
-//             <h2 className="text-sm font-medium text-slate-400 mb-3">Quick Actions</h2>
-//             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-//               {quickPrompts.map((prompt, index) => (
-//                 <motion.button
-//                   key={index}
-//                   initial={{ opacity: 0, y: 20 }}
-//                   animate={{ opacity: 1, y: 0 }}
-//                   transition={{ delay: index * 0.1 }}
-//                   whileHover={{ scale: 1.02, y: -2 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   onClick={() => handleQuickPrompt(prompt.text)}
-//                   className="p-4 rounded-xl bg-slate-900/50 border border-slate-800 hover:border-slate-700 transition-all group"
-//                 >
-//                   <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${prompt.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
-//                     <prompt.icon className="w-5 h-5 text-white" />
-//                   </div>
-//                   <p className="text-sm text-slate-300 text-left">{prompt.text}</p>
-//                 </motion.button>
-//               ))}
-//             </div>
-//           </motion.div>
-//         )}
-
-//         {/* Messages */}
-//         <div className="flex-1 overflow-y-auto mb-6 space-y-4 scrollbar-thin scrollbar-thumb-slate-800 scrollbar-track-transparent">
-//           <AnimatePresence>
-//             {messages.map((message, index) => (
-//               <motion.div
-//                 key={message.id}
-//                 initial={{ opacity: 0, y: 20 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 transition={{ delay: index * 0.1 }}
-//                 className={`flex gap-3 ${message.type === 'user' ? 'flex-row-reverse' : 'flex-row'}`}
-//               >
-//                 <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
-//                   message.type === 'bot' 
-//                     ? 'bg-gradient-to-br from-blue-500 to-purple-600' 
-//                     : 'bg-slate-800'
-//                 }`}>
-//                   {message.type === 'bot' ? <Bot className="w-5 h-5" /> : <User className="w-5 h-5" />}
-//                 </div>
-//                 <div className={`flex-1 max-w-2xl ${message.type === 'user' ? 'flex justify-end' : ''}`}>
-//                   <div className={`p-4 rounded-2xl ${
-//                     message.type === 'bot'
-//                       ? 'bg-slate-900/50 border border-slate-800'
-//                       : 'bg-gradient-to-br from-blue-600 to-purple-600'
-//                   }`}>
-//                     <p className="text-sm leading-relaxed">{message.content}</p>
-//                   </div>
-//                   <p className="text-xs text-slate-500 mt-1 px-2">
-//                     {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-//                   </p>
-//                 </div>
-//               </motion.div>
-//             ))}
-//           </AnimatePresence>
-
-//           {isTyping && (
-//             <motion.div
-//               initial={{ opacity: 0, y: 20 }}
-//               animate={{ opacity: 1, y: 0 }}
-//               className="flex gap-3"
-//             >
-//               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-//                 <Bot className="w-5 h-5" />
-//               </div>
-//               <div className="bg-slate-900/50 border border-slate-800 p-4 rounded-2xl">
-//                 <div className="flex gap-1">
-//                   <motion.div
-//                     animate={{ scale: [1, 1.2, 1] }}
-//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0 }}
-//                     className="w-2 h-2 bg-blue-400 rounded-full"
-//                   />
-//                   <motion.div
-//                     animate={{ scale: [1, 1.2, 1] }}
-//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.2 }}
-//                     className="w-2 h-2 bg-purple-400 rounded-full"
-//                   />
-//                   <motion.div
-//                     animate={{ scale: [1, 1.2, 1] }}
-//                     transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
-//                     className="w-2 h-2 bg-pink-400 rounded-full"
-//                   />
-//                 </div>
-//               </div>
-//             </motion.div>
-//           )}
-//           <div ref={messagesEndRef} />
-//         </div>
-
-//         {/* Input Area */}
-//         <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-4">
-//           <div className="flex gap-3">
-//             <input
-//               type="text"
-//               value={inputValue}
-//               onChange={(e) => setInputValue(e.target.value)}
-//               onKeyPress={handleKeyPress}
-//               placeholder="Ask me anything about your learning..."
-//               className="flex-1 bg-transparent outline-none text-sm placeholder:text-slate-500"
-//             />
-//             <motion.button
-//               whileHover={{ scale: 1.05 }}
-//               whileTap={{ scale: 0.95 }}
-//               onClick={handleSendMessage}
-//               disabled={!inputValue.trim()}
-//               className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
-//                 inputValue.trim()
-//                   ? 'bg-gradient-to-br from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/20'
-//                   : 'bg-slate-800 opacity-50 cursor-not-allowed'
-//               }`}
-//             >
-//               <Send className="w-5 h-5" />
-//             </motion.button>
-//           </div>
-//           <p className="text-xs text-slate-500 mt-3">
-//             Press Enter to send • Shift + Enter for new line
-//           </p>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AiAssistantPage;
-
-
-
-
-
-
-
-
-
-
-
-
-
-"use client"
-import React, { useState } from 'react';
-import { Wifi, Lock, CheckCircle, XCircle, ArrowRight, Server, Monitor } from 'lucide-react';
-
-const WebSocketHandshakeExplainer = () => {
-  const [activeTab, setActiveTab] = useState('concept');
-  const [animationStep, setAnimationStep] = useState(0);
-
-  const startAnimation = () => {
-    setAnimationStep(0);
-    const interval = setInterval(() => {
-      setAnimationStep(prev => {
-        if (prev >= 4) {
-          clearInterval(interval);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 1500);
-  };
-
-  React.useEffect(() => {
-    if (activeTab === 'visual') {
-      startAnimation();
-    }
-  }, [activeTab]);
+"use client";
+import React, { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  Sparkles,
+  GitBranch,
+  Zap,
+  Download,
+  Users,
+  BarChart3,
+  MessageSquare,
+  Play,
+  ChevronRight,
+  Check,
+  Menu,
+  X,
+} from "lucide-react";
+
+export default function StoryForgeAI() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
+
+  const features = [
+    {
+      icon: GitBranch,
+      title: "Visual Story Builder",
+      description:
+        "Design branching narratives with an intuitive flowchart interface",
+    },
+    {
+      icon: Sparkles,
+      title: "AI Story Assistant",
+      description:
+        "Generate dialogue, plot twists, and character backstories instantly",
+    },
+    {
+      icon: Download,
+      title: "JSON Export",
+      description: "Export directly to Unity, Unreal, or any game engine",
+    },
+    {
+      icon: Users,
+      title: "Real-time Collaboration",
+      description: "Multiple writers working together on the same narrative",
+    },
+    {
+      icon: MessageSquare,
+      title: "AI Character Chat",
+      description: "Interact with characters to test personality and dialogue",
+    },
+    {
+      icon: BarChart3,
+      title: "Story Analytics",
+      description: "AI-powered insights on pacing, tone, and player choices",
+    },
+  ];
+
+  const plans = [
+    {
+      name: "Indie",
+      price: "$19",
+      period: "/month",
+      features: [
+        "5 Active Projects",
+        "10,000 AI Tokens/mo",
+        "JSON Export",
+        "Community Support",
+      ],
+    },
+    {
+      name: "Studio",
+      price: "$79",
+      period: "/month",
+      popular: true,
+      features: [
+        "Unlimited Projects",
+        "100,000 AI Tokens/mo",
+        "Real-time Collaboration",
+        "Priority Support",
+        "Analytics Dashboard",
+      ],
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      period: "",
+      features: [
+        "Custom AI Models",
+        "Dedicated Support",
+        "On-premise Deployment",
+        "SLA Guarantee",
+      ],
+    },
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 pt-22">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-slate-800/50 backdrop-blur-lg rounded-2xl border border-purple-500/20 overflow-hidden">
-          {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6">
-            <div className="flex items-center gap-3">
-              <Wifi className="w-8 h-8 text-white" />
-              <div>
-                <h1 className="text-2xl font-bold text-white">WebSocket Handshake & Authentication</h1>
-                <p className="text-purple-100 text-sm">Understanding Socket.IO with Clerk</p>
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-slate-100">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-cyan-500/10">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                <Sparkles className="w-5 h-5" />
               </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                StoryForge AI
+              </span>
+            </div>
+
+            <div className="hidden md:flex items-center gap-8">
+              <a
+                href="#features"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Pricing
+              </a>
+              <a
+                href="#docs"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Docs
+              </a>
+              <button className="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-medium hover:shadow-lg hover:shadow-cyan-500/25 transition-all">
+                Start Free Trial
+              </button>
+            </div>
+
+            <button
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden bg-slate-900 border-t border-cyan-500/10 px-6 py-4"
+          >
+            <div className="flex flex-col gap-4">
+              <a
+                href="#features"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Features
+              </a>
+              <a
+                href="#pricing"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Pricing
+              </a>
+              <a
+                href="#docs"
+                className="text-slate-300 hover:text-cyan-400 transition-colors"
+              >
+                Docs
+              </a>
+              <button className="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-medium">
+                Start Free Trial
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </nav>
+
+      {/* Hero Section */}
+      <motion.section style={{ opacity, scale }} className="pt-32 pb-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-500/10 border border-cyan-500/20 rounded-full text-cyan-400 text-sm mb-6">
+                <Zap className="w-4 h-4" />
+                <span>AI-Powered Story Building</span>
+              </div>
+
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Craft Epic
+                <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                  {" "}
+                  Narratives{" "}
+                </span>
+                for Your Games
+              </h1>
+
+              <p className="text-xl text-slate-400 mb-8 leading-relaxed">
+                StoryForge AI helps indie devs and studios design branching
+                storylines with AI-assisted dialogue, character development, and
+                real-time collaboration tools.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 group">
+                  Get Started Free
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <button className="px-8 py-4 bg-slate-800/50 border border-slate-700 rounded-lg font-semibold text-lg hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
+                  <Play className="w-5 h-5" />
+                  Watch Demo
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Hero Visual */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mt-16 relative"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 blur-3xl"></div>
+              <div className="relative bg-slate-800/50 border border-cyan-500/20 rounded-2xl p-8 backdrop-blur-sm">
+                <div className="grid grid-cols-3 gap-4">
+                  {[1, 2, 3].map((i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.4 + i * 0.1 }}
+                      className="h-32 bg-gradient-to-br from-slate-700/50 to-slate-800/50 rounded-lg border border-cyan-500/10"
+                    ></motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Features Section */}
+      <section id="features" className="py-20 px-6 bg-slate-900/50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Everything You Need to
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {" "}
+                Build Stories
+              </span>
+            </h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+              Professional tools designed for game developers and storytellers
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-slate-800/50 border border-slate-700 rounded-xl p-6 hover:border-cyan-500/30 transition-all group"
+              >
+                <div className="w-12 h-12 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <feature.icon className="w-6 h-6 text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-slate-400">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Simple, Transparent
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {" "}
+                Pricing
+              </span>
+            </h2>
+            <p className="text-slate-400 text-lg">
+              Start free, scale as you grow
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {plans.map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`relative bg-slate-800/50 border rounded-2xl p-8 ${
+                  plan.popular
+                    ? "border-cyan-500 shadow-xl shadow-cyan-500/20"
+                    : "border-slate-700"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold">
+                    Most Popular
+                  </div>
+                )}
+
+                <div className="mb-6">
+                  <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-4xl font-bold">{plan.price}</span>
+                    <span className="text-slate-400">{plan.period}</span>
+                  </div>
+                </div>
+
+                <ul className="space-y-4 mb-8">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-cyan-400 mt-0.5 flex-shrink-0" />
+                      <span className="text-slate-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className={`w-full py-3 rounded-lg font-semibold transition-all ${
+                    plan.popular
+                      ? "bg-gradient-to-r from-cyan-500 to-blue-600 hover:shadow-lg hover:shadow-cyan-500/25"
+                      : "bg-slate-700 hover:bg-slate-600"
+                  }`}
+                >
+                  Get Started
+                </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-r from-cyan-500/10 to-blue-600/10 border border-cyan-500/20 rounded-2xl p-12"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Ready to Build Your
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                {" "}
+                Story?
+              </span>
+            </h2>
+            <p className="text-slate-400 text-lg mb-8">
+              Join hundreds of game developers crafting immersive narratives
+              with AI
+            </p>
+            <button className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-cyan-500/30 transition-all">
+              Start Free Trial
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-800 py-12 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <span className="text-xl font-bold">StoryForge AI</span>
+              </div>
+              <p className="text-slate-400 text-sm">
+                AI-powered story building for game developers
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Product</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Features
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Pricing
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Documentation
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Company</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Blog
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Careers
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">Legal</h4>
+              <ul className="space-y-2 text-slate-400 text-sm">
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Privacy
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Terms
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-cyan-400 transition-colors">
+                    Security
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
 
-          {/* Tabs */}
-          <div className="flex border-b border-slate-700">
-            {['concept', 'visual', 'code', 'flow'].map(tab => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-1 px-6 py-4 text-sm font-medium transition-colors ${
-                  activeTab === tab
-                    ? 'bg-purple-600 text-white'
-                    : 'bg-slate-800/50 text-slate-400 hover:text-white'
-                }`}
-              >
-                {tab === 'concept' && '🤝 What is Handshake?'}
-                {tab === 'visual' && '🎬 Visual Flow'}
-                {tab === 'code' && '💻 Code Example'}
-                {tab === 'flow' && '🔐 Why userId?'}
-              </button>
-            ))}
-          </div>
-
-          {/* Content */}
-          <div className="p-6">
-            {activeTab === 'concept' && (
-              <div className="space-y-6">
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h2 className="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
-                    <Wifi className="w-5 h-5" />
-                    What is a Handshake?
-                  </h2>
-                  <p className="text-slate-300 leading-relaxed mb-4">
-                    A <span className="text-purple-400 font-semibold">handshake</span> is the initial connection process between a client (browser) and server. 
-                    Think of it like introducing yourself when you meet someone new!
-                  </p>
-                  <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-purple-500">
-                    <p className="text-slate-300 text-sm">
-                      <strong className="text-white">Real-world analogy:</strong> When you enter a building with security, 
-                      you show your ID badge at the entrance. The guard checks it and lets you in. That's exactly what a handshake does!
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h2 className="text-xl font-bold text-blue-400 mb-4">The Handshake Process</h2>
-                  <div className="space-y-4">
-                    {[
-                      { step: 1, title: 'Client Initiates', desc: 'Browser sends connection request with auth data', color: 'purple' },
-                      { step: 2, title: 'Server Receives', desc: 'Middleware intercepts the request', color: 'blue' },
-                      { step: 3, title: 'Authentication', desc: 'Server validates the userId from Clerk', color: 'green' },
-                      { step: 4, title: 'Connection Established', desc: 'If valid, WebSocket connection opens', color: 'emerald' }
-                    ].map(item => (
-                      <div key={item.step} className="flex items-start gap-3">
-                        <div className={`bg-${item.color}-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0`}>
-                          {item.step}
-                        </div>
-                        <div>
-                          <p className="text-white font-semibold">{item.title}</p>
-                          <p className="text-slate-400 text-sm">{item.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-6 border border-purple-500/30">
-                  <h3 className="text-lg font-bold text-white mb-3">🎯 Key Point</h3>
-                  <p className="text-slate-300">
-                    The handshake happens <strong className="text-purple-400">ONCE</strong> when the connection is established, 
-                    not with every message. This is why we attach <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code> - 
-                    so we can identify the user for all subsequent messages!
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'visual' && (
-              <div className="space-y-6">
-                <button
-                  onClick={startAnimation}
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-                >
-                  🔄 Replay Animation
-                </button>
-
-                <div className="relative bg-slate-900/50 rounded-xl p-8 min-h-[400px]">
-                  {/* Client Side */}
-                  <div className={`absolute left-8 top-8 transition-all duration-500 ${animationStep >= 0 ? 'opacity-100' : 'opacity-0'}`}>
-                    <div className="bg-blue-600 rounded-xl p-4 shadow-lg">
-                      <Monitor className="w-8 h-8 text-white mb-2" />
-                      <p className="text-white font-bold">Client Browser</p>
-                      <p className="text-blue-200 text-sm">Your React App</p>
-                    </div>
-                  </div>
-
-                  {/* Server Side */}
-                  <div className={`absolute right-8 top-8 transition-all duration-500 ${animationStep >= 0 ? 'opacity-100' : 'opacity-0'}`}>
-                    <div className="bg-purple-600 rounded-xl p-4 shadow-lg">
-                      <Server className="w-8 h-8 text-white mb-2" />
-                      <p className="text-white font-bold">Server</p>
-                      <p className="text-purple-200 text-sm">Node.js + Socket.IO</p>
-                    </div>
-                  </div>
-
-                  {/* Step 1: Connection Request */}
-                  {animationStep >= 1 && (
-                    <div className="absolute left-8 top-40 animate-pulse">
-                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-blue-500 max-w-xs">
-                        <p className="text-blue-400 font-bold text-sm mb-2">1️⃣ Connection Request</p>
-                        <code className="text-xs text-slate-300 block">
-                          {`{ auth: { userId: "user_123" } }`}
-                        </code>
-                        <ArrowRight className="w-6 h-6 text-blue-400 mt-2 animate-bounce" style={{ transform: 'rotate(0deg)' }} />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 2: Middleware Check */}
-                  {animationStep >= 2 && (
-                    <div className="absolute right-8 top-40 animate-pulse">
-                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-yellow-500 max-w-xs">
-                        <p className="text-yellow-400 font-bold text-sm mb-2">2️⃣ Middleware Check</p>
-                        <code className="text-xs text-slate-300 block">
-                          socketAuthMiddleware()
-                        </code>
-                        <Lock className="w-6 h-6 text-yellow-400 mt-2" />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 3: Validation */}
-                  {animationStep >= 3 && (
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse">
-                      <div className="bg-slate-700 rounded-lg p-4 shadow-xl border border-green-500">
-                        <p className="text-green-400 font-bold text-sm mb-2">3️⃣ Validation</p>
-                        <CheckCircle className="w-8 h-8 text-green-400 mx-auto" />
-                        <p className="text-xs text-slate-300 mt-2">userId is valid!</p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Step 4: Connected */}
-                  {animationStep >= 4 && (
-                    <div className="absolute left-1/2 bottom-8 -translate-x-1/2 animate-pulse">
-                      <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg p-4 shadow-xl">
-                        <CheckCircle className="w-8 h-8 text-white mx-auto mb-2" />
-                        <p className="text-white font-bold">✅ Connected!</p>
-                        <p className="text-green-100 text-sm">socket.userId = "user_123"</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'code' && (
-              <div className="space-y-6">
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h3 className="text-lg font-bold text-purple-400 mb-4">📱 Client Side (Your React Component)</h3>
-                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
-                    <code className="text-sm text-slate-300">{`import { io } from 'socket.io-client';
-import { useUser } from '@clerk/nextjs';
-
-function AiChatSection() {
-  const { user } = useUser();
-  
-  useEffect(() => {
-    // Connect to Socket.IO with authentication
-    const socket = io('http://localhost:4000', {
-      auth: {
-        userId: user?.id  // ← This is where you pass userId!
-      }
-    });
-    
-    socket.on('connect', () => {
-      console.log('Connected to server!');
-    });
-    
-    return () => socket.disconnect();
-  }, [user]);
-  
-  return <div>Chat Component</div>;
-}`}</code>
-                  </pre>
-                </div>
-
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h3 className="text-lg font-bold text-blue-400 mb-4">🖥️ Server Side (Your Code)</h3>
-                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
-                    <code className="text-sm text-slate-300">{`const socketAuthMiddleware = async (socket, next) => {
-  try {
-    // Extract userId from handshake auth object
-    const userId = socket.handshake.auth.userId;
-    
-    if (!userId) {
-      return next(new Error("userId is required"));
-    }
-    
-    // Attach userId to socket for later use
-    socket.userId = userId;  // ← Now available everywhere!
-    
-    next(); // Allow connection
-  } catch (error) {
-    next(new Error("Authentication failed"));
-  }
-};
-
-// Usage in Socket.IO
-io.use(socketAuthMiddleware);
-
-io.on('connection', (socket) => {
-  console.log('User connected:', socket.userId);
-  
-  socket.on('send-message', (message) => {
-    // You can use socket.userId in any event!
-    console.log(\`User \${socket.userId} sent: \${message}\`);
-  });
-});`}</code>
-                  </pre>
-                </div>
-
-                <div className="bg-gradient-to-r from-purple-600/20 to-blue-600/20 rounded-xl p-6 border border-purple-500/30">
-                  <h3 className="text-lg font-bold text-white mb-3">💡 What's Happening?</h3>
-                  <ol className="space-y-2 text-slate-300">
-                    <li><strong className="text-purple-400">1.</strong> Client sends <code className="bg-slate-900 px-2 py-1 rounded">userId</code> in the connection request</li>
-                    <li><strong className="text-purple-400">2.</strong> Server middleware intercepts during handshake</li>
-                    <li><strong className="text-purple-400">3.</strong> Validates and attaches userId to socket</li>
-                    <li><strong className="text-purple-400">4.</strong> Now every message knows which user sent it!</li>
-                  </ol>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'flow' && (
-              <div className="space-y-6">
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h2 className="text-xl font-bold text-purple-400 mb-4">🔐 Why Do We Use socket.handshake.auth.userId?</h2>
-                  
-                  <div className="space-y-4">
-                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-purple-500">
-                      <h3 className="text-white font-bold mb-2">1. Security</h3>
-                      <p className="text-slate-300 text-sm">
-                        Clerk provides authenticated user IDs. By passing this during the handshake, you ensure only 
-                        authenticated users can connect to your WebSocket server.
-                      </p>
-                    </div>
-
-                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-blue-500">
-                      <h3 className="text-white font-bold mb-2">2. User Identification</h3>
-                      <p className="text-slate-300 text-sm">
-                        Every message, event, or action can be linked back to a specific user. This is crucial for 
-                        your AI chat where you need to know WHO is asking questions.
-                      </p>
-                    </div>
-
-                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-green-500">
-                      <h3 className="text-white font-bold mb-2">3. Persistence</h3>
-                      <p className="text-slate-300 text-sm">
-                        Once attached to <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code>, 
-                        it's available throughout the entire connection lifecycle. No need to send userId with every message!
-                      </p>
-                    </div>
-
-                    <div className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-yellow-500">
-                      <h3 className="text-white font-bold mb-2">4. Database Operations</h3>
-                      <p className="text-slate-300 text-sm">
-                        When saving chat history, you can use <code className="bg-slate-900 px-2 py-1 rounded text-purple-400">socket.userId</code> to 
-                        associate messages with the correct user in MongoDB.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-red-600/20 to-orange-600/20 rounded-xl p-6 border border-red-500/30">
-                  <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                    <XCircle className="w-5 h-5 text-red-400" />
-                    What Happens Without It?
-                  </h3>
-                  <ul className="space-y-2 text-slate-300">
-                    <li>❌ You wouldn't know which user sent a message</li>
-                    <li>❌ Chat history couldn't be saved to the correct user</li>
-                    <li>❌ Multiple users would get mixed messages</li>
-                    <li>❌ No way to personalize AI responses</li>
-                  </ul>
-                </div>
-
-                <div className="bg-slate-700/30 rounded-xl p-6 border border-slate-600">
-                  <h3 className="text-lg font-bold text-green-400 mb-4">✅ Real Usage Example</h3>
-                  <pre className="bg-slate-900 rounded-lg p-4 overflow-x-auto">
-                    <code className="text-sm text-slate-300">{`io.on('connection', (socket) => {
-  console.log(\`User \${socket.userId} connected\`);
-  
-  socket.on('ai-question', async (question) => {
-    // Save to database with user context
-    await ChatMessage.create({
-      userId: socket.userId,  // ← From Clerk auth
-      message: question,
-      timestamp: new Date()
-    });
-    
-    // Get personalized response
-    const userLevel = await getUserLevel(socket.userId);
-    const response = await getAIResponse(question, userLevel);
-    
-    socket.emit('ai-response', response);
-  });
-});`}</code>
-                  </pre>
-                </div>
-              </div>
-            )}
+          <div className="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
+            © 2025 StoryForge AI. All rights reserved.
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
-};
-
-export default WebSocketHandshakeExplainer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//MODULE PAGE DESIGN
-// "use client"
-// import React, { useState } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import {
-//   Play,
-//   BookOpen,
-//   Clock,
-//   CheckCircle,
-//   Star,
-//   ArrowRight,
-//   Users,
-//   Target,
-//   Award,
-//   ChevronDown,
-//   ChevronRight,
-//   ExternalLink,
-//   Lightbulb,
-//   AlertTriangle,
-//   Code,
-//   PenTool
-// } from 'lucide-react';
-
-// const LearningModulePage = () => {
-//   const [expandedLesson, setExpandedLesson] = useState(null);
-//   const [activeTab, setActiveTab] = useState('overview');
-
-//   // Sample data based on your structure
-//   const courseData = {
-//     domain: "Web Development",
-//     course: {
-//       title: "CSS Essentials: Styling the Web",
-//       shortDescription: "A beginner-friendly course on CSS, teaching core concepts like selectors, the box model, colors, and typography to create visually appealing web pages.",
-//       tags: ["css", "web", "styling", "typography", "beginner", "frontend"],
-//       levelSummary: [{
-//         level: "Beginner",
-//         overview: "Learn CSS fundamentals and style a responsive, visually appealing web page.",
-//         moduleCount: 1
-//       }]
-//     },
-//     module: {
-//       title: "Module 1 — Core CSS Concepts",
-//       description: "Explore the fundamentals of CSS, including selectors, the box model, color systems, and typography for effective web styling.",
-//     },
-//     lessons: [
-//       {
-//         id: "652f3f99def98ef901651c11",
-//         title: "Introduction to CSS",
-//         description: "Understand the role of CSS in web development, its syntax, and how to apply styles to HTML elements.",
-//         estimatedTime: 30,
-//         completed: true
-//       },
-//       {
-//         id: "652f3f99def98ef901651c12",
-//         title: "CSS Selectors",
-//         description: "Learn how to target HTML elements using CSS selectors, including type, class, ID, and advanced combinators.",
-//         estimatedTime: 45,
-//         completed: true
-//       },
-//       {
-//         id: "652f3f99def98ef901651c13",
-//         title: "The Box Model",
-//         description: "Master the CSS box model to control spacing, borders, and layout of web elements.",
-//         estimatedTime: 50,
-//         completed: false
-//       },
-//       {
-//         id: "652f3f99def98ef901651c14",
-//         title: "Colors in CSS",
-//         description: "Explore CSS color systems, including named colors, hex, RGB, and HSL, for vibrant designs.",
-//         estimatedTime: 40,
-//         completed: false
-//       },
-//       {
-//         id: "652f3f99def98ef901651c15",
-//         title: "Typography in CSS",
-//         description: "Control text appearance with CSS typography properties like font-family, font-size, and line-height.",
-//         estimatedTime: 50,
-//         completed: false
-//       },
-//       {
-//         id: "652f3f99def98ef901651c16",
-//         title: "Applying CSS to a Project",
-//         description: "Combine CSS selectors, box model, colors, and typography to style and deploy a styled web page.",
-//         estimatedTime: 75,
-//         completed: false
-//       }
-//     ]
-//   };
-
-//   const completedLessons = courseData.lessons.filter(lesson => lesson.completed).length;
-//   const totalLessons = courseData.lessons.length;
-//   const progressPercentage = (completedLessons / totalLessons) * 100;
-//   const totalTime = courseData.lessons.reduce((sum, lesson) => sum + lesson.estimatedTime, 0);
-
-//   const toggleLesson = (lessonId) => {
-//     setExpandedLesson(expandedLesson === lessonId ? null : lessonId);
-//   };
-
-//   const containerVariants = {
-//     hidden: { opacity: 0 },
-//     visible: {
-//       opacity: 1,
-//       transition: {
-//         staggerChildren: 0.1
-//       }
-//     }
-//   };
-
-//   const itemVariants = {
-//     hidden: { opacity: 0, y: 20 },
-//     visible: {
-//       opacity: 1,
-//       y: 0,
-//       transition: { duration: 0.5 }
-//     }
-//   };
-
-//   return (
-//     <div className="min-h-screen bg-[#0b1120] text-white">
-//       {/* Header */}
-//       <motion.header 
-//         initial={{ opacity: 0, y: -20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         className="border-b border-gray-800 bg-[#0b1120]/95 backdrop-blur-sm sticky top-0 z-50"
-//       >
-//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-//           <div className="flex items-center justify-between">
-//             <div className="flex items-center space-x-4">
-//               <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-//                 <BookOpen className="w-5 h-5" />
-//               </div>
-//               <div>
-//                 <p className="text-sm text-gray-400">{courseData.domain}</p>
-//                 <h1 className="text-xl font-semibold">{courseData.course.title}</h1>
-//               </div>
-//             </div>
-//             <div className="flex items-center space-x-4">
-//               <div className="text-right">
-//                 <p className="text-sm text-gray-400">Progress</p>
-//                 <p className="font-semibold text-blue-400">{Math.round(progressPercentage)}%</p>
-//               </div>
-//               <div className="w-16 h-16 relative">
-//                 <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 64 64">
-//                   <circle
-//                     cx="32"
-//                     cy="32"
-//                     r="28"
-//                     stroke="currentColor"
-//                     strokeWidth="4"
-//                     fill="none"
-//                     className="text-gray-700"
-//                   />
-//                   <circle
-//                     cx="32"
-//                     cy="32"
-//                     r="28"
-//                     stroke="currentColor"
-//                     strokeWidth="4"
-//                     fill="none"
-//                     strokeDasharray={`${progressPercentage * 1.76} 176`}
-//                     className="text-blue-500"
-//                   />
-//                 </svg>
-//                 <div className="absolute inset-0 flex items-center justify-center">
-//                   <span className="text-xs font-semibold">{completedLessons}/{totalLessons}</span>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </motion.header>
-
-//       {/* Main Content */}
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-//         <motion.div
-//           variants={containerVariants}
-//           initial="hidden"
-//           animate="visible"
-//           className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-//         >
-//           {/* Left Column - Course Info */}
-//           <motion.div variants={itemVariants} className="lg:col-span-2 space-y-6">
-//             {/* Course Header */}
-//             <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-6">
-//               <div className="flex items-start justify-between mb-4">
-//                 <div>
-//                   <h2 className="text-2xl font-bold mb-2">{courseData.module.title}</h2>
-//                   <p className="text-gray-300 leading-relaxed">{courseData.module.description}</p>
-//                 </div>
-//                 <div className="flex items-center space-x-2 bg-blue-500/20 px-3 py-1 rounded-full">
-//                   <Award className="w-4 h-4 text-blue-400" />
-//                   <span className="text-sm text-blue-400">{courseData.course.levelSummary[0].level}</span>
-//                 </div>
-//               </div>
-              
-//               {/* Tags */}
-//               <div className="flex flex-wrap gap-2 mb-4">
-//                 {courseData.course.tags.map((tag, index) => (
-//                   <span
-//                     key={index}
-//                     className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm"
-//                   >
-//                     #{tag}
-//                   </span>
-//                 ))}
-//               </div>
-
-//               {/* Stats */}
-//               <div className="grid grid-cols-3 gap-4">
-//                 <div className="text-center p-3 bg-black/20 rounded-lg">
-//                   <BookOpen className="w-5 h-5 text-blue-400 mx-auto mb-1" />
-//                   <p className="text-sm text-gray-400">Lessons</p>
-//                   <p className="font-semibold">{totalLessons}</p>
-//                 </div>
-//                 <div className="text-center p-3 bg-black/20 rounded-lg">
-//                   <Clock className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-//                   <p className="text-sm text-gray-400">Duration</p>
-//                   <p className="font-semibold">{Math.floor(totalTime / 60)}h {totalTime % 60}m</p>
-//                 </div>
-//                 <div className="text-center p-3 bg-black/20 rounded-lg">
-//                   <Target className="w-5 h-5 text-green-400 mx-auto mb-1" />
-//                   <p className="text-sm text-gray-400">Completed</p>
-//                   <p className="font-semibold">{completedLessons}/{totalLessons}</p>
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* Lessons List */}
-//             <div className="space-y-4">
-//               <h3 className="text-xl font-semibold mb-4">Lessons</h3>
-              
-//               {courseData.lessons.map((lesson, index) => (
-//                 <motion.div
-//                   key={lesson.id}
-//                   variants={itemVariants}
-//                   className={`border rounded-2xl transition-all duration-300 ${
-//                     lesson.completed 
-//                       ? 'border-green-500/30 bg-green-500/10' 
-//                       : 'border-gray-700 bg-gray-800/30'
-//                   }`}
-//                 >
-//                   <div
-//                     className="p-6 cursor-pointer"
-//                     onClick={() => toggleLesson(lesson.id)}
-//                   >
-//                     <div className="flex items-center justify-between">
-//                       <div className="flex items-center space-x-4">
-//                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-//                           lesson.completed 
-//                             ? 'bg-green-500 text-white' 
-//                             : 'bg-gray-700 text-gray-400'
-//                         }`}>
-//                           {lesson.completed ? (
-//                             <CheckCircle className="w-5 h-5" />
-//                           ) : (
-//                             <span className="font-semibold">{index + 1}</span>
-//                           )}
-//                         </div>
-//                         <div>
-//                           <h4 className="font-semibold text-lg">{lesson.title}</h4>
-//                           <p className="text-gray-400 text-sm">{lesson.description}</p>
-//                           <div className="flex items-center space-x-4 mt-2">
-//                             <div className="flex items-center space-x-1 text-gray-500">
-//                               <Clock className="w-4 h-4" />
-//                               <span className="text-sm">{lesson.estimatedTime} min</span>
-//                             </div>
-//                             {lesson.completed && (
-//                               <div className="flex items-center space-x-1 text-green-400">
-//                                 <CheckCircle className="w-4 h-4" />
-//                                 <span className="text-sm">Completed</span>
-//                               </div>
-//                             )}
-//                           </div>
-//                         </div>
-//                       </div>
-//                       <div className="flex items-center space-x-2">
-//                         {!lesson.completed && (
-//                           <motion.button
-//                             whileHover={{ scale: 1.05 }}
-//                             whileTap={{ scale: 0.95 }}
-//                             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors"
-//                           >
-//                             <Play className="w-4 h-4" />
-//                             <span>Start</span>
-//                           </motion.button>
-//                         )}
-//                         {expandedLesson === lesson.id ? (
-//                           <ChevronDown className="w-5 h-5 text-gray-400" />
-//                         ) : (
-//                           <ChevronRight className="w-5 h-5 text-gray-400" />
-//                         )}
-//                       </div>
-//                     </div>
-//                   </div>
-
-//                   {/* Expanded Content */}
-//                   <AnimatePresence>
-//                     {expandedLesson === lesson.id && (
-//                       <motion.div
-//                         initial={{ height: 0, opacity: 0 }}
-//                         animate={{ height: 'auto', opacity: 1 }}
-//                         exit={{ height: 0, opacity: 0 }}
-//                         transition={{ duration: 0.3 }}
-//                         className="overflow-hidden"
-//                       >
-//                         <div className="px-6 pb-6 border-t border-gray-700 pt-4 mt-4">
-//                           <div className="grid md:grid-cols-2 gap-6">
-//                             <div>
-//                               <h5 className="font-semibold mb-2 flex items-center">
-//                                 <Lightbulb className="w-4 h-4 mr-2 text-yellow-400" />
-//                                 Key Concepts
-//                               </h5>
-//                               <ul className="text-sm text-gray-300 space-y-1">
-//                                 <li>• CSS syntax and structure</li>
-//                                 <li>• Applying styles to HTML</li>
-//                                 <li>• External stylesheets</li>
-//                                 <li>• CSS cascade and specificity</li>
-//                               </ul>
-//                             </div>
-//                             <div>
-//                               <h5 className="font-semibold mb-2 flex items-center">
-//                                 <Code className="w-4 h-4 mr-2 text-blue-400" />
-//                                 What You'll Learn
-//                               </h5>
-//                               <ul className="text-sm text-gray-300 space-y-1">
-//                                 <li>• Write CSS rules and declarations</li>
-//                                 <li>• Link CSS files to HTML</li>
-//                                 <li>• Understand CSS specificity</li>
-//                                 <li>• Debug CSS issues</li>
-//                               </ul>
-//                             </div>
-//                           </div>
-//                         </div>
-//                       </motion.div>
-//                     )}
-//                   </AnimatePresence>
-//                 </motion.div>
-//               ))}
-//             </div>
-//           </motion.div>
-
-//           {/* Right Sidebar */}
-//           <motion.div variants={itemVariants} className="space-y-6">
-//             {/* Progress Card */}
-//             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//               <h3 className="font-semibold mb-4">Your Progress</h3>
-//               <div className="space-y-4">
-//                 <div>
-//                   <div className="flex justify-between text-sm mb-2">
-//                     <span>Module Progress</span>
-//                     <span>{Math.round(progressPercentage)}%</span>
-//                   </div>
-//                   <div className="w-full bg-gray-700 rounded-full h-2">
-//                     <motion.div
-//                       initial={{ width: 0 }}
-//                       animate={{ width: `${progressPercentage}%` }}
-//                       transition={{ duration: 1, delay: 0.5 }}
-//                       className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
-//                     />
-//                   </div>
-//                 </div>
-                
-//                 <div className="grid grid-cols-2 gap-4 pt-4">
-//                   <div className="text-center">
-//                     <div className="text-2xl font-bold text-blue-400">{completedLessons}</div>
-//                     <div className="text-sm text-gray-400">Completed</div>
-//                   </div>
-//                   <div className="text-center">
-//                     <div className="text-2xl font-bold text-purple-400">{totalLessons - completedLessons}</div>
-//                     <div className="text-sm text-gray-400">Remaining</div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-
-//             {/* Quick Actions */}
-//             <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-//               <h3 className="font-semibold mb-4">Quick Actions</h3>
-//               <div className="space-y-3">
-//                 <motion.button
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   className="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
-//                 >
-//                   <Play className="w-4 h-4" />
-//                   <span>Continue Learning</span>
-//                 </motion.button>
-                
-//                 <motion.button
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   className="w-full bg-gray-600 hover:bg-gray-500 text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
-//                 >
-//                   <BookOpen className="w-4 h-4" />
-//                   <span>View Resources</span>
-//                 </motion.button>
-                
-//                 <motion.button
-//                   whileHover={{ scale: 1.02 }}
-//                   whileTap={{ scale: 0.98 }}
-//                   className="w-full border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white py-3 px-4 rounded-lg flex items-center justify-center space-x-2 transition-colors"
-//                 >
-//                   <Users className="w-4 h-4" />
-//                   <span>Join Discussion</span>
-//                 </motion.button>
-//               </div>
-//             </div>
-
-//             {/* Learning Tips */}
-//             <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 backdrop-blur-sm border border-yellow-500/30 rounded-2xl p-6">
-//               <h3 className="font-semibold mb-4 flex items-center">
-//                 <Lightbulb className="w-5 h-5 mr-2 text-yellow-400" />
-//                 Learning Tips
-//               </h3>
-//               <div className="space-y-3 text-sm text-gray-300">
-//                 <div className="flex items-start space-x-2">
-//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
-//                   <p>Practice each CSS property with real examples</p>
-//                 </div>
-//                 <div className="flex items-start space-x-2">
-//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
-//                   <p>Use browser DevTools to experiment with styles</p>
-//                 </div>
-//                 <div className="flex items-start space-x-2">
-//                   <div className="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-2 flex-shrink-0" />
-//                   <p>Build small projects to reinforce learning</p>
-//                 </div>
-//               </div>
-//             </div>
-//           </motion.div>
-//         </motion.div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default LearningModulePage;
+}

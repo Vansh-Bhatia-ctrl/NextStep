@@ -7,7 +7,6 @@ import { useAuth, useUser } from "@clerk/nextjs";
 import useUserDomain from "../store/useUserDomain";
 import Link from "next/link";
 
-
 const CourseModules = ({ level }) => {
   const {
     getLearningContent,
@@ -34,6 +33,8 @@ const CourseModules = ({ level }) => {
   useEffect(() => {
     const setDomainCache = async () => {
       const token = await getToken();
+      console.log(`token: ${token}`);
+
       if (!isSignedIn) {
         clearCache();
       } else {
